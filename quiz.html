@@ -1,0 +1,1436 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AC Pre-Call Flow — Knowledge Check | Dr. Pompa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --slate-900: #1b2a31;
+        --slate-800: #243841;
+        --slate-700: #2f4a56;
+        --slate-600: #3f5b68;
+        --slate-500: #5a7682;
+        --slate-400: #89a0ab;
+        --slate-300: #b5c6cd;
+        --slate-200: #dce5e9;
+        --slate-100: #edf1f3;
+        --teal-700: #1e8f86;
+        --teal-600: #2db3a6;
+        --teal-500: #4ec5b9;
+        --teal-400: #87d8d0;
+        --teal-200: #c9eae6;
+        --teal-100: #e6f5f2;
+        --paper: #f7f3ed;
+        --paper-deep: #efe8dc;
+        --bone: #fbf9f4;
+        --ink: #1a262c;
+        --ink-soft: #3d5059;
+        --alert: #b8472e;
+        --alert-deep: #7d2f1f;
+        --correct-bg: #e6f5f2;
+        --correct-border: #2db3a6;
+        --incorrect-bg: #fdf0ec;
+        --incorrect-border: #b8472e;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 20% 0%,
+            rgba(45, 179, 166, 0.06) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at 80% 100%,
+            rgba(30, 143, 134, 0.04) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+      /* ── Nav ── */
+      .site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: var(--bone);
+        border-bottom: 1px solid var(--slate-200);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        z-index: 200;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+      .nav-logo img {
+        height: 36px;
+        width: auto;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-link {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--slate-500);
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+      }
+      .nav-link:hover {
+        color: var(--teal-700);
+        background: var(--teal-100);
+      }
+      .nav-link.active {
+        color: var(--teal-700);
+        background: var(--teal-100);
+      }
+
+      .progress-bar {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        height: 56px;
+        background: var(--bone);
+        border-bottom: 1px solid var(--slate-200);
+        display: flex;
+        align-items: center;
+        padding: 0 40px;
+        z-index: 100;
+        gap: 20px;
+      }
+      .progress-track {
+        flex: 1;
+        height: 6px;
+        background: var(--slate-200);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--teal-700), var(--teal-500));
+        border-radius: 3px;
+        transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        width: 0%;
+      }
+      .progress-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--slate-500);
+        white-space: nowrap;
+        min-width: 80px;
+        text-align: right;
+      }
+      .container {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 160px 32px 80px;
+        position: relative;
+        z-index: 1;
+      }
+      .screen {
+        display: none;
+      }
+      .screen.active {
+        display: block;
+      }
+      .start-screen {
+        text-align: center;
+        padding-top: 80px;
+      }
+      .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 16px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--teal-700);
+        font-weight: 500;
+        margin-bottom: 24px;
+      }
+      .start-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 56px;
+        font-weight: 500;
+        letter-spacing: -0.025em;
+        line-height: 1.05;
+        color: var(--slate-800);
+        margin-bottom: 24px;
+      }
+      .start-subtitle {
+        font-size: 20px;
+        color: var(--ink-soft);
+        max-width: 540px;
+        margin: 0 auto 48px;
+        line-height: 1.5;
+      }
+      .start-meta {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 56px;
+      }
+      .start-meta-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+      .meta-num {
+        font-family: "Outfit", sans-serif;
+        font-size: 36px;
+        font-weight: 400;
+        color: var(--slate-800);
+      }
+      .meta-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--slate-500);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 16px 40px;
+        border: none;
+        border-radius: 8px;
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .btn-primary {
+        background: var(--teal-700);
+        color: white;
+      }
+      .btn-primary:hover {
+        background: var(--teal-600);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(30, 143, 134, 0.3);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--slate-500);
+        border: 1px solid var(--slate-300);
+      }
+      .btn-ghost:hover {
+        background: var(--slate-100);
+        color: var(--slate-700);
+      }
+      .btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        transform: none !important;
+        box-shadow: none !important;
+      }
+      .question-card {
+        animation: fadeSlideIn 0.4s ease;
+      }
+      @keyframes fadeSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .scenario-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .scenario-badge.happy-path {
+        background: var(--teal-100);
+        color: var(--teal-700);
+      }
+      .scenario-badge.non-responder {
+        background: #fff3e0;
+        color: #e65100;
+      }
+      .scenario-badge.spouse-escalation {
+        background: #f3e5f5;
+        color: #7b1fa2;
+      }
+      .scenario-badge.nta-chase {
+        background: #e3f2fd;
+        color: #1565c0;
+      }
+      .type-badge {
+        display: inline-flex;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: var(--slate-100);
+        color: var(--slate-600);
+        margin-left: 8px;
+      }
+      .context-block {
+        background: var(--slate-800);
+        color: var(--slate-100);
+        border-radius: 10px;
+        padding: 24px 28px;
+        margin-bottom: 28px;
+        font-size: 15px;
+        line-height: 1.6;
+        position: relative;
+      }
+      .context-block::before {
+        content: "SCENARIO";
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--teal-400);
+        background: var(--slate-800);
+        padding: 0 8px;
+      }
+      .message-bubble {
+        background: white;
+        border: 1px solid var(--slate-200);
+        border-left: 4px solid var(--teal-600);
+        border-radius: 4px 10px 10px 4px;
+        padding: 20px 24px;
+        margin-bottom: 28px;
+        font-size: 16px;
+        line-height: 1.55;
+        color: var(--ink);
+      }
+      .message-sender {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--slate-500);
+        margin-bottom: 8px;
+      }
+      .flow-sequence {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 28px;
+      }
+      .flow-step {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 14px 20px;
+        background: white;
+        border: 1px solid var(--slate-200);
+        font-size: 15px;
+      }
+      .flow-step:first-child {
+        border-radius: 8px 8px 0 0;
+      }
+      .flow-step:last-child {
+        border-radius: 0 0 8px 8px;
+      }
+      .flow-step + .flow-step {
+        border-top: none;
+      }
+      .flow-step .step-num {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        color: var(--slate-400);
+        min-width: 24px;
+      }
+      .flow-step .step-name {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--teal-700);
+      }
+      .flow-step .step-desc {
+        color: var(--ink-soft);
+        font-size: 14px;
+        margin-left: auto;
+      }
+      .flow-step.mystery {
+        background: var(--teal-100);
+        border-color: var(--teal-400);
+        border-style: dashed;
+      }
+      .flow-step.mystery .step-name {
+        font-size: 20px;
+        color: var(--teal-700);
+      }
+      .question-text {
+        font-family: "Outfit", sans-serif;
+        font-size: 26px;
+        font-weight: 500;
+        color: var(--slate-800);
+        line-height: 1.3;
+        margin-bottom: 28px;
+        letter-spacing: -0.01em;
+      }
+      .options-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 32px;
+      }
+      .option {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 18px 22px;
+        background: white;
+        border: 2px solid var(--slate-200);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .option:hover {
+        border-color: var(--teal-500);
+        background: var(--teal-100);
+      }
+      .option.selected {
+        border-color: var(--teal-600);
+        background: var(--teal-100);
+      }
+      .option.disabled {
+        pointer-events: none;
+      }
+      .option.correct-answer {
+        border-color: var(--correct-border);
+        background: var(--correct-bg);
+      }
+      .option.incorrect-answer {
+        border-color: var(--incorrect-border);
+        background: var(--incorrect-bg);
+      }
+      .option-letter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        border-radius: 50%;
+        border: 2px solid var(--slate-300);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--slate-500);
+        transition: all 0.15s ease;
+      }
+      .option.selected .option-letter {
+        border-color: var(--teal-600);
+        background: var(--teal-600);
+        color: white;
+      }
+      .option.correct-answer .option-letter {
+        border-color: var(--correct-border);
+        background: var(--correct-border);
+        color: white;
+      }
+      .option.incorrect-answer .option-letter {
+        border-color: var(--incorrect-border);
+        background: var(--incorrect-border);
+        color: white;
+      }
+      .option-text {
+        flex: 1;
+        color: var(--ink);
+      }
+      .action-row {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+      }
+      .feedback-panel {
+        margin-top: 24px;
+        padding: 24px 28px;
+        border-radius: 8px;
+        border-left: 4px solid;
+        animation: feedbackSlide 0.35s ease;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+      @keyframes feedbackSlide {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .feedback-panel.correct {
+        background: var(--correct-bg);
+        border-left-color: var(--correct-border);
+      }
+      .feedback-panel.incorrect {
+        background: var(--incorrect-bg);
+        border-left-color: var(--incorrect-border);
+      }
+      .feedback-header {
+        font-family: "Outfit", sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .feedback-panel.correct .feedback-header {
+        color: var(--teal-700);
+      }
+      .feedback-panel.incorrect .feedback-header {
+        color: var(--alert);
+      }
+      .feedback-text {
+        color: var(--ink-soft);
+      }
+      .scorecard {
+        text-align: center;
+        animation: fadeSlideIn 0.5s ease;
+      }
+      .scorecard-eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 16px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--teal-700);
+        margin-bottom: 16px;
+      }
+      .score-big {
+        font-family: "Outfit", sans-serif;
+        font-size: 96px;
+        font-weight: 300;
+        color: var(--slate-800);
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
+      .score-pct {
+        font-family: "Outfit", sans-serif;
+        font-size: 48px;
+        font-weight: 300;
+        color: var(--slate-500);
+        margin-bottom: 48px;
+      }
+      .breakdown {
+        max-width: 520px;
+        margin: 0 auto 48px;
+        text-align: left;
+      }
+      .breakdown-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--slate-200);
+      }
+      .breakdown-label {
+        font-size: 15px;
+        color: var(--ink);
+        min-width: 160px;
+      }
+      .breakdown-bar {
+        flex: 1;
+        height: 8px;
+        background: var(--slate-200);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .breakdown-bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        background: linear-gradient(90deg, var(--teal-700), var(--teal-500));
+        transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .breakdown-score {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        color: var(--slate-500);
+        min-width: 40px;
+        text-align: right;
+      }
+      .missed-section {
+        text-align: left;
+        max-width: 640px;
+        margin: 0 auto 48px;
+      }
+      .missed-heading {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--slate-500);
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--slate-800);
+      }
+      .missed-item {
+        padding: 20px 0;
+        border-bottom: 1px solid var(--slate-200);
+      }
+      .missed-q {
+        font-family: "Outfit", sans-serif;
+        font-size: 17px;
+        font-weight: 500;
+        color: var(--slate-800);
+        margin-bottom: 10px;
+      }
+      .missed-yours {
+        font-size: 14px;
+        color: var(--alert);
+        margin-bottom: 4px;
+      }
+      .missed-correct {
+        font-size: 14px;
+        color: var(--teal-700);
+      }
+      .scorecard-actions {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 40px;
+      }
+      @media (max-width: 640px) {
+        .site-nav {
+          padding: 0 16px;
+        }
+        .container {
+          padding: 140px 16px 60px;
+        }
+        .start-title {
+          font-size: 36px;
+        }
+        .question-text {
+          font-size: 22px;
+        }
+        .score-big {
+          font-size: 64px;
+        }
+        .start-meta {
+          flex-direction: column;
+          gap: 16px;
+        }
+        .progress-bar {
+          padding: 0 16px;
+        }
+        .context-block {
+          padding: 18px 20px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="Dr. Pompa" />
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quiz.html" class="nav-link active">Quiz</a>
+        <a href="simulator.html" class="nav-link">Simulator</a>
+      </div>
+    </nav>
+
+    <div class="progress-bar" id="progressBar" style="display: none">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">Q 1 of 20</div>
+    </div>
+
+    <div class="container">
+      <div class="screen active" id="startScreen">
+        <div class="start-screen">
+          <div class="eyebrow">AC Team Onboarding</div>
+          <div class="start-title">Pre-Call Flow Knowledge Check</div>
+          <p class="start-subtitle">
+            Test your understanding of the AC pre-call flow after reviewing the
+            Interactive Training Simulator. Immediate feedback on every
+            question.
+          </p>
+          <div class="start-meta">
+            <div class="start-meta-item">
+              <span class="meta-num">20</span
+              ><span class="meta-label">Questions</span>
+            </div>
+            <div class="start-meta-item">
+              <span class="meta-num">3</span
+              ><span class="meta-label">Types</span>
+            </div>
+            <div class="start-meta-item">
+              <span class="meta-num">4</span
+              ><span class="meta-label">Scenarios</span>
+            </div>
+          </div>
+          <button class="btn btn-primary" id="startBtn">Begin Quiz</button>
+        </div>
+      </div>
+      <div class="screen" id="questionScreen"></div>
+      <div class="screen" id="scorecardScreen"></div>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var QUESTIONS = [
+          {
+            type: "MC",
+            scenario: "Happy Path",
+            context:
+              "Client: Sarah Mitchell | Denver, CO | HA: Tiger | Appt: Apr 22, 2:00 PM ET\nConcern: brain fog, fatigue\n\nSarah replies to the automated SMS: \u201cHonestly, the brain fog is the worst. I can\u2019t even think straight by 2pm. I\u2019ve tried everything \u2014 supplements, cleanses, you name it.\u201d",
+            question:
+              "Sarah just replied to the automated SMS with detailed health info. What\u2019s your first move?",
+            options: [
+              "Send .discovery to ask about her health concerns",
+              "Send .verify to confirm her email and timezone",
+              "Send a warm intro with a real-person signal, then acknowledge her health info",
+              "Send .nta with the questionnaire link",
+            ],
+            correct: 2,
+            explanation:
+              "When a client replies to the automated SMS with health info, your first message must signal you\u2019re a real person (not another bot) AND acknowledge what they shared. This is a warm intro \u2014 she already engaged, so meet her where she is.",
+          },
+          {
+            type: "RW",
+            scenario: "Happy Path",
+            context:
+              "Client: Jessica Torres | Tampa, FL | HA: Mike | Appt: Apr 24, 1:00 PM ET\nConcern: chronic fatigue, weight gain\n\nJessica replied to the automated SMS: \u201cI\u2019m exhausted all the time. I\u2019ve gained 30 lbs in the last year and nothing helps.\u201d\n\nBriana (Texter) sends this response:",
+            message:
+              "Hi Jessica! Can you confirm your email address so we can get your file set up?",
+            question: "Is this an acceptable first response from Briana?",
+            options: [
+              "Yes \u2014 email verification is the top priority",
+              "No \u2014 it skips the real-person signal and ignores Jessica\u2019s health info entirely",
+              "No \u2014 it should ask for phone number too",
+              "Yes \u2014 but it should also include the NTA link",
+            ],
+            correct: 1,
+            explanation:
+              "This message reads like another automated system. It ignores everything Jessica shared about her health, has no real-person signal, and jumps straight to data collection. The AC should first acknowledge her health info, show they\u2019re a real person, and THEN handle logistics.",
+          },
+          {
+            type: "MC",
+            scenario: "Happy Path",
+            context:
+              "Client: Amanda Chen | Portland, OR | HA: Bre | Appt: Apr 23, 3:00 PM ET\nConcern: migraines, digestive issues\n\nAmanda already told you: \u201cThe migraines are ruining my life. I get them 3-4 times a week and my stomach is a mess. I\u2019ve been to every specialist.\u201d\n\nYou haven\u2019t acknowledged her health info yet \u2014 this is a new conversation and you\u2019re deciding what template to send.",
+            question:
+              "You\u2019re about to send .discovery, but Amanda already shared her #1 health concern. What do you do?",
+            options: [
+              "Send .discovery anyway \u2014 the template requires it",
+              "Skip .discovery entirely and move to .nta",
+              "Acknowledge what she shared, empower her, and skip the redundant question",
+              "Ask a follow-up question about her symptoms for more detail",
+            ],
+            correct: 2,
+            explanation:
+              "She already answered the discovery question in her SMS reply. But you can\u2019t just skip past it silently \u2014 you need to acknowledge her specific concern (\u201cthe migraines\u201d), empower her (\u201cyou\u2019re in the right place\u201d), and then move forward. Skipping without acknowledging feels like you didn\u2019t read her message.",
+          },
+          {
+            type: "FITF",
+            scenario: "Happy Path",
+            context:
+              "Client: Rachel Kim | Austin, TX | HA: Tiger | Appt: Apr 25, 11:00 AM ET\nConcern: joint pain, insomnia\n\nBriana\u2019s flow with Rachel so far:",
+            flowSteps: [
+              { name: ".intro", desc: "warm intro + real-person signal" },
+              { name: "empowerment", desc: "acknowledge health info" },
+              { name: "???", desc: "", mystery: true },
+            ],
+            question:
+              "What comes next in this back-to-back onboarding sequence?",
+            options: [
+              ".nta \u2014 send the questionnaire link",
+              ".verify \u2014 email verification + timezone confirmation",
+              ".resources \u2014 send the resource page",
+              ".testimonial \u2014 share a testimonial link",
+            ],
+            correct: 1,
+            explanation:
+              "After intro and empowerment, the next step is .verify \u2014 confirming the client\u2019s email and verifying their timezone with the appointment date/time. This is quick housekeeping that can be sent back-to-back (~1 min apart).",
+          },
+          {
+            type: "RW",
+            scenario: "Happy Path",
+            context:
+              "Client: Katie O\u2019Brien | Nashville, TN | HA: Mike | Appt: Apr 21, 10:00 AM ET\n\nBriana sends this .verify message to Katie:",
+            message:
+              "Please confirm your email address for our records. We also need to verify your timezone before your appointment.",
+            question: "What\u2019s wrong with this .verify message?",
+            options: [
+              "Nothing \u2014 it covers email and timezone correctly",
+              "It uses \u201cconfirm,\u201d \u201crecords,\u201d and \u201cverify\u201d \u2014 too formal and clinical for a conversational text",
+              "It should also include the NTA link",
+              "It needs to mention Mike by name",
+            ],
+            correct: 1,
+            explanation:
+              "The words \u201cconfirm,\u201d \u201crecords,\u201d and \u201cverify\u201d make this sound like an automated system. The .verify template rules ban these words. Better: \u201cWe have katie.obrien@gmail.com on file \u2014 is that the best email?\u201d Keep it conversational, quick, human.",
+          },
+          {
+            type: "MC",
+            scenario: "Happy Path",
+            context:
+              "Client: Michelle Santos | Denver, CO (Mountain Time) | HA: Tiger\nAppointment: Apr 22 at 2:00 PM Eastern",
+            question: "How should you state Michelle\u2019s appointment time?",
+            options: [
+              "\u201cYour call is at 2:00 PM.\u201d",
+              "\u201cYour call is at noon Mountain time.\u201d",
+              "\u201cYour call is at 2:00 PM Eastern, which is noon your time.\u201d",
+              "\u201cYour call is at 2:00 PM ET / 12:00 PM MT.\u201d",
+            ],
+            correct: 2,
+            explanation:
+              "Always state BOTH timezones when they differ. \u201c2:00 PM Eastern, noon your time\u201d is clear and personal. Don\u2019t use abbreviations like ET/MT \u2014 write it conversationally.",
+          },
+          {
+            type: "MC",
+            scenario: "Happy Path",
+            context:
+              "Client: Dana Lawson | Charlotte, NC | HA: Bre | Appt: Apr 28, 1:30 PM ET\nConcern: thyroid issues, hair loss\n\nYou\u2019re mapping out Dana\u2019s Day 1 onboarding sequence.",
+            question: "When in the flow should you share a testimonial link?",
+            options: [
+              "After NTA completion \u2014 as a reward for finishing",
+              "Only if Dana asks for social proof",
+              "Early in the flow \u2014 Day 1, as part of the onboarding sequence",
+              "During the 48-hour confirmation, to build last-minute excitement",
+            ],
+            correct: 2,
+            explanation:
+              "Testimonials are trust-builders and should be shared early \u2014 Day 1, as part of the onboarding sequence. A compelling story from someone with a similar health concern can lock in their commitment to show up.",
+          },
+          {
+            type: "MC",
+            scenario: "Non-Responder",
+            context:
+              "Client: Lauren Price | Seattle, WA | HA: Mike | Appt: Apr 26, 12:00 PM ET\n\nLauren received the automated SMS 24 hours ago. No reply. You\u2019re about to send a personalized outreach.",
+            question:
+              "24 hours, no reply from Lauren. What do you check before reaching out?",
+            options: [
+              "Just send a generic follow-up \u2014 no need to check anything",
+              "Check NTA status, recent activity (logins, form completions), and intake data",
+              "Call her immediately \u2014 texts aren\u2019t working",
+              "Wait another 24 hours before doing anything",
+            ],
+            correct: 1,
+            explanation:
+              "Before reaching out, check what the client HAS done. Did they complete the NTA? Log in? Start a form? This intel shapes your message \u2014 referencing their activity shows you\u2019re paying attention and makes the outreach personal.",
+          },
+          {
+            type: "RW",
+            scenario: "Non-Responder",
+            context:
+              "Client: Heather Dunn | Phoenix, AZ | HA: Bre | Appt: Apr 24, 3:00 PM ET\n\nHeather hasn\u2019t replied to the automated SMS. Briana sends this 24-hour follow-up:",
+            message:
+              "Hey Heather, you haven\u2019t responded to our text yet. Please reply when you get a chance so we can get you set up for your call.",
+            question: "What\u2019s wrong with this message?",
+            options: [
+              "Nothing \u2014 it\u2019s direct and clear",
+              "\u201cYou haven\u2019t responded\u201d is guilt framing, and \u201cplease reply\u201d is demanding \u2014 this creates pressure, not warmth",
+              "It should include the NTA link",
+              "It needs to mention Bre by name",
+            ],
+            correct: 1,
+            explanation:
+              "\u201cYou haven\u2019t responded\u201d puts the client on the defensive. \u201cPlease reply\u201d feels demanding. Non-responder outreach should feel like a fresh, warm touchpoint \u2014 not a follow-up to something they ignored. Lead with value, not guilt.",
+          },
+          {
+            type: "MC",
+            scenario: "Non-Responder",
+            context:
+              "Client: Kristen Park | San Diego, CA | HA: Bre | Appt: Apr 25, 2:00 PM ET\n\nKristen completed her NTA two days ago but has never replied to any of your texts.",
+            question:
+              "NTA is done but Kristen hasn\u2019t replied to any messages. What\u2019s your approach?",
+            options: [
+              "Send a message saying \u201cI noticed you haven\u2019t replied to our texts\u201d",
+              "Reference her NTA completion warmly, keep it low-pressure, give her an easy opening to respond",
+              "Stop texting \u2014 she clearly doesn\u2019t want to communicate",
+              "Call her instead of texting",
+            ],
+            correct: 1,
+            explanation:
+              "Reference what she DID do (completed the NTA) rather than what she didn\u2019t (reply). \u201cI saw you got your questionnaire done \u2014 that\u2019s great!\u201d shows you\u2019re paying attention and gives her a positive reason to engage.",
+          },
+          {
+            type: "RW",
+            scenario: "Non-Responder",
+            context:
+              "Client: Angela Martinez | Dallas, TX | HA: Tiger | Appt: Apr 23, 10:00 AM ET\n\nAfter several unanswered texts, Briana sends Angela this message:",
+            message:
+              "Hi Angela, this is my last attempt to reach you. If I don\u2019t hear back, I\u2019ll assume you\u2019re no longer interested in your consultation.",
+            question: "What\u2019s wrong with this message?",
+            options: [
+              "Nothing \u2014 it sets a clear boundary",
+              "It should offer to reschedule instead",
+              "\u201cLast attempt\u201d is an ultimatum and \u201cno longer interested\u201d applies guilt \u2014 this violates the tone rules completely",
+              "It\u2019s too long",
+            ],
+            correct: 2,
+            explanation:
+              "Ultimatums and guilt have no place in AC messaging. \u201cLast attempt\u201d and \u201cno longer interested\u201d are pressure tactics. Ghost chase messages should leave the door open: \u201cWhenever you\u2019re ready, we\u2019re here.\u201d Never punish silence.",
+          },
+          {
+            type: "MC",
+            scenario: "Spouse Escalation",
+            context:
+              "Client: Nicole Reeves | Atlanta, GA | HA: Mike | Appt: Apr 25, 11:00 AM ET\n\nNicole completed her NTA. Her answers show she\u2019s married. No one has mentioned the spouse yet \u2014 there\u2019s been no pushback.",
+            question:
+              "When and how should the spouse conversation be introduced?",
+            options: [
+              "Wait until the 3-day confirmation to ask about spouse attendance",
+              "Send .sp.invite shortly after NTA completion \u2014 NTA reveals marital status, so this is the natural moment to ask",
+              "Only bring it up if the client mentions their spouse first",
+              "Have the HA ask during the call itself",
+            ],
+            correct: 1,
+            explanation:
+              "The NTA reveals marital status, making post-NTA the natural moment to send .sp.invite. This is a routine part of onboarding, not a confrontation. Either the Caller or Texter can send the template as long as it uses the Caller\u2019s name. The .sp.invite template asks if the spouse can join \u2014 it\u2019s proactive, so it should go out before any pushback occurs.",
+          },
+          {
+            type: "MC",
+            scenario: "Spouse Escalation",
+            context:
+              "Client: Lisa Bradford | Boston, MA | HA: Tiger | Appt: Apr 22, 2:00 PM ET\nSpouse: Mark\n\nLisa replies to .conf3d: \u201cStill on for Tuesday! I finished the questionnaire. I\u2019ll ask Mark but honestly he\u2019s pretty skeptical about all this. He\u2019ll probably say no. Is it okay if it\u2019s just me?\u201d",
+            question:
+              "Lisa is pushing back on spouse attendance. What does Briana (Texter) do?",
+            options: [
+              "Try to convince Lisa that Mark should attend",
+              "Send .sp.invite to address Mark\u2019s skepticism",
+              "Respond only to the non-spouse parts and silently escalate to the Caller",
+              "Tell Lisa \u201cLet me check on that and get back to you\u201d",
+            ],
+            correct: 2,
+            explanation:
+              "SILENT ESCALATION: The Texter never handles spouse conversations. Briana responds only to non-spouse parts (NTA completion, appointment confirmation), completely ignores the spouse topic, and flags Lisa for the Caller behind the scenes. The client has no idea an escalation happened.",
+          },
+          {
+            type: "RW",
+            scenario: "Spouse Escalation",
+            context:
+              "Client: Jenna Cole | Sacramento, CA | HA: Bre | Appt: Apr 24, 1:00 PM ET\nSpouse: Ryan\n\nJenna pushed back on Ryan attending the call. Briana responds:",
+            message:
+              "That\u2019s great you got the questionnaire done, Jenna! Let me check on the partner question and get back to you.",
+            question: "What\u2019s wrong with Briana\u2019s response?",
+            options: [
+              "Nothing \u2014 she acknowledged the NTA and is handling the spouse question",
+              "She should have addressed Ryan\u2019s concerns directly",
+              "\u201cLet me check on the partner question\u201d signals an escalation is happening \u2014 this is NOT a silent handoff",
+              "She should have included the timezone",
+            ],
+            correct: 2,
+            explanation:
+              "\u201cLet me check on that\u201d tells the client something is being escalated internally. In a silent escalation, Briana should COMPLETELY ignore the spouse topic \u2014 not acknowledge it, not defer it. She responds only to the NTA and confirms the appointment. Zero mention of the partner.",
+          },
+          {
+            type: "FITF",
+            scenario: "Spouse Escalation",
+            context:
+              "Client: Courtney Ellis | Atlanta, GA | HA: Bre | Appt: Apr 23, 12:00 PM ET\nSpouse: Jason\n\nJanice sent .sp.invite via text. Courtney responds: \u201cI appreciate that but I really don\u2019t think Jason would go for it. Can we just do it without him?\u201d",
+            flowSteps: [
+              {
+                name: ".sp.invite (text)",
+                desc: "Caller\u2019s first attempt",
+              },
+              { name: "Client pushback", desc: "Courtney says no" },
+              { name: "???", desc: "", mystery: true },
+            ],
+            question:
+              "Caller\u2019s text attempt failed. Courtney still says no. What\u2019s next?",
+            options: [
+              "Send another text with stronger reasoning",
+              "Accept Jason\u2019s absence and move on",
+              "Caller follows up by PHONE \u2014 text-based spouse persuasion is limited to one attempt",
+              "Have Briana try from her number",
+            ],
+            correct: 2,
+            explanation:
+              "After one text attempt fails, the Caller escalates to PHONE. Text-based spouse persuasion is limited to one attempt. The phone call uses a 9-step script for real conversation and nuance. If Jason still says no after the call, accept gracefully.",
+          },
+          {
+            type: "MC",
+            scenario: "Spouse Escalation",
+            context:
+              "Client: Robin Hayes | Columbus, OH | HA: Tiger | Appt: Apr 22, 2:00 PM ET\nSpouse: Steve\n\nJanice called Robin. After the full objection script & process, Steve still doesn\u2019t want to join the call.",
+            question: "Steve ultimately says no. What do you do?",
+            options: [
+              "Try one more time on the day of the call",
+              "Accept gracefully, confirm the appointment, and flag the absent spouse to the HA as a risk factor",
+              "Reschedule the appointment until Steve agrees to join",
+              "Tell Robin that Steve should reconsider",
+            ],
+            correct: 1,
+            explanation:
+              "If the partner says no after the full process (text + phone), respect it completely. Confirm the appointment: \u201cYou\u2019re all set for Tuesday at 2:00 PM Eastern with Tiger.\u201d Never guilt, never push further. But DO flag it to the HA \u2014 an absent spouse is a risk factor they should know about going into the call.",
+          },
+          {
+            type: "MC",
+            scenario: "24hr NTA Chase",
+            context:
+              "Client: Diana Marsh | Raleigh, NC | HA: Mike | Appt: Apr 26, 10:00 AM ET\n\nDiana completed her NTA yesterday but never replied to any texts. Her NTA is done and you can see her results.",
+            question:
+              "Diana completed NTA silently but never replied. What do you reference in your outreach?",
+            options: [
+              "Don\u2019t mention the NTA \u2014 just send a standard follow-up",
+              "Reference the NTA completion \u2014 it shows you\u2019re paying attention and gives a warm opening",
+              "Ask her to redo the NTA because she didn\u2019t confirm via text",
+              "Send a generic \u201cchecking in\u201d message",
+            ],
+            correct: 1,
+            explanation:
+              "Referencing NTA completion (\u201cI saw you got your questionnaire done \u2014 great!\u201d) proves you\u2019re paying attention to what she IS doing. It gives her credit for taking action and creates a natural, positive opening.",
+          },
+          {
+            type: "FITF",
+            scenario: "24hr NTA Chase",
+            context:
+              "Client: Stephanie Voss | Louisville, KY | HA: Tiger | Appt: Apr 25, 1:00 PM ET\nConcern: brain fog, chronic fatigue, joint pain\n\nStephanie completed her NTA and scored 78 (high). She hasn\u2019t replied to any texts.",
+            flowSteps: [
+              { name: "NTA complete", desc: "Score: 78 (high)" },
+              { name: "Top concerns", desc: "brain fog, fatigue, joint pain" },
+              { name: "Outreach approach?", desc: "", mystery: true },
+            ],
+            question:
+              "Stephanie\u2019s NTA score is 78 (high). Which outreach approach fits?",
+            options: [
+              "Generic: \u201cJust checking in \u2014 your call is coming up!\u201d",
+              "Acknowledge the score, validate her experience, bridge to HA: \u201cYour results really stood out. Tiger is going to have a lot to work with.\u201d",
+              "Share the exact score: \u201cYou scored a 78, which is very high.\u201d",
+              "Send the NTA link again in case she wants to retake it",
+            ],
+            correct: 1,
+            explanation:
+              "A high NTA score means the client is dealing with a lot. Acknowledge with empathy (\u201cyour results really stood out\u201d), validate, and bridge to the HA. Don\u2019t share the exact score \u2014 that feels clinical.",
+          },
+          {
+            type: "RW",
+            scenario: "24hr NTA Chase",
+            context:
+              "Client: Brittany Lane | Salt Lake City, UT | HA: Tiger | Appt: Apr 24, 2:00 PM ET\n\nBrittany hasn\u2019t completed her NTA. Briana sends:",
+            message:
+              "Hi Brittany, you need to complete your health questionnaire before your call with Tiger. Here\u2019s the link: [NTA_LINK]",
+            question: "What\u2019s wrong with this message?",
+            options: [
+              "Nothing \u2014 it\u2019s clear and includes the link",
+              "It should mention the timezone",
+              "\u201cYou need to\u201d is demanding and \u201chealth questionnaire\u201d is too clinical \u2014 frame it as helpful, not required",
+              "It should include a testimonial",
+            ],
+            correct: 2,
+            explanation:
+              "\u201cYou need to\u201d makes the NTA feel like homework. \u201cHealth questionnaire\u201d is clinical and cold. Better: \u201cThere\u2019s a quick assessment that helps Tiger personalize your call.\u201d Make it about THEIR benefit, not a requirement.",
+          },
+          {
+            type: "MC",
+            scenario: "24hr NTA Chase",
+            context:
+              "Client: Kelly Tran | Philadelphia, PA | HA: Bre | Appt: Apr 29, 11:00 AM ET\n\nAfter 3 days of silence, Kelly finally replies: \u201cSorry I\u2019ve been MIA! Crazy week. Yes I\u2019m still on for Tuesday.\u201d",
+            question:
+              "Kelly responds after 3 days of silence. What\u2019s the FIRST thing you do?",
+            options: [
+              "Ask why she didn\u2019t respond sooner",
+              "Jump straight to confirming requirements (NTA, kit, etc.)",
+              "Acknowledge her warmly with no guilt about the delay, then naturally move to outstanding items",
+              "Send all the links she missed in one message",
+            ],
+            correct: 2,
+            explanation:
+              "When a ghost comes back, lead with warmth: \u201cSo glad to hear from you!\u201d Never guilt about the delay \u2014 she\u2019s here now. After the warm acknowledgment, naturally check on outstanding items.",
+          },
+        ];
+
+        var SCENARIO_KEYS = {
+          "Happy Path": "happy-path",
+          "Non-Responder": "non-responder",
+          "Spouse Escalation": "spouse-escalation",
+          "24hr NTA Chase": "nta-chase",
+        };
+        var LETTERS = ["A", "B", "C", "D"];
+        var currentQ = 0;
+        var answers = [];
+        var submitted = false;
+
+        function el(id) {
+          return document.getElementById(id);
+        }
+
+        function createEl(tag, cls, text) {
+          var e = document.createElement(tag);
+          if (cls) e.className = cls;
+          if (text) e.textContent = text;
+          return e;
+        }
+
+        function clearChildren(node) {
+          while (node.firstChild) node.removeChild(node.firstChild);
+        }
+
+        document
+          .getElementById("startBtn")
+          .addEventListener("click", function () {
+            el("startScreen").classList.remove("active");
+            el("questionScreen").classList.add("active");
+            el("progressBar").style.display = "flex";
+            answers = new Array(QUESTIONS.length).fill(-1);
+            currentQ = 0;
+            submitted = false;
+            renderQuestion();
+          });
+
+        function renderQuestion() {
+          var q = QUESTIONS[currentQ];
+          var screen = el("questionScreen");
+          clearChildren(screen);
+
+          var card = createEl("div", "question-card");
+
+          // Badge row
+          var badgeRow = createEl("div", "");
+          badgeRow.style.cssText =
+            "display:flex;align-items:center;gap:8px;margin-bottom:20px";
+          var sBadge = createEl(
+            "span",
+            "scenario-badge " + SCENARIO_KEYS[q.scenario],
+            q.scenario,
+          );
+          var tBadge = createEl("span", "type-badge", q.type);
+          badgeRow.appendChild(sBadge);
+          badgeRow.appendChild(tBadge);
+          card.appendChild(badgeRow);
+
+          // Context block
+          var ctx = createEl("div", "context-block");
+          q.context.split("\n").forEach(function (line, i) {
+            if (i > 0) ctx.appendChild(document.createElement("br"));
+            ctx.appendChild(document.createTextNode(line));
+          });
+          card.appendChild(ctx);
+
+          // Message bubble (RW)
+          if (q.type === "RW" && q.message) {
+            var bubble = createEl("div", "message-bubble");
+            var sender = createEl("div", "message-sender", "AC Message");
+            bubble.appendChild(sender);
+            bubble.appendChild(document.createTextNode(q.message));
+            card.appendChild(bubble);
+          }
+
+          // Flow sequence (FITF)
+          if (q.type === "FITF" && q.flowSteps) {
+            var seq = createEl("div", "flow-sequence");
+            q.flowSteps.forEach(function (step, i) {
+              var fs = createEl(
+                "div",
+                "flow-step" + (step.mystery ? " mystery" : ""),
+              );
+              fs.appendChild(createEl("span", "step-num", String(i + 1)));
+              fs.appendChild(createEl("span", "step-name", step.name));
+              if (step.desc)
+                fs.appendChild(createEl("span", "step-desc", step.desc));
+              seq.appendChild(fs);
+            });
+            card.appendChild(seq);
+          }
+
+          // Question text
+          card.appendChild(createEl("div", "question-text", q.question));
+
+          // Options
+          var optList = createEl("div", "options-list");
+          optList.id = "optionsList";
+          q.options.forEach(function (opt, i) {
+            var optDiv = createEl("div", "option");
+            optDiv.setAttribute("data-idx", i);
+            optDiv.addEventListener("click", function () {
+              selectOption(i);
+            });
+            optDiv.appendChild(createEl("span", "option-letter", LETTERS[i]));
+            optDiv.appendChild(createEl("span", "option-text", opt));
+            optList.appendChild(optDiv);
+          });
+          card.appendChild(optList);
+
+          // Submit button
+          var actionRow = createEl("div", "action-row");
+          var submitBtn = createEl(
+            "button",
+            "btn btn-primary",
+            "Submit Answer",
+          );
+          submitBtn.id = "submitBtn";
+          submitBtn.disabled = true;
+          submitBtn.addEventListener("click", submitAnswer);
+          actionRow.appendChild(submitBtn);
+          card.appendChild(actionRow);
+
+          // Feedback area
+          var fbArea = createEl("div", "");
+          fbArea.id = "feedbackArea";
+          card.appendChild(fbArea);
+
+          screen.appendChild(card);
+          updateProgress();
+          submitted = false;
+        }
+
+        function selectOption(idx) {
+          if (submitted) return;
+          answers[currentQ] = idx;
+          var opts = document.querySelectorAll(".option");
+          opts.forEach(function (o) {
+            o.classList.remove("selected");
+          });
+          opts[idx].classList.add("selected");
+          el("submitBtn").disabled = false;
+        }
+
+        function submitAnswer() {
+          if (submitted || answers[currentQ] === -1) return;
+          submitted = true;
+          var q = QUESTIONS[currentQ];
+          var chosen = answers[currentQ];
+          var isCorrect = chosen === q.correct;
+
+          var opts = document.querySelectorAll(".option");
+          opts.forEach(function (o) {
+            o.classList.add("disabled");
+          });
+          opts[q.correct].classList.add("correct-answer");
+          if (!isCorrect) opts[chosen].classList.add("incorrect-answer");
+
+          var fbArea = el("feedbackArea");
+
+          var panel = createEl(
+            "div",
+            "feedback-panel " + (isCorrect ? "correct" : "incorrect"),
+          );
+          panel.appendChild(
+            createEl(
+              "div",
+              "feedback-header",
+              isCorrect ? "\u2713 Correct!" : "\u2717 Incorrect",
+            ),
+          );
+          panel.appendChild(createEl("div", "feedback-text", q.explanation));
+          fbArea.appendChild(panel);
+
+          var nextRow = createEl("div", "action-row");
+          nextRow.style.marginTop = "20px";
+          var nextBtn = createEl(
+            "button",
+            "btn btn-primary",
+            currentQ < QUESTIONS.length - 1
+              ? "Next Question \u2192"
+              : "See Results",
+          );
+          nextBtn.addEventListener("click", nextQuestion);
+          nextRow.appendChild(nextBtn);
+          fbArea.appendChild(nextRow);
+
+          el("submitBtn").style.display = "none";
+        }
+
+        function nextQuestion() {
+          currentQ++;
+          if (currentQ >= QUESTIONS.length) {
+            showScorecard();
+          } else {
+            renderQuestion();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
+        }
+
+        function updateProgress() {
+          var pct = (currentQ / QUESTIONS.length) * 100;
+          el("progressFill").style.width = pct + "%";
+          el("progressLabel").textContent =
+            "Q " + (currentQ + 1) + " of " + QUESTIONS.length;
+        }
+
+        function showScorecard() {
+          el("questionScreen").classList.remove("active");
+          el("scorecardScreen").classList.add("active");
+          el("progressFill").style.width = "100%";
+          el("progressLabel").textContent = "Complete";
+
+          var total = QUESTIONS.length;
+          var correct = 0;
+          var missed = [];
+          var scenarioScores = {};
+
+          QUESTIONS.forEach(function (q, i) {
+            if (!scenarioScores[q.scenario])
+              scenarioScores[q.scenario] = { correct: 0, total: 0 };
+            scenarioScores[q.scenario].total++;
+            if (answers[i] === q.correct) {
+              correct++;
+              scenarioScores[q.scenario].correct++;
+            } else {
+              missed.push({ idx: i, q: q, chosen: answers[i] });
+            }
+          });
+
+          var pct = Math.round((correct / total) * 100);
+          var screen = el("scorecardScreen");
+          clearChildren(screen);
+
+          var sc = createEl("div", "scorecard");
+          sc.appendChild(createEl("div", "scorecard-eyebrow", "Your Results"));
+          sc.appendChild(createEl("div", "score-big", correct + " / " + total));
+          sc.appendChild(createEl("div", "score-pct", pct + "%"));
+
+          // Breakdown
+          var bd = createEl("div", "breakdown");
+          [
+            "Happy Path",
+            "Non-Responder",
+            "Spouse Escalation",
+            "24hr NTA Chase",
+          ].forEach(function (s) {
+            var d = scenarioScores[s];
+            if (!d) return;
+            var barPct = Math.round((d.correct / d.total) * 100);
+            var row = createEl("div", "breakdown-row");
+            row.appendChild(createEl("span", "breakdown-label", s));
+            var bar = createEl("div", "breakdown-bar");
+            var fill = createEl("div", "breakdown-bar-fill");
+            fill.style.width = barPct + "%";
+            bar.appendChild(fill);
+            row.appendChild(bar);
+            row.appendChild(
+              createEl("span", "breakdown-score", d.correct + "/" + d.total),
+            );
+            bd.appendChild(row);
+          });
+          sc.appendChild(bd);
+
+          // Missed questions
+          if (missed.length > 0) {
+            var ms = createEl("div", "missed-section");
+            ms.appendChild(
+              createEl("div", "missed-heading", "Review Missed Questions"),
+            );
+            missed.forEach(function (m) {
+              var item = createEl("div", "missed-item");
+              item.appendChild(
+                createEl(
+                  "div",
+                  "missed-q",
+                  "Q" + (m.idx + 1) + ": " + m.q.question,
+                ),
+              );
+              item.appendChild(
+                createEl(
+                  "div",
+                  "missed-yours",
+                  "\u2717 You chose: " +
+                    LETTERS[m.chosen] +
+                    " \u2014 " +
+                    m.q.options[m.chosen],
+                ),
+              );
+              item.appendChild(
+                createEl(
+                  "div",
+                  "missed-correct",
+                  "\u2713 Correct: " +
+                    LETTERS[m.q.correct] +
+                    " \u2014 " +
+                    m.q.options[m.q.correct],
+                ),
+              );
+              ms.appendChild(item);
+            });
+            sc.appendChild(ms);
+          }
+
+          // Actions
+          var actions = createEl("div", "scorecard-actions");
+          var retakeBtn = createEl("button", "btn btn-primary", "Retake Quiz");
+          retakeBtn.addEventListener("click", retakeQuiz);
+          actions.appendChild(retakeBtn);
+          var simBtn = createEl("button", "btn btn-ghost", "Back to Simulator");
+          simBtn.addEventListener("click", function () {
+            window.location.href = "simulator.html";
+          });
+          actions.appendChild(simBtn);
+          sc.appendChild(actions);
+
+          screen.appendChild(sc);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function retakeQuiz() {
+          QUESTIONS.forEach(function (q) {
+            var correctText = q.options[q.correct];
+            var shuffled = q.options.slice();
+            for (var i = shuffled.length - 1; i > 0; i--) {
+              var j = Math.floor(Math.random() * (i + 1));
+              var tmp = shuffled[i];
+              shuffled[i] = shuffled[j];
+              shuffled[j] = tmp;
+            }
+            q.options = shuffled;
+            q.correct = shuffled.indexOf(correctText);
+          });
+
+          el("scorecardScreen").classList.remove("active");
+          el("questionScreen").classList.add("active");
+          currentQ = 0;
+          answers = new Array(QUESTIONS.length).fill(-1);
+          submitted = false;
+          renderQuestion();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      })();
+    </script>
+  </body>
+</html>
