@@ -882,61 +882,12 @@
               },
 
               {
-                type: "ac",
-                sender: "Briana (Texter)",
-                shortcut: ".confreply",
-                label: ".confreply",
-                time: "Apr 18, 1:40 PM",
-                text: "Got it, adding Linda now. I'll send her the health questionnaire separately so she has her own login. You're both all set for Friday at 9 AM Mountain with Greg.\n\nI'm going to send over a couple things to check out before the call. Nothing overwhelming, just some good stuff that I think will really resonate with what you've been going through.",
-                note: "Confirms Linda added, mentions separate NTA for her, restates appointment in Ron's timezone, bridges naturally to resource/testimonial drop. All .verify items complete.",
-                status: {
-                  confirm: "Responsive",
-                  nta: "Not Started",
-                  kit: "Not Completed",
-                },
-                prompt:
-                  "SCENARIO: HANDLE REPLY AFTER VERIFY SEQUENCE COMPLETE\nShortcut: .confreply\n\nWhen all .verify items are checked off:\n- Confirm the last item (attendee added)\n- Mention next steps for additional attendees (separate NTA)\n- Restate appointment in client's confirmed timezone\n- Bridge to resources/testimonial drop\n- Keep it brief and warm",
-              },
-
-              {
-                type: "ac",
-                sender: "Briana (Texter)",
-                shortcut: ".resources",
-                label: ".resources (msg 1)",
-                time: "Apr 18, 1:42 PM",
-                text: "Here's a page with everything in one spot: a documentary, a short webinar, and test kit instructions:\n\nhttps://drpompa.com/resources\n\nNo pressure to get through it all. Even the first 5 minutes of the documentary is worth it.",
-                note: "RESOURCES DROP (Message 1 of 2): Sent while engagement is high. One consolidated link, not a dump of multiple URLs. Framed as a gift, not homework.",
-                status: {
-                  confirm: "Responsive",
-                  nta: "Not Started",
-                  kit: "Not Completed",
-                },
-                prompt:
-                  'SCENARIO: RESOURCES & TESTIMONIAL \u2014 POST-VERIFY VALUE DROP\nShortcut: .resources\n\nGenerates TWO separate messages:\n\nMessage 1: Resource page link.\n- ONE consolidated page with documentary, webinar, kit instructions.\n- Frame as gift: "No pressure to get through it all."\n\nMessage 2: Best-match testimonial link.\n- If health discovery context available, pick a matching story.\n- Reference their specific concern.\n\nRULES:\n- ONE resource link. ONE testimonial link. Max.\n- NEVER frame as required or homework.\n- Break across TWO messages.',
-              },
-
-              {
-                type: "ac",
-                sender: "Briana (Texter)",
-                shortcut: ".resources",
-                label: ".resources (msg 2)",
-                time: "Apr 18, 1:43 PM",
-                text: "Also, I was thinking about what you shared about the fatigue and memory issues. This story really stood out to me, really similar to yours:\n\nhttps://reviews.pompaworkshop.com/tank",
-                note: "TESTIMONIAL DROP (Message 2 of 2): Ties directly to Ron's specific symptoms. Sent ~1 min after the resource page. Proves Briana actually read his message.",
-                status: {
-                  confirm: "Responsive",
-                  nta: "Not Started",
-                  kit: "Not Completed",
-                },
-              },
-
-              {
                 type: "client",
                 sender: "Ron Peters",
                 label: "Client Confirms",
                 time: "Apr 20, 2:30 PM",
-                text: "Thanks Briana! Linda and I watched the documentary last night. Really eye-opening stuff. I'll do the questionnaire this weekend. Linda said she got her link too. Still on for Friday!",
-                note: "Both Ron and Linda engaging with content. Documentary watched. NTA planned for weekend. Linda confirmed she received her separate link. High engagement.",
+                text: "Thanks Briana! Linda and I both started the assessment this weekend. She got her link too. Still on for Friday!",
+                note: "Both Ron and Linda working on NTA. Linda confirmed she got her registration link. High engagement, no resources shared yet.",
                 status: {
                   confirm: "Responsive",
                   nta: "Not Started",
@@ -990,6 +941,40 @@
                 },
                 prompt:
                   "SCENARIO: 48-HOUR CONFIRMATION\nShortcut: .conf48\n\nConfirm date, time in client's confirmed timezone, HA name.\nCheck on outstanding requirements (kit).\nIf NTA done, acknowledge. Do not re-ask.\nIf Double: Yes and both NTAs done, acknowledge both.\nClose with reassurance.",
+              },
+
+              {
+                type: "ac",
+                sender: "Briana (Texter)",
+                shortcut: ".resdone",
+                label: ".resdone",
+                time: "Apr 22, 10:15 AM",
+                text: "Ron, I see you and Linda both finished the assessment, that's awesome, thank you for getting that done. Greg is going to have a really clear picture going into your call.\n\nI wanted to share something with you before Friday. Have you had a chance to check this out yet?\n\nhttps://reviews.pompaworkshop.com/tank",
+                note: "RESOURCES DONE: Sent at 48 hours before appointment. Acknowledges both NTAs completed, thanks them, shares testimonial link, asks if they've checked it out. Combines NTA acknowledgment with testimonial drop.",
+                status: {
+                  confirm: "Ready",
+                  nta: "Complete",
+                  kit: "Not Completed",
+                },
+                prompt:
+                  'SCENARIO: ASSESSMENT COMPLETE + TESTIMONIAL DROP\nShortcut: .resdone\n\nSent at 48 hours before appointment when NTA is completed:\n- Acknowledge assessment completion\n- Thank them for getting it done\n- Edify HA briefly: "going to have a really clear picture"\n- Share testimonial link: https://reviews.pompaworkshop.com/tank\n- Ask if they\'ve checked it out\n- If Double: Yes, acknowledge both assessments\n\nRULES:\n- Testimonial link is condition-matched when possible\n- Do NOT re-ask about NTA\n- Keep it warm and brief',
+              },
+
+              {
+                type: "ac",
+                sender: "Briana (Texter)",
+                shortcut: ".testimonial",
+                label: ".testimonial",
+                time: "Apr 22, 10:16 AM",
+                text: "Also, I was thinking about what you shared about the fatigue and memory issues. This story really stood out to me, really similar to yours:\n\nhttps://reviews.pompaworkshop.com/tank",
+                note: "TESTIMONIAL: Condition-matched testimonial sent right after .resdone. Ties directly to Ron's specific symptoms from his initial message. Proves Briana actually read what he shared.",
+                status: {
+                  confirm: "Ready",
+                  nta: "Complete",
+                  kit: "Not Completed",
+                },
+                prompt:
+                  'SCENARIO: CONDITION-MATCHED TESTIMONIAL\nShortcut: .testimonial\n\nSent after .resdone:\n- Reference specific symptoms the client shared\n- Match to a testimonial story with similar health journey\n- "This story really stood out to me, really similar to yours"\n- Generic fallback: https://reviews.pompaworkshop.com/tank\n\nRULES:\n- ONE testimonial link only\n- Must reference something specific from their health discovery\n- Casual tone, not a pitch',
               },
 
               {
