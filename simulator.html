@@ -840,15 +840,15 @@
                 shortcut: ".nta1",
                 label: ".nta1 (msg 1)",
                 time: "Apr 18, 1:37 PM",
-                text: "Got it, Linda's all set on our end. Love that she's excited to jump on too. Ron, before your call with Greg there's a short intake form to fill out, about 15 minutes. Think of it as the new patient paperwork that covers the stuff most doctors never ask about, like toxin history and symptom patterns, so Greg can walk in already knowing your picture.\n\nHere's your login link: https://apply.pompaworkshop.com/login\n\nIt'll send a magic link to your email to get you in, no password needed. Laptop or iPad works best. Skip anything you're unsure about, nothing is required. If you run into any trouble getting in, here's a quick video walkthrough: [NTA_VIDEO_LINK]\n\nI'm here if anything comes up.",
-                note: "NTA LOGIN (Message 1 of 2): .nta1 generates two messages. First message delivers the NTA login link and frames the questionnaire as what makes the call productive, not homework. Mentions skipping anything they're unsure about to reduce friction.",
+                text: "Got it, Linda's all set on our end. Love that she's excited to jump on too.\n\nRon, before your call with Greg, there's a short intake that lets him walk in already understanding your picture, so the two of you can get straight to the root-cause conversation instead of covering the basics.\n\nHere's where to start: https://pom.pa/StartHere. The first thing you'll see is a 2-minute video from Dr. Pompa, then a Start My Assessment button to begin. The whole intake runs about 15 minutes, and you can skip anything you're not sure about.\n\nA laptop or iPad gives you the best experience on the platform. I'm here if anything comes up.",
+                note: "NTA LANDING PAGE (Message 1 of 2): .nta1 generates two messages. First message delivers the NTA landing page (pom.pa/StartHere) with Dr. Pompa video + Start My Assessment button. Frames intake as what lets the HA skip the basics. 15 minutes, skip anything.",
                 status: {
                   confirm: "Responsive",
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
                 prompt:
-                  'SCENARIO: NTA DELIVERY \u2014 FIRST SEND\nShortcut: .nta1\n\nGenerates TWO separate messages:\n\nMessage 1: NTA Login\n- Frame as "what lets [HA] walk in already understanding your picture"\n- Login link: https://apply.pompaworkshop.com/login (HARDCODED)\n- Mention magic link to inbox, laptop/iPad preference\n- Offer help: "I\'m right here if anything gives you trouble"\n\nMessage 2: Secondary Registration (only if Double: Yes)\n- Separate account for spouse/partner with different email\n- Registration link: https://apply.pompaworkshop.com/register-secondary (HARDCODED)\n- Same 15 minutes, same skip-anything framing\n\nRULES:\n- Links are HARDCODED. Never generate different URLs.\n- Do NOT say "required."\n- Break across TWO messages, ~1 min apart.',
+                  'SCENARIO: NTA DELIVERY \u2014 FIRST SEND\nShortcut: .nta1\n\nGenerates TWO separate messages:\n\nMessage 1: NTA Landing Page\n- Frame as "what lets [HA] walk in already understanding your picture"\n- Landing page: https://pom.pa/StartHere (HARDCODED)\n- Mention Dr. Pompa 2-min video at top, then Start My Assessment button\n- 15 minutes, skip anything, laptop/iPad best\n- Offer help: "I\'m here if anything comes up"\n\nMessage 2: Spouse/Second Person Registration (only if Double: Yes)\n- Same page https://pom.pa/StartHere has spouse registration section lower down\n- Different email than primary\n- Same 15 minutes, same skip-anything framing\n\nRULES:\n- Link is HARDCODED: https://pom.pa/StartHere. Never generate a different URL.\n- Do NOT say "required."\n- Break across TWO messages, ~1 min apart.',
               },
 
               {
@@ -857,8 +857,8 @@
                 shortcut: ".nta1",
                 label: ".nta1 (msg 2)",
                 time: "Apr 18, 1:38 PM",
-                text: "Linda will need her own account to fill out her own intake, just a different email than the one you used. Here's her link: https://apply.pompaworkshop.com/register-secondary\n\nSame deal, about 15 minutes and she can skip anything she's not sure on.",
-                note: "SECONDARY REGISTRATION (Message 2 of 2): Only sent because Double: Yes. Directs Linda to register-secondary with her own email. Keeps tone consistent with msg 1.",
+                text: "One more thing for Linda. The same page has a spouse registration section lower down where she can complete her own intake using a different email than yours. Same 15 minutes, same skip-anything-you're-unsure-about rule: https://pom.pa/StartHere",
+                note: "SPOUSE REGISTRATION (Message 2 of 2): Only sent because Double: Yes. Same pom.pa/StartHere page has a spouse section lower down. Different email than primary. Keeps tone consistent with msg 1.",
                 status: {
                   confirm: "Responsive",
                   nta: "Not Started",
