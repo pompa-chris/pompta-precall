@@ -837,6 +837,38 @@
               {
                 type: "ac",
                 sender: "Briana (Texter)",
+                shortcut: ".nta1",
+                label: ".nta1 (msg 1)",
+                time: "Apr 18, 1:37 PM",
+                text: "Ron, your next step before the call with Greg is a health questionnaire Dr. Pompa built himself. It's what lets Greg walk in already understanding your picture, so the conversation is real from minute one, not an orientation. About 15 minutes, and you can skip anything you're not sure about.\n\nLog in here with the email you used at purchase: https://apply.pompaworkshop.com/login\nOnce you're in, we send a magic link straight to that inbox. Works best on a laptop or iPad.\n\nI'm right here if anything gives you trouble.",
+                note: "NTA LOGIN (Message 1 of 2): .nta1 generates two messages. First message delivers the NTA login link and frames the questionnaire as what makes the call productive, not homework. Mentions skipping anything they're unsure about to reduce friction.",
+                status: {
+                  confirm: "Responsive",
+                  nta: "Not Started",
+                  kit: "Not Completed",
+                },
+                prompt:
+                  'SCENARIO: NTA DELIVERY \u2014 FIRST SEND\nShortcut: .nta1\n\nGenerates TWO separate messages:\n\nMessage 1: NTA Login\n- Frame as "what lets [HA] walk in already understanding your picture"\n- Login link: https://apply.pompaworkshop.com/login (HARDCODED)\n- Mention magic link to inbox, laptop/iPad preference\n- Offer help: "I\'m right here if anything gives you trouble"\n\nMessage 2: Secondary Registration (only if Double: Yes)\n- Separate account for spouse/partner with different email\n- Registration link: https://apply.pompaworkshop.com/register-secondary (HARDCODED)\n- Same 15 minutes, same skip-anything framing\n\nRULES:\n- Links are HARDCODED. Never generate different URLs.\n- Do NOT say "required."\n- Break across TWO messages, ~1 min apart.',
+              },
+
+              {
+                type: "ac",
+                sender: "Briana (Texter)",
+                shortcut: ".nta1",
+                label: ".nta1 (msg 2)",
+                time: "Apr 18, 1:38 PM",
+                text: "If your wife hasn't registered yet, she'll need her own account with a different email. Send her this link: https://apply.pompaworkshop.com/register-secondary\n\nSame 15 minutes, same deal on skipping anything she's not sure about.",
+                note: "SECONDARY REGISTRATION (Message 2 of 2): Only sent because Double: Yes. Directs Linda to register-secondary with her own email. Keeps tone consistent with msg 1.",
+                status: {
+                  confirm: "Responsive",
+                  nta: "Not Started",
+                  kit: "Not Completed",
+                },
+              },
+
+              {
+                type: "ac",
+                sender: "Briana (Texter)",
                 shortcut: ".confreply",
                 label: ".confreply",
                 time: "Apr 18, 1:40 PM",
@@ -881,23 +913,6 @@
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
-              },
-
-              {
-                type: "ac",
-                sender: "Briana (Texter)",
-                shortcut: ".nta",
-                label: ".nta",
-                time: "Apr 20, 9:15 AM",
-                text: "Hey Ron, one thing that'll make your call with Greg way more productive \u2014 there's a health questionnaire that gives him your full picture before you even get on:\n\nhttps://apply.pompaworkshop.com/register-secondary\n\nTakes about 10-15 minutes. Best done on a laptop or iPad if you have one handy.\n\nI'm also sending Linda her own link so she can fill out hers separately.",
-                note: "NTA delivery \u2014 sent 2 days later as a separate touchpoint. Mentions Linda getting her own link since Double: Yes. Link is hardcoded and never changes.",
-                status: {
-                  confirm: "Responsive",
-                  nta: "Not Started",
-                  kit: "Not Completed",
-                },
-                prompt:
-                  'SCENARIO: NTA \u2014 FIRST-SEND REQUEST\nShortcut: .nta\n\nDelivers NTA link:\n- https://apply.pompaworkshop.com/register-secondary\n- Frame as helpful: "so [HAName] has your full picture"\n- Mention laptop/iPad preference\n- If Double: Yes, mention additional attendees get their own link\n\nRULES:\n- Link is HARDCODED. Never generate a different URL.\n- Do NOT say "required."\n- Do NOT list other requirements.',
               },
 
               {
