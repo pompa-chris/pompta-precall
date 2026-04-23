@@ -840,15 +840,15 @@
                 shortcut: ".nta1",
                 label: ".nta1 (msg 1)",
                 time: "Apr 18, 1:37 PM",
-                text: "Got it, Linda's all set on our end. Love that she's excited to jump on too.\n\nRon, before your call with Greg, there's a short intake that lets him walk in already understanding your picture, so the two of you can get straight to the root-cause conversation instead of covering the basics.\n\nHere's where to start: https://pom.pa/StartHere. The first thing you'll see is a 2-minute video from Dr. Pompa, then a Start My Assessment button to begin. The whole intake runs about 15 minutes, and you can skip anything you're not sure about.\n\nA laptop or iPad gives you the best experience on the platform. I'm here if anything comes up.",
-                note: "NTA LANDING PAGE (Message 1 of 2): .nta1 generates two messages. First message delivers the NTA landing page (pom.pa/StartHere) with Dr. Pompa video + Start My Assessment button. Frames intake as what lets the HA skip the basics. 15 minutes, skip anything.",
+                text: "Linda's all set on our end, Ron. Before your call with Greg, there's a quick assessment we send every client through, and it's what lets Greg walk into your conversation already understanding your picture rather than spending the whole time getting up to speed on your history.\n\nSending the link right now.",
+                note: "NTA INTRO (Message 1 of 3): .nta1 generates three messages (third only if Double: Yes). First message acknowledges attendee info, frames the assessment as what lets the HA skip the basics. Ends with 'Sending the link right now' to set up msg 2.",
                 status: {
                   confirm: "Responsive",
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
                 prompt:
-                  'SCENARIO: NTA DELIVERY \u2014 FIRST SEND\nShortcut: .nta1\n\nGenerates TWO separate messages:\n\nMessage 1: NTA Landing Page\n- Frame as "what lets [HA] walk in already understanding your picture"\n- Landing page: https://pom.pa/StartHere (HARDCODED)\n- Mention Dr. Pompa 2-min video at top, then Start My Assessment button\n- 15 minutes, skip anything, laptop/iPad best\n- Offer help: "I\'m here if anything comes up"\n\nMessage 2: Spouse/Second Person Registration (only if Double: Yes)\n- Same page https://pom.pa/StartHere has spouse registration section lower down\n- Different email than primary\n- Same 15 minutes, same skip-anything framing\n\nRULES:\n- Link is HARDCODED: https://pom.pa/StartHere. Never generate a different URL.\n- Do NOT say "required."\n- Break across TWO messages, ~1 min apart.',
+                  'SCENARIO: NTA DELIVERY \u2014 FIRST SEND\nShortcut: .nta1\n\nGenerates THREE separate messages (msg 3 only if Double: Yes):\n\nMessage 1: NTA Intro\n- Acknowledge attendee info if just collected\n- Frame assessment as "what lets [HA] walk in already understanding your picture"\n- End with "Sending the link right now" to set up msg 2\n- No link in this message\n\nMessage 2: Link & Instructions\n- Landing page: https://pom.pa/StartHere (HARDCODED)\n- Mention Dr. Pompa 2-min video at top, then Start My Assessment button\n- 15 minutes, skip anything, laptop/iPad best\n- Offer help: "I\'m here if anything comes up"\n\nMessage 3: Spouse/Second Person Registration (only if Double: Yes)\n- Same page https://pom.pa/StartHere has second-person section lower down\n- Use spouse email if known from prior conversation\n- Same 15 minutes, same skip-anything framing\n\nRULES:\n- Link is HARDCODED: https://pom.pa/StartHere. Never generate a different URL.\n- Do NOT say "required."\n- Break across THREE messages, ~1 min apart.',
               },
 
               {
@@ -857,8 +857,23 @@
                 shortcut: ".nta1",
                 label: ".nta1 (msg 2)",
                 time: "Apr 18, 1:38 PM",
-                text: "One more thing for Linda. The same page has a spouse registration section lower down where she can complete her own intake using a different email than yours. Same 15 minutes, same skip-anything-you're-unsure-about rule: https://pom.pa/StartHere",
-                note: "SPOUSE REGISTRATION (Message 2 of 2): Only sent because Double: Yes. Same pom.pa/StartHere page has a spouse section lower down. Different email than primary. Keeps tone consistent with msg 1.",
+                text: "Here's your link: https://pom.pa/StartHere\n\nFirst thing on the page is a short 2-minute video from Dr. Pompa, then you'll see the Start My Assessment button to begin. It runs about 15 minutes and you can skip anything you're unsure about. Works best on a laptop or iPad if you have one handy.\n\nI'm here if anything comes up.",
+                note: "NTA LINK & INSTRUCTIONS (Message 2 of 3): Delivers the link with clear walkthrough of what they'll see on the page. Dr. Pompa video first, then Start My Assessment button. 15 min, skip anything, laptop/iPad.",
+                status: {
+                  confirm: "Responsive",
+                  nta: "Not Started",
+                  kit: "Not Completed",
+                },
+              },
+
+              {
+                type: "ac",
+                sender: "Briana (Texter)",
+                shortcut: ".nta1",
+                label: ".nta1 (msg 3)",
+                time: "Apr 18, 1:39 PM",
+                text: "One more thing for Linda. The same page has a section lower down specifically for a second person joining the call. She'll just need to register there using her own email, linda.peters@gmail.com, same 15 minutes, same skip-anything-you're-unsure-about rule applies to her too: https://pom.pa/StartHere",
+                note: "SPOUSE REGISTRATION (Message 3 of 3): Only sent because Double: Yes. Same pom.pa/StartHere page has a second-person section lower down. Uses Linda's email from the prior message. Keeps tone consistent.",
                 status: {
                   confirm: "Responsive",
                   nta: "Not Started",
