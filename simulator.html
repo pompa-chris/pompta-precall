@@ -540,8 +540,7 @@
         <div class="client-card">
           <h3>Client Profile (fake data)</h3>
           <div class="row">
-            <span class="label">Name</span
-            ><span class="value">Ron Peters</span>
+            <span class="label">Name</span><span class="value">Ron Peters</span>
           </div>
           <div class="row">
             <span class="label">DOB</span
@@ -573,11 +572,12 @@
           </div>
           <div class="row">
             <span class="label">Double</span
-            ><span class="value" style="color: var(--grn); font-weight: 600">Yes</span>
+            ><span class="value" style="color: var(--grn); font-weight: 600"
+              >Yes</span
+            >
           </div>
           <div class="row">
-            <span class="label">NTQ Score</span
-            ><span class="value">108</span>
+            <span class="label">NTQ Score</span><span class="value">108</span>
           </div>
           <div class="row">
             <span class="label">AC Texter</span
@@ -683,7 +683,7 @@
                 label: ".intro (msg 1)",
                 time: "Apr 18, 12:28 PM",
                 text: "Hey Ron, this is Briana \u2014 a real person on Dr. Pompa's team, not a bot. I'm going to be your point of contact leading up to your call with Greg on Friday, April 24th, making sure you and Linda feel completely ready.",
-                note: "WARM INTRO: Client already replied, so Briana leads with \"real person\" signal. References Linda by name since Ron mentioned her. This is Message 1 of a back-to-back sequence.",
+                note: 'WARM INTRO: Client already replied, so Briana leads with "real person" signal. References Linda by name since Ron mentioned her. This is Message 1 of a back-to-back sequence.',
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Not Started",
@@ -707,7 +707,7 @@
                   kit: "Not Completed",
                 },
                 prompt:
-                  "SCENARIO: ONBOARDING \u2014 EMPOWERMENT (sent as 2nd .intro message)\nShortcut: .intro\n\nWhen client already shared health info via automated SMS:\n- SKIP the discovery question \u2014 they already told you.\n- Acknowledge with genuine empathy.\n- Mirror 1-2 specific details (symptoms, timeline, frustration).\n- Empower: \"The fact that you're still looking says a lot.\"\n- Reference spouse if mentioned.\n- 2-3 sentences. End with empowerment, not a question.\n\nWhen client has NOT shared health info:\n- Ask ONE open-ended question about their health journey.",
+                  'SCENARIO: ONBOARDING \u2014 EMPOWERMENT (sent as 2nd .intro message)\nShortcut: .intro\n\nWhen client already shared health info via automated SMS:\n- SKIP the discovery question \u2014 they already told you.\n- Acknowledge with genuine empathy.\n- Mirror 1-2 specific details (symptoms, timeline, frustration).\n- Empower: "The fact that you\'re still looking says a lot."\n- Reference spouse if mentioned.\n- 2-3 sentences. End with empowerment, not a question.\n\nWhen client has NOT shared health info:\n- Ask ONE open-ended question about their health journey.',
               },
 
               {
@@ -755,7 +755,7 @@
                   kit: "Not Completed",
                 },
                 prompt:
-                  "SCENARIO: CONTACT VERIFICATION \u2014 DYNAMIC SEQUENCE\nShortcut: .verify\n\nRUN 2 \u2014 APPOINTMENT CONFIRMATION:\n- Convert appointment time to client's confirmed timezone\n- State: \"Your call with [HA] is [date] at [LOCAL TIME] [TIMEZONE]\"\n- Ask: \"Does that still work for you, [name]?\"\n- Replace placeholders with confirmed values BEFORE sending\n- If client reschedules, handle in-conversation and don't re-trigger .verify until new time is locked",
+                  'SCENARIO: CONTACT VERIFICATION \u2014 DYNAMIC SEQUENCE\nShortcut: .verify\n\nRUN 2 \u2014 APPOINTMENT CONFIRMATION:\n- Convert appointment time to client\'s confirmed timezone\n- State: "Your call with [HA] is [date] at [LOCAL TIME] [TIMEZONE]"\n- Ask: "Does that still work for you, [name]?"\n- Replace placeholders with confirmed values BEFORE sending\n- If client reschedules, handle in-conversation and don\'t re-trigger .verify until new time is locked',
               },
 
               {
@@ -779,14 +779,14 @@
                 label: ".verify (3/4) Email",
                 time: "Apr 18, 1:05 PM",
                 text: "One quick thing before your call with Greg on Friday. I see ron.peters@gmail.com on file. Any chance you've ever signed up with us using a different email?",
-                note: "VERIFY RUN 3: Email verification. Casual phrasing \u2014 \"any chance\" feels natural, not interrogative. Important for HubSpot deduplication.",
+                note: 'VERIFY RUN 3: Email verification. Casual phrasing \u2014 "any chance" feels natural, not interrogative. Important for HubSpot deduplication.',
                 status: {
                   confirm: "Responsive",
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
                 prompt:
-                  "SCENARIO: CONTACT VERIFICATION \u2014 DYNAMIC SEQUENCE\nShortcut: .verify\n\nRUN 3 \u2014 EMAIL VERIFICATION:\n- State the email on file\n- Ask if they've ever signed up with a different email\n- If client names a second email, flag in Aloware and send to Slack #sales-system-help for HubSpot dedupe\n- Casual tone \u2014 \"any chance you've ever...\" not \"please confirm your email address\"",
+                  'SCENARIO: CONTACT VERIFICATION \u2014 DYNAMIC SEQUENCE\nShortcut: .verify\n\nRUN 3 \u2014 EMAIL VERIFICATION:\n- State the email on file\n- Ask if they\'ve ever signed up with a different email\n- If client names a second email, flag in Aloware and send to Slack #sales-system-help for HubSpot dedupe\n- Casual tone \u2014 "any chance you\'ve ever..." not "please confirm your email address"',
               },
 
               {
@@ -865,7 +865,7 @@
                   kit: "Not Completed",
                 },
                 prompt:
-                  "SCENARIO: RESOURCES & TESTIMONIAL \u2014 POST-VERIFY VALUE DROP\nShortcut: .resources\n\nGenerates TWO separate messages:\n\nMessage 1: Resource page link.\n- ONE consolidated page with documentary, webinar, kit instructions.\n- Frame as gift: \"No pressure to get through it all.\"\n\nMessage 2: Best-match testimonial link.\n- If health discovery context available, pick a matching story.\n- Reference their specific concern.\n\nRULES:\n- ONE resource link. ONE testimonial link. Max.\n- NEVER frame as required or homework.\n- Break across TWO messages.",
+                  'SCENARIO: RESOURCES & TESTIMONIAL \u2014 POST-VERIFY VALUE DROP\nShortcut: .resources\n\nGenerates TWO separate messages:\n\nMessage 1: Resource page link.\n- ONE consolidated page with documentary, webinar, kit instructions.\n- Frame as gift: "No pressure to get through it all."\n\nMessage 2: Best-match testimonial link.\n- If health discovery context available, pick a matching story.\n- Reference their specific concern.\n\nRULES:\n- ONE resource link. ONE testimonial link. Max.\n- NEVER frame as required or homework.\n- Break across TWO messages.',
               },
 
               {
@@ -897,7 +897,7 @@
                   kit: "Not Completed",
                 },
                 prompt:
-                  "SCENARIO: NTA \u2014 FIRST-SEND REQUEST\nShortcut: .nta\n\nDelivers NTA link:\n- https://apply.pompaworkshop.com/register-secondary\n- Frame as helpful: \"so [HAName] has your full picture\"\n- Mention laptop/iPad preference\n- If Double: Yes, mention additional attendees get their own link\n\nRULES:\n- Link is HARDCODED. Never generate a different URL.\n- Do NOT say \"required.\"\n- Do NOT list other requirements.",
+                  'SCENARIO: NTA \u2014 FIRST-SEND REQUEST\nShortcut: .nta\n\nDelivers NTA link:\n- https://apply.pompaworkshop.com/register-secondary\n- Frame as helpful: "so [HAName] has your full picture"\n- Mention laptop/iPad preference\n- If Double: Yes, mention additional attendees get their own link\n\nRULES:\n- Link is HARDCODED. Never generate a different URL.\n- Do NOT say "required."\n- Do NOT list other requirements.',
               },
 
               {
@@ -928,7 +928,7 @@
                   kit: "Not Completed",
                 },
                 prompt:
-                  "SCENARIO: 3-DAY PRE-CALL CONFIRMATION\nShortcut: .conf3d\n\nConfirm date/time in client's CONFIRMED timezone.\nEdify HA briefly: \"already going through your results.\"\nIf Double: Yes, include additional attendees naturally.\nCAN include one question.\nKeep it under 4 sentences.",
+                  'SCENARIO: 3-DAY PRE-CALL CONFIRMATION\nShortcut: .conf3d\n\nConfirm date/time in client\'s CONFIRMED timezone.\nEdify HA briefly: "already going through your results."\nIf Double: Yes, include additional attendees naturally.\nCAN include one question.\nKeep it under 4 sentences.',
               },
 
               {
@@ -968,7 +968,7 @@
                 label: "Client Updates",
                 time: "Apr 22, 3:15 PM",
                 text: "Just took the test! My result was definitely on the higher end of the chart. Linda's was too. Is that something to worry about?",
-                note: "Kit complete for both! Client fully prepped. The \"higher end\" result \u2014 redirect to HA without interpreting.",
+                note: 'Kit complete for both! Client fully prepped. The "higher end" result \u2014 redirect to HA without interpreting.',
                 status: { confirm: "Ready", nta: "Complete", kit: "Complete" },
               },
 
@@ -982,7 +982,7 @@
                 note: "Edification \u2014 builds trust in the HA. References Ron's symptoms from initial message. Does NOT interpret the test result. Includes Linda naturally.",
                 status: { confirm: "Ready", nta: "Complete", kit: "Complete" },
                 prompt:
-                  "EDIFICATION (embedded in templates)\n\nRules:\n- NEVER give medical advice or interpret results.\n- NEVER call the call \"sales.\"\n- Reference one specific detail from their story.\n- Build trust in the HA. Position as experienced, empathetic, prepared.\n- If Double: Yes, include both attendees naturally.\n- 2-4 sentences.",
+                  'EDIFICATION (embedded in templates)\n\nRules:\n- NEVER give medical advice or interpret results.\n- NEVER call the call "sales."\n- Reference one specific detail from their story.\n- Build trust in the HA. Position as experienced, empathetic, prepared.\n- If Double: Yes, include both attendees naturally.\n- 2-4 sentences.',
               },
 
               {
@@ -1030,8 +1030,8 @@
                 sender: "Automated SMS",
                 shortcut: "auto",
                 label: "Initial Outreach",
-                time: "Apr 12, 10:02 AM",
-                text: "Hi Sarah! This is a message from Dr. Pompa's team. Congrats on getting your Cellular Inflammation Test Kit! We're getting everything ready for your upcoming consultation.\n\nQuick question: what's the #1 thing you're hoping to improve with your health right now?",
+                time: "Apr 18, 10:02 AM",
+                text: "Hi Ron! This is a message from Dr. Pompa's team. Congrats on getting your Cellular Inflammation Test Kit! We're getting everything ready for your upcoming consultation.\n\nQuick question: what's the #1 thing you're hoping to improve with your health right now?",
                 note: "Automated SMS sent. In this scenario, the client does NOT reply. After 24 hours of silence, the texter manually sends a personalized text.",
                 status: {
                   confirm: "Blank",
@@ -1047,16 +1047,16 @@
                 sender: "Briana (Texter)",
                 shortcut: ".intro",
                 label: ".intro (cold)",
-                time: "Apr 13, 10:05 AM",
-                text: "Hey Sarah, this is Briana \u2014 a real person on Dr. Pompa's team. I'm going to be your point of contact leading up to your call with Tiger on Tuesday, April 22nd at 2:00 PM Eastern, making sure you feel totally ready. You'll hear from me a couple times before then just to keep things on track.",
-                note: "24hr mark, no reply to automated SMS. Briana sends cold .intro. Key differences from warm intro: still signals 'real person', includes appointment date/time WITH TIMEZONE, but does NOT reference health concerns (she has none \u2014 Sarah never replied). This is Message 1 of a back-to-back.",
+                time: "Apr 19, 10:05 AM",
+                text: "Hey Ron, this is Briana \u2014 a real person on Dr. Pompa's team. I'm going to be your point of contact leading up to your call with Greg on Friday, April 24th, making sure you feel totally ready. You'll hear from me a couple times before then just to keep things on track.",
+                note: "24hr mark, no reply to automated SMS. Briana sends cold .intro. Key differences from warm intro: still signals 'real person', includes appointment date but does NOT assume timezone \u2014 that comes via .verify. Ron never replied so we have no health concerns to reference. Message 1 of a back-to-back.",
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
                 prompt:
-                  "SCENARIO: ONBOARDING \u2014 INTRODUCTION MESSAGE (COLD VARIANT)\nShortcut: .intro\n\nWhen client has NOT replied to automated SMS:\n- Lead with real-person signal.\n- Introduce yourself as concierge.\n- Include appointment date/time WITH TIMEZONE.\n- Do NOT reference health situation (you don't have one yet).\n- 2-3 sentences. No question.",
+                  "SCENARIO: ONBOARDING \u2014 INTRODUCTION MESSAGE (COLD VARIANT)\nShortcut: .intro\n\nWhen client has NOT replied to automated SMS:\n- Lead with real-person signal.\n- Introduce yourself as concierge.\n- Include appointment date and HA name.\n- Do NOT mention timezone \u2014 that hasn't been confirmed via .verify yet.\n- Do NOT reference health situation (you don't have one yet).\n- 2-3 sentences. No question.",
               },
 
               {
@@ -1064,16 +1064,16 @@
                 sender: "Briana (Texter)",
                 shortcut: ".verify",
                 label: ".verify",
-                time: "Apr 13, 10:06 AM",
-                text: "Quick thing \u2014 we have sarahmitchell42@gmail.com on file for you. Is that the best email, or have you used a different one with us at any point?",
-                note: "Contact verification sent right after intro. Even for non-responders, verifying email is critical. Timezone was already confirmed in the intro. This gives Sarah an easy, low-stakes question to reply to.",
+                time: "Apr 19, 10:06 AM",
+                text: "Quick thing \u2014 we have ron.peters@gmail.com on file for you. Is that the best email, or have you used a different one with us at any point?",
+                note: "Contact verification sent right after intro. Even for non-responders, verifying email is critical. This gives Ron an easy, low-stakes question to reply to. Timezone verification will come when .verify is re-triggered after he responds.",
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
                 prompt:
-                  'SCENARIO: ONBOARDING \u2014 CONTACT VERIFICATION\nShortcut: .verify\n\nFor non-responders, this serves double duty:\n1. Verify email (primary purpose)\n2. Give them an easy question to break the ice \u2014 much lower stakes than "what\'s going on with your health?"',
+                  "SCENARIO: CONTACT VERIFICATION \u2014 DYNAMIC SEQUENCE\nShortcut: .verify\n\nFor non-responders, .verify starts with email since it's the easiest question to break the ice:\n1. Verify email (primary purpose)\n2. Give them an easy question \u2014 much lower stakes than \"what's going on with your health?\"\n\nTimezone, appt confirmation, and attendees will follow in subsequent .verify runs once the client engages.",
               },
 
               {
@@ -1081,8 +1081,8 @@
                 sender: "Briana (Texter)",
                 shortcut: ".discovery",
                 label: ".discovery",
-                time: "Apr 14, 10:00 AM",
-                text: "Sarah, I'd love to get a little background before your call. What's been going on with your health that made you decide to get the test kit?",
+                time: "Apr 20, 10:00 AM",
+                text: "Ron, I'd love to get a little background before your call. What's been going on with your health that made you decide to get the test kit?",
                 note: "Day 2, still no reply. AC sends .discovery \u2014 the critical data-mining question. For non-responders, this goes out as-is (no conditional needed since they haven't shared anything yet).",
                 status: {
                   confirm: "Waiting on Reply",
@@ -1098,8 +1098,8 @@
                 sender: "Briana (Texter)",
                 shortcut: ".nta",
                 label: ".nta",
-                time: "Apr 15, 10:00 AM",
-                text: "Hey Sarah, here's the link for the health questionnaire so Tiger has your full picture before the call:\n\nhttps://apply.pompaworkshop.com/register-secondary\n\nIt takes about 10-15 minutes. Best done on a laptop or iPad if you have one handy.",
+                time: "Apr 21, 10:00 AM",
+                text: "Hey Ron, here's the link for the health questionnaire so Greg has your full picture before the call:\n\nhttps://apply.pompaworkshop.com/register-secondary\n\nIt takes about 10-15 minutes. Best done on a laptop or iPad if you have one handy.",
                 note: "Day 3, still silent. NTA delivery goes out regardless of engagement. The link must be delivered \u2014 some silent clients DO complete the NTA without ever replying to texts.",
                 status: {
                   confirm: "Waiting on Reply",
@@ -1115,9 +1115,9 @@
                 sender: "Briana (Texter)",
                 shortcut: ".resources",
                 label: ".resources",
-                time: "Apr 15, 10:01 AM",
+                time: "Apr 21, 10:01 AM",
                 text: "Also wanted to share this \u2014 a handful of real stories from people who've been through the program. Some really powerful stuff in here:\n\nhttps://reviews.pompaworkshop.com/tank",
-                note: "Generic testimonial drop (no specific symptoms to reference since Sarah never replied). Uses the general Pompa Stories page instead of a condition-specific story. Still sent early in the flow to build trust.",
+                note: "Generic testimonial drop (no specific symptoms to reference since Ron never replied). Uses the general Pompa Stories page instead of a condition-specific story. Still sent early in the flow to build trust.",
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Not Started",
@@ -1132,9 +1132,9 @@
                 sender: "Briana (Texter)",
                 shortcut: ".remnta",
                 label: ".remnta",
-                time: "Apr 17, 10:00 AM",
-                text: "Hey Sarah, just wanted to circle back about the health questionnaire before your call with Tiger. It takes about 10 minutes and helps them understand your full picture so the call is completely tailored to you.\n\nhttps://apply.pompaworkshop.com/register-secondary\n\nI'm here if you have any questions about it.",
-                note: "Day 5, still silent. Gentle NTA reminder. No guilt. Open door, no direct question. At this point the AC checks whether NTA was completed silently (some clients do the NTA without replying to texts).",
+                time: "Apr 22, 10:00 AM",
+                text: "Hey Ron, just wanted to circle back about the health questionnaire before your call with Greg. It takes about 10 minutes and helps them understand your full picture so the call is completely tailored to you.\n\nhttps://apply.pompaworkshop.com/register-secondary\n\nI'm here if you have any questions about it.",
+                note: "Day 4, still silent. Gentle NTA reminder. No guilt. Open door, no direct question. At this point the AC checks whether NTA was completed silently (some clients do the NTA without replying to texts).",
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Not Started",
@@ -1149,25 +1149,25 @@
                 sender: "Briana (Texter)",
                 shortcut: ".chaseghost",
                 label: ".chaseghost",
-                time: "Apr 19, 10:00 AM",
-                text: "Hey Sarah, just checking in \u2014 I know life gets busy and I don't want to be a bother. Your call with Tiger is this Tuesday at 2:00 PM Eastern and the door is still wide open.\n\nIf the timing doesn't work, I can move it. Just let me know either way.",
-                note: "Ghost re-engagement. For true non-responders with NO health info shared, the ghost message can't reference specific symptoms. Instead it focuses on: acknowledge silence without guilt, restate the appointment with timezone, offer flexibility (reschedule option), and keep it SHORT.",
+                time: "Apr 23, 10:00 AM",
+                text: "Hey Ron, just checking in \u2014 I know life gets busy and I don't want to be a bother. Your call with Greg is this Friday and the door is still wide open.\n\nIf the timing doesn't work, I can move it. Just let me know either way.",
+                note: "Ghost re-engagement. For true non-responders with NO health info shared, the ghost message can't reference specific symptoms. Acknowledges silence without guilt, restates the appointment (no timezone \u2014 not confirmed yet), offers flexibility. Keeps it SHORT.",
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
                 prompt:
-                  "SCENARIO: GHOST RE-ENGAGEMENT \u2014 SILENT LEAD\nShortcut: .chaseghost\n\nStep 1: Acknowledge silence without guilt.\nStep 2: Reference something SPECIFIC from intake.\n- IF no intake info available: focus on the appointment + flexibility.\nStep 3: Leave the door open.\n\nRULES:\n- NEVER guilt-trip.\n- Under 3 sentences.\n- If no health info to reference, offer reschedule flexibility instead.\n\nNOTE: When the client DID share health info (via automated SMS or intake), reference ONE specific symptom. That proves you're a real person, not a sequence.",
+                  "SCENARIO: GHOST RE-ENGAGEMENT \u2014 SILENT LEAD\nShortcut: .chaseghost\n\nStep 1: Acknowledge silence without guilt.\nStep 2: Reference something SPECIFIC from intake.\n- IF no intake info available: focus on the appointment + flexibility.\nStep 3: Leave the door open.\n\nRULES:\n- NEVER guilt-trip.\n- Under 3 sentences.\n- Do NOT mention timezone unless confirmed via .verify.\n- If no health info to reference, offer reschedule flexibility instead.",
               },
 
               {
                 type: "client",
-                sender: "Sarah Mitchell",
+                sender: "Ron Peters",
                 label: "Client Re-engages",
-                time: "Apr 19, 3:45 PM",
-                text: "I'm so sorry for the silence! Things have been crazy at work. Yes I still want to do the call. I haven't done the questionnaire yet though, is there still time?",
-                note: "Ghost recovery success! The low-pressure approach worked. Now Briana must: confirm appointment with timezone, get NTA done (3 days left), and NOT make her feel bad about the silence.",
+                time: "Apr 23, 3:45 PM",
+                text: "I'm so sorry for the silence! Things have been crazy. Yes I still want to do the call. I haven't done the questionnaire yet though, is there still time?",
+                note: "Ghost recovery success! The low-pressure approach worked. Now Briana must: confirm appointment, get NTA done (1 day left), run .verify for timezone, and NOT make him feel bad about the silence.",
                 status: {
                   confirm: "Responsive",
                   nta: "Not Started",
@@ -1180,16 +1180,16 @@
                 sender: "Briana (Texter)",
                 shortcut: ".confreply",
                 label: ".confreply",
-                time: "Apr 19, 3:55 PM",
-                text: "No need to apologize at all, Sarah! Life happens. There is absolutely still time \u2014 your call with Tiger is this Tuesday, April 22nd at 2:00 PM Eastern.\n\nThe questionnaire takes about 10-15 minutes, so if you can knock it out this weekend Tiger will have everything he needs: https://apply.pompaworkshop.com/register-secondary\n\nAlso, just want to make sure \u2014 you're in Mountain time, right? That would be noon your time on Tuesday.",
-                note: "Reply handler: normalizes silence, confirms appointment with TIMEZONE, delivers NTA link, and verifies timezone all in one message. For ghost recovery, you collapse multiple steps into one since you're making up for lost time.",
+                time: "Apr 23, 3:55 PM",
+                text: "No need to apologize at all, Ron! Life happens. There is absolutely still time \u2014 your call with Greg is this Friday, April 24th.\n\nThe questionnaire takes about 10-15 minutes, so if you can knock it out tonight Greg will have everything he needs: https://apply.pompaworkshop.com/register-secondary\n\nAlso, quick question \u2014 what timezone are you in so I can confirm the time in your local time?",
+                note: "Ghost recovery reply: normalizes silence, confirms appointment date, delivers NTA link, and asks for timezone via .verify logic \u2014 all in one message. For ghost recovery, you collapse multiple steps since you're making up for lost time. Timezone NOT assumed \u2014 asked directly.",
                 status: {
                   confirm: "Responsive",
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
                 prompt:
-                  "SCENARIO: HANDLE ANY REPLY TO A CONFIRMATION MESSAGE\nShortcut: .confreply\n\nFor ghost recovery replies:\n- Normalize silence. No guilt.\n- Confirm appointment with TIMEZONE.\n- Deliver outstanding requirements (NTA link if not done).\n- Verify timezone if not already confirmed.\n\nYou can cover more ground in one message during recovery since you're catching up.",
+                  "SCENARIO: HANDLE ANY REPLY TO A CONFIRMATION MESSAGE\nShortcut: .confreply\n\nFor ghost recovery replies:\n- Normalize silence. No guilt.\n- Confirm appointment date (no timezone until confirmed).\n- Deliver outstanding requirements (NTA link if not done).\n- Ask for timezone since .verify hasn't confirmed it yet.\n\nYou can cover more ground in one message during recovery since you're catching up.",
               },
             ],
           },
@@ -1203,9 +1203,9 @@
                 sender: "Briana (Texter)",
                 shortcut: ".conf3d",
                 label: ".conf3d",
-                time: "Apr 19, 10:30 AM",
-                text: "Hey Sarah, just checking in. Your call with Tiger is on Tuesday, April 22nd at 2:00 PM Eastern (noon your time). He's already going through your questionnaire results to get ready.\n\nIf David is around that day, it can be really helpful to have him on the call too. Either way, you're all set. Still looking good for Tuesday?",
-                note: "First mention of spouse attendance in .conf3d. David's name from intake. Framed as helpful, not required. This is the ONLY spouse mention the Texter makes \u2014 it's part of the standard confirmation, not a dedicated spouse conversation.",
+                time: "Apr 21, 10:30 AM",
+                text: "Hey Ron, just checking in. Your call with Greg is this Friday, April 24th at 9:00 AM Mountain. He's already going through your questionnaire results to get ready.\n\nIf Linda is around that day, it can be really helpful to have her on the call too. Either way, you're all set. Still looking good for Friday?",
+                note: "3-day confirmation. Time stated in Ron's confirmed timezone (Mountain \u2014 confirmed earlier via .verify). First mention of spouse attendance. Linda's name from intake. Framed as helpful, not required. This is the ONLY spouse mention the Texter makes.",
                 status: {
                   confirm: "Responsive",
                   nta: "Complete",
@@ -1215,11 +1215,11 @@
 
               {
                 type: "client",
-                sender: "Sarah Mitchell",
+                sender: "Ron Peters",
                 label: "Spouse Pushback",
-                time: "Apr 19, 11:15 AM",
-                text: "Yes, still on for Tuesday! I finished the questionnaire yesterday. I'll ask David but honestly he's pretty skeptical about all of this. He'll probably say no. Is it okay if it's just me?",
-                note: 'Spouse pushback detected. David is "skeptical." Briana does NOT reply about the spouse topic. She immediately escalates to Janice (Caller). Only the Caller handles spouse conversations.',
+                time: "Apr 21, 11:15 AM",
+                text: "Yes, still on for Friday! I finished the questionnaire yesterday. I'll ask Linda but honestly she's pretty skeptical about all of this. She'll probably say no. Is it okay if it's just me?",
+                note: 'Spouse pushback detected. Linda is "skeptical" even though she bought a kit (Double: Yes). Briana does NOT reply about the spouse topic. She immediately escalates to Janice (Caller). Only the Caller handles spouse conversations.',
                 status: {
                   confirm: "Responsive",
                   nta: "Complete",
@@ -1231,9 +1231,9 @@
                 type: "ac",
                 sender: "Briana (Texter)",
                 label: "Silent Escalation",
-                time: "Apr 19, 11:20 AM",
-                text: "That's great you got the questionnaire done, Sarah! Tiger is going to love seeing your results. You're all set for Tuesday at 2:00 PM Eastern (noon your time).",
-                note: "SILENT ESCALATION: Briana responds ONLY to the NTA completion and confirms the appointment. She does NOT acknowledge, reference, or address the spouse topic AT ALL — no 'let me check,' no 'I'll get back to you,' nothing. The client should have no idea an escalation is happening. Behind the scenes, Briana immediately flags Sarah for Janice (Caller). The Texter NEVER sends .sp.invite — that's the Caller's job.",
+                time: "Apr 21, 11:20 AM",
+                text: "That's great you got the questionnaire done, Ron! Greg is going to love seeing your results. You're all set for Friday at 9:00 AM Mountain.",
+                note: "SILENT ESCALATION: Briana responds ONLY to the NTA completion and confirms the appointment in Ron's confirmed timezone. She does NOT acknowledge, reference, or address the spouse topic AT ALL \u2014 no 'let me check,' no 'I'll get back to you,' nothing. The client should have no idea an escalation is happening. Behind the scenes, Briana immediately flags Ron for Janice (Caller).",
                 status: {
                   confirm: "Responsive",
                   nta: "Complete",
@@ -1248,9 +1248,9 @@
                 sender: "Janice (Caller)",
                 shortcut: ".sp.invite",
                 label: ".sp.invite (text)",
-                time: "Apr 19, 11:45 AM",
-                text: "Hey Sarah, this is Janice from Dr. Pompa's team! I help get everyone prepped for their calls. I saw you're set for Tuesday with Tiger \u2014 great choice.\n\nOne thing we've found makes a huge difference is when partners can sit in on the call. A lot of the health decisions that come out of these conversations end up affecting the whole household. Tiger is great at walking through everything in a way that makes sense even for someone coming in fresh.\n\nDo you think David would be open to joining for the first part?",
-                note: "SILENT ESCALATION IN ACTION: Janice reaches out as a natural, independent touchpoint \u2014 she does NOT say 'Briana told me' or reference any previous conversation about David. She introduces herself fresh, as if this is a routine part of the pre-call process. The client has no idea this was triggered by their pushback to Briana.",
+                time: "Apr 21, 11:45 AM",
+                text: "Hey Ron, this is Janice from Dr. Pompa's team! I help get everyone prepped for their calls. I saw you're set for Friday with Greg \u2014 great choice.\n\nOne thing we've found makes a huge difference is when partners can sit in on the call. A lot of the health decisions that come out of these conversations end up affecting the whole household. Greg is great at walking through everything in a way that makes sense even for someone coming in fresh.\n\nDo you think Linda would be open to joining for the first part?",
+                note: "SILENT ESCALATION IN ACTION: Janice reaches out as a natural, independent touchpoint \u2014 she does NOT say 'Briana told me' or reference any previous conversation about Linda. She introduces herself fresh, as if this is a routine part of the pre-call process. The client has no idea this was triggered by their pushback to Briana.",
                 status: {
                   confirm: "Responsive",
                   nta: "Complete",
@@ -1262,11 +1262,11 @@
 
               {
                 type: "client",
-                sender: "Sarah Mitchell",
+                sender: "Ron Peters",
                 label: "Pushback to Caller",
-                time: "Apr 19, 12:40 PM",
-                text: "Hi Janice. I appreciate that but I really don't think he'd go for it. He's not into this kind of stuff at all. Can we just do it without him?",
-                note: "Sarah pushes back on the Caller's text. Per policy: Caller now follows up by PHONE to have a real conversation. Text-based spouse persuasion is limited to one attempt.",
+                time: "Apr 21, 12:40 PM",
+                text: "Hi Janice. I appreciate that but I really don't think she'd go for it. She's not into this kind of stuff at all. Can we just do it without her?",
+                note: "Ron pushes back on the Caller's text. Per policy: Caller now follows up by PHONE to have a real conversation. Text-based spouse persuasion is limited to one attempt.",
                 status: {
                   confirm: "Responsive",
                   nta: "Complete",
@@ -1279,16 +1279,16 @@
                 sender: "Janice (Caller)",
                 shortcut: ".sp.callhandle",
                 label: ".sp.callhandle (phone)",
-                time: "Apr 19, 1:30 PM",
-                text: '[PHONE CALL \u2014 Janice calls Sarah]\n\nJanice follows the 9-step voice script:\n\n1. Warm intro \u2014 "Hey Sarah, this is Janice again"\n2. Acknowledge the spouse concern \u2014 "I know David\'s not super into this kind of thing"\n3. Validate without judging \u2014 "That\'s really common, especially when one partner hasn\'t seen the same information yet"\n4. Reframe the ask \u2014 "It\'s not that we need David to believe in anything. We just find that when both partners hear the information together, it avoids the telephone game later"\n5. Reduce the commitment \u2014 "He wouldn\'t need to participate. Just listen in for the first 20-30 minutes"\n6. Address the skepticism directly \u2014 "Honestly, the skeptical ones usually end up asking the best questions"\n7. Offer a compromise \u2014 "Would he be open to just being in the room, even if he\'s working on something else?"\n8. If still no \u2014 respect it. "I completely understand. Let\'s make sure YOUR call is as strong as possible."\n9. Confirm the appointment regardless \u2014 "You\'re all set for Tuesday at 2 PM Eastern with Tiger."',
-                note: "Caller escalates to PHONE after one text attempt failed. The 9-step script gives structure. If David still says no, Janice accepts and confirms the appointment regardless. The Caller owns the entire spouse conversation from start to finish.",
+                time: "Apr 21, 1:30 PM",
+                text: '[PHONE CALL \u2014 Janice calls Ron]\n\nJanice follows the 9-step voice script:\n\n1. Warm intro \u2014 "Hey Ron, this is Janice again"\n2. Acknowledge the spouse concern \u2014 "I know Linda\'s not super into this kind of thing"\n3. Validate without judging \u2014 "That\'s really common, especially when one partner hasn\'t seen the same information yet"\n4. Reframe the ask \u2014 "It\'s not that we need Linda to believe in anything. We just find that when both partners hear the information together, it avoids the telephone game later"\n5. Reduce the commitment \u2014 "She wouldn\'t need to participate. Just listen in for the first 20-30 minutes"\n6. Address the skepticism directly \u2014 "Honestly, the skeptical ones usually end up asking the best questions"\n7. Offer a compromise \u2014 "Would she be open to just being in the room, even if she\'s working on something else?"\n8. If still no \u2014 respect it. "I completely understand. Let\'s make sure YOUR call is as strong as possible."\n9. Confirm the appointment regardless \u2014 "You\'re all set for Friday at 9 AM Mountain with Greg."',
+                note: "Caller escalates to PHONE after one text attempt failed. The 9-step script gives structure. If Linda still says no, Janice accepts and confirms the appointment regardless (in Ron's confirmed timezone). The Caller owns the entire spouse conversation from start to finish.",
                 status: {
                   confirm: "Responsive",
                   nta: "Complete",
                   kit: "Not Completed",
                 },
                 prompt:
-                  "SPOUSE CALL HANDLING \u2014 CALLER ONLY\nShortcut: .sp.callhandle\n\nUsed when the client pushed back on spouse attendance via text and the Caller is now following up by phone.\n\n9-step script:\n1. Warm intro\n2. Acknowledge the concern\n3. Validate without judging\n4. Reframe (household decisions, not belief)\n5. Reduce commitment (just listen in)\n6. Address skepticism (skeptical ones ask the best questions)\n7. Offer compromise (in the room, working on something else)\n8. If still no \u2014 respect it completely\n9. Confirm the appointment regardless\n\nRULES:\n- ALWAYS confirm appointment at the end, spouse or no spouse.\n- Include TIMEZONE in the confirmation.\n- If David says no, accept gracefully. Never guilt.\n- The Caller owns the full spouse workflow: text attempt first, phone if needed.",
+                  "SPOUSE CALL HANDLING \u2014 CALLER ONLY\nShortcut: .sp.callhandle\n\nUsed when the client pushed back on spouse attendance via text and the Caller is now following up by phone.\n\n9-step script:\n1. Warm intro\n2. Acknowledge the concern\n3. Validate without judging\n4. Reframe (household decisions, not belief)\n5. Reduce commitment (just listen in)\n6. Address skepticism (skeptical ones ask the best questions)\n7. Offer compromise (in the room, working on something else)\n8. If still no \u2014 respect it completely\n9. Confirm the appointment regardless\n\nRULES:\n- ALWAYS confirm appointment at the end, spouse or no spouse.\n- Use client's confirmed timezone in the confirmation.\n- If spouse says no, accept gracefully. Never guilt.\n- The Caller owns the full spouse workflow: text attempt first, phone if needed.",
               },
             ],
           },
@@ -1302,8 +1302,8 @@
                 sender: "Automated SMS",
                 shortcut: "auto",
                 label: "Initial Outreach",
-                time: "Apr 12, 10:02 AM",
-                text: "Hi Sarah! This is a message from Dr. Pompa's team. Congrats on getting your Cellular Inflammation Test Kit! We're getting everything ready for your upcoming consultation.\n\nQuick question: what's the #1 thing you're hoping to improve with your health right now?",
+                time: "Apr 18, 10:02 AM",
+                text: "Hi Ron! This is a message from Dr. Pompa's team. Congrats on getting your Cellular Inflammation Test Kit! We're getting everything ready for your upcoming consultation.\n\nQuick question: what's the #1 thing you're hoping to improve with your health right now?",
                 note: "Automated SMS sent. Client does NOT reply. After 24 hours, the texter checks what the client HAS done (NTA? kit? intake form?) and sends a personalized message based on that activity.",
                 status: {
                   confirm: "Blank",
@@ -1316,8 +1316,8 @@
                 type: "ac",
                 sender: "Briana (Texter)",
                 label: "24hr Check",
-                time: "Apr 13, 10:00 AM",
-                text: "[INTERNAL: Briana checks Sarah's status in HubSpot/Aloware]\n\nVariant A: Sarah completed the NTA silently (no text reply, but NTA is done)\nVariant B: Sarah's NTA score was high (80+)\nVariant C: No activity at all \u2014 no NTA, no reply, nothing\n\nThe next message depends on which variant applies. Click 'Next' to see Variant A (NTA done).",
+                time: "Apr 19, 10:00 AM",
+                text: "[INTERNAL: Briana checks Ron's status in HubSpot/Aloware]\n\nVariant A: Ron completed the NTA silently (no text reply, but NTA is done)\nVariant B: Ron's NTA score was high (80+)\nVariant C: No activity at all \u2014 no NTA, no reply, nothing\n\nThe next message depends on which variant applies. Click 'Next' to see Variant A (NTA done).",
                 note: "This is the decision point. The texter checks the CRM before sending. Different activity levels get different personalized messages. This scenario shows all three variants in sequence for training purposes.",
                 status: {
                   confirm: "Blank",
@@ -1331,16 +1331,16 @@
                 sender: "Briana (Texter)",
                 shortcut: ".intro",
                 label: "Variant A: NTA Done",
-                time: "Apr 13, 10:05 AM",
-                text: "Hey Sarah, this is Briana \u2014 a real person on Dr. Pompa's team! I see you already filled out the health questionnaire, that's awesome. Tiger is going to have a really clear picture of what's going on before your call on Tuesday, April 22nd at 2:00 PM Eastern.\n\nI'll be your point of contact leading up to the call. Quick question \u2014 we have sarahmitchell42@gmail.com on file. Is that the best email for you?",
-                note: "VARIANT A: Client completed NTA silently. Briana acknowledges the NTA completion (proves she's paying attention, not running a sequence), confirms appointment with timezone, verifies email. This is a combined intro + verify because the client already showed engagement through action (even if not through text).",
+                time: "Apr 19, 10:05 AM",
+                text: "Hey Ron, this is Briana \u2014 a real person on Dr. Pompa's team! I see you already filled out the health questionnaire, that's awesome. Greg is going to have a really clear picture of what's going on before your call on Friday, April 24th.\n\nI'll be your point of contact leading up to the call. Quick question \u2014 we have ron.peters@gmail.com on file. Is that the best email for you?",
+                note: "VARIANT A: Client completed NTA silently. Briana acknowledges the NTA completion (proves she's paying attention, not running a sequence), confirms appointment date, verifies email. Combined intro + verify. Does NOT mention timezone \u2014 not confirmed via .verify yet.",
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Complete",
                   kit: "Not Completed",
                 },
                 prompt:
-                  '24HR PERSONALIZED CHASE \u2014 VARIANT A: NTA COMPLETED\n\n*** NEW PROMPT NEEDED ***\nNo existing template covers this scenario. The current .intro says "Do NOT mention pre-call requirements" and the current .verify is separate.\n\nWhen the client completed the NTA without replying to texts:\n- Acknowledge the NTA completion: "I see you already filled out the questionnaire"\n- This proves you\'re a real person checking their actual status, not a bot\n- Combine intro + email verify in one message\n- Include appointment date/time WITH TIMEZONE\n- ONE question (email verify) to invite a reply',
+                  '24HR PERSONALIZED CHASE \u2014 VARIANT A: NTA COMPLETED\n\nWhen the client completed the NTA without replying to texts:\n- Acknowledge the NTA completion: "I see you already filled out the questionnaire"\n- This proves you\'re a real person checking their actual status, not a bot\n- Combine intro + email verify in one message\n- Include appointment date and HA name\n- Do NOT mention timezone \u2014 not confirmed via .verify yet\n- ONE question (email verify) to invite a reply',
               },
 
               {
@@ -1348,16 +1348,16 @@
                 sender: "Briana (Texter)",
                 shortcut: ".intro",
                 label: "Variant B: High NTA Score",
-                time: "Apr 13, 10:05 AM",
-                text: "Hey Sarah, this is Briana \u2014 a real person on Dr. Pompa's team. I saw your questionnaire results came back and your score was on the higher end. I know that can feel a little alarming, but honestly that's exactly what this test is designed to catch, and it means Tiger is going to have a LOT to work with on your call.\n\nYour call is Tuesday, April 22nd at 2:00 PM Eastern. I'll be your point of contact before then.",
-                note: 'VARIANT B: NTA done AND score was high (80+). Briana references the score to show she\'s paying attention, reframes it positively ("Tiger will have a lot to work with"), and builds anticipation. Does NOT interpret the result. The high score reference creates urgency without pressure.',
+                time: "Apr 19, 10:05 AM",
+                text: "Hey Ron, this is Briana \u2014 a real person on Dr. Pompa's team. I saw your questionnaire results came back and your score was on the higher end. I know that can feel a little alarming, but honestly that's exactly what this test is designed to catch, and it means Greg is going to have a LOT to work with on your call.\n\nYour call is Friday, April 24th. I'll be your point of contact before then.",
+                note: "VARIANT B: NTA done AND score was high (80+). Briana references the score to show she's paying attention, reframes it positively, builds anticipation. Does NOT interpret the result. Does NOT mention timezone \u2014 not confirmed yet. The high score reference creates urgency without pressure.",
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Complete",
                   kit: "Not Completed",
                 },
                 prompt:
-                  '24HR PERSONALIZED CHASE \u2014 VARIANT B: HIGH NTA SCORE\n\n*** NEW PROMPT NEEDED ***\nNo existing template covers referencing a high NTA score.\n\nWhen the NTA score is high (80+):\n- Reference the score context without interpreting it\n- Reframe positively: "that means Tiger will have a LOT to work with"\n- This creates natural urgency (my score is high, I should definitely do this call)\n- NEVER give medical advice. NEVER say "your toxicity is high"\n- Include appointment with TIMEZONE\n- Position HA as the expert who will explain it',
+                  '24HR PERSONALIZED CHASE \u2014 VARIANT B: HIGH NTA SCORE\n\nWhen the NTA score is high (80+):\n- Reference the score context without interpreting it\n- Reframe positively: "that means Greg will have a LOT to work with"\n- This creates natural urgency (my score is high, I should definitely do this call)\n- NEVER give medical advice. NEVER say "your toxicity is high"\n- Include appointment date and HA name\n- Do NOT mention timezone \u2014 not confirmed via .verify yet\n- Position HA as the expert who will explain it',
               },
 
               {
@@ -1365,25 +1365,25 @@
                 sender: "Briana (Texter)",
                 shortcut: ".intro",
                 label: "Variant C: No Activity",
-                time: "Apr 13, 10:05 AM",
-                text: "Hey Sarah, this is Briana \u2014 a real person on Dr. Pompa's team. I'll be your point of contact leading up to your call with Tiger on Tuesday, April 22nd at 2:00 PM Eastern.\n\nI wanted to share this with you \u2014 some really powerful stories from people who've been through the program:\nhttps://reviews.pompaworkshop.com/tank\n\nYou'll hear from me a couple times before your call just to keep things on track.",
-                note: "VARIANT C: No activity at all. Since there's nothing to reference (no NTA, no reply, no intake), Briana leads with a testimonial to build trust and create engagement. The testimonial gives Sarah something to connect with even without a conversation. Uses the generic stories page since we don't know her specific condition.",
+                time: "Apr 19, 10:05 AM",
+                text: "Hey Ron, this is Briana \u2014 a real person on Dr. Pompa's team. I'll be your point of contact leading up to your call with Greg on Friday, April 24th.\n\nI wanted to share this with you \u2014 some really powerful stories from people who've been through the program:\nhttps://reviews.pompaworkshop.com/tank\n\nYou'll hear from me a couple times before your call just to keep things on track.",
+                note: "VARIANT C: No activity at all. Since there's nothing to reference, Briana leads with a testimonial to build trust. Uses the generic stories page. Does NOT mention timezone \u2014 not confirmed yet.",
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
                 prompt:
-                  '24HR PERSONALIZED CHASE \u2014 VARIANT C: NO ACTIVITY\n\n*** NEW PROMPT NEEDED ***\nNo existing template covers the "zero activity" 24hr chase.\n\nWhen the client has done nothing (no NTA, no reply):\n- Send intro with real-person signal\n- Include a testimonial link (generic page since no health info to match)\n- Include appointment with TIMEZONE\n- Keep it light, no pressure\n- The testimonial serves as a trust-builder and conversation starter\n\nThis variant is most likely to need a follow-up with .discovery since we still have no health info from the client.',
+                  "24HR PERSONALIZED CHASE \u2014 VARIANT C: NO ACTIVITY\n\nWhen the client has done nothing (no NTA, no reply):\n- Send intro with real-person signal\n- Include a testimonial link (generic page since no health info to match)\n- Include appointment date and HA name\n- Do NOT mention timezone \u2014 not confirmed via .verify yet\n- Keep it light, no pressure\n- The testimonial serves as a trust-builder and conversation starter",
               },
 
               {
                 type: "client",
-                sender: "Sarah Mitchell",
+                sender: "Ron Peters",
                 label: "Client Replies (any variant)",
-                time: "Apr 13, 2:30 PM",
-                text: "Hey Briana! Sorry I didn't reply yesterday, I got busy. Yes that email is right. I've been dealing with really bad fatigue and brain fog for the past few years. Is Tiger going to be able to help with that?",
-                note: "Client responds! Now we have health info AND email confirmation. The personalized 24hr chase worked \u2014 she felt like a person was actually paying attention to her, not just running an automated sequence.",
+                time: "Apr 19, 2:30 PM",
+                text: "Hey Briana! Sorry I didn't reply yesterday, I got busy. Yes that email is right. I've been dealing with really bad fatigue and memory issues for the past few years. My wife Linda's been going through the same thing. Is Greg going to be able to help with that?",
+                note: "Client responds! Now we have health info AND email confirmation. Mentions Linda (Double: Yes context). The personalized 24hr chase worked \u2014 he felt like a person was actually paying attention, not just running an automated sequence.",
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Not Started",
@@ -1396,16 +1396,16 @@
                 sender: "Briana (Texter)",
                 shortcut: ".discovery",
                 label: ".discovery (ack)",
-                time: "Apr 13, 2:40 PM",
-                text: "No worries at all, Sarah! And yes \u2014 fatigue and brain fog are actually two of the most common things Tiger sees. He's helped a lot of people who've been in that exact spot, dealing with it for years while doctors keep saying everything looks fine. You're in the right place.\n\nI'll send you a few things to check out before your call.",
-                note: 'Empowerment response: acknowledges her health concern, validates her frustration ("doctors keep saying everything looks fine"), empowers ("you\'re in the right place"), and bridges to resources. Since she asked "is Tiger going to help with that?" \u2014 answer with edification, not a new question.',
+                time: "Apr 19, 2:40 PM",
+                text: "No worries at all, Ron! And yes \u2014 fatigue and memory issues are actually two of the most common things Greg sees. He's helped a lot of people who've been in that exact spot, dealing with it for years while doctors keep saying everything looks fine. You and Linda are in the right place.\n\nI'll send you a few things to check out before your call.",
+                note: 'Empowerment response: acknowledges his health concern, validates frustration, empowers, includes Linda naturally. Since he asked "is Greg going to help with that?" \u2014 answer with edification, not a new question. Bridges to resources.',
                 status: {
                   confirm: "Responsive",
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
                 prompt:
-                  ".discovery (ACKNOWLEDGMENT VARIANT)\n\nWhen the client shares health info in response to the 24hr chase (rather than in response to the discovery question):\n- Acknowledge and empower. Do NOT re-ask.\n- Validate their frustration.\n- Edify the HA if they asked about them.\n- Bridge to next touchpoint (resources/NTA).\n- 2-3 sentences.",
+                  ".discovery (ACKNOWLEDGMENT VARIANT)\n\nWhen the client shares health info in response to the 24hr chase (rather than in response to the discovery question):\n- Acknowledge and empower. Do NOT re-ask.\n- Validate their frustration.\n- Edify the HA if they asked about them.\n- If spouse mentioned (Double: Yes), include naturally.\n- Bridge to next touchpoint (resources/NTA).\n- 2-3 sentences.",
               },
             ],
           },
