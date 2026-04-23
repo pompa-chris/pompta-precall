@@ -882,12 +882,29 @@
               },
 
               {
+                type: "ac",
+                sender: "Briana (Texter)",
+                shortcut: ".testimonial",
+                label: ".testimonial",
+                time: "Apr 20, 10:00 AM",
+                text: "I was thinking about what you shared about the fatigue and the memory slipping while being told it's just age, there are a few stories on here that really reminded me of that.\n\nhttps://reviews.pompaworkshop.com/tank",
+                note: "TESTIMONIAL: Sent 1-2 days after .nta1 as a separate value-drop touchpoint. Ties directly to Ron's specific symptoms from his initial message. Proves Briana actually read what he shared. Casual, not a pitch.",
+                status: {
+                  confirm: "Responsive",
+                  nta: "Not Started",
+                  kit: "Not Completed",
+                },
+                prompt:
+                  'SCENARIO: CONDITION-MATCHED TESTIMONIAL\nShortcut: .testimonial\n\nSent 1-2 days after .nta1 as a separate touchpoint:\n- Reference specific symptoms the client shared\n- Match to a testimonial story with similar health journey\n- Casual framing, not a pitch\n- Generic fallback: https://reviews.pompaworkshop.com/tank\n\nRULES:\n- ONE testimonial link only\n- Must reference something specific from their health discovery\n- 1-2 days after last AC message',
+              },
+
+              {
                 type: "client",
                 sender: "Ron Peters",
                 label: "Client Confirms",
                 time: "Apr 20, 2:30 PM",
                 text: "Thanks Briana! Linda and I both started the assessment this weekend. She got her link too. Still on for Friday!",
-                note: "Both Ron and Linda working on NTA. Linda confirmed she got her registration link. High engagement, no resources shared yet.",
+                note: "Both Ron and Linda working on NTA. Linda confirmed she got her registration link. High engagement.",
                 status: {
                   confirm: "Responsive",
                   nta: "Not Started",
@@ -898,83 +915,18 @@
               {
                 type: "ac",
                 sender: "Briana (Texter)",
-                shortcut: ".conf3d",
-                label: ".conf3d",
-                time: "Apr 21, 10:30 AM",
-                text: "Hey Ron, just checking in! Your call with Greg is this Friday, April 24th at 9:00 AM Mountain. He's already going through your questionnaire results to get ready.\n\nIf Linda has any questions before the call, she can text me too. You're both all set. Still looking good for Friday?",
-                note: "3-day confirmation. Time stated in Ron's confirmed timezone (Mountain). Linda mentioned naturally. HA edification starts. Both completed NTA over the weekend.",
-                status: {
-                  confirm: "Responsive",
-                  nta: "Complete",
-                  kit: "Not Completed",
-                },
-                prompt:
-                  'SCENARIO: 3-DAY PRE-CALL CONFIRMATION\nShortcut: .conf3d\n\nConfirm date/time in client\'s CONFIRMED timezone.\nEdify HA briefly: "already going through your results."\nIf Double: Yes, include additional attendees naturally.\nCAN include one question.\nKeep it under 4 sentences.',
-              },
-
-              {
-                type: "client",
-                sender: "Ron Peters",
-                label: "Client Responds",
-                time: "Apr 21, 11:15 AM",
-                text: "All set for Friday! We both finished the questionnaire over the weekend. Linda's score was pretty high too. I haven't done the test kit yet though. Is there still time?",
-                note: "Both NTAs complete. Kit not done yet. 3 days until call \u2014 still time.",
-                status: {
-                  confirm: "Responsive",
-                  nta: "Complete",
-                  kit: "Not Completed",
-                },
-              },
-
-              {
-                type: "ac",
-                sender: "Briana (Texter)",
-                shortcut: ".conf48",
-                label: ".conf48",
-                time: "Apr 22, 10:00 AM",
-                text: "That's great you both got it done! And yes, absolutely still time. The test only takes about 2 minutes. Greg will have real data on what's happening at the cellular level when he goes through everything with you.\n\nYour call is in 2 days, this Friday at 9:00 AM Mountain. You're both in great shape.",
-                note: "48-hour confirmation. Reassures about kit timing. Time in Mountain. Both NTAs acknowledged, not re-asked.",
-                status: {
-                  confirm: "Ready",
-                  nta: "Complete",
-                  kit: "Not Completed",
-                },
-                prompt:
-                  "SCENARIO: 48-HOUR CONFIRMATION\nShortcut: .conf48\n\nConfirm date, time in client's confirmed timezone, HA name.\nCheck on outstanding requirements (kit).\nIf NTA done, acknowledge. Do not re-ask.\nIf Double: Yes and both NTAs done, acknowledge both.\nClose with reassurance.",
-              },
-
-              {
-                type: "ac",
-                sender: "Briana (Texter)",
                 shortcut: ".resdone",
                 label: ".resdone",
-                time: "Apr 22, 10:15 AM",
+                time: "Apr 22, 10:00 AM",
                 text: "Ron, I see you and Linda both finished the assessment, that's awesome, thank you for getting that done. Greg is going to have a really clear picture going into your call.\n\nI wanted to share something with you before Friday. Have you had a chance to check this out yet?\n\nhttps://reviews.pompaworkshop.com/tank",
-                note: "RESOURCES DONE: Sent at 48 hours before appointment. Acknowledges both NTAs completed, thanks them, shares testimonial link, asks if they've checked it out. Combines NTA acknowledgment with testimonial drop.",
+                note: "RESOURCES DONE: Sent at 48 hours before appointment. Acknowledges both NTAs completed, thanks them, asks if they checked out the testimonial link shared earlier.",
                 status: {
                   confirm: "Ready",
                   nta: "Complete",
                   kit: "Not Completed",
                 },
                 prompt:
-                  'SCENARIO: ASSESSMENT COMPLETE + TESTIMONIAL DROP\nShortcut: .resdone\n\nSent at 48 hours before appointment when NTA is completed:\n- Acknowledge assessment completion\n- Thank them for getting it done\n- Edify HA briefly: "going to have a really clear picture"\n- Share testimonial link: https://reviews.pompaworkshop.com/tank\n- Ask if they\'ve checked it out\n- If Double: Yes, acknowledge both assessments\n\nRULES:\n- Testimonial link is condition-matched when possible\n- Do NOT re-ask about NTA\n- Keep it warm and brief',
-              },
-
-              {
-                type: "ac",
-                sender: "Briana (Texter)",
-                shortcut: ".testimonial",
-                label: ".testimonial",
-                time: "Apr 22, 10:16 AM",
-                text: "Also, I was thinking about what you shared about the fatigue and memory issues. This story really stood out to me, really similar to yours:\n\nhttps://reviews.pompaworkshop.com/tank",
-                note: "TESTIMONIAL: Condition-matched testimonial sent right after .resdone. Ties directly to Ron's specific symptoms from his initial message. Proves Briana actually read what he shared.",
-                status: {
-                  confirm: "Ready",
-                  nta: "Complete",
-                  kit: "Not Completed",
-                },
-                prompt:
-                  'SCENARIO: CONDITION-MATCHED TESTIMONIAL\nShortcut: .testimonial\n\nSent after .resdone:\n- Reference specific symptoms the client shared\n- Match to a testimonial story with similar health journey\n- "This story really stood out to me, really similar to yours"\n- Generic fallback: https://reviews.pompaworkshop.com/tank\n\nRULES:\n- ONE testimonial link only\n- Must reference something specific from their health discovery\n- Casual tone, not a pitch',
+                  'SCENARIO: ASSESSMENT COMPLETE + RESOURCE CHECK\nShortcut: .resdone\n\nSent at 48 hours before appointment when NTA is completed:\n- Acknowledge assessment completion\n- Thank them for getting it done\n- Edify HA briefly: "going to have a really clear picture"\n- Reference testimonial link shared earlier, ask if they checked it out\n- If Double: Yes, acknowledge both assessments\n\nRULES:\n- Do NOT re-ask about NTA\n- Keep it warm and brief',
               },
 
               {
