@@ -651,7 +651,7 @@
                 shortcut: "auto",
                 label: "Initial Outreach",
                 time: "Apr 18, 10:02 AM",
-                text: "Hi Ron! This is a message from Dr. Pompa's team. Congrats on getting your Cellular Inflammation Test Kit! We're getting everything ready for your upcoming consultation.\n\nQuick question: what's the #1 thing you're hoping to improve with your health right now?",
+                text: "Hey Ron, Dr. Pompa's team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
                 note: "Automated marketing SMS triggered by kit purchase. Mines the #1 health concern. Some clients reply, some don't. This scenario shows a responder.",
                 status: {
                   confirm: "Blank",
@@ -667,8 +667,8 @@
                 sender: "Ron Peters",
                 label: "Client Responds",
                 time: "Apr 18, 12:15 PM",
-                text: "Hey there. Honestly it's been a rough couple of years. I'm 65 and everyone keeps telling me it's just \"getting older\" but I know that's not it. Constant fatigue, my memory is slipping, joint pain everywhere. My doctor put me on thyroid meds but nothing changed. My wife Linda is dealing with a lot of the same stuff too \u2014 that's why we both got kits. We just want answers at this point.",
-                note: "Ron opens up. Key details: fatigue, memory issues, joint pain, thyroid meds not working, wife Linda also affected (Double: Yes context \u2014 both got kits). This gets logged in Aloware. The AC MUST acknowledge this.",
+                text: "Hey there. Honestly it's been a rough couple of years. I'm 65 and everyone keeps telling me it's just \"getting older\" but I know that's not it. Constant fatigue, my memory is slipping, joint pain everywhere. My doctor put me on thyroid meds but nothing changed. I just want answers at this point.",
+                note: "Ron opens up. Key details: fatigue, memory issues, joint pain, thyroid meds not working. Does NOT mention who the second kit is for \u2014 the AC won't know until .verify (4/4) asks. This gets logged in Aloware. The AC MUST acknowledge this.",
                 status: {
                   confirm: "Blank",
                   nta: "Not Started",
@@ -682,15 +682,15 @@
                 shortcut: ".intro",
                 label: ".intro (msg 1)",
                 time: "Apr 18, 12:28 PM",
-                text: "Hey Ron, this is Briana \u2014 a real person on Dr. Pompa's team, not a bot. I'm going to be your point of contact leading up to your call with Greg on Friday, April 24th, making sure you and Linda feel completely ready.",
-                note: 'WARM INTRO: Client already replied, so Briana leads with "real person" signal. References Linda by name since Ron mentioned her. This is Message 1 of a back-to-back sequence.',
+                text: "Hey Ron, this is Briana \u2014 a real person on Dr. Pompa's team, not a bot. I'm going to be your point of contact leading up to your call with Greg on Friday, April 24th, making sure you feel completely ready.",
+                note: 'WARM INTRO: Client already replied, so Briana leads with "real person" signal and names herself immediately. Does NOT mention second kit buyer \u2014 we don\'t know who that is yet. This is Message 1 of a back-to-back sequence.',
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
                 prompt:
-                  "SCENARIO: ONBOARDING \u2014 INTRODUCTION MESSAGE\nShortcut: .intro\n\nWhen client ALREADY shared health info + spouse info via automated SMS reply:\n- Lead with real-person signal: \"this is [Name], a real person on Dr. Pompa's team\"\n- Introduce your role as concierge\n- Reference spouse if mentioned (Double: Yes)\n- 2-3 sentences. Still no question.\n\nWhen client has NOT replied (cold outreach):\n- Same real-person signal\n- Include appointment date/time WITH TIMEZONE\n- Do NOT reference health situation (you don't have one yet)",
+                  "SCENARIO: ONBOARDING \u2014 INTRODUCTION MESSAGE\nShortcut: .intro\n\nWhen client ALREADY shared health info via automated SMS reply:\n- Lead with real-person signal: \"this is [Name], a real person on Dr. Pompa's team\"\n- Introduce your role as concierge\n- Do NOT mention Double: Yes or additional attendees \u2014 we don't know who they are yet\n- 2-3 sentences. Still no question.\n\nWhen client has NOT replied (cold outreach):\n- Same real-person signal\n- Include appointment date and HA name\n- Do NOT reference health situation (you don't have one yet)",
               },
 
               {
@@ -699,8 +699,8 @@
                 shortcut: ".intro",
                 label: ".intro (msg 2)",
                 time: "Apr 18, 12:29 PM",
-                text: "I read what you shared and I just want you to know \u2014 being told it's just \"getting older\" when you know something deeper is going on, that's incredibly frustrating. Two years of fatigue, memory slipping, joint pain, thyroid meds not helping... and you're STILL looking for answers. That says a lot about you, Ron. You and Linda are in the right place.",
-                note: "EMPOWERMENT MESSAGE: Briana acknowledges what Ron shared, mirrors specific details, empowers him. Message 2 of the back-to-back sequence. Includes Linda because he mentioned her. Sent ~1 min after msg 1.",
+                text: "I read what you shared and I just want you to know \u2014 being told it's just \"getting older\" when you know something deeper is going on, that's incredibly frustrating. Two years of fatigue, memory slipping, joint pain, thyroid meds not helping... and you're STILL looking for answers. That says a lot about you, Ron. You're in the right place.",
+                note: "EMPOWERMENT MESSAGE: Briana acknowledges what Ron shared, mirrors specific details, empowers him. Message 2 of the back-to-back sequence. Sent ~1 min after msg 1.",
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Not Started",
@@ -810,7 +810,7 @@
                 label: ".verify (4/4) Attendees",
                 time: "Apr 18, 1:22 PM",
                 text: "Looks like you ordered more than one kit. Who else is joining you on your call with Greg? Just need the name and best email for each person so we can get them set up.",
-                note: "VERIFY RUN 4: Double: Yes detected in Aloware notes from HubSpot export, so .verify asks about additional attendees. Ron already mentioned Linda \u2014 this confirms and collects her info. Each attendee needs their own NTA login/username.",
+                note: "VERIFY RUN 4: Double: Yes detected in Aloware notes from HubSpot export, so .verify asks about additional attendees. The AC does NOT know who the second person is until they ask \u2014 could be a spouse, friend, child, etc. Each attendee needs their own NTA login/username.",
                 status: {
                   confirm: "Responsive",
                   nta: "Not Started",
@@ -1031,7 +1031,7 @@
                 shortcut: "auto",
                 label: "Initial Outreach",
                 time: "Apr 18, 10:02 AM",
-                text: "Hi Ron! This is a message from Dr. Pompa's team. Congrats on getting your Cellular Inflammation Test Kit! We're getting everything ready for your upcoming consultation.\n\nQuick question: what's the #1 thing you're hoping to improve with your health right now?",
+                text: "Hey Ron, Dr. Pompa's team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
                 note: "Automated SMS sent. In this scenario, the client does NOT reply. After 24 hours of silence, the texter manually sends a personalized text.",
                 status: {
                   confirm: "Blank",
@@ -1303,7 +1303,7 @@
                 shortcut: "auto",
                 label: "Initial Outreach",
                 time: "Apr 18, 10:02 AM",
-                text: "Hi Ron! This is a message from Dr. Pompa's team. Congrats on getting your Cellular Inflammation Test Kit! We're getting everything ready for your upcoming consultation.\n\nQuick question: what's the #1 thing you're hoping to improve with your health right now?",
+                text: "Hey Ron, Dr. Pompa's team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
                 note: "Automated SMS sent. Client does NOT reply. After 24 hours, the texter checks what the client HAS done (NTA? kit? intake form?) and sends a personalized message based on that activity.",
                 status: {
                   confirm: "Blank",
@@ -1382,8 +1382,8 @@
                 sender: "Ron Peters",
                 label: "Client Replies (any variant)",
                 time: "Apr 19, 2:30 PM",
-                text: "Hey Briana! Sorry I didn't reply yesterday, I got busy. Yes that email is right. I've been dealing with really bad fatigue and memory issues for the past few years. My wife Linda's been going through the same thing. Is Greg going to be able to help with that?",
-                note: "Client responds! Now we have health info AND email confirmation. Mentions Linda (Double: Yes context). The personalized 24hr chase worked \u2014 he felt like a person was actually paying attention, not just running an automated sequence.",
+                text: "Hey Briana! Sorry I didn't reply yesterday, I got busy. Yes that email is right. I've been dealing with really bad fatigue and memory issues for the past few years. Is Greg going to be able to help with that?",
+                note: "Client responds! Now we have health info AND email confirmation. The personalized 24hr chase worked \u2014 he felt like a person was actually paying attention, not just running an automated sequence.",
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Not Started",
@@ -1397,15 +1397,15 @@
                 shortcut: ".discovery",
                 label: ".discovery (ack)",
                 time: "Apr 19, 2:40 PM",
-                text: "No worries at all, Ron! And yes \u2014 fatigue and memory issues are actually two of the most common things Greg sees. He's helped a lot of people who've been in that exact spot, dealing with it for years while doctors keep saying everything looks fine. You and Linda are in the right place.\n\nI'll send you a few things to check out before your call.",
-                note: 'Empowerment response: acknowledges his health concern, validates frustration, empowers, includes Linda naturally. Since he asked "is Greg going to help with that?" \u2014 answer with edification, not a new question. Bridges to resources.',
+                text: "No worries at all, Ron! And yes \u2014 fatigue and memory issues are actually two of the most common things Greg sees. He's helped a lot of people who've been in that exact spot, dealing with it for years while doctors keep saying everything looks fine. You're in the right place.\n\nI'll send you a few things to check out before your call.",
+                note: 'Empowerment response: acknowledges his health concern, validates frustration, empowers. Since he asked "is Greg going to help with that?" \u2014 answer with edification, not a new question. Bridges to resources.',
                 status: {
                   confirm: "Responsive",
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
                 prompt:
-                  ".discovery (ACKNOWLEDGMENT VARIANT)\n\nWhen the client shares health info in response to the 24hr chase (rather than in response to the discovery question):\n- Acknowledge and empower. Do NOT re-ask.\n- Validate their frustration.\n- Edify the HA if they asked about them.\n- If spouse mentioned (Double: Yes), include naturally.\n- Bridge to next touchpoint (resources/NTA).\n- 2-3 sentences.",
+                  ".discovery (ACKNOWLEDGMENT VARIANT)\n\nWhen the client shares health info in response to the 24hr chase (rather than in response to the discovery question):\n- Acknowledge and empower. Do NOT re-ask.\n- Validate their frustration.\n- Edify the HA if they asked about them.\n- Bridge to next touchpoint (resources/NTA).\n- 2-3 sentences.",
               },
             ],
           },
