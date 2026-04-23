@@ -651,7 +651,7 @@
                 shortcut: "auto",
                 label: "Initial Outreach",
                 time: "Apr 18, 10:02 AM",
-                text: "Hey Ron, Dr. Pompa's team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+                text: "Hey Ron, Dr Pompa's Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
                 note: "Automated marketing SMS triggered by kit purchase. Mines the #1 health concern. Some clients reply, some don't. This scenario shows a responder.",
                 status: {
                   confirm: "Blank",
@@ -717,14 +717,14 @@
                 label: ".verify (1/4) Timezone",
                 time: "Apr 18, 12:30 PM",
                 text: "Before your call with Greg on Friday April 24th, what timezone are you in so I can pull up your appointment in your local time?",
-                note: "VERIFY SEQUENCE START: .verify is a dynamic template that checks the AC CONFIRMED INFO checklist in Aloware and generates a message for the next missing item. First run: Timezone is blank, so it asks for timezone. Wait for client reply before re-triggering .verify.",
+                note: "VERIFY SEQUENCE START: .verify is a dynamic AI Blaze shortcut. Each time you type .verify, it checks the message history and AC CONFIRMED INFO checklist — if an item is already confirmed, it skips it and generates ONLY the next missing template. You can also reply to the AI with 'Give me all templates' to see everything at once. First run: Timezone is blank, so it asks for timezone. Wait for client reply before re-triggering .verify.",
                 status: {
                   confirm: "Waiting on Reply",
                   nta: "Not Started",
                   kit: "Not Completed",
                 },
                 prompt:
-                  "SCENARIO: CONTACT VERIFICATION \u2014 DYNAMIC SEQUENCE\nShortcut: .verify\n\n.verify checks the AC CONFIRMED INFO checklist in Aloware and generates a message for the NEXT missing item in order:\n1. Timezone\n2. Appt Confirmation\n3. Email Verify\n4. Attendees (only if Double: Yes)\n5. Partner Check\n6. Pre-Call Lander Link\n\nRUN 1 \u2014 TIMEZONE:\n- Ask what timezone they're in\n- Frame as helping pull up appointment in local time\n- Short, casual, one question\n- WAIT for reply before re-triggering .verify\n\nAC notes: Follow up once after 24 hours if no reply.",
+                  "SCENARIO: CONTACT VERIFICATION \u2014 DYNAMIC SEQUENCE\nShortcut: .verify\n\nHOW IT WORKS: .verify is a single AI Blaze shortcut that dynamically generates a different template each time. It reads the message history — if an item is already confirmed, it skips it and outputs ONLY the next unconfirmed template. You can also reply to the AI: 'Give me all templates' to see everything at once.\n\nChecklist order:\n1. Timezone\n2. Appt Confirmation (converted to client's timezone)\n3. Email Verify\n4. Attendees (only if Double: Yes)\n\nRUN 1 \u2014 TIMEZONE:\n- Ask what timezone they're in\n- Frame as helping pull up appointment in local time\n- Short, casual, one question\n- WAIT for reply before re-triggering .verify\n\nAC notes: Follow up once after 24 hours if no reply.",
               },
 
               {
@@ -1031,7 +1031,7 @@
                 shortcut: "auto",
                 label: "Initial Outreach",
                 time: "Apr 18, 10:02 AM",
-                text: "Hey Ron, Dr. Pompa's team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+                text: "Hey Ron, Dr Pompa's Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
                 note: "Automated SMS sent. In this scenario, the client does NOT reply. After 24 hours of silence, the texter manually sends a personalized text.",
                 status: {
                   confirm: "Blank",
@@ -1303,7 +1303,7 @@
                 shortcut: "auto",
                 label: "Initial Outreach",
                 time: "Apr 18, 10:02 AM",
-                text: "Hey Ron, Dr. Pompa's team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+                text: "Hey Ron, Dr Pompa's Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
                 note: "Automated SMS sent. Client does NOT reply. After 24 hours, the texter checks what the client HAS done (NTA? kit? intake form?) and sends a personalized message based on that activity.",
                 status: {
                   confirm: "Blank",
