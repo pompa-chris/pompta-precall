@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AC Live Testing — Dr. Pompa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --s9:#1b2a31;--s8:#243841;--s7:#2f4a56;--s6:#3f5b68;--s5:#5a7682;
+  --s4:#89a0ab;--s3:#b5c6cd;--s2:#dce5e9;--s1:#edf1f3;
+  --t7:#1e8f86;--t6:#2db3a6;--t5:#4ec5b9;--t4:#87d8d0;--t2:#c9eae6;--t1:#e6f5f2;
+  --paper:#f7f3ed;--bone:#fbf9f4;--ink:#1a262c;--ink2:#3d5059;
+  --am1:#fffbeb;--am2:#fef3c7;--am3:#fde68a;--am6:#d97706;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.6;overflow:hidden}
+.site-nav{position:fixed;top:0;left:0;right:0;height:64px;background:var(--bone);border-bottom:1px solid var(--s2);display:flex;align-items:center;justify-content:space-between;padding:0 40px;z-index:100}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+.nav-logo img{height:36px}
+.nav-links{display:flex;gap:8px}
+.nav-link{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--s5);padding:8px 16px;border-radius:6px;transition:all .2s}
+.nav-link:hover,.nav-link.active{color:var(--t7);background:var(--t1)}
+.app{display:flex;height:calc(100vh - 64px);margin-top:64px}
+.pnl-l{width:280px;min-width:280px;border-right:1px solid var(--s2);background:var(--bone);display:flex;flex-direction:column}
+.pnl-l-hdr{padding:16px;border-bottom:1px solid var(--s2)}
+.pnl-l-hdr h3{font-family:"Outfit",sans-serif;font-size:15px;font-weight:600;color:var(--s7);margin-bottom:8px}
+.itog{display:flex;gap:4px}
+.itog button{flex:1;font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;border:1px solid var(--s2);cursor:pointer}
+.itog button.on{background:var(--t7);color:#fff;border-color:var(--t7)}
+.itog button:not(.on){background:var(--bone);color:var(--s5)}
+.clist{flex:1;overflow-y:auto}
+.ci{display:flex;gap:12px;padding:14px 16px;border-bottom:1px solid var(--s1);cursor:pointer;transition:background .15s}
+.ci:hover{background:#efe8dc}
+.ci.on{background:var(--t1);border-left:3px solid var(--t7)}
+.cav{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#fff;flex-shrink:0}
+.cinf{flex:1;min-width:0}
+.cinf b{font-size:14px;font-weight:600;color:var(--s8);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cinf small{font-size:11px;color:var(--s4);font-family:"IBM Plex Mono",monospace;display:block}
+.cinf em{font-size:12px;color:var(--s5);font-style:normal;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cmeta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.cmeta span:first-child{font-size:11px;color:var(--s4)}
+.cbdg{font-size:10px;font-weight:600;color:#fff;background:var(--t6);border-radius:10px;padding:1px 7px}
+.ctag{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--t7);background:var(--t1);padding:2px 6px;border-radius:4px;white-space:nowrap}
+.pnl-c{flex:1;display:flex;flex-direction:column;background:var(--paper);min-width:0}
+.thdr{padding:14px 20px;border-bottom:1px solid var(--s2);background:var(--bone);display:flex;align-items:center;justify-content:space-between}
+.thdr h2{font-family:"Outfit",sans-serif;font-size:18px;font-weight:500;color:var(--s8)}
+.ttag{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--t7);background:var(--t1);padding:4px 10px;border-radius:6px}
+.msgs{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px}
+.m{display:flex;gap:10px;max-width:75%}
+.m.cl{align-self:flex-start}
+.m.ac{align-self:flex-end;flex-direction:row-reverse}
+.m.au{align-self:center;max-width:85%}
+.m.us{align-self:flex-end;flex-direction:row-reverse}
+.m.un{align-self:flex-end;flex-direction:row-reverse}
+.mav{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;flex-shrink:0}
+.mb{display:flex;flex-direction:column;gap:2px}
+.mbb{padding:10px 14px;border-radius:12px;font-size:14px;line-height:1.5}
+.m.cl .mbb{background:var(--bone);border:1px solid var(--s2);border-bottom-left-radius:4px}
+.m.ac .mbb{background:var(--t1);border:1px solid var(--t2);border-bottom-right-radius:4px}
+.m.au .mbb{background:var(--s1);border:1px solid var(--s2);color:var(--s6);font-size:13px;text-align:center;font-style:italic}
+.m.us .mbb{background:var(--t7);color:#fff;border-bottom-right-radius:4px}
+.m.un .mbb{background:var(--am2);border:1px solid var(--am3);border-bottom-right-radius:4px}
+.mt{font-size:11px;color:var(--s4);font-family:"IBM Plex Mono",monospace}
+.m.ac .mt,.m.us .mt,.m.un .mt{text-align:right}
+.mtr{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--t7);background:var(--t1);padding:2px 8px;border-radius:4px;margin-top:4px}
+.iarea{border-top:1px solid var(--s2);background:var(--bone)}
+.itabs{display:flex;padding:8px 16px 0}
+.itab{font-size:13px;font-weight:600;padding:6px 16px;border:none;background:none;cursor:pointer;color:var(--s4);border-bottom:2px solid transparent}
+.itab.at{color:var(--t7);border-bottom-color:var(--t7)}
+.itab.an{color:var(--am6);border-bottom-color:var(--am6)}
+.irow{display:flex;align-items:flex-end;gap:8px;padding:8px 16px 12px}
+.irow textarea{flex:1;resize:none;border:1px solid var(--s2);border-radius:8px;padding:10px 14px;font-family:"IBM Plex Sans",sans-serif;font-size:14px;line-height:1.5;min-height:42px;max-height:120px;outline:none;background:#fff}
+.irow textarea:focus{border-color:var(--t4);box-shadow:0 0 0 3px rgba(30,143,134,.1)}
+.irow textarea.nm{background:var(--am1);border-color:var(--am3)}
+.irow textarea.nm:focus{border-color:var(--am6);box-shadow:0 0 0 3px rgba(217,119,6,.1)}
+.sbtn{padding:8px 20px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer}
+.sbtn.tm{background:var(--t7);color:#fff}
+.sbtn.tm:hover{background:var(--t6)}
+.sbtn.nm{background:var(--am6);color:#fff}
+.iftr{font-size:11px;color:var(--s4);padding:0 16px 8px;font-family:"IBM Plex Mono",monospace}
+.pnl-r{width:320px;min-width:320px;border-left:1px solid var(--s2);background:var(--bone);overflow-y:auto}
+.ss{padding:16px 20px;border-bottom:1px solid var(--s2)}
+.ss h4{font-family:"Outfit",sans-serif;font-size:14px;font-weight:600;color:var(--s7);margin-bottom:10px}
+.shdr{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.sav{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;color:#fff}
+.sname{font-family:"Outfit",sans-serif;font-size:18px;font-weight:500;color:var(--s8)}
+.sph{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--s6)}
+.sloc{font-size:12px;color:var(--s4);margin-top:2px}
+.sicons{display:flex;gap:8px;margin-top:12px}
+.sic{width:36px;height:36px;border-radius:8px;border:1px solid var(--s2);display:flex;align-items:center;justify-content:center;color:var(--s5);background:var(--bone)}
+.phr{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.phl{font-size:12px;color:var(--s5)}
+.phn{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--s7)}
+.phb{display:flex;gap:4px}
+.phb span{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px}
+.phb .w{background:#dbeafe;color:#1d4ed8}
+.phb .p{background:var(--t1);color:var(--t7)}
+.ov{font-size:14px;color:var(--s8);font-weight:500}
+.nc{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--s7);line-height:1.6;white-space:pre-wrap;background:var(--paper);border:1px solid var(--s2);border-radius:8px;padding:12px;min-height:120px;cursor:text}
+.nc:focus{outline:none;border-color:var(--t4);box-shadow:0 0 0 3px rgba(30,143,134,.1)}
+.hc{background:var(--paper);border:1px solid var(--s2);border-radius:8px;padding:14px}
+.hch{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.hcl{width:28px;height:28px;background:#ff7a59;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px}
+.hct{font-size:14px;font-weight:600;color:var(--s8)}
+.hr{display:flex;justify-content:space-between;font-size:12px;padding:3px 0}
+.hrl{color:var(--s5)}
+.hrv{color:var(--s7);font-weight:500;text-align:right;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hd{background:var(--s1);border-radius:6px;padding:10px;margin-top:8px;font-size:12px}
+.hdt{font-weight:600;color:var(--s8);margin-bottom:4px}
+.hsb{width:100%;margin-top:10px;padding:8px;border:1px solid var(--t2);border-radius:6px;background:var(--t1);color:var(--t7);font-size:13px;font-weight:600;cursor:default;text-align:center}
+.empty{flex:1;display:flex;align-items:center;justify-content:center;color:var(--s4);font-size:16px;font-style:italic}
+.rst-btn{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;padding:4px 12px;border-radius:6px;border:1px solid #fca5a5;background:#fef2f2;color:#b91c1c;cursor:pointer;transition:all .15s;letter-spacing:.04em}
+.rst-btn:hover{background:#fee2e2;border-color:#f87171}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--s3);border-radius:3px}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="Dr. Pompa"/></a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="quiz.html" class="nav-link">Quiz</a>
+    <a href="simulator.html" class="nav-link">Simulator</a>
+    <a href="live-testing.html" class="nav-link active">Live Testing</a>
+  </div>
+</nav>
+<div class="app">
+  <div class="pnl-l">
+    <div class="pnl-l-hdr"><h3>AC-PodH-1</h3><div class="itog"><button class="on">Threaded</button><button>Unthreaded</button></div></div>
+    <div class="clist" id="clist"></div>
+  </div>
+  <div class="pnl-c" id="pc"><div class="empty">Select a contact to begin testing</div></div>
+  <div class="pnl-r" id="pr"><div class="empty">No contact selected</div></div>
+</div>
+<script>
+const CC=['#e57373','#7986cb','#4db6ac','#ff8a65','#a1887f','#9575cd','#4fc3f7','#81c784','#ffb74d','#f06292'];
+function ac(n){let h=0;for(let i=0;i<n.length;i++)h=n.charCodeAt(i)+((h<<5)-h);return CC[Math.abs(h)%CC.length]}
+function ini(n){return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)}
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+const S=[
+{id:'intro',name:'Diana Whitmore',phone:'(360) 555-0147',email:'diana.whitmore@gmail.com',location:'58, Vancouver WA',ha:'Tom Fitzgerald',haFirst:'Tom',apptDate:'May 8, 2026 at 3:00 PM ET',double:'No',owner:'Briana',templateTest:'.intro',unread:1,lastTime:'12m',
+notes:'Client Name: Diana Whitmore\nHealth Advisor: Tom Fitzgerald\nScheduled Appointment Date: May 8 at 3:00 PM ET\nAppt Day: --\nZoom Link: --',
+hubspot:{name:'Diana Whitmore',email:'diana.whitmore@gmail.com',owner:'Briana',phone:'+13605550147',pipeline:'VQT',stage:'New Lead'},
+messages:[
+{sender:'System',text:'[AUTOMATED] Hey Diana, Dr Pompa\'s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?',time:'May 1, 10:08 AM ET',type:'automated'},
+{sender:'Diana Whitmore',text:'Hi. I\'ve been chasing this for about 11 years. It started after I had my second kid. Started with gut stuff that never went away, then about 4 years ago I got diagnosed with Hashimoto\'s. I\'ve been on Synthroid for that whole time and my thyroid numbers look "normal" but I don\'t feel normal. I wake up tired, my hair has been thinning for years, and I get these mood swings that I swear are worse than actual perimenopause. I\'ve tried cutting gluten, paleo, elimination diets, multiple functional medicine doctors. Nothing has moved the needle meaningfully. My last doctor told me to just accept this is my "new normal". I\'m not accepting that.',time:'May 1, 12:47 PM ET',type:'client',trigger:true}
+]},
+{id:'nta1',name:'Catherine Boyd',phone:'(941) 555-0284',email:'catherine.boyd62@gmail.com',location:'62, Sarasota FL',ha:'Marcus Lee',haFirst:'Marcus',apptDate:'May 13, 2026 at 11:00 AM ET',double:'Yes - sister Eileen',owner:'Briana',templateTest:'.sp.invite',unread:2,lastTime:'28m',
+notes:'Client Name: Catherine Boyd\nHealth Advisor: Marcus Lee\nScheduled Appointment Date: May 13 at 11:00 AM ET\nAppt Day: --\nDouble: Yes\nSpouse / 2nd Person: Eileen (sister)\nZoom Link: --\n------------------------------\nAC CONFIRMED INFO\n-AC Name: Briana\n-Timezone: Eastern\n-Appt Confirmation: Confirmed\n-Email Verify: Pending\n-Attendees: Eileen (sister)',
+hubspot:{name:'Catherine Boyd',email:'catherine.boyd62@gmail.com',owner:'Briana',phone:'+19415550284',pipeline:'VQT',stage:'Kit Purchased'},
+messages:[
+{sender:'System',text:'[AUTOMATED] Hey Catherine, Dr Pompa\'s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?',time:'Wed May 6, 11:30 AM ET',type:'automated'},
+{sender:'Catherine Boyd',text:'Hi. I was diagnosed with fibromyalgia about 9 years ago. The pain moves around all day and the mornings are the worst. I never feel rested even after a full night. The brain fog has really picked up the last 2 years and that scares me more than the pain. I\'ve done the rheumatologist, the pain clinic, Lyrica, low-dose naltrexone, three rounds of elimination diets. My sister Eileen is going through almost the exact same thing and she\'s the one who told me about Pompa. She ordered her own kit and she\'ll be on the call with me.',time:'Wed May 6, 4:18 PM ET',type:'client'},
+{sender:'Briana (AC)',text:'Hey Catherine, I\'m Briana, one of the Admissions Coordinators on Dr. Pompa\'s team. I\'ll be your main point of contact leading up to your call with Marcus on May 13th. You\'ll hear from me a few times before then, just making sure you\'re set and have everything you need.',time:'Wed May 6, 5:00 PM ET',type:'ac'},
+{sender:'Briana (AC)',text:'Nine years into the fibromyalgia diagnosis, mornings as the worst stretch, and brain fog that\'s escalated in the last two years to where it\'s the part scaring you more than the pain. That\'s a long road, and the rheumatologist plus pain clinic plus Lyrica plus LDN plus three elimination rounds tells me you\'ve done the work. The fact that Eileen pointed you here after going through her own version of this says a lot.',time:'Wed May 6, 5:01 PM ET',type:'ac'},
+{sender:'Briana (AC)',text:'Before your call with Marcus on Wednesday, May 13th, what timezone are you in so I can pull up your appointment in your local time.',time:'Wed May 6, 5:02 PM ET',type:'ac'},
+{sender:'Catherine Boyd',text:'I\'m Eastern, in Florida.',time:'Thu May 7, 9:14 AM ET',type:'client'},
+{sender:'Briana (AC)',text:'Got it. So your call with Marcus is Wednesday, May 13th at 11:00 AM Eastern. Does that still work for you, Catherine.',time:'Thu May 7, 10:00 AM ET',type:'ac'},
+{sender:'Catherine Boyd',text:'Yes, that\'s on my calendar.',time:'Thu May 7, 12:30 PM ET',type:'client'},
+{sender:'Briana (AC)',text:'Great. And I want to make sure I get Eileen squared away on our end too, since she\'ll be on the call with you. What\'s her email so I can get her set up.',time:'Fri May 8, 9:45 AM ET',type:'ac'},
+{sender:'Catherine Boyd',text:'Her email is eileen.boyd.fl@gmail.com.',time:'Fri May 8, 8:22 PM ET',type:'client'},
+{sender:'Briana (AC)',text:'Perfect. One quick thing before your call with Marcus. I see catherine.boyd62@gmail.com on file for you. Any chance you\'ve ever signed up with us using a different email.',time:'Sat May 9, 9:00 AM ET',type:'ac'},
+{sender:'Catherine Boyd',text:'That\'s the right one, catherine.boyd62@gmail.com. Only email I use.',time:'Sat May 9, 11:42 AM ET',type:'client',trigger:true}
+]},
+{id:'spinvite',name:'James Morrison',phone:'(206) 555-0391',email:'jmorrison58@outlook.com',location:'58, Seattle WA',ha:'Michael Torres',haFirst:'Michael',apptDate:'Apr 26, 2026 at 1:00 PM PT',double:'No',owner:'Briana',templateTest:'.sp.invite',unread:1,lastTime:'1h',
+notes:'Client Name: James Morrison\nHealth Advisor: Michael Torres\nScheduled Appointment Date: Apr 26 at 4:00 PM ET\nAppt Day: Thursday\nZoom Link: --\n------------------------------\nAC CONFIRMED INFO\n-AC Name: Briana\n-Timezone: Pacific (PT)\n-Appt Confirmation: Thu Apr 26 @ 1:00 PM PT\n-Email Verify: jmorrison58@outlook.com\n-Attendees: Not yet raised',
+hubspot:{name:'James Morrison',email:'jmorrison58@outlook.com',owner:'Briana',phone:'+12065550391',pipeline:'VQT',stage:'Kit Purchased'},
+messages:[
+{sender:'System',text:'[AUTOMATED] Hey James, Dr Pompa\'s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?',time:'Sat Apr 18, 11:20 AM',type:'automated'},
+{sender:'James Morrison',text:'Been dealing with IBS for 15 years, nothing really touches it. Got off the phone with my cardiologist yesterday and he wants to start me on blood pressure meds. I\'ve done the rounds with doctors. Figured I\'d try something different this time.',time:'Sat Apr 18, 3:12 PM',type:'client'},
+{sender:'Briana (AC)',text:'Hey James, I\'m Briana, one of the Admissions Coordinators on Dr. Pompa\'s team. I\'ll be your main point of contact leading up to your call with Michael on Apr 26th. You\'ll hear from me a few times before then, just making sure you\'re set and have everything you need.',time:'Sat Apr 18, 3:28 PM',type:'ac'},
+{sender:'Briana (AC)',text:'Fifteen years of IBS and now a cardiologist pushing blood pressure meds, that\'s a long stretch of symptoms getting treated one at a time without anyone connecting them. Stepping off that track to look at this from a different angle takes real thought. Getting to Michael with a clearer picture of what\'s actually driving it is exactly the right move.',time:'Sat Apr 18, 3:29 PM',type:'ac'},
+{sender:'Briana (AC)',text:'Before your call with Michael on Thursday, Apr 26th, what timezone are you in so I can pull up your appointment in your local time?',time:'Sat Apr 18, 3:30 PM',type:'ac'},
+{sender:'James Morrison',text:'Pacific. Seattle.',time:'Sat Apr 18, 6:02 PM',type:'client'},
+{sender:'Briana (AC)',text:'Got it. So your call with Michael is Thursday, Apr 26th at 1:00 PM Pacific time. Does that still work for you, James?',time:'Sat Apr 18, 6:18 PM',type:'ac'},
+{sender:'James Morrison',text:'Yeah that works.',time:'Sat Apr 18, 6:40 PM',type:'client'},
+{sender:'Briana (AC)',text:'One quick thing before your call with Michael. I see jmorrison58@outlook.com on file. Any chance you\'ve ever signed up with us using a different email?',time:'Mon Apr 20, 9:30 AM',type:'ac'},
+{sender:'James Morrison',text:'Nope that\'s my only email.',time:'Mon Apr 20, 11:45 AM',type:'client',trigger:true}
+]},
+{id:'chasenta',name:'Patricia Ellis',phone:'(404) 555-0178',email:'pattie.ellis@gmail.com',location:'47, Atlanta GA',ha:'Jennifer Walsh',haFirst:'Jennifer',apptDate:'Apr 27, 2026 at 10:00 AM ET',double:'No',owner:'Briana',templateTest:'.chasenta',unread:1,lastTime:'2h',
+notes:'Client Name: Patricia Ellis\nHealth Advisor: Jennifer Walsh\nScheduled Appointment Date: Apr 27 at 10:00 AM ET\nAppt Day: Monday\nZoom Link: --\n------------------------------\nAC CONFIRMED INFO\n-AC Name: Briana\n-Timezone: Eastern (ET)\n-Appt Confirmation: Mon Apr 27 @ 10:00 AM ET\n-Email Verify: pattie.ellis@gmail.com\n-Attendees: Solo\n------------------------------\nKit Status: Delivered, photo pending\nNTA Status: Pending',
+hubspot:{name:'Patricia Ellis',email:'pattie.ellis@gmail.com',owner:'Briana',phone:'+14045550178',pipeline:'VQT',stage:'Kit Purchased'},
+messages:[
+{sender:'System',text:'[AUTOMATED] Hey Patricia, Dr Pompa\'s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?',time:'Sat Apr 18, 9:00 AM',type:'automated'},
+{sender:'Patricia Ellis',text:'Honestly it\'s a long list. The big thing is mold illness from a house we sold back in 2019, and my body never fully recovered. I get migraines that knock me out for 2 to 3 days at a time. I can\'t think straight in the afternoon, it\'s like someone flips a switch on my brain around 2pm. And I feel like I\'m running on empty no matter how much I sleep. Did three functional medicine doctors already, nothing stuck.',time:'Sat Apr 18, 1:40 PM',type:'client'},
+{sender:'Briana (AC)',text:'Hey Patricia, I\'m Briana, one of the Admissions Coordinators on Dr. Pompa\'s team. I\'ll be your main point of contact leading up to your call with Jennifer on April 27th. You\'ll hear from me a few times before then, just making sure you\'re set and have everything you need.',time:'Sat Apr 18, 2:15 PM',type:'ac'},
+{sender:'Briana (AC)',text:'A 2019 mold exposure your body never came back from, migraines taking you out for days, and an afternoon switch-flip on your brain, all while you\'re running on empty. That\'s a heavy stack to be carrying for this long. Three rounds of functional medicine and still looking for answers tells me you\'re not here for another protocol, you\'re here to finally understand what\'s underneath all of it.',time:'Sat Apr 18, 2:16 PM',type:'ac'},
+{sender:'Briana (AC)',text:'Before your call with Jennifer on Monday, April 27th, what timezone are you in so I can pull up your appointment in your local time?',time:'Sat Apr 18, 2:17 PM',type:'ac'},
+{sender:'Patricia Ellis',text:'I\'m in Atlanta so Eastern.',time:'Sat Apr 18, 4:22 PM',type:'client'},
+{sender:'Briana (AC)',text:'Got it. So your call with Jennifer is Monday, April 27th at 10:00 AM Eastern. Does that still work for you, Patricia?',time:'Sun Apr 19, 10:00 AM',type:'ac'},
+{sender:'Patricia Ellis',text:'Yes that\'s on my calendar. And my email is still pattie.ellis@gmail.com, haven\'t used anything else.',time:'Sun Apr 19, 12:08 PM',type:'client',trigger:true}
+]},
+{id:'verify1',name:'Marcus Chen',phone:'(317) 555-0462',email:'marcus.chen.54@gmail.com',location:'54, Indianapolis IN',ha:'Gregory Reynolds',haFirst:'Greg',apptDate:'May 19, 2026 at 2:00 PM EDT',double:'No',owner:'Briana',templateTest:'.verify',unread:1,lastTime:'32m',
+notes:'Client Name: Marcus Chen\nHealth Advisor: Gregory Reynolds\nScheduled Appointment Date: May 19 at 2:00 PM EDT\nDouble: No\nSymptoms: 20 years of chronic migraines. Ocular kind, two or three a week. Done the neurologist route, Botox, Emgality, sumatriptan. Nothing has lasted. Sleep is bad, gut is bad, I\'m tired of managing this instead of fixing it.',
+hubspot:{name:'Marcus Chen',email:'marcus.chen.54@gmail.com',owner:'Briana',phone:'+13175550462',pipeline:'VQT',stage:'Kit Purchased'},
+messages:[
+{sender:'System',text:'[AUTOMATED] Hey Marcus, Dr Pompa\'s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?',time:'Sat May 9, 9:15 AM ET',type:'automated'},
+{sender:'Marcus Chen',text:'Hi. I\'ve dealt with ocular migraines for about 20 years. Two or three a week right now. I\'ve done the neurologist, Botox, Emgality, sumatriptan. Nothing has held. My sleep is bad, my gut is bad, and I\'m tired of managing this instead of actually fixing it.',time:'Sat May 9, 10:40 AM ET',type:'client'},
+{sender:'Briana (AC)',text:'Hey Marcus, I\'m Briana, one of the Admissions Coordinators on Dr. Pompa\'s team. I\'ll be your main point of contact leading up to your call with Greg on May 19th. You\'ll hear from me a few times before then, just making sure you\'re set and have everything you need.',time:'Sat May 9, 11:00 AM ET',type:'ac'},
+{sender:'Briana (AC)',text:'Twenty years of ocular migraines with Botox, Emgality, and sumatriptan in the mix, plus sleep and gut issues you\'ve named yourself, that\'s a long stretch of managing something without any of it sticking. Being tired of management instead of resolution is exactly the right instinct to bring into this. Greg is set up for that kind of conversation.',time:'Sat May 9, 11:00 AM ET',type:'ac',trigger:true}
+]},
+{id:'verify3',name:'Philip Tran',phone:'(512) 555-0733',email:'p.tran.atx@protonmail.com',location:'51, Austin TX',ha:'Rebecca Chen',haFirst:'Rebecca',apptDate:'May 27, 2026 at 10:00 AM CDT',double:'No',owner:'Briana',templateTest:'.verify',unread:1,lastTime:'45m',
+notes:'Client Name: Philip Tran\nHealth Advisor: Rebecca Chen\nScheduled Appointment Date: May 27 at 10:00 AM CDT\nDouble: No\nSymptoms: IBS-D for most of my adult life. Last 3 years planning my day around bathrooms. Colonoscopy, borderline SIBO test, elimination diet. Nothing moved. Burned out on gastros.\n------------------------------\nAC CONFIRMED INFO\n-AC Name: Briana\n-Timezone: Central (Austin)\n-Appt Confirmation: Wed May 27 @ 10:00 AM CT\n-Email Verify: Pending',
+hubspot:{name:'Philip Tran',email:'p.tran.atx@protonmail.com',owner:'Briana',phone:'+15125550733',pipeline:'VQT',stage:'Kit Purchased'},
+messages:[
+{sender:'System',text:'[AUTOMATED] Hey Philip, Dr Pompa\'s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?',time:'Tue May 12, 9:20 AM CT',type:'automated'},
+{sender:'Philip Tran',text:'IBS-D for most of my adult life, but the last 3 years I\'m planning my whole day around bathrooms. Had a colonoscopy, a borderline SIBO test, and did an elimination diet. Nothing moved. I\'m done with gastros who shrug and prescribe another med.',time:'Tue May 12, 12:15 PM CT',type:'client'},
+{sender:'Briana (AC)',text:'Hey Philip, I\'m Briana, one of the Admissions Coordinators on Dr. Pompa\'s team. I\'ll be your main point of contact leading up to your call with Rebecca on May 27th.',time:'Tue May 12, 1:00 PM CT',type:'ac'},
+{sender:'Briana (AC)',text:'IBS-D for most of your adult life that\'s escalated in the last 3 years to where you\'re planning your day around bathrooms, with a colonoscopy and borderline SIBO and an elimination diet all behind you, that\'s a significant amount of work without results. Being burned out on more meds after all that makes sense. Rebecca is the right next conversation to have.',time:'Tue May 12, 1:00 PM CT',type:'ac'},
+{sender:'Briana (AC)',text:'Before your call with Rebecca on May 27, what timezone are you in so I can pull up your appointment in your local time.',time:'Tue May 12, 1:01 PM CT',type:'ac'},
+{sender:'Philip Tran',text:'Central, Austin.',time:'Tue May 12, 4:40 PM CT',type:'client'},
+{sender:'Briana (AC)',text:'Got it. So your call with Rebecca is Wednesday May 27 at 10:00 AM Central. Does that still work for you, Philip.',time:'Wed May 13, 9:15 AM CT',type:'ac'},
+{sender:'Philip Tran',text:'Yes that works.',time:'Thu May 14, 7:50 AM CT',type:'client',trigger:true}
+]},
+{id:'verify4',name:'Angela Park',phone:'(206) 555-0819',email:'angela.park.46@gmail.com',location:'46, Seattle WA',ha:'Daniel Rodriguez',haFirst:'Daniel',apptDate:'Jun 1, 2026 at 1:00 PM PDT',double:'Yes',owner:'Briana',templateTest:'.verify',unread:1,lastTime:'1h',
+notes:'Client Name: Angela Park\nHealth Advisor: Daniel Rodriguez\nScheduled Appointment Date: June 1 at 1:00 PM PDT\nDouble: Yes\nSymptoms: 6 years autoimmune. Hashimoto\'s first, then Raynaud\'s, now rheum circling lupus. Fatigue is crushing. Whole family struggling.\n------------------------------\nAC CONFIRMED INFO\n-AC Name: Briana\n-Timezone: Pacific (Seattle)\n-Appt Confirmation: Mon Jun 1 @ 1:00 PM PT\n-Email Verify: angela.park.46@gmail.com\n-Attendees: NOT CAPTURED (Double: Yes)',
+hubspot:{name:'Angela Park',email:'angela.park.46@gmail.com',owner:'Briana',phone:'+12065550819',pipeline:'VQT',stage:'Kit Purchased'},
+messages:[
+{sender:'System',text:'[AUTOMATED] Hey Angela, Dr Pompa\'s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?',time:'Tue May 12, 10:30 AM PT',type:'automated'},
+{sender:'Angela Park',text:'Hi. Six years of autoimmune issues. Hashimoto\'s first, then Raynaud\'s, and now my rheum is starting to use the word lupus but won\'t commit. Fatigue is crushing me. Honestly the reason I\'m here is my whole family is going through different versions of this and I don\'t want this for them.',time:'Tue May 12, 4:12 PM PT',type:'client'},
+{sender:'Briana (AC)',text:'Hey Angela, I\'m Briana, one of the Admissions Coordinators on Dr. Pompa\'s team. I\'ll be your main point of contact leading up to your call with Daniel on June 1st.',time:'Tue May 12, 5:00 PM PT',type:'ac'},
+{sender:'Briana (AC)',text:'Six years of stacking autoimmune issues, Hashimoto\'s, Raynaud\'s, and now a rheumatologist circling the word lupus without committing, with the fatigue as the part that\'s actually crushing you. Watching family members go through their own versions of the same thing and deciding to change something for them as much as yourself, that\'s the kind of turning point that makes this call matter. Daniel will have a real conversation with you.',time:'Tue May 12, 5:00 PM PT',type:'ac'},
+{sender:'Briana (AC)',text:'Before your call with Daniel on June 1, what timezone are you in so I can pull up your appointment in your local time.',time:'Tue May 12, 5:01 PM PT',type:'ac'},
+{sender:'Angela Park',text:'Pacific, Seattle.',time:'Wed May 13, 9:30 AM PT',type:'client'},
+{sender:'Briana (AC)',text:'Got it. So your call with Daniel is Monday June 1 at 1:00 PM Pacific. Does that still work for you, Angela.',time:'Wed May 13, 10:00 AM PT',type:'ac'},
+{sender:'Angela Park',text:'Yes that works.',time:'Wed May 13, 2:45 PM PT',type:'client'},
+{sender:'Briana (AC)',text:'One quick thing before your call with Daniel. I see angela.park.46@gmail.com on file. Any chance you\'ve ever signed up with us using a different email.',time:'Thu May 14, 11:00 AM PT',type:'ac'},
+{sender:'Angela Park',text:'That\'s the right one. Only email I use.',time:'Sat May 16, 8:20 AM PT',type:'client',trigger:true}
+]},
+{id:'testimonial',name:'Patricia Ellis (NTA)',phone:'(404) 555-0178',email:'pattie.ellis@gmail.com',location:'47, Atlanta GA',ha:'Jennifer Walsh',haFirst:'Jennifer',apptDate:'Apr 27, 2026 at 10:00 AM ET',double:'No',owner:'Briana',templateTest:'.testimonial',unread:1,lastTime:'3h',
+notes:'Client Name: Patricia Ellis\nHealth Advisor: Jennifer Walsh\nScheduled Appointment Date: Apr 27 at 10:00 AM ET\nAppt Day: Monday\n------------------------------\nAC CONFIRMED INFO\n-AC Name: Briana\n-Timezone: Eastern (ET)\n-Appt Confirmation: Confirmed\n-Email Verify: pattie.ellis@gmail.com\n-Attendees: Solo\n------------------------------\nNTA Status: Completed Tue Apr 21',
+hubspot:{name:'Patricia Ellis',email:'pattie.ellis@gmail.com',owner:'Briana',phone:'+14045550178',pipeline:'VQT',stage:'NTA Complete'},
+messages:[
+{sender:'Briana (AC)',text:'Before your call with Jennifer, there\'s a quick assessment we send every client through, and it\'s what lets Jennifer walk into your conversation already understanding your picture rather than spending the whole time getting up to speed on your history.\n\nHere\'s your link: https://pom.pa/StartHere\n\nFirst thing on the page is a short 2-minute video from Dr. Pompa, then you\'ll see the Start My Assessment button to begin. It runs about 15 minutes and you can skip anything you\'re unsure about. Works best on a laptop or iPad if you have one handy.\n\nI\'m here if anything comes up.',time:'Mon Apr 20, 9:45 AM',type:'ac'},
+{sender:'Patricia Ellis',text:'finished it this morning. that was more thorough than i expected honestly. some of those questions made me stop and think',time:'Tue Apr 21, 11:14 AM',type:'client',trigger:true}
+]},
+{id:'conf48',name:'Rebecca Chen',phone:'(312) 555-0654',email:'rebecca.chen.42@gmail.com',location:'42, Chicago IL',ha:'David Kim',haFirst:'David',apptDate:'Apr 26, 2026 at 1:00 PM CT',double:'No',owner:'Briana',templateTest:'.conf48',unread:1,lastTime:'4h',
+notes:'Client Name: Rebecca Chen\nHealth Advisor: David Kim\nScheduled Appointment Date: Apr 26 at 1:00 PM CT\nDouble: No\nSymptoms: Chronic hives 2+ years, joint pain in hands, afternoon fatigue at 2pm, labs point autoimmune but no diagnosis\n------------------------------\nRequirements Status:\nNTA: NOT COMPLETE\nTest Kit: NOT COMPLETE\nDr. Pompa Webinar: NOT WATCHED\n------------------------------\nAC CONFIRMED INFO\n-Timezone: Central (Chicago)\n-Appt Confirmation: Confirmed\n-Email Verify: rebecca.chen.42@gmail.com\n-Attendees: Solo (husband declined)',
+hubspot:{name:'Rebecca Chen',email:'rebecca.chen.42@gmail.com',owner:'Briana',phone:'+13125550654',pipeline:'VQT',stage:'Kit Purchased'},
+messages:[
+{sender:'System',text:'[AUTOMATED] Hey Rebecca, Dr Pompa\'s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?',time:'Wed Apr 22, 9:15 AM CT',type:'automated'},
+{sender:'Rebecca Chen',text:'It\'s a few things honestly. I\'ve had chronic hives for over 2 years with no clear trigger. My hands ache every morning, especially my knuckles. My energy is fine until around 2pm and then it\'s like someone unplugs me. My labs keep coming back with markers that point toward autoimmune but none of my doctors will actually commit to a diagnosis, so I\'m stuck treating symptoms with no real answer.',time:'Wed Apr 22, 1:02 PM CT',type:'client'},
+{sender:'Briana (AC)',text:'Hey Rebecca, I\'m Briana, one of the Admissions Coordinators on Dr. Pompa\'s team. I\'ll be your main point of contact leading up to your call with David on April 26th. You\'ll hear from me a few times before then, just making sure you\'re set and have everything you need.',time:'Wed Apr 22, 1:30 PM CT',type:'ac'},
+{sender:'Briana (AC)',text:'Two years of chronic hives, aching hands in the mornings, and labs that keep hinting at autoimmune while nobody will give you a name for it, that\'s exhausting in a very specific way. Being told to treat symptoms without a real answer is its own kind of dead end. Coming here to go at the root makes sense given what you\'ve already been through.',time:'Wed Apr 22, 1:31 PM CT',type:'ac',trigger:true}
+]},
+{id:'ntarescue',name:'Maria Sanchez',phone:'(602) 555-0295',email:'maria.sanchez54@yahoo.com',location:'54, Phoenix AZ',ha:'Sarah Chen',haFirst:'Sarah',apptDate:'Apr 28, 2026 at 11:00 AM AZ',double:'No',owner:'Briana',templateTest:'.ntarescue',unread:1,lastTime:'15m',
+notes:'Client Name: Maria Sanchez\nHealth Advisor: Sarah Chen\nScheduled Appointment Date: Apr 28 at 2:00 PM ET (11:00 AM AZ)\nAppt Day: Tuesday\nZoom Link: --\n------------------------------\nAC CONFIRMED INFO\n-AC Name: Briana\n-Timezone: Arizona (MST, no DST)\n-Appt Confirmation: Tue Apr 28 @ 11:00 AM AZ\n-Email Verify: maria.sanchez54@yahoo.com\n-Attendees: Solo\n------------------------------\nKit Status: Delivered, not yet completed\nNTA Status: BLOCKED - 3 tech failures',
+hubspot:{name:'Maria Sanchez',email:'maria.sanchez54@yahoo.com',owner:'Briana',phone:'+16025550295',pipeline:'VQT',stage:'Kit Purchased'},
+messages:[
+{sender:'System',text:'[AUTOMATED] Hey Maria, Dr Pompa\'s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?',time:'Sat Apr 18, 10:05 AM',type:'automated'},
+{sender:'Maria Sanchez',text:'Hi. I\'m 54 and have had Hashimoto\'s for about 8 years. I\'m exhausted no matter how much I sleep, my brain feels like it\'s in a fog half the day, and I\'ve gained 22 lbs in the last 2 years even though I\'m eating clean and exercising 5 days a week. My endo keeps adjusting my Synthroid but nothing is working. I\'m tired of being told my labs "look fine" when I feel terrible.',time:'Sat Apr 18, 2:47 PM',type:'client'},
+{sender:'Briana (AC)',text:'Hey Maria, I\'m Briana, one of the Admissions Coordinators on Dr. Pompa\'s team. I\'ll be your main point of contact leading up to your call with Sarah on April 28th. You\'ll hear from me a few times before then, just making sure you\'re set and have everything you need.',time:'Sat Apr 18, 3:02 PM',type:'ac'},
+{sender:'Briana (AC)',text:'Eight years of Hashimoto\'s plus being told your labs "look fine" while you\'re living with exhaustion, brain fog, and weight that won\'t budge no matter what you do, that\'s a lot to carry. Adjusting Synthroid over and over without seeing a change tells you the thyroid number isn\'t the whole story. Wanting answers that actually explain what\'s happening makes complete sense.',time:'Sat Apr 18, 3:03 PM',type:'ac'},
+{sender:'Briana (AC)',text:'Thanks Maria. Before your call with Sarah, there\'s a quick assessment we send every client through, and it\'s what lets Sarah walk into your conversation already understanding your picture rather than spending the whole time getting up to speed on your history.\n\nHere\'s your link: https://pom.pa/StartHere\n\nFirst thing on the page is a short 2-minute video from Dr. Pompa, then you\'ll see the Start My Assessment button to begin. It runs about 15 minutes and you can skip anything you\'re unsure about. Works best on a laptop or iPad if you have one handy.\n\nI\'m here if anything comes up.',time:'Mon Apr 20, 10:11 AM',type:'ac'},
+{sender:'Maria Sanchez',text:'Tried to fill this out tonight and it keeps kicking me back to the login page. I put in my email and it says no account found. I already paid for the test kit so I don\'t understand why it\'s saying that.',time:'Tue Apr 21, 7:45 PM',type:'client'},
+{sender:'Briana (AC)',text:'Sorry about the hassle Maria. That page actually asks you to create a new login for the assessment portion, it\'s a separate system from where you bought the kit. On the main page with the Dr. Pompa video, scroll a little lower and you\'ll see a Register or Create Account option. Use the same email and create a password there, then it should let you in.',time:'Tue Apr 21, 8:02 PM',type:'ac'},
+{sender:'Maria Sanchez',text:'Ok tried again this morning. Registered like you said. It let me in and I got about halfway through and then it logged me out. Lost everything I put in. Now I\'m back at the login screen and my password isn\'t working.',time:'Wed Apr 22, 8:30 AM',type:'client'},
+{sender:'Briana (AC)',text:'Ugh, I\'m sorry Maria. That happens sometimes when the session times out. Try clicking Forgot Password right on that login screen and it\'ll send a reset link to your email. Once you\'re back in, your progress should auto-save as you go this time. If it doesn\'t, let me know right away and I\'ll flag it on our end.',time:'Wed Apr 22, 8:48 AM',type:'ac'},
+{sender:'Maria Sanchez',text:'I did the forgot password thing. Got the email, clicked the link, set a new password, tried to log back in and it says invalid credentials. I\'ve been at this for an HOUR now. This is ridiculous. I bought a test kit to learn about my health, not to spend my entire morning fighting with a broken website. Honestly I\'m done. Can you just refund me the $97? I don\'t have the energy for this.',time:'Thu Apr 23, 11:15 AM',type:'client',trigger:true}
+]}
+];
+
+let cur=null,mode='text';
+var LS_KEY='ac-live-testing';
+
+function lsGet(id){try{var d=JSON.parse(localStorage.getItem(LS_KEY)||'{}');return d[id]||null}catch(e){return null}}
+function lsSet(id,data){try{var d=JSON.parse(localStorage.getItem(LS_KEY)||'{}');d[id]=data;localStorage.setItem(LS_KEY,JSON.stringify(d))}catch(e){}}
+function lsDel(id){try{var d=JSON.parse(localStorage.getItem(LS_KEY)||'{}');delete d[id];localStorage.setItem(LS_KEY,JSON.stringify(d))}catch(e){}}
+
+function getSaved(id){var d=lsGet(id);return d||{msgs:[],notes:null}}
+function saveMsg(id,text,type){var d=getSaved(id);d.msgs.push({text:text,type:type,time:new Date().toISOString()});lsSet(id,d)}
+function saveNotes(id,text){var d=getSaved(id);d.notes=text;lsSet(id,d)}
+
+function rList(){
+  var el=document.getElementById('clist');
+  el.innerHTML=S.map(function(s){
+    var saved=getSaved(s.id),hasSent=saved.msgs.length>0;
+    var preview=hasSent?saved.msgs[saved.msgs.length-1].text:s.messages[s.messages.length-1].text;
+    return '<div class="ci'+(cur&&cur.id===s.id?' on':'')+'" onclick="sel(\''+s.id+'\')">'
+    +'<div class="cav" style="background:'+ac(s.name)+'">'+ini(s.name)+'</div>'
+    +'<div class="cinf"><b>'+s.name+'</b><small>'+s.phone+'</small><em>'+esc(preview.slice(0,42))+'...</em></div>'
+    +'<div class="cmeta"><span>'+s.lastTime+'</span>'+(hasSent?'':'<span class="cbdg">'+s.unread+'</span>')+'<span class="ctag">'+s.templateTest+'</span></div>'
+    +'</div>'}).join('');
+}
+
+function sel(id){cur=S.find(function(s){return s.id===id});mode='text';rList();rThread();rSide();}
+
+function rThread(){
+  if(!cur){document.getElementById('pc').innerHTML='<div class="empty">Select a contact to begin testing</div>';return;}
+  var s=cur,saved=getSaved(s.id);
+  var h='<div class="thdr"><h2>'+s.name+'</h2><div style="display:flex;gap:8px;align-items:center"><span class="ttag">Template: '+s.templateTest+'</span>'
+    +'<button class="rst-btn" onclick="resetContact(\''+s.id+'\')">Reset</button></div></div>';
+  h+='<div class="msgs" id="ma">';
+  s.messages.forEach(function(m){h+=rMsg(m,s)});
+  saved.msgs.forEach(function(m){
+    var cls=m.type==='note'?'un':'us',abg=m.type==='note'?'#d97706':'#1e8f86';
+    var lbl=m.type==='note'?'Note':'Sent';
+    var d=new Date(m.time),ts=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
+    var ds=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+    h+='<div class="m '+cls+'"><div class="mav" style="background:'+abg+'">B</div><div class="mb"><div class="mbb">'+esc(m.text)+'</div><span class="mt">'+lbl+' - '+ds+', '+ts+'</span></div></div>';
+  });
+  h+='</div>';
+  h+='<div class="iarea"><div class="itabs">';
+  h+='<button class="itab'+(mode==='text'?' at':'')+'" onclick="sm(\'text\')">Text</button>';
+  h+='<button class="itab'+(mode==='note'?' an':'')+'" onclick="sm(\'note\')">Note</button></div>';
+  h+='<div class="irow"><textarea id="mi" class="'+(mode==='note'?'nm':'')+'" placeholder="'+(mode==='note'?'Add an internal note...':'Type your message')+'" onkeydown="hk(event)"></textarea>';
+  h+='<button class="sbtn '+(mode==='note'?'nm':'tm')+'" onclick="send()">'+(mode==='note'?'Save Note':'Send Text')+'</button></div>';
+  h+='<div class="iftr">To: '+s.phone+' &bull; From: Briana (AC) &bull; Press Enter to send</div></div>';
+  document.getElementById('pc').innerHTML=h;
+  var ma=document.getElementById('ma');if(ma)ma.scrollTop=ma.scrollHeight;
+}
+
+function rMsg(m,s){
+  var tc=m.type==='automated'?'au':m.type==='client'?'cl':'ac';
+  var ab=m.type==='client'?ac(s.name):m.type==='ac'?'#1e8f86':'#89a0ab';
+  var at=m.type==='client'?ini(s.name):m.type==='ac'?'B':'SYS';
+  var r='<div class="m '+tc+'">';
+  if(m.type!=='automated')r+='<div class="mav" style="background:'+ab+'">'+at+'</div>';
+  r+='<div class="mb"><div class="mbb">'+m.text+'</div><span class="mt">'+m.time+'</span>';
+  if(m.trigger)r+='<span class="mtr">YOUR TURN - Write the '+s.templateTest+' response</span>';
+  r+='</div></div>';
+  return r;
+}
+
+function sm(m){mode=m;rThread();var el=document.getElementById('mi');if(el)el.focus();}
+function hk(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
+
+function send(){
+  var el=document.getElementById('mi'),t=el.value.trim();if(!t||!cur)return;
+  var mtype=mode==='note'?'note':'text';
+  saveMsg(cur.id,t,mtype);
+  el.value='';
+  rThread();
+  rList();
+}
+
+function resetContact(id){
+  lsDel(id);
+  rThread();
+  rList();
+}
+
+function rSide(){
+  if(!cur){document.getElementById('pr').innerHTML='<div class="empty">No contact selected</div>';return;}
+  var s=cur,c=ac(s.name),hs=s.hubspot;
+  var h='<div class="ss"><div class="shdr"><div class="sav" style="background:'+c+'">'+ini(s.name)+'</div><div><div class="sname">'+s.name+'</div><div class="sph">'+s.phone+'</div><div class="sloc">'+s.location+'</div></div></div>';
+  h+='<div class="sicons">';
+  h+='<div class="sic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>';
+  h+='<div class="sic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
+  h+='<div class="sic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>';
+  h+='<div class="sic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>';
+  h+='</div></div>';
+  h+='<div class="ss"><h4>All Numbers</h4><div class="phr"><div><div class="phl">Mobile Phone Number</div><div class="phn">'+hs.phone+'</div></div><div class="phb"><span class="w">Wireless</span><span class="p">Primary</span></div></div></div>';
+  h+='<div class="ss"><h4>Contact Owner</h4><div class="ov">'+s.owner+'</div></div>';
+  var savedNotes=getSaved(s.id).notes;
+  var notesVal=savedNotes!==null?savedNotes:s.notes;
+  h+='<div class="ss"><h4>Notes</h4><div class="nc" contenteditable="true" id="sideNotes" onblur="saveNotes(\''+s.id+'\',this.textContent)">'+esc(notesVal)+'</div></div>';
+  h+='<div class="ss"><h4>Integrations</h4><div class="hc"><div class="hch"><div class="hcl">H</div><div class="hct">HubSpot</div></div>';
+  h+='<div class="hr"><span class="hrl">Name:</span><span class="hrv">'+hs.name+'</span></div>';
+  h+='<div class="hr"><span class="hrl">Email:</span><span class="hrv">'+hs.email+'</span></div>';
+  h+='<div class="hr"><span class="hrl">Owner:</span><span class="hrv">'+hs.owner+'</span></div>';
+  h+='<div class="hr"><span class="hrl">Phone:</span><span class="hrv">'+hs.phone+'</span></div>';
+  h+='<div class="hd"><div class="hdt">Deal: '+hs.pipeline+' | '+hs.name+'</div>';
+  h+='<div class="hr"><span class="hrl">Pipeline:</span><span class="hrv">'+hs.pipeline+'</span></div>';
+  h+='<div class="hr"><span class="hrl">Stage:</span><span class="hrv">'+hs.stage+'</span></div></div>';
+  h+='<div class="hsb">Sync with HubSpot</div></div></div>';
+  document.getElementById('pr').innerHTML=h;
+}
+
+rList();
+</script>
+</body>
+</html>

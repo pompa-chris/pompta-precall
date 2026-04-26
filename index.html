@@ -150,9 +150,9 @@
       /* ── Cards ── */
       .cards-container {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 32px;
-        max-width: 960px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 40px 40px 100px;
         position: relative;
@@ -283,6 +283,11 @@
         z-index: 1;
       }
 
+      @media (max-width: 1024px) {
+        .cards-container {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
       @media (max-width: 720px) {
         .cards-container {
           grid-template-columns: 1fr;
@@ -312,6 +317,7 @@
         <a href="index.html" class="nav-link active">Home</a>
         <a href="quiz.html" class="nav-link">Quiz</a>
         <a href="simulator.html" class="nav-link">Simulator</a>
+        <a href="live-testing.html" class="nav-link">Live Testing</a>
       </div>
     </nav>
 
@@ -401,6 +407,45 @@
         </div>
         <div class="card-cta">
           Launch Simulator <span class="arrow">&rarr;</span>
+        </div>
+      </a>
+      <a href="live-testing.html" class="card">
+        <div class="card-icon" style="background: #fef3c7; border: 1px solid #fde68a;">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#d97706"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+          </svg>
+        </div>
+        <div class="card-tag">Hands-On Practice</div>
+        <h2 class="card-title">Live Testing</h2>
+        <p class="card-desc">
+          Practice writing real Blaze template responses in an Aloware-style
+          inbox. Each contact is a test scenario with full conversation
+          history, notes, and HubSpot context. Write your message and
+          send it just like you would in the real system.
+        </p>
+        <div class="card-meta">
+          <div class="card-meta-item">
+            <span class="card-meta-num">10</span> Scenarios
+          </div>
+          <div class="card-meta-item">
+            <span class="card-meta-num">8</span> Templates
+          </div>
+          <div class="card-meta-item">
+            <span class="card-meta-num">SMS</span> Practice
+          </div>
+        </div>
+        <div class="card-cta">
+          Start Testing <span class="arrow">&rarr;</span>
         </div>
       </a>
     </div>
