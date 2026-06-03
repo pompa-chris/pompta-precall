@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Call Guide — Script Suggestions (Steps 1-5)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --slate-900: #1b2a31;
+        --slate-700: #2f4a56;
+        --slate-500: #5a7682;
+        --slate-400: #89a0ab;
+        --slate-200: #dce5e9;
+        --slate-100: #edf1f3;
+        --teal-700: #1e8f86;
+        --teal-600: #2db3a6;
+        --teal-100: #e6f5f2;
+        --paper: #f7f3ed;
+        --paper-deep: #efe8dc;
+        --bone: #fbf9f4;
+        --ink: #1a262c;
+        --ink-soft: #3d5059;
+        --red-50: #fef2f2;
+        --red-100: #fee2e2;
+        --red-200: #fecaca;
+        --red-600: #dc2626;
+        --red-700: #b91c1c;
+        --green-50: #f0fdf4;
+        --green-100: #dcfce7;
+        --green-200: #bbf7d0;
+        --green-600: #16a34a;
+        --green-700: #15803d;
+        --amber-50: #fffbeb;
+        --amber-100: #fef3c7;
+        --amber-600: #d97706;
+        --amber-700: #b45309;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+      }
+      h1 {
+        font-family: "Outfit", sans-serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--ink);
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        color: var(--ink-soft);
+        font-size: 1.05rem;
+        margin-bottom: 40px;
+      }
+
+      /* Step card */
+      .step-card {
+        background: var(--bone);
+        border: 1px solid var(--slate-200);
+        border-radius: 12px;
+        padding: 32px;
+        margin-bottom: 32px;
+      }
+      .step-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .step-num {
+        background: var(--teal-600);
+        color: white;
+        font-family: "Outfit", sans-serif;
+        font-weight: 600;
+        font-size: 0.8rem;
+        padding: 4px 12px;
+        border-radius: 20px;
+        letter-spacing: 0.5px;
+      }
+      .step-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+      }
+
+      /* Issues */
+      .issue-list {
+        margin-bottom: 20px;
+      }
+      .issue-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--red-700);
+        margin-bottom: 8px;
+      }
+      .issue-item {
+        background: var(--red-50);
+        border-left: 3px solid var(--red-600);
+        padding: 10px 14px;
+        border-radius: 0 6px 6px 0;
+        margin-bottom: 6px;
+        font-size: 0.92rem;
+        color: var(--ink-soft);
+      }
+
+      /* Comparison */
+      .comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+      @media (max-width: 700px) {
+        .comparison {
+          grid-template-columns: 1fr;
+        }
+      }
+      .comp-col {
+        border-radius: 8px;
+        padding: 16px;
+      }
+      .comp-col.current {
+        background: var(--red-50);
+        border: 1px solid var(--red-200);
+      }
+      .comp-col.suggested {
+        background: var(--green-50);
+        border: 1px solid var(--green-200);
+      }
+      .comp-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 8px;
+      }
+      .comp-col.current .comp-label {
+        color: var(--red-700);
+      }
+      .comp-col.suggested .comp-label {
+        color: var(--green-700);
+      }
+      .comp-section-label {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--slate-500);
+        margin-top: 12px;
+        margin-bottom: 4px;
+      }
+      .comp-section-label:first-child {
+        margin-top: 0;
+      }
+      .comp-script {
+        font-size: 0.95rem;
+        font-style: italic;
+        line-height: 1.5;
+        color: var(--ink);
+      }
+      .strikethrough {
+        text-decoration: line-through;
+        opacity: 0.5;
+      }
+      .highlight {
+        background: #fef08a;
+        padding: 1px 4px;
+        border-radius: 3px;
+      }
+
+      /* Rationale */
+      .rationale {
+        background: var(--amber-50);
+        border: 1px solid var(--amber-100);
+        border-radius: 8px;
+        padding: 14px 16px;
+        margin-top: 16px;
+      }
+      .rationale-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: var(--amber-700);
+        margin-bottom: 6px;
+      }
+      .rationale-text {
+        font-size: 0.9rem;
+        color: var(--ink-soft);
+        line-height: 1.55;
+      }
+
+      /* Also update */
+      .also-update {
+        margin-top: 16px;
+      }
+      .also-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--teal-700);
+        margin-bottom: 8px;
+      }
+      .also-item {
+        background: var(--teal-100);
+        border-left: 3px solid var(--teal-600);
+        padding: 10px 14px;
+        border-radius: 0 6px 6px 0;
+        margin-bottom: 6px;
+        font-size: 0.92rem;
+        color: var(--ink-soft);
+      }
+
+      /* Patterns table */
+      .patterns-card {
+        background: var(--bone);
+        border: 1px solid var(--slate-200);
+        border-radius: 12px;
+        padding: 32px;
+        margin-top: 40px;
+      }
+      .patterns-card h2 {
+        font-family: "Outfit", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+      .patterns-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .patterns-table th {
+        text-align: left;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--slate-500);
+        padding: 8px 12px;
+        border-bottom: 2px solid var(--slate-200);
+      }
+      .patterns-table td {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        border-bottom: 1px solid var(--slate-200);
+        color: var(--ink-soft);
+        vertical-align: top;
+      }
+      .patterns-table tr:last-child td {
+        border-bottom: none;
+      }
+      .tag-red {
+        display: inline-block;
+        background: var(--red-100);
+        color: var(--red-700);
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+      .tag-green {
+        display: inline-block;
+        background: var(--green-100);
+        color: var(--green-700);
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+      .no-change-badge {
+        display: inline-block;
+        background: var(--green-100);
+        color: var(--green-700);
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 3px 10px;
+        border-radius: 4px;
+        margin-left: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Live Call Guide &mdash; Script Suggestions</h1>
+      <p class="subtitle">
+        Steps 1&ndash;5 analysis. Side-by-side comparisons with rationale.
+        Meaning is preserved &mdash; language is tightened for easier live
+        delivery.
+      </p>
+
+      <!-- ════════ STEP 1 ════════ -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="step-num">Step 1</span>
+          <span class="step-title"
+            >Opening &mdash; &ldquo;Dr. Pompa&rsquo;s Office&rdquo;</span
+          >
+          <span class="no-change-badge">Primary script: no change</span>
+        </div>
+
+        <p
+          style="
+            font-size: 0.92rem;
+            color: var(--ink-soft);
+            margin-bottom: 16px;
+          "
+        >
+          The opening script is tight. 3-beat pattern, micro-commitment with
+          &ldquo;Can you hear me okay?&rdquo; &mdash; no changes needed there.
+          One small improvement to the follow-up:
+        </p>
+
+        <div class="comparison">
+          <div class="comp-col current">
+            <div class="comp-label">Current Follow-Up</div>
+            <div class="comp-section-label">After they respond</div>
+            <div class="comp-script">
+              &ldquo;Great! I&rsquo;m just calling to make sure you&rsquo;re all
+              set for your appointment with {HAName} on
+              <span class="highlight">{Day, Date}</span>.&rdquo;
+            </div>
+          </div>
+          <div class="comp-col suggested">
+            <div class="comp-label">Suggested Follow-Up</div>
+            <div class="comp-section-label">After they respond</div>
+            <div class="comp-script">
+              &ldquo;Great! I&rsquo;m just calling to make sure you&rsquo;re all
+              set for your appointment with {HAName} on
+              <span class="highlight">{Day} at {Time}</span>.&rdquo;
+            </div>
+          </div>
+        </div>
+
+        <div class="rationale">
+          <div class="rationale-label">Why</div>
+          <div class="rationale-text">
+            Adding the time here plants the seed for Step 2. Instead of
+            introducing new info at the time zone check, Step 2 becomes a quick
+            confirmation of something they already heard. Smoother flow, fewer
+            surprises.
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ STEP 2 ════════ -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="step-num">Step 2</span>
+          <span class="step-title">Time Zone Verification</span>
+        </div>
+
+        <div class="issue-list">
+          <div class="issue-label">Issues identified</div>
+          <div class="issue-item">
+            Asking &ldquo;what time zone are you in?&rdquo; puts the burden on
+            the client. Many people hesitate or get it wrong (Mountain vs.
+            Central, etc.).
+          </div>
+          <div class="issue-item">
+            Nobody asks &ldquo;what time zone are you in?&rdquo; in normal
+            conversation &mdash; it feels like a quiz.
+          </div>
+          <div class="issue-item">
+            The current altScript already uses a better approach (verify by
+            checking the current time). The primary script should lead with that
+            pattern instead.
+          </div>
+        </div>
+
+        <div class="comparison">
+          <div class="comp-col current">
+            <div class="comp-label">Current</div>
+            <div class="comp-section-label">Primary script</div>
+            <div class="comp-script">
+              &ldquo;And just to confirm &mdash;
+              <span class="highlight">what time zone are you in?</span> I know
+              we texted earlier but I want to make sure we have the right time
+              for you.&rdquo;
+            </div>
+            <div class="comp-section-label">Alt script</div>
+            <div class="comp-script">
+              &ldquo;So it should be 1:45 PM for you right now, right? Okay
+              awesome, perfect. So your appointment is {Day} at {Time} your
+              time.&rdquo;
+            </div>
+          </div>
+          <div class="comp-col suggested">
+            <div class="comp-label">Suggested</div>
+            <div class="comp-section-label">Primary script</div>
+            <div class="comp-script">
+              &ldquo;I just want to make sure we have your time right &mdash;
+              <span class="highlight"
+                >it should be about {CurrentTimeInTheirZone} for you right now,
+                right?</span
+              >&rdquo;
+            </div>
+            <div class="comp-section-label">
+              Alt &rarr; &ldquo;After they confirm&rdquo;
+            </div>
+            <div class="comp-script">
+              &ldquo;Perfect, so your appointment is {Day} at {Time} your
+              time.&rdquo;
+            </div>
+          </div>
+        </div>
+
+        <div class="rationale">
+          <div class="rationale-label">Why</div>
+          <div class="rationale-text">
+            Verify by checking, not quizzing. Fewer words, feels like a casual
+            check instead of a test, and gets you to the same answer faster. The
+            caller already glances at the area code during ringing &mdash; use
+            that info instead of asking the client to self-report.
+          </div>
+        </div>
+
+        <div class="also-update">
+          <div class="also-label">Also update</div>
+          <div class="also-item">
+            <strong>Instruction text:</strong> Change to &ldquo;ALWAYS verify on
+            the phone, even if they texted it. AI Blaze/Aloware can show 3
+            different times. Verify BY CHECKING, not quizzing &mdash; glance at
+            their area code to guess their zone, then confirm.&rdquo;
+          </div>
+          <div class="also-item">
+            <strong>Tip:</strong> Add &ldquo;Don&rsquo;t ask them to name their
+            time zone &mdash; many people hesitate or get it wrong.&rdquo;
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ STEP 3 ════════ -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="step-num">Step 3</span>
+          <span class="step-title">Zoom Access &amp; Calendar Invite</span>
+        </div>
+
+        <div class="issue-list">
+          <div class="issue-label">Issues identified</div>
+          <div class="issue-item">
+            Two questions stacked together. The first (&ldquo;Were you able to
+            find...&rdquo;) is a yes/no that lets them say &ldquo;yeah I think
+            so&rdquo; without actually checking.
+          </div>
+          <div class="issue-item">
+            The instruction says &ldquo;Make them GO FIND IT&rdquo; &mdash; but
+            the script uses soft questions instead of directives.
+          </div>
+          <div class="issue-item">
+            Alt script (&ldquo;Could you try to look for it...&rdquo;) repeats
+            the same request when the first ask already failed. Doesn&rsquo;t
+            solve the problem.
+          </div>
+        </div>
+
+        <div class="comparison">
+          <div class="comp-col current">
+            <div class="comp-label">Current</div>
+            <div class="comp-section-label">Primary script</div>
+            <div class="comp-script">
+              &ldquo;<span class="highlight">Were you able to find</span> that
+              calendar invitation in your email?
+              <span class="highlight">Can you see</span> the Zoom link in
+              there?&rdquo;
+            </div>
+            <div class="comp-section-label">
+              If &ldquo;I don&rsquo;t know / I get a bunch of emails&rdquo;
+            </div>
+            <div class="comp-script">
+              &ldquo;No worries!
+              <span class="highlight">Could you try to look for it</span> right
+              now and see that calendar invitation with the Zoom link?&rdquo;
+            </div>
+          </div>
+          <div class="comp-col suggested">
+            <div class="comp-label">Suggested</div>
+            <div class="comp-section-label">Primary script</div>
+            <div class="comp-script">
+              &ldquo;<span class="highlight"
+                >Can you pull up your email real quick</span
+              >
+              and find the calendar invite?
+              <span class="highlight">I&rsquo;ll wait</span> &mdash; I want to
+              make sure the Zoom link is in there.&rdquo;
+            </div>
+            <div class="comp-section-label">If they can&rsquo;t find it</div>
+            <div class="comp-script">
+              &ldquo;No worries &mdash;
+              <span class="highlight">let me resend it to you right now.</span>
+              Check your email in about 30 seconds and let me know when you see
+              it.&rdquo;
+            </div>
+          </div>
+        </div>
+
+        <div class="rationale">
+          <div class="rationale-label">Why</div>
+          <div class="rationale-text">
+            <strong>&ldquo;Pull up your email real quick&rdquo;</strong> is a
+            directive, not a question.
+            <strong>&ldquo;I&rsquo;ll wait&rdquo;</strong> signals you&rsquo;re
+            not moving on until they actually check. The alt now
+            <strong>takes action</strong> (resend) instead of re-asking the same
+            question. Keeps momentum instead of stalling.
+          </div>
+        </div>
+
+        <div class="also-update">
+          <div class="also-label">Also update</div>
+          <div class="also-item">
+            <strong>Instruction text:</strong> Add &ldquo;Give a directive, not
+            a question.&rdquo;
+          </div>
+          <div class="also-item">
+            <strong>Tip:</strong> Change to &ldquo;&lsquo;I&rsquo;ll wait&rsquo;
+            signals you&rsquo;re not moving on. If they still can&rsquo;t find
+            it after resend, walk them through checking spam/promotions
+            folders.&rdquo;
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ STEP 4 ════════ -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="step-num">Step 4</span>
+          <span class="step-title">Zoom Experience Check</span>
+        </div>
+
+        <div class="issue-list">
+          <div class="issue-label">Issues identified</div>
+          <div class="issue-item">
+            Two back-to-back questions. &ldquo;Virtual telehealth
+            appointment&rdquo; is jargon-heavy for many clients (often older,
+            health-challenged).
+          </div>
+          <div class="issue-item">
+            The second question (&ldquo;Have you done a Zoom call?&rdquo;) is
+            the one that actually matters &mdash; the first is redundant.
+          </div>
+        </div>
+
+        <div class="comparison">
+          <div class="comp-col current">
+            <div class="comp-label">Current</div>
+            <div class="comp-script">
+              &ldquo;<span class="highlight"
+                >Have you done a virtual telehealth appointment before?</span
+              >
+              Have you done a Zoom call before?&rdquo;
+            </div>
+          </div>
+          <div class="comp-col suggested">
+            <div class="comp-label">Suggested</div>
+            <div class="comp-script">
+              &ldquo;Have you used Zoom before,
+              <span class="highlight">or will this be your first time?</span
+              >&rdquo;
+            </div>
+          </div>
+        </div>
+
+        <div class="rationale">
+          <div class="rationale-label">Why</div>
+          <div class="rationale-text">
+            One question instead of two. Plain language instead of jargon.
+            <strong>&ldquo;Or will this be your first time?&rdquo;</strong>
+            normalizes saying no &mdash; the client doesn&rsquo;t feel dumb
+            admitting it. Gets to the same branching decision in half the words.
+          </div>
+        </div>
+
+        <div class="also-update">
+          <div class="also-label">Also update</div>
+          <div class="also-item">
+            <strong>Instruction text:</strong> Add &ldquo;One simple
+            question.&rdquo;
+          </div>
+          <div class="also-item">
+            <strong>Tip:</strong> Lead with &ldquo;&lsquo;Or will this be your
+            first time?&rsquo; normalizes saying no &mdash; they don&rsquo;t
+            feel dumb admitting it.&rdquo;
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ STEP 5 ════════ -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="step-num">Step 5</span>
+          <span class="step-title">Device Push</span>
+        </div>
+
+        <div class="issue-list">
+          <div class="issue-label">Issues identified</div>
+          <div class="issue-item">
+            Two stacked questions again. &ldquo;Computer&rdquo; and
+            &ldquo;laptop&rdquo; are basically the same thing to most people
+            &mdash; listing both sounds like padding.
+          </div>
+          <div class="issue-item">
+            Alt script bundles two separate ideas (device push + pen/paper) into
+            one long paragraph. By the time you get to &ldquo;pen and
+            paper,&rdquo; they&rsquo;ve tuned out.
+          </div>
+        </div>
+
+        <div class="comparison">
+          <div class="comp-col current">
+            <div class="comp-label">Current</div>
+            <div class="comp-section-label">Primary script</div>
+            <div class="comp-script">
+              &ldquo;What device are you going to use for this call?
+              <span class="highlight"
+                >Do you have a computer, a laptop, an iPad?</span
+              >&rdquo;
+            </div>
+            <div class="comp-section-label">If &ldquo;just my phone&rdquo;</div>
+            <div class="comp-script">
+              &ldquo;You could do it on your phone, but do you have a laptop or
+              an iPad? We really recommend a bigger screen so you can see the
+              charts {HAName} will be going over. It makes a big difference.
+              <span class="highlight"
+                >Also, have a pen and paper handy &mdash; this is like a real
+                doctor&rsquo;s appointment, but virtually over Zoom.</span
+              >&rdquo;
+            </div>
+          </div>
+          <div class="comp-col suggested">
+            <div class="comp-label">Suggested</div>
+            <div class="comp-section-label">Primary script</div>
+            <div class="comp-script">
+              &ldquo;<span class="highlight"
+                >What are you planning to do the Zoom on &mdash; laptop, iPad,
+                or phone?</span
+              >&rdquo;
+            </div>
+            <div class="comp-section-label">If &ldquo;just my phone&rdquo;</div>
+            <div class="comp-script">
+              &ldquo;Totally fine, but if you have a laptop or iPad available,
+              I&rsquo;d really use that &mdash; {HAName} shares some charts on
+              screen and they&rsquo;re hard to read on a small phone. Worth it
+              if you can swing it.&rdquo;
+            </div>
+            <div class="comp-section-label">
+              Then add separately (after they respond)
+            </div>
+            <div class="comp-script">
+              &ldquo;<span class="highlight"
+                >Oh and grab a pen and paper &mdash; this is like a real
+                doctor&rsquo;s appointment, just over Zoom.</span
+              >&rdquo;
+            </div>
+          </div>
+        </div>
+
+        <div class="rationale">
+          <div class="rationale-label">Why</div>
+          <div class="rationale-text">
+            <strong>Primary:</strong> One question, conversational. Listing
+            phone last subtly anchors laptop/iPad as the &ldquo;normal&rdquo;
+            choice. <strong>Alt:</strong> Split into two separate beats so each
+            idea gets its own moment. The device push doesn&rsquo;t get diluted
+            by pen/paper. Shorter sentences = easier to deliver naturally on a
+            live call.
+          </div>
+        </div>
+
+        <div class="also-update">
+          <div class="also-label">Also update</div>
+          <div class="also-item">
+            <strong>Instruction text:</strong> Add &ldquo;List phone LAST to
+            anchor bigger screens as the default.&rdquo;
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ PATTERNS SUMMARY ════════ -->
+      <div class="patterns-card">
+        <h2>Patterns Across All 5 Steps</h2>
+        <table class="patterns-table">
+          <thead>
+            <tr>
+              <th>Pattern Found</th>
+              <th>Fix Applied</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="tag-red">Double-stacked questions</span></td>
+              <td>
+                <span class="tag-green">One question at a time</span> &mdash;
+                easier to deliver, easier to process
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="tag-red"
+                  >Asking client to self-report (time zone, Zoom exp)</span
+                >
+              </td>
+              <td>
+                <span class="tag-green"
+                  >Verify for them or normalize the &ldquo;no&rdquo;
+                  answer</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="tag-red">Long alt scripts bundling 2+ ideas</span>
+              </td>
+              <td>
+                <span class="tag-green">Split into sequential beats</span>
+                &mdash; each idea gets its own moment
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="tag-red"
+                  >Soft directives (&ldquo;could you try to...&rdquo;)</span
+                >
+              </td>
+              <td>
+                <span class="tag-green"
+                  >Direct actions (&ldquo;pull up your email,&rdquo; &ldquo;let
+                  me resend it&rdquo;)</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="tag-red"
+                  >Redundant word lists (&ldquo;computer, laptop,
+                  iPad&rdquo;)</span
+                >
+              </td>
+              <td>
+                <span class="tag-green">Tighten to distinct choices</span>
+                &mdash; remove synonyms
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Contact Detail — Dr. Pompa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --s9: #1b2a31;
+        --s8: #243841;
+        --s7: #2f4a56;
+        --s6: #3f5b68;
+        --s5: #5a7682;
+        --s4: #89a0ab;
+        --s3: #b5c6cd;
+        --s2: #dce5e9;
+        --s1: #edf1f3;
+        --t7: #1e8f86;
+        --t6: #2db3a6;
+        --t5: #4ec5b9;
+        --t4: #87d8d0;
+        --t2: #c9eae6;
+        --t1: #e6f5f2;
+        --paper: #f7f3ed;
+        --bone: #fbf9f4;
+        --ink: #1a262c;
+        --ink2: #3d5059;
+        --hs-blue: #0091ae;
+        --hs-blue-light: #e5f5f8;
+        --hs-dark: #33475b;
+        --hs-gray: #516f90;
+        --hs-border: #cbd6e2;
+        --hs-bg: #f5f8fa;
+        --hs-white: #ffffff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--hs-bg);
+        color: var(--hs-dark);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+      .site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: var(--bone);
+        border-bottom: 1px solid var(--s2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        z-index: 100;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-decoration: none;
+      }
+      .nav-logo img {
+        height: 36px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 8px;
+      }
+      .nav-link {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--s5);
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+      }
+      .nav-link:hover {
+        color: var(--t7);
+        background: var(--t1);
+      }
+      .nav-link.active {
+        color: var(--t7);
+        background: var(--t1);
+      }
+      .page {
+        padding-top: 64px;
+        min-height: 100vh;
+      }
+      .back-bar {
+        background: var(--hs-white);
+        border-bottom: 1px solid var(--hs-border);
+        padding: 12px 32px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .back-link {
+        font-size: 14px;
+        color: var(--hs-blue);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .back-link:hover {
+        text-decoration: underline;
+      }
+      .contact-header {
+        background: var(--hs-white);
+        border-bottom: 1px solid var(--hs-border);
+        padding: 20px 32px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .header-avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: 600;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .header-name {
+        font-family: "Outfit", sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--hs-dark);
+      }
+      .header-email {
+        font-size: 14px;
+        color: var(--hs-gray);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 300px 1fr 320px;
+        gap: 0;
+        min-height: calc(100vh - 200px);
+      }
+      .col-left,
+      .col-right {
+        background: var(--hs-white);
+        border-right: 1px solid var(--hs-border);
+        overflow-y: auto;
+        padding: 0;
+      }
+      .col-right {
+        border-right: none;
+        border-left: 1px solid var(--hs-border);
+      }
+      .col-center {
+        overflow-y: auto;
+        padding: 0;
+        background: var(--hs-bg);
+      }
+      .card {
+        border-bottom: 1px solid var(--hs-border);
+        padding: 20px 24px;
+      }
+      .card-title {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--hs-gray);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+      .card-title .toggle {
+        font-size: 16px;
+        color: var(--s4);
+        transition: transform 0.2s;
+      }
+      .card-title .toggle.collapsed {
+        transform: rotate(-90deg);
+      }
+      .card-body {
+        display: grid;
+        gap: 8px;
+      }
+      .card-body.collapsed {
+        display: none;
+      }
+      .field {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        min-height: 28px;
+      }
+      .field-label {
+        color: var(--hs-gray);
+        flex-shrink: 0;
+        min-width: 100px;
+      }
+      .field-value {
+        color: var(--hs-dark);
+        font-weight: 500;
+        text-align: right;
+        word-break: break-word;
+      }
+      .field-value a {
+        color: var(--hs-blue);
+        text-decoration: none;
+      }
+      .field-value a:hover {
+        text-decoration: underline;
+      }
+      .field-select {
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        font-size: 13px;
+        padding: 3px 6px;
+        border: 1px solid var(--hs-border);
+        border-radius: 4px;
+        background: var(--hs-white);
+        color: var(--hs-dark);
+        cursor: pointer;
+        text-align: right;
+        max-width: 160px;
+      }
+      .field-select:focus {
+        outline: 2px solid var(--hs-blue);
+        outline-offset: -1px;
+      }
+      /* Multi-select checklist dropdown */
+      .checklist-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      .checklist-toggle {
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 4px 10px;
+        border: 1px solid var(--hs-border);
+        border-radius: 4px;
+        background: var(--hs-white);
+        color: var(--hs-dark);
+        cursor: pointer;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        min-width: 80px;
+        transition: border-color 0.15s;
+      }
+      .checklist-toggle:hover {
+        border-color: var(--hs-blue);
+      }
+      .checklist-toggle.open {
+        border-color: var(--hs-blue);
+        box-shadow: 0 0 0 1px var(--hs-blue);
+      }
+      .checklist-toggle .caret {
+        font-size: 10px;
+        margin-left: auto;
+        opacity: 0.6;
+      }
+      .checklist-panel {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 4px;
+        background: var(--hs-white);
+        border: 1px solid var(--hs-border);
+        border-radius: 6px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        z-index: 50;
+        min-width: 200px;
+        padding: 6px 0;
+      }
+      .checklist-panel.open {
+        display: block;
+      }
+      .checklist-panel label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: background 0.1s;
+      }
+      .checklist-panel label:hover {
+        background: var(--hs-bg);
+      }
+      .checklist-panel input[type="checkbox"] {
+        accent-color: var(--hs-blue);
+      }
+      .checklist-summary-pills {
+        display: flex;
+        gap: 3px;
+        align-items: center;
+      }
+      .checklist-pip {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--hs-border);
+      }
+      .checklist-pip.checked {
+        background: var(--hs-blue);
+      }
+
+      .field-toggle {
+        position: relative;
+        width: 36px;
+        height: 20px;
+        background: var(--s3);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.2s;
+        border: none;
+      }
+      .field-toggle.on {
+        background: var(--t6);
+      }
+      .field-toggle::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #fff;
+        transition: transform 0.2s;
+      }
+      .field-toggle.on::after {
+        transform: translateX(16px);
+      }
+      .center-tabs {
+        display: flex;
+        border-bottom: 1px solid var(--hs-border);
+        background: var(--hs-white);
+        position: sticky;
+        top: 0;
+        z-index: 5;
+      }
+      .center-tab {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--hs-gray);
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        padding: 12px 20px;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .center-tab:hover {
+        color: var(--hs-dark);
+      }
+      .center-tab.active {
+        color: var(--hs-blue);
+        border-bottom-color: var(--hs-blue);
+        font-weight: 600;
+      }
+      .center-content {
+        padding: 20px 24px;
+      }
+      .tab-panel {
+        display: none;
+      }
+      .tab-panel.active {
+        display: block;
+      }
+      .center-card {
+        background: var(--hs-white);
+        border: 1px solid var(--hs-border);
+        border-radius: 8px;
+        padding: 20px 24px;
+        margin-bottom: 16px;
+      }
+      .center-card-title {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--hs-gray);
+        margin-bottom: 12px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .pill-r {
+        background: #d4edda;
+        color: #155724;
+      }
+      .pill-ready {
+        background: #cce5ff;
+        color: #004085;
+      }
+      .pill-confirmed {
+        background: #d1ecf1;
+        color: #0c5460;
+      }
+      .pill-wr {
+        background: #fff3cd;
+        color: #856404;
+      }
+      .pill-nc {
+        background: #f8d7da;
+        color: #721c24;
+      }
+      .pill-canceled {
+        background: #e2e3e5;
+        color: #383d41;
+      }
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(80px);
+        background: var(--hs-dark);
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        z-index: 9999;
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      @media (max-width: 1100px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .col-left,
+        .col-right {
+          border: none;
+          border-bottom: 1px solid var(--hs-border);
+        }
+      }
+      @media (max-width: 720px) {
+        .site-nav {
+          padding: 0 16px;
+        }
+        .nav-links {
+          gap: 4px;
+        }
+        .nav-link {
+          padding: 6px 10px;
+          font-size: 11px;
+        }
+        .back-bar,
+        .contact-header,
+        .card,
+        .center-content {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a href="index.html" class="nav-logo"
+        ><img src="logo.png" alt="Dr. Pompa"
+      /></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quiz.html" class="nav-link">Quiz</a>
+        <a href="simulator.html" class="nav-link">Simulator</a>
+        <a href="live-testing.html" class="nav-link">Live Testing</a>
+        <a href="contacts.html" class="nav-link active">Contacts</a>
+        <a href="call-scripts.html" class="nav-link">Call Scripts</a>
+        <a href="spouse-training.html" class="nav-link">Spouse</a>
+        <a href="call-guide.html" class="nav-link">Call Guide</a>
+        <a href="reschedule-sop.html" class="nav-link">Reschedule SOP</a>
+      </div>
+    </nav>
+    <div class="page">
+      <div class="back-bar">
+        <a href="contacts.html" class="back-link" id="backLink"
+          >&#8592; Back to Contacts</a
+        >
+      </div>
+      <div class="contact-header" id="contactHeader"></div>
+      <div class="grid">
+        <div class="col-left" id="colLeft"></div>
+        <div class="col-center">
+          <div class="center-tabs" id="centerTabs"></div>
+          <div class="center-content" id="centerContent"></div>
+        </div>
+        <div class="col-right" id="colRight"></div>
+      </div>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script>
+      var STORAGE_KEY = "ac-hubspot-contacts";
+      var AVATAR_COLORS = [
+        "#0091ae",
+        "#ff7a59",
+        "#00bda5",
+        "#7c98b6",
+        "#516f90",
+        "#f5c26b",
+        "#8b45a6",
+        "#e8584f",
+        "#47b881",
+        "#1e8f86",
+      ];
+      var STATUS_OPTIONS = [
+        "",
+        "Waiting on Reply",
+        "Responsive",
+        "Ready",
+        "Confirmed",
+        "Never Confirmed",
+        "Canceled",
+      ];
+      var PRIORITY_OPTIONS = [
+        "",
+        "48 hours | Ghosting",
+        "Spouse Objection",
+        "Needs Attention",
+        "Technical difficulties",
+        "Reschedule Request",
+        "New booking | Ghosting",
+        "Responsive - Course",
+        "Cancel Request",
+      ];
+      var CHECKLIST_KEYS = [
+        "spouseConfirmed",
+        "metaOxyKit",
+        "zoomAccess",
+        "dateTime",
+      ];
+      var CHECKLIST_LABELS = {
+        spouseConfirmed: "Spouse Confirmed",
+        metaOxyKit: "MetaOxy Kit",
+        zoomAccess: "Zoom Access",
+        dateTime: "Date/Time",
+      };
+      var OUTCOME_OPTIONS = ["", "Scheduled", "Completed", "No-Show"];
+      var DEAL_STAGE_OPTIONS = [
+        "",
+        "Appointment Scheduled",
+        "Qualified",
+        "Presentation",
+        "Contract Sent",
+        "Closed Won",
+        "Closed Lost",
+      ];
+      var toastTimer;
+      var centerTab = "ac-dashboard";
+
+      function avatarColor(name) {
+        var h = 0;
+        for (var i = 0; i < name.length; i++)
+          h = name.charCodeAt(i) + ((h << 5) - h);
+        return AVATAR_COLORS[Math.abs(h) % AVATAR_COLORS.length];
+      }
+      function initials(f, l) {
+        return (f ? f[0] : "") + (l ? l[0] : "");
+      }
+      function fmtDate(d) {
+        if (!d) return "—";
+        return (
+          new Date(d).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "2-digit",
+            timeZone: "America/New_York",
+          }) + " EDT"
+        );
+      }
+      function daysUntil(d) {
+        if (!d) return "—";
+        var diff = Math.ceil((new Date(d) - new Date()) / 86400000);
+        if (diff < 0) return diff + "d (past)";
+        if (diff === 0) return "Today";
+        return diff + (diff === 1 ? " day" : " days");
+      }
+      function val(v) {
+        return v || "—";
+      }
+      function showToast(msg) {
+        var el = document.getElementById("toast");
+        el.textContent = msg;
+        el.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          el.classList.remove("show");
+        }, 3000);
+      }
+
+      function loadContacts() {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          try {
+            var data = JSON.parse(raw);
+            if (data._version === 1 && data.contacts) return data.contacts;
+          } catch (e) {}
+        }
+        return null;
+      }
+      function saveContacts(list) {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({
+            _version: 1,
+            _seededAt: new Date().toISOString(),
+            contacts: list,
+          }),
+        );
+      }
+
+      function getContact() {
+        var params = new URLSearchParams(window.location.search);
+        var id = params.get("id");
+        var list = loadContacts();
+        if (!list || !id) return null;
+        for (var i = 0; i < list.length; i++) {
+          if (list[i].id === id) return list[i];
+        }
+        return null;
+      }
+      function updateContact(field, value) {
+        var list = loadContacts();
+        if (!list) return;
+        var params = new URLSearchParams(window.location.search);
+        var id = params.get("id");
+        for (var i = 0; i < list.length; i++) {
+          if (list[i].id === id) {
+            list[i][field] = value;
+            break;
+          }
+        }
+        saveContacts(list);
+      }
+
+      function makeField(label, content) {
+        var div = document.createElement("div");
+        div.className = "field";
+        var lbl = document.createElement("span");
+        lbl.className = "field-label";
+        lbl.textContent = label;
+        div.appendChild(lbl);
+        if (typeof content === "string") {
+          var v = document.createElement("span");
+          v.className = "field-value";
+          v.textContent = content;
+          div.appendChild(v);
+        } else {
+          div.appendChild(content);
+        }
+        return div;
+      }
+
+      function makeSelect(options, current, field) {
+        var sel = document.createElement("select");
+        sel.className = "field-select";
+        options.forEach(function (o) {
+          var opt = document.createElement("option");
+          opt.value = o;
+          opt.textContent = o || "(None)";
+          if (o === current) opt.selected = true;
+          sel.appendChild(opt);
+        });
+        sel.addEventListener("change", function () {
+          updateContact(field, sel.value);
+          showToast(field.replace(/([A-Z])/g, " $1") + " updated");
+        });
+        return sel;
+      }
+
+      function makeToggle(current, field) {
+        var btn = document.createElement("button");
+        btn.className = "field-toggle" + (current ? " on" : "");
+        btn.addEventListener("click", function () {
+          var nv = !btn.classList.contains("on");
+          btn.classList.toggle("on");
+          updateContact(field, nv);
+          showToast(field + " " + (nv ? "enabled" : "disabled"));
+        });
+        return btn;
+      }
+
+      function makeCard(title, fields, collapsed) {
+        var card = document.createElement("div");
+        card.className = "card";
+        var titleEl = document.createElement("div");
+        titleEl.className = "card-title";
+        var titleText = document.createTextNode(title + " ");
+        titleEl.appendChild(titleText);
+        var toggle = document.createElement("span");
+        toggle.className = "toggle" + (collapsed ? " collapsed" : "");
+        toggle.textContent = "\u25BE";
+        titleEl.appendChild(toggle);
+        card.appendChild(titleEl);
+        var body = document.createElement("div");
+        body.className = "card-body" + (collapsed ? " collapsed" : "");
+        fields.forEach(function (f) {
+          body.appendChild(f);
+        });
+        card.appendChild(body);
+        titleEl.addEventListener("click", function () {
+          toggle.classList.toggle("collapsed");
+          body.classList.toggle("collapsed");
+        });
+        return card;
+      }
+
+      function makeCenterCard(title, fields) {
+        var card = document.createElement("div");
+        card.className = "center-card";
+        var t = document.createElement("div");
+        t.className = "center-card-title";
+        t.textContent = title;
+        card.appendChild(t);
+        var body = document.createElement("div");
+        body.className = "card-body";
+        fields.forEach(function (f) {
+          body.appendChild(f);
+        });
+        card.appendChild(body);
+        return card;
+      }
+
+      function makeChecklist(contact) {
+        var cl = contact.preCallChecklist || {};
+        if (typeof cl === "string") cl = {};
+
+        var wrapper = document.createElement("div");
+        wrapper.className = "checklist-dropdown";
+
+        var toggle = document.createElement("button");
+        toggle.className = "checklist-toggle";
+        toggle.type = "button";
+
+        var checked = CHECKLIST_KEYS.filter(function (k) {
+          return !!cl[k];
+        }).length;
+
+        var pills = document.createElement("span");
+        pills.className = "checklist-summary-pills";
+        CHECKLIST_KEYS.forEach(function (k) {
+          var pip = document.createElement("span");
+          pip.className = "checklist-pip" + (cl[k] ? " checked" : "");
+          pills.appendChild(pip);
+        });
+        toggle.appendChild(pills);
+        var countSpan = document.createElement("span");
+        countSpan.textContent = checked + "/" + CHECKLIST_KEYS.length;
+        toggle.appendChild(countSpan);
+        var caret = document.createElement("span");
+        caret.className = "caret";
+        caret.textContent = "\u25BE";
+        toggle.appendChild(caret);
+
+        var panel = document.createElement("div");
+        panel.className = "checklist-panel";
+
+        CHECKLIST_KEYS.forEach(function (key) {
+          var label = document.createElement("label");
+          var cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.checked = !!cl[key];
+          cb.addEventListener("change", function () {
+            if (
+              !contact.preCallChecklist ||
+              typeof contact.preCallChecklist === "string"
+            )
+              contact.preCallChecklist = {};
+            contact.preCallChecklist[key] = cb.checked;
+            updateContact("preCallChecklist", contact.preCallChecklist);
+            var newChecked = CHECKLIST_KEYS.filter(function (k) {
+              return !!contact.preCallChecklist[k];
+            }).length;
+            countSpan.textContent = newChecked + "/" + CHECKLIST_KEYS.length;
+            var pips = pills.querySelectorAll(".checklist-pip");
+            CHECKLIST_KEYS.forEach(function (k, i) {
+              if (contact.preCallChecklist[k]) pips[i].classList.add("checked");
+              else pips[i].classList.remove("checked");
+            });
+          });
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(CHECKLIST_LABELS[key]));
+          panel.appendChild(label);
+        });
+
+        toggle.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var isOpen = panel.classList.contains("open");
+          document
+            .querySelectorAll(".checklist-panel.open")
+            .forEach(function (p) {
+              p.classList.remove("open");
+            });
+          document
+            .querySelectorAll(".checklist-toggle.open")
+            .forEach(function (t) {
+              t.classList.remove("open");
+            });
+          if (!isOpen) {
+            panel.classList.add("open");
+            toggle.classList.add("open");
+          }
+        });
+
+        wrapper.appendChild(toggle);
+        wrapper.appendChild(panel);
+        return wrapper;
+      }
+
+      // Close checklist dropdowns on outside click
+      document.addEventListener("click", function () {
+        document
+          .querySelectorAll(".checklist-panel.open")
+          .forEach(function (p) {
+            p.classList.remove("open");
+          });
+        document
+          .querySelectorAll(".checklist-toggle.open")
+          .forEach(function (t) {
+            t.classList.remove("open");
+          });
+      });
+      function makePrioritySelect(contact) {
+        var sel = document.createElement("select");
+        sel.className = "field-select";
+        PRIORITY_OPTIONS.forEach(function (o) {
+          var opt = document.createElement("option");
+          opt.value = o;
+          opt.textContent = o || "(None)";
+          if (o === contact.callPriority) opt.selected = true;
+          sel.appendChild(opt);
+        });
+        sel.addEventListener("change", function () {
+          updateContact("callPriority", sel.value);
+          updateContact(
+            "callPriorityDateTime",
+            sel.value ? new Date().toISOString() : "",
+          );
+          showToast("Call Priority updated");
+        });
+        return sel;
+      }
+      function renderPage() {
+        var c = getContact();
+        if (!c) {
+          document.getElementById("contactHeader").textContent =
+            "Contact not found. Return to contacts list.";
+          return;
+        }
+        var name = c.firstName + " " + c.lastName;
+
+        // Header
+        var header = document.getElementById("contactHeader");
+        header.textContent = "";
+        var av = document.createElement("div");
+        av.className = "header-avatar";
+        av.style.background = avatarColor(name);
+        av.textContent = initials(c.firstName, c.lastName);
+        header.appendChild(av);
+        var info = document.createElement("div");
+        var h = document.createElement("div");
+        h.className = "header-name";
+        h.textContent = name;
+        info.appendChild(h);
+        var em = document.createElement("div");
+        em.className = "header-email";
+        em.textContent = c.email || "";
+        info.appendChild(em);
+        header.appendChild(info);
+
+        // LEFT COLUMN
+        var left = document.getElementById("colLeft");
+        left.textContent = "";
+
+        // Card 1: Contact Identity
+        left.appendChild(
+          makeCard("Contact Identity", [
+            makeField("First Name", val(c.firstName)),
+            makeField("Last Name", val(c.lastName)),
+            makeField("Email", val(c.email)),
+            makeField("Mobile Phone", val(c.mobilePhone)),
+            makeField("Marital Status", val(c.maritalStatus)),
+            makeField("NTQ %", c.ntqPercentage ? c.ntqPercentage + "%" : "—"),
+            makeField(
+              "CC Confirmation Status",
+              makeSelect(
+                STATUS_OPTIONS,
+                c.closingCallConfirmationStatus,
+                "closingCallConfirmationStatus",
+              ),
+            ),
+            makeField("Pre-Call Checklist", makeChecklist(c)),
+            makeField("Call Priority", makePrioritySelect(c)),
+          ]),
+        );
+
+        // Card 2: Ownership
+        left.appendChild(
+          makeCard("Ownership", [
+            makeField("Contact Owner", val(c.contactOwner)),
+            makeField("Closer Owner", val(c.closerOwner)),
+            makeField("Confirmation Owner", val(c.confirmationOwner)),
+            makeField("Setter Owner", val(c.setterOwner)),
+            makeField("SDR Owner", val(c.sdrOwner)),
+            makeField("HubSpot Team", val(c.hubspotTeam)),
+          ]),
+        );
+
+        // Card 3: Lead
+        left.appendChild(
+          makeCard("Lead", [
+            makeField("Lifecycle Stage", val(c.lifecycleStage)),
+            makeField("Lead Status", val(c.leadStatus)),
+            makeField("Lead Source", val(c.leadSource)),
+            makeField("Contact Priority", val(c.contactPriority)),
+            makeField("City", val(c.city)),
+            makeField("State/Region", val(c.stateRegion)),
+            makeField("Age", c.age ? String(c.age) : "—"),
+          ]),
+        );
+
+        // Card 4: Compliance
+        left.appendChild(
+          makeCard("Compliance", [
+            makeField(
+              "Do Not Contact",
+              makeToggle(c.doNotContact, "doNotContact"),
+            ),
+          ]),
+        );
+
+        // CENTER COLUMN
+        var tabs = document.getElementById("centerTabs");
+        tabs.textContent = "";
+        var content = document.getElementById("centerContent");
+        content.textContent = "";
+
+        var tabDefs = [
+          { id: "ac-dashboard", label: "AC Dashboard" },
+          { id: "client-context", label: "Client Context" },
+        ];
+        tabDefs.forEach(function (t) {
+          var btn = document.createElement("button");
+          btn.className = "center-tab" + (t.id === centerTab ? " active" : "");
+          btn.textContent = t.label;
+          btn.addEventListener("click", function () {
+            centerTab = t.id;
+            renderCenter(c);
+            renderCenterTabs();
+          });
+          tabs.appendChild(btn);
+        });
+
+        renderCenter(c);
+
+        // RIGHT COLUMN
+        var right = document.getElementById("colRight");
+        right.textContent = "";
+
+        // Associated Deals
+        right.appendChild(
+          makeCard("Associated Deals", [
+            makeField("Pipeline", val(c.dealPipeline)),
+            makeField(
+              "Deal Stage",
+              makeSelect(DEAL_STAGE_OPTIONS, c.dealStage, "dealStage"),
+            ),
+            makeField("Close Date", fmtDate(c.dealCloseDate)),
+          ]),
+        );
+
+        // NTQ / Health Profile
+        right.appendChild(
+          makeCard("NTQ / Health Profile", [
+            makeField("Date of Birth", val(c.dateOfBirth)),
+            makeField("Marital Status", val(c.maritalStatus)),
+            makeField("Double", val(c.double)),
+            makeField(
+              "NTQ Total Score",
+              c.ntqTotalScore ? String(c.ntqTotalScore) : "—",
+            ),
+            makeField("NTQ %", c.ntqPercentage ? c.ntqPercentage + "%" : "—"),
+            makeField(
+              "NTQ Link",
+              c.ntqLink
+                ? (function () {
+                    var sp = document.createElement("span");
+                    sp.className = "field-value";
+                    var a = document.createElement("a");
+                    a.href = c.ntqLink;
+                    a.textContent = "View NTQ";
+                    a.target = "_blank";
+                    a.rel = "noopener";
+                    sp.appendChild(a);
+                    return sp;
+                  })()
+                : "—",
+            ),
+            makeField("NTQ Complete", c.ntqComplete ? "Yes" : "No"),
+            makeField("Updated", c.ntqUpdated ? fmtDate(c.ntqUpdated) : "—"),
+          ]),
+        );
+
+        // Revenue
+        right.appendChild(
+          makeCard(
+            "Revenue",
+            [
+              makeField("Closed by Sales Date", fmtDate(c.closedBySalesDate)),
+              makeField("Closed By", val(c.closedBy)),
+              makeField(
+                "Collected Payments",
+                c.collectedPayments ? "$" + c.collectedPayments : "—",
+              ),
+            ],
+            true,
+          ),
+        );
+
+        // Associated Tickets
+        right.appendChild(
+          makeCard("Associated Tickets", [
+            makeField("Tickets", val(c.associatedTickets)),
+          ]),
+        );
+      }
+
+      function renderCenterTabs() {
+        var tabs = document.getElementById("centerTabs");
+        var btns = tabs.querySelectorAll(".center-tab");
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].className =
+            "center-tab" +
+            (btns[i].textContent.toLowerCase().replace(/\s+/g, "-") ===
+              centerTab ||
+            (btns[i].textContent === "AC Dashboard" &&
+              centerTab === "ac-dashboard") ||
+            (btns[i].textContent === "Client Context" &&
+              centerTab === "client-context")
+              ? " active"
+              : "");
+        }
+      }
+
+      function renderCenter(c) {
+        var content = document.getElementById("centerContent");
+        content.textContent = "";
+
+        if (centerTab === "ac-dashboard") {
+          // Appointment
+          content.appendChild(
+            makeCenterCard("Appointment", [
+              makeField("Health Advisor", val(c.closerOwner)),
+              makeField("Scheduled Appt Date", fmtDate(c.meetingStartDate)),
+              makeField(
+                "Appt Day",
+                c.meetingStartDate
+                  ? new Date(c.meetingStartDate).toLocaleDateString("en-US", {
+                      weekday: "long",
+                    })
+                  : "—",
+              ),
+              makeField("Time Until Call", daysUntil(c.meetingStartDate)),
+              makeField(
+                "Closing Call Outcome",
+                makeSelect(
+                  OUTCOME_OPTIONS,
+                  c.closingCallOutcome,
+                  "closingCallOutcome",
+                ),
+              ),
+              makeField(
+                "CC Confirmation Status",
+                makeSelect(
+                  STATUS_OPTIONS,
+                  c.closingCallConfirmationStatus,
+                  "closingCallConfirmationStatus",
+                ),
+              ),
+              makeField("Booked", val(c.booked)),
+              makeField("Double", val(c.double)),
+              makeField(
+                "Zoom Link",
+                c.zoomLink
+                  ? (function () {
+                      var a = document.createElement("span");
+                      a.className = "field-value";
+                      var link = document.createElement("a");
+                      link.href = c.zoomLink;
+                      link.textContent = "Open Zoom";
+                      link.target = "_blank";
+                      link.rel = "noopener";
+                      a.appendChild(link);
+                      return a;
+                    })()
+                  : "—",
+              ),
+            ]),
+          );
+          // Test Kit Info
+          content.appendChild(
+            makeCenterCard("Test Kit Info", [
+              makeField("Purchase Date", fmtDate(c.testKitPurchaseDate)),
+              makeField("Test Kit Result", val(c.testKitResult)),
+              makeField("MetaOxy Tracking", val(c.metaOxyTracking)),
+              makeField("Report Issue", val(c.reportIssue)),
+              makeField("Sales Lifecycle", val(c.salesLifecycle)),
+              makeField("Kit Tracking Status", val(c.kitTrackingStatus)),
+            ]),
+          );
+          // Communication
+          content.appendChild(
+            makeCenterCard("Communication", [
+              makeField("Last Contacted", fmtDate(c.lastContacted)),
+              makeField("Last Activity Date", fmtDate(c.lastActivityDate)),
+              makeField("Last Outgoing Call", fmtDate(c.lastOutgoingCall)),
+              makeField(
+                "Aloware Outbound Dials",
+                String(c.numAlowareOutboundDials || 0),
+              ),
+              makeField("Times Contacted", String(c.numTimesContacted || 0)),
+              makeField("Outbound Disposition", val(c.outboundCallDisposition)),
+            ]),
+          );
+          // Sequences
+          content.appendChild(
+            makeCenterCard("Sequences", [
+              makeField("Follow-Up Seq V3", val(c.followUpSequenceV3)),
+              makeField("Follow-Up Seq", val(c.followUpSequence)),
+            ]),
+          );
+        } else {
+          // Client Context - Setter Engine
+          content.appendChild(
+            makeCenterCard("Setter Engine", [
+              makeField("Summary", val(c.setterSummary)),
+              makeField("Engagement Source", val(c.engagementSource)),
+              makeField("Engagement Owner", val(c.engagementOwner)),
+            ]),
+          );
+          // Purchase & Timing
+          content.appendChild(
+            makeCenterCard("Purchase & Timing", [
+              makeField("SamCart Order Date", fmtDate(c.samcartOrderDate)),
+              makeField(
+                "Days to Buy Kit",
+                c.daysToBuyKit ? String(c.daysToBuyKit) : "—",
+              ),
+              makeField("Create Date", fmtDate(c.createDate)),
+              makeField("Lead Date", fmtDate(c.leadDate)),
+            ]),
+          );
+        }
+      }
+
+      // Back link preserves last active view
+      var backLink = document.getElementById("backLink");
+      var lastView = localStorage.getItem("ac-hubspot-active-view");
+      if (lastView) backLink.href = "contacts.html#" + lastView;
+
+      renderPage();
+    </script>
+  </body>
+</html>

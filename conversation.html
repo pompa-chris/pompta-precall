@@ -1,0 +1,1992 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Conversation — Dr. Pompa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ── Root variables ── */
+      :root {
+        --s9: #1b2a31;
+        --s8: #243841;
+        --s7: #2f4a56;
+        --s6: #3f5b68;
+        --s5: #5a7682;
+        --s4: #89a0ab;
+        --s3: #b5c6cd;
+        --s2: #dce5e9;
+        --s1: #edf1f3;
+        --t7: #1e8f86;
+        --t6: #2db3a6;
+        --t5: #4ec5b9;
+        --t4: #87d8d0;
+        --t2: #c9eae6;
+        --t1: #e6f5f2;
+        --paper: #f7f3ed;
+        --bone: #fbf9f4;
+        --ink: #1a262c;
+        --ink2: #3d5059;
+        --hs-blue: #0091ae;
+        --hs-blue-light: #e5f5f8;
+        --hs-dark: #33475b;
+        --hs-gray: #516f90;
+        --hs-border: #cbd6e2;
+        --hs-bg: #f5f8fa;
+        --hs-white: #ffffff;
+
+        /* Message type colors */
+        --purple: #7b1fa2;
+        --purple-bg: rgba(123, 31, 162, 0.06);
+        --purple-bd: rgba(123, 31, 162, 0.15);
+        --blue: #1565c0;
+        --blue-bg: rgba(21, 101, 192, 0.06);
+        --blue-bd: rgba(21, 101, 192, 0.15);
+        --green: #2e7d32;
+        --green-bg: #ffffff;
+        --green-bd: #dce5e9;
+        --orange: #e65100;
+        --orange-bg: rgba(230, 81, 0, 0.06);
+        --orange-bd: rgba(230, 81, 0, 0.15);
+        --teal: #1e8f86;
+        --teal-bg: rgba(30, 143, 134, 0.08);
+        --teal-bd: rgba(30, 143, 134, 0.2);
+      }
+
+      /* ── Reset ── */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--hs-bg);
+        color: var(--hs-dark);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        line-height: 1.6;
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      /* ── Site Nav (64px fixed) ── */
+      .site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: var(--bone);
+        border-bottom: 1px solid var(--s2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        z-index: 100;
+      }
+
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-decoration: none;
+      }
+
+      .nav-logo img {
+        height: 36px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 8px;
+      }
+
+      .nav-link {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--s5);
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+      }
+
+      .nav-link:hover {
+        color: var(--t7);
+        background: var(--t1);
+      }
+
+      .nav-link.active {
+        color: var(--t7);
+        background: var(--t1);
+      }
+
+      /* ── App layout ── */
+      .app {
+        display: flex;
+        height: calc(100vh - 64px);
+        margin-top: 64px;
+      }
+
+      /* ── Chat panel (left) ── */
+      .chat-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+
+      .chat-header {
+        padding: 14px 24px;
+        border-bottom: 1px solid var(--hs-border);
+        background: var(--hs-white);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .chat-back {
+        font-size: 13px;
+        color: var(--hs-blue);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+      }
+
+      .chat-back:hover {
+        text-decoration: underline;
+      }
+
+      .chat-header-name {
+        font-family: "Outfit", sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--hs-dark);
+      }
+
+      .chat-header-phone {
+        font-size: 13px;
+        color: var(--hs-gray);
+      }
+
+      .chat-header-pill {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1.6;
+      }
+
+      .chat-reset {
+        font-size: 12px;
+        color: var(--hs-gray);
+        background: var(--hs-white);
+        border: 1px solid var(--hs-border);
+        border-radius: 4px;
+        padding: 4px 10px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        margin-left: auto;
+      }
+
+      .chat-reset:hover {
+        color: var(--hs-blue);
+        border-color: var(--hs-blue);
+      }
+
+      /* ── Messages area ── */
+      .messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      /* ── Message rows ── */
+      .msg {
+        display: flex;
+        gap: 10px;
+        max-width: 72%;
+      }
+
+      .msg.au {
+        align-self: center;
+        max-width: 85%;
+      }
+
+      .msg.cl {
+        align-self: flex-start;
+      }
+
+      .msg.ac {
+        align-self: flex-end;
+        flex-direction: row-reverse;
+      }
+
+      .msg.caller {
+        align-self: flex-end;
+        flex-direction: row-reverse;
+      }
+
+      .msg.us {
+        align-self: flex-end;
+        flex-direction: row-reverse;
+      }
+
+      /* ── Message avatar ── */
+      .msg-avatar {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .msg-avatar.au {
+        background: var(--purple);
+      }
+
+      .msg-avatar.cl {
+        background: var(--green);
+      }
+
+      .msg-avatar.ac {
+        background: var(--blue);
+      }
+
+      .msg-avatar.caller {
+        background: var(--orange);
+      }
+
+      .msg-avatar.us {
+        background: var(--teal);
+      }
+
+      /* ── Message body ── */
+      .msg-body {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .msg-sender {
+        font-size: 11px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      .msg-sender.au {
+        color: var(--purple);
+      }
+
+      .msg-sender.cl {
+        color: var(--green);
+      }
+
+      .msg-sender.ac {
+        color: var(--blue);
+      }
+
+      .msg-sender.caller {
+        color: var(--orange);
+      }
+
+      .msg-sender.us {
+        color: var(--teal);
+      }
+
+      .msg-bubble {
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .msg-bubble.au {
+        background: var(--purple-bg);
+        border: 1px solid var(--purple-bd);
+      }
+
+      .msg-bubble.cl {
+        background: var(--green-bg);
+        border: 1px solid var(--green-bd);
+      }
+
+      .msg-bubble.ac {
+        background: var(--blue-bg);
+        border: 1px solid var(--blue-bd);
+      }
+
+      .msg-bubble.caller {
+        background: var(--orange-bg);
+        border: 1px solid var(--orange-bd);
+      }
+
+      .msg-bubble.us {
+        background: var(--teal-bg);
+        border: 1px solid var(--teal-bd);
+      }
+
+      .msg-meta {
+        font-size: 10px;
+        color: var(--hs-gray);
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      /* ── Input area ── */
+      .input-area {
+        padding: 16px 24px;
+        border-top: 1px solid var(--hs-border);
+        background: var(--hs-white);
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+      }
+
+      .input-area textarea {
+        flex: 1;
+        font-size: 14px;
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        padding: 10px 14px;
+        border: 1px solid var(--hs-border);
+        border-radius: 8px;
+        resize: none;
+        min-height: 42px;
+        max-height: 120px;
+        outline: none;
+        transition:
+          border-color 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+
+      .input-area textarea:focus {
+        border-color: var(--hs-blue);
+        box-shadow: 0 0 0 3px rgba(0, 145, 174, 0.12);
+      }
+
+      .input-area button {
+        font-size: 13px;
+        font-weight: 700;
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        padding: 10px 20px;
+        background: var(--teal);
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+
+      .input-area button:hover {
+        background: var(--t6);
+      }
+
+      /* ── Side panel (right) ── */
+      .side-panel {
+        width: 300px;
+        min-width: 300px;
+        border-left: 1px solid var(--hs-border);
+        background: var(--hs-white);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .side-header {
+        padding: 20px;
+        border-bottom: 1px solid var(--hs-border);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .side-avatar {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: 700;
+        color: #ffffff;
+        background: var(--hs-blue);
+      }
+
+      .side-name {
+        font-family: "Outfit", sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--hs-dark);
+      }
+
+      .side-phone {
+        font-size: 12px;
+        color: var(--hs-gray);
+      }
+
+      .side-section {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--hs-border);
+      }
+
+      .side-section h4 {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--hs-gray);
+        margin-bottom: 10px;
+      }
+
+      .side-field {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        padding: 4px 0;
+      }
+
+      .side-field-label {
+        color: var(--hs-gray);
+      }
+
+      .side-field-value {
+        color: var(--hs-dark);
+        font-weight: 500;
+        text-align: right;
+        max-width: 60%;
+      }
+
+      /* ── Checklist pips ── */
+      .side-pips {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
+
+      .side-pip {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--hs-border);
+      }
+
+      .side-pip.on {
+        background: var(--hs-blue);
+      }
+
+      /* ── Notes ── */
+      .side-notes {
+        padding: 16px 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .side-notes h4 {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--hs-gray);
+        margin-bottom: 10px;
+      }
+
+      .side-notes textarea {
+        flex: 1;
+        min-height: 100px;
+        font-size: 12px;
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        padding: 10px;
+        border: 1px solid var(--hs-border);
+        border-radius: 6px;
+        resize: none;
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
+
+      .side-notes textarea:focus {
+        border-color: var(--hs-blue);
+      }
+
+      /* ── Status pill variants ── */
+      .status-pill-wr {
+        background: #fef3cd;
+        color: #856404;
+      }
+
+      .status-pill-r {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .status-pill-ready {
+        background: var(--hs-blue-light);
+        color: var(--hs-blue);
+      }
+
+      .status-pill-confirmed {
+        background: #d1ecf1;
+        color: #0c5460;
+      }
+
+      .status-pill-nc {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .status-pill-canceled {
+        background: #e2e3e5;
+        color: #6c757d;
+      }
+
+      .status-pill-blank {
+        background: var(--s1);
+        color: var(--s5);
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 900px) {
+        .side-panel {
+          display: none;
+        }
+
+        .msg {
+          max-width: 88%;
+        }
+
+        .msg.au {
+          max-width: 95%;
+        }
+
+        .site-nav {
+          padding: 0 16px;
+        }
+
+        .chat-header {
+          padding: 12px 16px;
+        }
+
+        .messages {
+          padding: 16px;
+        }
+
+        .input-area {
+          padding: 12px 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a href="index.html" class="nav-logo"
+        ><img src="logo.png" alt="Dr. Pompa"
+      /></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quiz.html" class="nav-link">Quiz</a>
+        <a href="simulator.html" class="nav-link">Simulator</a>
+        <a href="live-testing.html" class="nav-link">Live Testing</a>
+        <a href="contacts.html" class="nav-link active">Contacts</a>
+        <a href="call-scripts.html" class="nav-link">Call Scripts</a>
+        <a href="spouse-training.html" class="nav-link">Spouse</a>
+        <a href="call-guide.html" class="nav-link">Call Guide</a>
+        <a href="reschedule-sop.html" class="nav-link">Reschedule SOP</a>
+      </div>
+    </nav>
+
+    <div class="app">
+      <div class="chat-panel">
+        <div class="chat-header" id="chatHeader"></div>
+        <div class="messages" id="messages"></div>
+        <div class="input-area" id="inputArea"></div>
+      </div>
+      <div class="side-panel" id="sidePanel"></div>
+    </div>
+
+    <script>
+      var CONVERSATIONS = {
+        /* ════════════════════════════════════════════════════════
+           TIER 1 — Full threads (8-15 messages)
+           ════════════════════════════════════════════════════════ */
+
+        c1: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Jammie, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 20, 9:02 AM ET",
+            type: "automated",
+          },
+          {
+            sender: "Jammie Castle",
+            text: "Hi! I watched the webinar last night and it really hit home. I\u2019ve been dealing with brain fog for the past couple years \u2014 like I can\u2019t think straight, especially in the afternoon. And the fatigue is unreal. I sleep 8 hours and wake up feeling like I didn\u2019t sleep at all. My husband noticed it too, he\u2019s the one who sent me the webinar link actually.",
+            time: "Apr 20, 11:47 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Jammie, thank you so much for sharing that with me \u2014 brain fog that thick where you can\u2019t think straight by the afternoon, plus waking up exhausted after a full night of sleep\u2026 that\u2019s such a frustrating combination, and I\u2019m really glad your husband pointed you toward Dr. Pompa\u2019s work. I\u2019m Briana, one of the Admissions Coordinators on Dr. Pompa\u2019s team. You have an upcoming consultation with Mike Torres, one of our senior Health Advisors \u2014 he\u2019s going to walk through everything with you. Before that call, I just want to make sure we\u2019re all set on a few things so Mike can hit the ground running for you.",
+            time: "Apr 20, 12:34 PM ET",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Before your call with Mike Torres on April 24th, what timezone are you in so I can pull up your appointment in your local time?",
+            time: "Apr 20, 12:35 PM ET",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Hey Jammie! Just circling back \u2014 wanted to confirm your timezone so I can make sure your appointment time with Mike is accurate on your end. Are you in Central time?",
+            time: "Apr 21, 10:15 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Hi Jammie, hope your week is going well! Just reaching out one more time to confirm your timezone before your call with Mike Torres on the 24th. Let me know when you get a chance!",
+            time: "Apr 22, 9:30 AM ET",
+            type: "ac",
+          },
+        ],
+
+        c5: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Marcus, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 18, 8:15 AM CT",
+            type: "automated",
+          },
+          {
+            sender: "Marcus Reeves",
+            text: "Hey there. Honestly, it\u2019s a lot. I\u2019ve been dealing with brain fog, joint pain that moves around \u2014 some days it\u2019s my knees, some days my hands \u2014 and this deep fatigue that never lets up. I\u2019ve done the functional medicine route for about two years. Spent a fortune on supplements and specialty labs. Some things helped for a bit, but nothing stuck. My wife found Dr. Pompa\u2019s podcast and we watched the webinar together. For the first time it actually made sense why nothing has worked.",
+            time: "Apr 18, 10:22 AM CT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Marcus, I really appreciate you taking the time to share all of that. Migrating joint pain, persistent brain fog, and that kind of deep fatigue that doesn\u2019t respond to rest \u2014 I hear you, and I know how exhausting it is to invest in functional medicine protocols that give you a glimpse of hope and then plateau. The fact that you and your wife watched the webinar together and it finally clicked tells me you\u2019re in exactly the right place. I\u2019m Briana, one of the Admissions Coordinators here. You\u2019re booked with Mike Torres, one of our senior Health Advisors, and he\u2019s going to dig into your full picture with you.",
+            time: "Apr 18, 11:08 AM CT",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Before your call with Mike Torres on April 23rd, what timezone are you in so I can pull up your appointment in your local time?",
+            time: "Apr 18, 11:09 AM CT",
+            type: "ac",
+          },
+          {
+            sender: "Marcus Reeves",
+            text: "Central time! Chicago area.",
+            time: "Apr 18, 11:31 AM CT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Perfect \u2014 so your call with Mike Torres is confirmed for Wednesday, April 23rd at 2:00 PM Central Time. I\u2019ve got that locked in for you!",
+            time: "Apr 18, 11:45 AM CT",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "One thing that\u2019s going to make your call with Mike SO much more productive \u2014 we have a short assessment that lets Mike walk into your conversation already understanding your health picture. It takes about 10 minutes and covers toxin exposures, symptoms, and health history. Here\u2019s the link: pom.pa/StartHere",
+            time: "Apr 18, 11:47 AM CT",
+            type: "ac",
+          },
+          {
+            sender: "Marcus Reeves",
+            text: "Just finished it! That was actually really eye-opening. Some of those questions about dental work and water sources\u2026 I had no idea that stuff mattered.",
+            time: "Apr 18, 4:52 PM CT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "That\u2019s awesome, Marcus! And yes \u2014 those are exactly the kinds of upstream factors that most practitioners miss entirely. That\u2019s what makes this approach different. Mike is going to love that you\u2019ve already completed it. He\u2019ll have your results pulled up before your call so he can speak directly to your situation \u2014 the joint pain, the brain fog, all of it. Mike has worked with a lot of clients who came from the functional medicine world feeling stuck, and he\u2019s really skilled at identifying what\u2019s been missed. You\u2019re in great hands.",
+            time: "Apr 18, 5:15 PM CT",
+            type: "ac",
+          },
+          {
+            sender: "Marcus Reeves",
+            text: "That\u2019s really good to hear. My wife wants to be on the call too if that\u2019s okay?",
+            time: "Apr 19, 8:30 AM CT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Absolutely! We actually love when spouses join \u2014 Mike always says the best outcomes happen when the whole household is on the same page. Having your wife there will be great. You\u2019re all set for Wednesday the 23rd at 2 PM Central!",
+            time: "Apr 19, 9:02 AM CT",
+            type: "ac",
+          },
+        ],
+
+        c7: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Daniel, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 15, 10:00 AM ET",
+            type: "automated",
+          },
+          {
+            sender: "Daniel Okafor",
+            text: "Thanks for reaching out. I\u2019ve been struggling with chronic fatigue for about 3 years now. Also have serious gut issues \u2014 bloating after almost every meal, food sensitivities that seem to multiply. A mold inspector found high levels in our basement last year. We remediated but I never got better. My wife\u2019s having some of the same symptoms too.",
+            time: "Apr 15, 12:18 PM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Daniel, thank you for being so open about what you\u2019re going through. Three years of chronic fatigue, gut issues that keep expanding with new food sensitivities, and a confirmed mold exposure \u2014 even after remediation \u2014 that\u2019s a really common pattern we see, and it tells me the mold may have triggered something deeper that the remediation alone couldn\u2019t resolve. And the fact that your wife is experiencing similar symptoms after living in the same environment is really significant. I\u2019m Briana, your Admissions Coordinator. You\u2019re set to speak with Mike Torres, one of our senior Health Advisors, and mold cases are absolutely in his wheelhouse.",
+            time: "Apr 15, 1:05 PM ET",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Before your call with Mike Torres on April 21st, what timezone are you in so I can pull up your appointment in your local time?",
+            time: "Apr 15, 1:06 PM ET",
+            type: "ac",
+          },
+          {
+            sender: "Daniel Okafor",
+            text: "Eastern time, Atlanta.",
+            time: "Apr 15, 1:22 PM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Great \u2014 your call with Mike Torres is confirmed for Monday, April 21st at 11:00 AM Eastern Time. Locked in!",
+            time: "Apr 15, 1:30 PM ET",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Daniel, there\u2019s a quick assessment I\u2019d love for you to complete before your call. It\u2019s what lets Mike walk into the conversation already understanding your full picture \u2014 the mold exposure, the gut issues, the fatigue. Takes about 10 minutes. Here\u2019s the link: pom.pa/StartHere",
+            time: "Apr 15, 1:32 PM ET",
+            type: "ac",
+          },
+          {
+            sender: "Daniel Okafor",
+            text: "Done! Scored a 68%. Some of those questions about past antibiotic use and mercury fillings really made me think.",
+            time: "Apr 16, 9:45 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "A 68% \u2014 that\u2019s a significant score, Daniel, and it confirms there\u2019s a real toxic burden here beyond just the mold. Mike is going to be able to connect a lot of dots for you. He\u2019s already going to have your results and he\u2019ll speak directly to the gut issues, the fatigue, and how the mold exposure fits into the bigger picture. He\u2019s worked with so many mold clients and he\u2019s exceptional at mapping out the path forward.",
+            time: "Apr 16, 10:15 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Daniel Okafor",
+            text: "That\u2019s great. My wife wants to join the call too. She\u2019s been skeptical but her symptoms are getting worse.",
+            time: "Apr 16, 10:40 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "I\u2019m so glad she\u2019s willing to be on the call \u2014 Mike will be able to speak to her symptoms directly too, especially given the shared mold exposure. Having both of you there will make a huge difference. Quick pre-call checklist: find a quiet spot with no distractions, have a pen and paper handy, and make sure you\u2019re both on a strong connection. Mike\u2019s going to cover a lot of ground.",
+            time: "Apr 16, 10:55 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Daniel Okafor",
+            text: "Will do. We\u2019ll be in my home office. Thanks for all the help, Briana.",
+            time: "Apr 16, 11:08 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "You\u2019re so welcome, Daniel! I\u2019m really excited for your call with Mike. You and your wife are going to get a lot of clarity on Monday. Talk soon!",
+            time: "Apr 16, 11:20 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Hey Daniel! Just a heads up \u2014 your call with Mike Torres is tomorrow at 11:00 AM Eastern. Find a quiet spot, have your wife with you, and bring any questions you\u2019ve been thinking about. Mike\u2019s reviewed your assessment and he\u2019s ready to dig in. Any last questions before tomorrow?",
+            time: "Apr 20, 3:00 PM ET",
+            type: "ac",
+          },
+          {
+            sender: "Daniel Okafor",
+            text: "No questions \u2014 we\u2019re both ready. Looking forward to it!",
+            time: "Apr 20, 3:45 PM ET",
+            type: "client",
+          },
+        ],
+
+        c9: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Robert, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 14, 8:30 AM ET",
+            type: "automated",
+          },
+          {
+            sender: "Robert Fitzgerald",
+            text: "Hi there. I was diagnosed with Lyme disease about 5 years ago. Did multiple rounds of antibiotics, tried herbal protocols, spent time at a Lyme-literate doctor. I also had mold in our old house \u2014 we moved but I never fully recovered. The neurological symptoms are what scare me most \u2014 brain fog, word-finding issues, tingling in my hands. I\u2019m 47 and feel like I\u2019m 80. My wife has been my rock through this. We watched every one of Dr. Pompa\u2019s videos and we\u2019re ready to go all in.",
+            time: "Apr 14, 9:55 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Robert, I want you to know \u2014 what you just shared really matters and I\u2019m so glad you and your wife found Dr. Pompa\u2019s work. Five years of battling Lyme with antibiotics and herbals that didn\u2019t get you across the finish line, compounded by a mold exposure that layered on even more toxicity\u2026 and now the neurological symptoms \u2014 the brain fog, word-finding issues, and tingling \u2014 that\u2019s your body telling you there\u2019s still something upstream that hasn\u2019t been addressed. The fact that you feel 80 at 47 tells me your body is under a massive toxic burden. I\u2019m Briana, your Admissions Coordinator. You\u2019re booked with Mike Torres, one of our top Health Advisors, and Lyme-plus-mold cases are exactly his specialty.",
+            time: "Apr 14, 10:42 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Before your call with Mike Torres on April 19th, what timezone are you in so I can pull up your appointment in your local time?",
+            time: "Apr 14, 10:43 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Robert Fitzgerald",
+            text: "Eastern \u2014 we\u2019re in Boston.",
+            time: "Apr 14, 10:58 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Your call with Mike Torres is confirmed for Saturday, April 19th at 10:00 AM Eastern Time. Got it locked in!",
+            time: "Apr 14, 11:10 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Robert, there\u2019s a quick neurotoxicity assessment that\u2019s going to be really powerful for you. It\u2019s what lets Mike walk into your conversation already understanding your toxic load \u2014 the Lyme, the mold, the neurological symptoms. It takes about 10 minutes and I think you\u2019ll find the results really validating. Here\u2019s the link: pom.pa/StartHere",
+            time: "Apr 14, 11:12 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Robert Fitzgerald",
+            text: "Just did it. Scored 91%. Not surprised honestly but seeing it quantified like that is kind of a wake-up call.",
+            time: "Apr 14, 2:30 PM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "A 91% is one of the highest scores I\u2019ve seen, Robert \u2014 and I know that\u2019s validating and sobering at the same time. But here\u2019s the good news: Mike has worked with clients at your level and even higher, and he\u2019s seen incredible transformations. Your score actually gives him a very clear picture of what\u2019s happening and where to focus. He\u2019s going to have your full results in front of him on Saturday.",
+            time: "Apr 14, 3:05 PM ET",
+            type: "ac",
+          },
+          {
+            sender: "Robert Fitzgerald",
+            text: "My wife will absolutely be on the call. She\u2019s been researching alongside me and she has a list of questions ready.",
+            time: "Apr 15, 8:15 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "I love that! Mike always says the clients who come in with their spouse and a list of questions are the ones who get the most out of the call. You two are going to be a great fit for this. We\u2019re all set \u2014 Saturday the 19th at 10 AM Eastern, both of you, quiet spot, questions ready.",
+            time: "Apr 15, 8:45 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Hey Robert! Your call with Mike Torres is tomorrow at 10:00 AM Eastern. Just a few reminders: find a quiet spot with no distractions, have your wife with you, and bring that list of questions. Mike has reviewed your assessment \u2014 that 91% score \u2014 and he\u2019s very prepared to walk you through a clear path forward. Is there anything else on your mind before tomorrow?",
+            time: "Apr 18, 4:00 PM ET",
+            type: "ac",
+          },
+          {
+            sender: "Robert Fitzgerald",
+            text: "No, we\u2019re ready. Honestly, this is the most hopeful we\u2019ve felt in years. Thank you for everything, Briana.",
+            time: "Apr 18, 4:30 PM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "That means so much to hear, Robert. You and your wife deserve to feel hopeful again. Mike is going to take great care of you tomorrow. Talk soon!",
+            time: "Apr 18, 4:45 PM ET",
+            type: "ac",
+          },
+        ],
+
+        c13: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Frank, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 16, 9:00 AM ET",
+            type: "automated",
+          },
+          {
+            sender: "Frank DeLuca",
+            text: "Hey. So I had all my amalgam fillings removed about a year ago but nobody told me you need to detox after. Since then I\u2019ve had terrible brain fog, muscle weakness, and I just feel toxic. Like my body is holding onto something. I\u2019ve been reading about heavy metals and it all fits. My wife thinks I\u2019m being dramatic and that I just need to eat better. She\u2019s not on board with spending money on another health thing.",
+            time: "Apr 16, 11:15 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Frank, first of all \u2014 you are NOT being dramatic. What you\u2019re describing is textbook for someone who had amalgam fillings removed without a proper detox protocol. When those fillings come out, mercury gets redistributed into your tissues, and without chelation or a true cellular detox, your body just stores it. The brain fog, muscle weakness, that toxic feeling \u2014 that\u2019s your body telling you it needs help getting that mercury out. I hear you on your wife\u2019s concerns too, and that\u2019s actually really common. I\u2019m Briana, your Admissions Coordinator. You\u2019re booked with Mike Torres, and he\u2019s worked with a lot of post-amalgam removal clients. He\u2019ll be able to explain exactly what\u2019s happening in a way that may help your wife understand too.",
+            time: "Apr 16, 12:02 PM ET",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Before your call with Mike Torres on April 22nd, what timezone are you in so I can pull up your appointment in your local time?",
+            time: "Apr 16, 12:03 PM ET",
+            type: "ac",
+          },
+          {
+            sender: "Frank DeLuca",
+            text: "Eastern, Philly area. And yeah the mercury thing makes total sense. I just don\u2019t know how to get my wife to take it seriously.",
+            time: "Apr 16, 12:30 PM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Got it \u2014 your call with Mike is confirmed for Tuesday, April 22nd at 1:00 PM Eastern. Here\u2019s what I\u2019d suggest regarding your wife: we have a quick assessment that gives you a clear, quantified score on your toxicity level. Sometimes seeing the number is what helps a skeptical spouse realize this isn\u2019t guesswork. Here\u2019s the link: pom.pa/StartHere",
+            time: "Apr 16, 12:45 PM ET",
+            type: "ac",
+          },
+          {
+            sender: "Frank DeLuca",
+            text: "I tried to show my wife the assessment but she just rolled her eyes. She said we already spent $4k on the amalgam removal and she\u2019s not interested in more health stuff. Honestly I\u2019m frustrated because I know something is wrong but I don\u2019t have her support.",
+            time: "Apr 17, 9:20 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Frank, I completely understand how frustrating that is. I want to make sure you get the support you need here. I\u2019m going to loop in Janice, one of our senior team members who has a lot of experience helping families navigate this exact situation. She may have some ideas on how to approach this with your wife. Hang tight!",
+            time: "Apr 17, 10:00 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Janice",
+            text: "Hey Frank, this is Janice from Dr. Pompa\u2019s team. Briana filled me in on your situation and I just want to say \u2014 I talk to husbands in your exact position every single week. The spouse who\u2019s suffering and knows something is wrong, and the partner who\u2019s been burned by past health investments. I get it. Can I ask \u2014 would your wife be open to just listening in on the first 10 minutes of your call with Mike? No commitment, no pressure. Mike has a way of explaining the science that tends to click even for the biggest skeptics. Sometimes just hearing it from the expert changes everything.",
+            time: "Apr 17, 11:30 AM ET",
+            type: "caller",
+          },
+          {
+            sender: "Frank DeLuca",
+            text: "I think I could get her to do 10 minutes. She respects doctors and science, she just doesn\u2019t trust the supplement industry. If Mike can explain it from a science angle she\u2019d probably listen.",
+            time: "Apr 17, 12:15 PM ET",
+            type: "client",
+          },
+          {
+            sender: "Janice",
+            text: "That\u2019s exactly what Mike does \u2014 he leads with the research, the mechanisms, the peer-reviewed data. No supplement pitch. He\u2019ll explain WHY your body is holding onto mercury and what the science says about removing it at the cellular level. I think your wife is going to be surprised. I\u2019ll let Briana know to make sure Mike\u2019s briefed on the spouse dynamic so he can be sensitive to that. You\u2019re in great hands, Frank.",
+            time: "Apr 17, 12:45 PM ET",
+            type: "caller",
+          },
+        ],
+
+        /* ════════════════════════════════════════════════════════
+           TIER 2 — Medium threads (3-6 messages)
+           ════════════════════════════════════════════════════════ */
+
+        c3: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Suzette, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 21, 9:30 AM MT",
+            type: "automated",
+          },
+          {
+            sender: "Suzette Sommers",
+            text: "Hi! My friend did Dr. Pompa\u2019s program and she looks like a different person. I\u2019ve been dealing with general fatigue for a few years, nothing extreme but I just never feel fully energized. Some days are worse than others. I figured if it worked for her, maybe it could help me too.",
+            time: "Apr 21, 11:05 AM MT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Suzette, I love hearing that \u2014 there\u2019s nothing more powerful than seeing someone you know go through a real transformation. And that kind of persistent, low-grade fatigue where you never quite feel fully charged is actually one of the most common things we hear. It might not feel extreme, but it steals your quality of life over time. I\u2019m Briana, one of the Admissions Coordinators here. You\u2019re booked with Mike Torres, a senior Health Advisor, and he\u2019s going to dig into what might be driving that fatigue for you.",
+            time: "Apr 21, 11:40 AM MT",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Before your call with Mike Torres on April 26th, what timezone are you in so I can pull up your appointment in your local time?",
+            time: "Apr 21, 11:41 AM MT",
+            type: "ac",
+          },
+        ],
+
+        c4: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Sharon, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 22, 10:00 AM CT",
+            type: "automated",
+          },
+          {
+            sender: "Sharon Wood",
+            text: "I heard Dr. Pompa on a podcast and it was the first time someone explained thyroid issues in a way that made sense to me. I\u2019ve been on levothyroxine for 8 years and I still feel terrible \u2014 weight won\u2019t budge no matter what I do, hair thinning, always cold. I\u2019m 55 and I feel like I\u2019m falling apart.",
+            time: "Apr 22, 12:30 PM CT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Sharon, thank you so much for sharing that. Eight years on levothyroxine and still dealing with weight resistance, hair thinning, and feeling cold all the time \u2014 that tells me the medication is managing your TSH number but it\u2019s not addressing the root cause of WHY your thyroid is struggling. That\u2019s exactly what Dr. Pompa talks about, and it\u2019s what drew so many of our clients in. I\u2019m Briana, your Admissions Coordinator, and I\u2019m here to get you prepped for your call with your Health Advisor. We\u2019re going to take great care of you.",
+            time: "Apr 22, 1:15 PM CT",
+            type: "ac",
+          },
+        ],
+
+        c6: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Linda, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 19, 8:00 AM MT",
+            type: "automated",
+          },
+          {
+            sender: "Linda Kowalski",
+            text: "Hi there. I\u2019m a nurse so I\u2019ve seen the conventional side for 25 years and I know it\u2019s not getting to the root of things. I was diagnosed with Hashimoto\u2019s about 6 years ago and more recently lupus-like symptoms. Extreme joint inflammation, rashes, fatigue that puts me on the couch by 3 PM. I feel like my immune system is attacking itself and nobody can tell me why.",
+            time: "Apr 19, 10:32 AM MT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Linda, as a nurse you have such a unique perspective on this \u2014 you\u2019ve seen firsthand how conventional medicine manages symptoms without digging into the why, and now you\u2019re living it. Hashimoto\u2019s layered with lupus-like autoimmune symptoms, the joint inflammation, rashes, and fatigue that shuts you down by mid-afternoon\u2026 your immune system IS attacking itself, and there\u2019s always a reason. Dr. Pompa\u2019s approach is built on finding that upstream trigger. I\u2019m Briana, your AC, and you\u2019re set to talk with Mike Torres. He\u2019s worked with many autoimmune cases and he\u2019s going to really value your clinical background in the conversation.",
+            time: "Apr 19, 11:15 AM MT",
+            type: "ac",
+          },
+          {
+            sender: "Linda Kowalski",
+            text: "I\u2019m in Mountain time, Phoenix area. And thank you \u2014 it\u2019s refreshing to talk to someone who gets it.",
+            time: "Apr 19, 11:40 AM MT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Absolutely, Linda. Your call with Mike Torres is confirmed for Thursday, April 24th at 9:00 AM Mountain Time. He\u2019s going to connect a lot of dots for you. I\u2019ll be in touch before the call with a quick assessment link!",
+            time: "Apr 19, 12:00 PM MT",
+            type: "ac",
+          },
+        ],
+
+        c8: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Teresa, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 20, 9:00 AM PT",
+            type: "automated",
+          },
+          {
+            sender: "Teresa Huang",
+            text: "Hi! Gut health is my main concern. I\u2019ve had IBS symptoms for years \u2014 bloating, irregular digestion, and my skin is a mess. Cystic acne along my jawline that nothing topical fixes. I feel like my gut and skin are connected but no one\u2019s been able to help me figure out how.",
+            time: "Apr 20, 10:45 AM PT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Teresa, you are absolutely right that your gut and skin are connected \u2014 the gut-skin axis is one of the most well-documented connections in functional health. Cystic acne along the jawline, chronic bloating, and IBS symptoms together are your body waving a flag that something deeper is going on in the gut. I\u2019m Briana, your Admissions Coordinator. You\u2019re booked with Mike Torres and he\u2019s going to walk you through exactly how these connect.",
+            time: "Apr 20, 11:20 AM PT",
+            type: "ac",
+          },
+          {
+            sender: "Teresa Huang",
+            text: "I\u2019m in Pacific time, Seattle.",
+            time: "Apr 20, 11:35 AM PT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Your call with Mike Torres is confirmed for Friday, April 25th at 11:00 AM Pacific Time. You\u2019re all set!",
+            time: "Apr 20, 11:50 AM PT",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Teresa, one more thing \u2014 there\u2019s a short assessment that will help Mike understand your full health picture before your call. It covers toxin exposures, gut symptoms, and more. Takes about 10 minutes: pom.pa/StartHere",
+            time: "Apr 20, 11:52 AM PT",
+            type: "ac",
+          },
+        ],
+
+        c10: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Angela, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 23, 8:00 AM ET",
+            type: "automated",
+          },
+          {
+            sender: "Angela Petrov",
+            text: "I\u2019ve been having debilitating migraines 3-4 times a month for the past two years. They started around the same time I began having hormonal issues \u2014 irregular cycles, hot flashes (I\u2019m only 41!), and mood swings that are really affecting my marriage. My doctor just wants to put me on birth control and migraine meds. I want to fix the root cause.",
+            time: "Apr 23, 9:15 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Angela, 3-4 migraines a month alongside hormonal disruption at 41 \u2014 that\u2019s your body absolutely screaming that something is off hormonally, and the fact that they started at the same time is NOT a coincidence. Masking it with birth control and migraine meds isn\u2019t fixing anything, and I\u2019m glad you see that. I\u2019m Briana, your AC. You\u2019re booked with Mike Torres, who is really great with hormonal cases. He\u2019s going to help you understand what\u2019s driving both the migraines and the hormonal shifts.",
+            time: "Apr 23, 9:50 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Angela Petrov",
+            text: "Eastern time, Miami. And thank you, that\u2019s exactly what I needed to hear.",
+            time: "Apr 23, 10:10 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Your call with Mike Torres is confirmed for Monday, April 28th at 3:00 PM Eastern Time. Locked in for you, Angela!",
+            time: "Apr 23, 10:25 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Hey Angela! Just checking in \u2014 were you able to complete the assessment I mentioned? pom.pa/StartHere \u2014 It\u2019ll take about 10 minutes and it gives Mike a huge head start on understanding your full picture before Monday\u2019s call.",
+            time: "Apr 25, 9:00 AM ET",
+            type: "ac",
+          },
+        ],
+
+        c11: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey William, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 22, 10:00 AM PT",
+            type: "automated",
+          },
+          {
+            sender: "William Tran",
+            text: "Anxiety and sleep issues mostly. I can\u2019t fall asleep before 2 AM no matter what I try, and during the day I have this constant low-level anxiety. I\u2019m 29 and feel like my nervous system is stuck in fight-or-flight.",
+            time: "Apr 22, 12:40 PM PT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "William, what you\u2019re describing \u2014 a nervous system that feels locked in fight-or-flight, the inability to fall asleep, constant daytime anxiety \u2014 that\u2019s a really clear signal that something is dysregulating your autonomic nervous system. At 29, your body shouldn\u2019t be stuck in that mode. I\u2019m Briana, your Admissions Coordinator, and we\u2019re going to help you figure out what\u2019s driving this.",
+            time: "Apr 22, 1:15 PM PT",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Before your upcoming call, what timezone are you in so I can pull up your appointment in your local time?",
+            time: "Apr 22, 1:16 PM PT",
+            type: "ac",
+          },
+        ],
+
+        c12: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Priya, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 20, 9:00 AM CT",
+            type: "automated",
+          },
+          {
+            sender: "Priya Sharma",
+            text: "My sister did Dr. Pompa\u2019s program and she told me I need to call. I have thyroid issues \u2014 Hashimoto\u2019s diagnosed 4 years ago \u2014 and extreme fatigue. I\u2019m a mom of two and I can barely keep up. My sister said the program changed her life.",
+            time: "Apr 20, 10:45 AM CT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Priya, I love that your sister referred you \u2014 that kind of family recommendation means the world to us. Hashimoto\u2019s with that level of fatigue where you can\u2019t keep up with your kids is so common and so solvable when you address the root cause. I\u2019m Briana, your AC, and you\u2019re set to speak with Mike Torres. He\u2019s fantastic with thyroid cases.",
+            time: "Apr 20, 11:30 AM CT",
+            type: "ac",
+          },
+          {
+            sender: "Priya Sharma",
+            text: "Central time, Dallas. Quick question though \u2014 does my husband need to be on the call? He\u2019s not really into this kind of stuff and I don\u2019t want it to be awkward.",
+            time: "Apr 20, 11:50 AM CT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Great question! We do strongly encourage spouses to be on the call because it helps everyone get on the same page, especially when it comes to understanding the commitment and the process. Would he be open to just listening in? No pressure for him to participate \u2014 a lot of husbands come in skeptical and leave the call feeling really good about it.",
+            time: "Apr 20, 12:15 PM CT",
+            type: "ac",
+          },
+        ],
+
+        c16: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Diane, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 21, 8:30 AM ET",
+            type: "automated",
+          },
+          {
+            sender: "Diane Moretti",
+            text: "Chronic pain is my biggest thing. I was told I have fibromyalgia but the medications don\u2019t really help. I have pain that moves around my body \u2014 shoulders one day, hips the next. Plus fatigue and these awful headaches. I\u2019m 46 and I feel like I\u2019m trapped in someone else\u2019s body.",
+            time: "Apr 21, 10:55 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Diane, I hear that so often \u2014 \u2018trapped in someone else\u2019s body\u2019 \u2014 and it breaks my heart every time. Migrating pain, fatigue, and headaches that get labeled as fibromyalgia\u2026 but the meds don\u2019t work because they\u2019re not addressing WHY your body is in that pain state. There\u2019s always a reason, and that\u2019s exactly what we help uncover. I\u2019m Briana, your Admissions Coordinator. You\u2019re set with Mike Torres, and he\u2019s amazing with chronic pain cases.",
+            time: "Apr 21, 11:30 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Diane Moretti",
+            text: "I\u2019m Eastern time, Charlotte NC. When is my call?",
+            time: "Apr 21, 11:50 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Your call with Mike Torres is confirmed for Saturday, April 26th at 10:30 AM Eastern Time. I\u2019ll send over a quick assessment before then that\u2019ll help Mike understand your full picture. You\u2019re going to get a lot of answers, Diane.",
+            time: "Apr 21, 12:10 PM ET",
+            type: "ac",
+          },
+        ],
+
+        c18: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Rachel, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 24, 11:00 AM PT",
+            type: "automated",
+          },
+          {
+            sender: "Rachel Nguyen",
+            text: "Hi! I\u2019m 28 and dealing with gut issues (constant bloating, food sensitivities that keep getting worse), terrible cystic acne, and anxiety that\u2019s been getting progressively worse over the past year. I feel like everything is connected but I can\u2019t figure out the thread.",
+            time: "Apr 24, 1:20 PM PT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Rachel, you\u2019re absolutely onto something \u2014 gut issues, skin breakouts, and anxiety that\u2019s escalating are all connected, and the fact that everything is getting progressively worse tells me there\u2019s something upstream driving all three. At 28 you should not be dealing with this cascade of symptoms. I\u2019m Briana, your Admissions Coordinator, and I\u2019m here to get you ready for your call with your Health Advisor.",
+            time: "Apr 24, 2:00 PM PT",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Before your upcoming call, what timezone are you in so I can pull up your appointment in your local time?",
+            time: "Apr 24, 2:01 PM PT",
+            type: "ac",
+          },
+        ],
+
+        c19: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Gregory, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 22, 8:00 AM ET",
+            type: "automated",
+          },
+          {
+            sender: "Gregory Walsh",
+            text: "I had a lot of dental work done over the years \u2014 root canals, crowns, and I know I had mercury fillings as a kid. I\u2019ve been dealing with brain fog, joint stiffness, and this general feeling of being unwell for the past 5 years. My wife is dealing with fatigue too and she\u2019s interested in the program.",
+            time: "Apr 22, 9:40 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Gregory, dental history like that \u2014 root canals, crowns, and mercury fillings \u2014 is one of the biggest hidden sources of toxic burden we see. The brain fog, joint stiffness, and that general malaise for 5 years all point to something your body has been trying to process. I\u2019m Briana, your AC. You\u2019re booked with Mike Torres and he\u2019s going to connect those dots for you.",
+            time: "Apr 22, 10:15 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Gregory Walsh",
+            text: "Eastern time, Tampa. And can my wife be on the call?",
+            time: "Apr 22, 10:30 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Absolutely \u2014 we encourage it! Your call is confirmed for Sunday, April 27th at 1:00 PM Eastern Time. Here\u2019s the assessment link so Mike can come prepared: pom.pa/StartHere",
+            time: "Apr 22, 10:45 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Briana",
+            text: "Hey Gregory! Your call with Mike Torres is tomorrow at 1:00 PM Eastern. Make sure you and your wife find a quiet spot and bring any questions. Mike\u2019s reviewed your assessment and he\u2019s ready. Any last questions?",
+            time: "Apr 26, 2:30 PM ET",
+            type: "ac",
+          },
+        ],
+
+        /* ════════════════════════════════════════════════════════
+           TIER 3 — Minimal threads (1-2 messages)
+           ════════════════════════════════════════════════════════ */
+
+        c2: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Ravikanth, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 23, 9:00 AM PT",
+            type: "automated",
+          },
+        ],
+
+        c14: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Nancy, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 5, 10:00 AM CT",
+            type: "automated",
+          },
+          {
+            sender: "Nancy Bergstrom",
+            text: "I\u2019m 62 and just feel like my health has been in a slow decline for the past few years. Fatigue, memory issues, aches and pains that seem to be getting worse. My late husband always said I needed to take better care of myself. Finally decided to look into this.",
+            time: "Apr 5, 2:20 PM CT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Nancy, thank you for reaching out and for taking this step for yourself. A gradual decline like that \u2014 fatigue, memory issues, increasing aches \u2014 is your body telling you something needs to change at a deeper level. I\u2019m Briana, your Admissions Coordinator, and I want to make sure we get your call confirmed. Can you let me know your timezone and the best time to reach you?",
+            time: "Apr 6, 9:30 AM CT",
+            type: "ac",
+          },
+        ],
+
+        c15: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Carlos, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 20, 9:00 AM CT",
+            type: "automated",
+          },
+          {
+            sender: "Carlos Mendez",
+            text: "Hey, I booked but I actually need to cancel. Something came up with work and I can\u2019t make the appointment. Maybe another time.",
+            time: "Apr 20, 11:30 AM CT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Hey Carlos, totally understand \u2014 life happens! I\u2019d hate for you to lose your spot though. Would it help if we rescheduled to a time that works better with your schedule? We have some flexibility. Just let me know!",
+            time: "Apr 20, 12:00 PM CT",
+            type: "ac",
+          },
+        ],
+
+        c17: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Kevin, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 25, 10:00 AM ET",
+            type: "automated",
+          },
+        ],
+
+        c20: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Jasmine, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 22, 8:30 AM CT",
+            type: "automated",
+          },
+          {
+            sender: "Briana",
+            text: "All confirmed for today, Jasmine! Your call with Mike Torres is at 2:00 PM Central. Your husband is joining, you\u2019ve completed the assessment, and Mike is ready. Find a quiet spot and we\u2019ll talk soon!",
+            time: "Apr 29, 8:15 AM CT",
+            type: "ac",
+          },
+        ],
+
+        c21: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Patrick, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 24, 9:00 AM ET",
+            type: "automated",
+          },
+          {
+            sender: "Patrick O\u2019Brien",
+            text: "I listen to Dr. Pompa\u2019s podcast religiously. I\u2019ve had chronic back pain for years and recently started getting more fatigued. I\u2019m 44 and I used to be really active. Now I can barely get through a workout. My wife thinks it\u2019s just aging but I know something else is going on.",
+            time: "Apr 24, 11:30 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Patrick, it\u2019s great that you\u2019re a podcast listener \u2014 you already have a solid foundation in the principles. Chronic back pain combined with escalating fatigue at 44 is NOT just aging. Your body is telling you something, and the fact that your exercise tolerance is dropping is a big clue. I\u2019m Briana, your AC, and you\u2019re set with Mike Torres who\u2019s going to get to the bottom of this.",
+            time: "Apr 24, 12:15 PM ET",
+            type: "ac",
+          },
+        ],
+
+        c22: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Maria, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 21, 10:00 AM PT",
+            type: "automated",
+          },
+          {
+            sender: "Maria Gonzalez",
+            text: "Hi, I\u2019m dealing with chronic fatigue and some digestive issues. My husband and I are both interested but we need to talk about timing.",
+            time: "Apr 21, 12:15 PM PT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Hi Maria! Thank you for reaching out. Chronic fatigue and digestive issues are such a common pair and there\u2019s usually a root cause connecting them. I\u2019m Briana, your Admissions Coordinator \u2014 I\u2019d love to help you and your husband find the right time.",
+            time: "Apr 21, 1:00 PM PT",
+            type: "ac",
+          },
+          {
+            sender: "Maria Gonzalez",
+            text: "Actually, I need to cancel for now. My husband just got laid off and we can\u2019t commit to anything financially right now. I\u2019m sorry.",
+            time: "Apr 22, 9:00 AM PT",
+            type: "client",
+          },
+        ],
+
+        c23: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Brian, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 23, 9:30 AM MT",
+            type: "automated",
+          },
+          {
+            sender: "Brian Chambers",
+            text: "Honestly, a lot. Fatigue, brain fog, and I went through a rough divorce last year. I think the stress tanked my health. I used to run marathons and now I can barely jog a mile.",
+            time: "Apr 23, 11:00 AM MT",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Brian, I\u2019m sorry you\u2019ve been through such a tough year. Major life stress like a divorce can absolutely wreck your health \u2014 it dysregulates your HPA axis, tanks your adrenals, and opens the door for all kinds of downstream symptoms. Going from marathons to barely jogging a mile tells me your body took a serious hit. I\u2019m Briana, your AC, and we\u2019re going to help you get back to yourself.",
+            time: "Apr 23, 11:45 AM MT",
+            type: "ac",
+          },
+        ],
+
+        c24: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Stephanie, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 15, 9:00 AM ET",
+            type: "automated",
+          },
+          {
+            sender: "Stephanie Kim",
+            text: "Hormonal issues and weight gain. Nothing I do makes a difference.",
+            time: "Apr 15, 3:30 PM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Stephanie, hormonal weight gain that doesn\u2019t respond to diet or exercise is one of the most frustrating things \u2014 but it\u2019s also a clear signal that something deeper needs to be addressed. I\u2019m Briana and I\u2019m here to get you set up. I tried reaching you a few times about confirming your appointment \u2014 would love to hear back when you get a chance!",
+            time: "Apr 17, 10:00 AM ET",
+            type: "ac",
+          },
+        ],
+
+        c25: [
+          {
+            sender: "System",
+            text: "[AUTOMATED] Hey Anthony, Dr Pompa\u2019s Team here. I saw you booked a consultation with us, glad to be able to help. What is the main health challenge on your mind right now?",
+            time: "Apr 22, 9:00 AM ET",
+            type: "automated",
+          },
+          {
+            sender: "Anthony Russo",
+            text: "Hey, I\u2019ve got chronic fatigue and some gut issues. Really want to get to the bottom of it.",
+            time: "Apr 22, 10:30 AM ET",
+            type: "client",
+          },
+          {
+            sender: "Briana",
+            text: "Anthony, glad you\u2019re ready to dig into the root cause. Chronic fatigue and gut issues together usually point to something upstream that\u2019s driving both. I\u2019m Briana, your AC \u2014 let\u2019s get you prepped for your call!",
+            time: "Apr 22, 11:00 AM ET",
+            type: "ac",
+          },
+          {
+            sender: "Anthony Russo",
+            text: "Actually, can we reschedule? I forgot I have a work conflict that day. Something later in the week would be better.",
+            time: "Apr 23, 8:45 AM ET",
+            type: "client",
+          },
+        ],
+      };
+      /* ── Helpers ── */
+
+      var COLORS = [
+        "#e57373",
+        "#7986cb",
+        "#4db6ac",
+        "#ff8a65",
+        "#a1887f",
+        "#9575cd",
+        "#4fc3f7",
+        "#81c784",
+        "#ffb74d",
+        "#f06292",
+      ];
+
+      function getContactId() {
+        var params = new URLSearchParams(window.location.search);
+        return params.get("id") || "";
+      }
+
+      function getContact(id) {
+        try {
+          var raw = localStorage.getItem("ac-hubspot-contacts");
+          if (!raw) return null;
+          var data = JSON.parse(raw);
+          var contacts = data.contacts || [];
+          for (var i = 0; i < contacts.length; i++) {
+            if (contacts[i].id === id) return contacts[i];
+          }
+          return null;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function getSaved(id) {
+        try {
+          var raw = localStorage.getItem("ac-convo-" + id);
+          if (!raw) return { msgs: [], notes: "" };
+          var data = JSON.parse(raw);
+          return {
+            msgs: data.msgs || [],
+            notes: data.notes || "",
+          };
+        } catch (e) {
+          return { msgs: [], notes: "" };
+        }
+      }
+
+      function saveSent(id, text) {
+        var saved = getSaved(id);
+        saved.msgs.push({ text: text, time: new Date().toISOString() });
+        localStorage.setItem("ac-convo-" + id, JSON.stringify(saved));
+      }
+
+      function saveNotes(id, notes) {
+        var saved = getSaved(id);
+        saved.notes = notes;
+        localStorage.setItem("ac-convo-" + id, JSON.stringify(saved));
+      }
+
+      function resetConvo(id) {
+        localStorage.removeItem("ac-convo-" + id);
+        render();
+      }
+
+      function avatarColor(name) {
+        var h = 0;
+        for (var i = 0; i < name.length; i++)
+          h = name.charCodeAt(i) + ((h << 5) - h);
+        return COLORS[Math.abs(h) % COLORS.length];
+      }
+
+      function initials(first, last) {
+        return (
+          (first ? first[0].toUpperCase() : "") +
+          (last ? last[0].toUpperCase() : "")
+        );
+      }
+
+      function fmtDate(iso) {
+        if (!iso) return "—";
+        var d = new Date(iso);
+        if (isNaN(d.getTime())) return "—";
+        return d.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        });
+      }
+
+      function timeUntil(iso) {
+        if (!iso) return "—";
+        var d = new Date(iso);
+        if (isNaN(d.getTime())) return "—";
+        var now = new Date();
+        var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        var target = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+        var diffMs = target.getTime() - today.getTime();
+        var diffDays = Math.round(diffMs / 86400000);
+        if (diffDays === 0) return "Today";
+        if (diffDays === 1) return "1 day";
+        if (diffDays > 1) return diffDays + " days";
+        if (diffDays === -1) return "1 day ago";
+        return Math.abs(diffDays) + " days ago";
+      }
+
+      function statusPillClass(status) {
+        if (!status || status === "") return "status-pill-blank";
+        if (status === "Waiting on Reply") return "status-pill-wr";
+        if (status === "Responsive") return "status-pill-r";
+        if (status === "Ready") return "status-pill-ready";
+        if (status === "Confirmed") return "status-pill-confirmed";
+        if (status === "Never Confirmed") return "status-pill-nc";
+        if (status === "Canceled") return "status-pill-canceled";
+        return "status-pill-blank";
+      }
+
+      /* ── Rendering ── */
+
+      function renderHeader(contact) {
+        var el = document.getElementById("chatHeader");
+        el.textContent = "";
+
+        var back = document.createElement("a");
+        back.href = "contacts.html";
+        back.className = "chat-back";
+        back.textContent = "\u2190 Back to Contacts";
+        el.appendChild(back);
+
+        var name = document.createElement("span");
+        name.className = "chat-header-name";
+        name.textContent =
+          (contact.firstName || "") + " " + (contact.lastName || "");
+        el.appendChild(name);
+
+        var phone = document.createElement("span");
+        phone.className = "chat-header-phone";
+        phone.textContent = contact.mobilePhone || "";
+        el.appendChild(phone);
+
+        var pill = document.createElement("span");
+        pill.className =
+          "chat-header-pill " +
+          statusPillClass(contact.closingCallConfirmationStatus);
+        pill.textContent = contact.closingCallConfirmationStatus || "No Status";
+        el.appendChild(pill);
+
+        var resetBtn = document.createElement("button");
+        resetBtn.className = "chat-reset";
+        resetBtn.textContent = "Reset";
+        resetBtn.addEventListener("click", function () {
+          resetConvo(getContactId());
+        });
+        el.appendChild(resetBtn);
+      }
+
+      function renderMessages(contact) {
+        var messagesEl = document.getElementById("messages");
+        messagesEl.textContent = "";
+
+        var contactId = getContactId();
+        var convoMsgs = CONVERSATIONS[contactId];
+
+        if (!convoMsgs || convoMsgs.length === 0) {
+          var empty = document.createElement("div");
+          empty.style.cssText =
+            "text-align:center;color:var(--hs-gray);padding:40px;font-size:14px;";
+          empty.textContent = "No conversation yet. Send a message to start.";
+          messagesEl.appendChild(empty);
+        } else {
+          var fullName =
+            (contact.firstName || "") + " " + (contact.lastName || "");
+          for (var i = 0; i < convoMsgs.length; i++) {
+            var m = convoMsgs[i];
+            messagesEl.appendChild(
+              buildMessageEl(m.type, m.sender, m.text, m.time, contact),
+            );
+          }
+        }
+
+        // Append user-sent messages
+        var saved = getSaved(contactId);
+        for (var j = 0; j < saved.msgs.length; j++) {
+          var sm = saved.msgs[j];
+          var fmtTime = fmtDate(sm.time);
+          messagesEl.appendChild(
+            buildMessageEl("us", "You", sm.text, fmtTime, contact),
+          );
+        }
+
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      function buildMessageEl(type, sender, text, time, contact) {
+        var msg = document.createElement("div");
+        msg.className = "msg " + type;
+
+        var avatar = document.createElement("div");
+        avatar.className = "msg-avatar " + type;
+
+        if (type === "automated" || type === "au") {
+          msg.className = "msg au";
+          avatar.className = "msg-avatar au";
+          avatar.style.background = "#89a0ab";
+          avatar.textContent = "SYS";
+        } else if (type === "cl") {
+          var fullName =
+            (contact.firstName || "") + " " + (contact.lastName || "");
+          avatar.style.background = avatarColor(fullName);
+          avatar.textContent = initials(contact.firstName, contact.lastName);
+        } else if (type === "ac") {
+          avatar.style.background = "#1565c0";
+          avatar.textContent = "B";
+        } else if (type === "caller") {
+          avatar.style.background = "#e65100";
+          avatar.textContent = "J";
+        } else if (type === "us") {
+          avatar.style.background = "#1e8f86";
+          avatar.textContent = "You";
+        }
+
+        msg.appendChild(avatar);
+
+        var body = document.createElement("div");
+        body.className = "msg-body";
+
+        var senderEl = document.createElement("div");
+        var senderClass = type;
+        if (type === "automated") senderClass = "au";
+        senderEl.className = "msg-sender " + senderClass;
+        senderEl.textContent = sender;
+        body.appendChild(senderEl);
+
+        var bubble = document.createElement("div");
+        var bubbleClass = type;
+        if (type === "automated") bubbleClass = "au";
+        bubble.className = "msg-bubble " + bubbleClass;
+        bubble.textContent = text;
+        body.appendChild(bubble);
+
+        var meta = document.createElement("div");
+        meta.className = "msg-meta";
+        meta.textContent = time;
+        body.appendChild(meta);
+
+        msg.appendChild(body);
+        return msg;
+      }
+
+      function renderInput(contact) {
+        var el = document.getElementById("inputArea");
+        el.textContent = "";
+
+        var textarea = document.createElement("textarea");
+        textarea.placeholder = "Type your message...";
+        textarea.rows = 1;
+
+        textarea.addEventListener("input", function () {
+          this.style.height = "auto";
+          this.style.height = Math.min(this.scrollHeight, 120) + "px";
+        });
+
+        textarea.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+          }
+        });
+
+        var sendBtn = document.createElement("button");
+        sendBtn.textContent = "Send";
+        sendBtn.addEventListener("click", function () {
+          sendMessage();
+        });
+
+        function sendMessage() {
+          var val = textarea.value.trim();
+          if (!val) return;
+          saveSent(getContactId(), val);
+          textarea.value = "";
+          textarea.style.height = "auto";
+          renderMessages(contact);
+        }
+
+        el.appendChild(textarea);
+        el.appendChild(sendBtn);
+      }
+
+      function renderSidebar(contact) {
+        var el = document.getElementById("sidePanel");
+        el.textContent = "";
+
+        var fullName =
+          (contact.firstName || "") + " " + (contact.lastName || "");
+
+        // Header
+        var header = document.createElement("div");
+        header.className = "side-header";
+
+        var sideAvatar = document.createElement("div");
+        sideAvatar.className = "side-avatar";
+        sideAvatar.style.background = avatarColor(fullName);
+        sideAvatar.textContent = initials(contact.firstName, contact.lastName);
+        header.appendChild(sideAvatar);
+
+        var headerInfo = document.createElement("div");
+        var nameEl = document.createElement("div");
+        nameEl.className = "side-name";
+        nameEl.textContent = fullName;
+        headerInfo.appendChild(nameEl);
+
+        var phoneEl = document.createElement("div");
+        phoneEl.className = "side-phone";
+        phoneEl.textContent = contact.mobilePhone || "";
+        headerInfo.appendChild(phoneEl);
+
+        header.appendChild(headerInfo);
+        el.appendChild(header);
+
+        // Contact Info
+        var infoSection = document.createElement("div");
+        infoSection.className = "side-section";
+
+        var infoH4 = document.createElement("h4");
+        infoH4.textContent = "Contact Info";
+        infoSection.appendChild(infoH4);
+
+        // Status
+        var statusField = createField("Status", "");
+        var statusVal = statusField.querySelector(".side-field-value");
+        statusVal.textContent = "";
+        var statusPill = document.createElement("span");
+        statusPill.className =
+          "chat-header-pill " +
+          statusPillClass(contact.closingCallConfirmationStatus);
+        statusPill.textContent =
+          contact.closingCallConfirmationStatus || "No Status";
+        statusVal.appendChild(statusPill);
+        infoSection.appendChild(statusField);
+
+        infoSection.appendChild(
+          createField("Health Advisor", contact.closerOwner || "\u2014"),
+        );
+        infoSection.appendChild(
+          createField("Appt Date", fmtDate(contact.meetingStartDate)),
+        );
+        infoSection.appendChild(
+          createField("Time Until Call", timeUntil(contact.meetingStartDate)),
+        );
+        infoSection.appendChild(
+          createField("Owner", contact.confirmationOwner || "\u2014"),
+        );
+
+        el.appendChild(infoSection);
+
+        // Pre-Call Checklist
+        var checkSection = document.createElement("div");
+        checkSection.className = "side-section";
+
+        var checkH4 = document.createElement("h4");
+        checkH4.textContent = "Pre-Call Checklist";
+        checkSection.appendChild(checkH4);
+
+        var cl = contact.preCallChecklist || {};
+        var checkItems = [
+          { key: "spouseConfirmed", label: "Spouse Confirmed" },
+          { key: "metaOxyKit", label: "MetaOxy Kit" },
+          { key: "zoomAccess", label: "Zoom Access" },
+          { key: "dateTime", label: "Date/Time" },
+        ];
+
+        for (var ci = 0; ci < checkItems.length; ci++) {
+          var item = checkItems[ci];
+          var row = document.createElement("div");
+          row.className = "side-field";
+
+          var label = document.createElement("span");
+          label.className = "side-field-label";
+          label.textContent = item.label;
+          row.appendChild(label);
+
+          var pipsWrap = document.createElement("div");
+          pipsWrap.className = "side-pips";
+
+          var pip = document.createElement("span");
+          pip.className = "side-pip";
+          if (cl[item.key]) pip.classList.add("on");
+          pipsWrap.appendChild(pip);
+
+          row.appendChild(pipsWrap);
+          checkSection.appendChild(row);
+        }
+
+        el.appendChild(checkSection);
+
+        // NTQ Assessment
+        if (contact.ntqPercentage && contact.ntqPercentage > 0) {
+          var ntqSection = document.createElement("div");
+          ntqSection.className = "side-section";
+
+          var ntqH4 = document.createElement("h4");
+          ntqH4.textContent = "NTQ Assessment";
+          ntqSection.appendChild(ntqH4);
+
+          var ntqField = createField("Score", contact.ntqPercentage + "%");
+          ntqSection.appendChild(ntqField);
+
+          el.appendChild(ntqSection);
+        }
+
+        // Notes
+        var notesSection = document.createElement("div");
+        notesSection.className = "side-notes";
+
+        var notesH4 = document.createElement("h4");
+        notesH4.textContent = "Notes";
+        notesSection.appendChild(notesH4);
+
+        var notesTA = document.createElement("textarea");
+        notesTA.placeholder = "Add notes about this contact...";
+        var savedData = getSaved(getContactId());
+        notesTA.value = savedData.notes;
+
+        var notesTimer = null;
+        notesTA.addEventListener("input", function () {
+          if (notesTimer) clearTimeout(notesTimer);
+          notesTimer = setTimeout(function () {
+            saveNotes(getContactId(), notesTA.value);
+          }, 500);
+        });
+
+        notesSection.appendChild(notesTA);
+        el.appendChild(notesSection);
+      }
+
+      function createField(labelText, valueText) {
+        var row = document.createElement("div");
+        row.className = "side-field";
+
+        var label = document.createElement("span");
+        label.className = "side-field-label";
+        label.textContent = labelText;
+        row.appendChild(label);
+
+        var value = document.createElement("span");
+        value.className = "side-field-value";
+        value.textContent = valueText;
+        row.appendChild(value);
+
+        return row;
+      }
+
+      function render() {
+        var id = getContactId();
+        var contact = getContact(id);
+        if (!contact) {
+          window.location.href = "contacts.html";
+          return;
+        }
+        renderHeader(contact);
+        renderMessages(contact);
+        renderInput(contact);
+        renderSidebar(contact);
+      }
+
+      /* ── Init ── */
+      (function () {
+        var id = getContactId();
+        if (!id) {
+          window.location.href = "contacts.html";
+          return;
+        }
+        var contact = getContact(id);
+        if (!contact) {
+          window.location.href = "contacts.html";
+          return;
+        }
+        render();
+      })();
+    </script>
+  </body>
+</html>

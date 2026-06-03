@@ -1,0 +1,1323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Call Guide — Design Simplification Ideas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --slate-900: #1b2a31;
+        --slate-700: #2f4a56;
+        --slate-500: #5a7682;
+        --slate-400: #89a0ab;
+        --slate-300: #b5c6cd;
+        --slate-200: #dce5e9;
+        --slate-100: #edf1f3;
+        --teal-700: #1e8f86;
+        --teal-600: #2db3a6;
+        --teal-500: #4ec5b9;
+        --teal-400: #87d8d0;
+        --teal-100: #e6f5f2;
+        --paper: #f7f3ed;
+        --paper-deep: #efe8dc;
+        --bone: #fbf9f4;
+        --ink: #1a262c;
+        --ink-soft: #3d5059;
+        --blue-50: #eff6ff;
+        --blue-100: #dbeafe;
+        --blue-200: #bfdbfe;
+        --blue-600: #2563eb;
+        --blue-700: #1d4ed8;
+        --green-50: #f0fdf4;
+        --green-100: #dcfce7;
+        --green-600: #16a34a;
+        --green-700: #15803d;
+        --amber-50: #fffbeb;
+        --amber-100: #fef3c7;
+        --amber-600: #d97706;
+        --amber-700: #b45309;
+        --purple-50: #faf5ff;
+        --purple-100: #f3e8ff;
+        --purple-600: #9333ea;
+        --purple-700: #7e22ce;
+        --red-50: #fef2f2;
+        --red-100: #fee2e2;
+        --red-600: #dc2626;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+      }
+      h1 {
+        font-family: "Outfit", sans-serif;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        color: var(--ink-soft);
+        font-size: 1.05rem;
+        margin-bottom: 12px;
+      }
+      .principle-bar {
+        background: var(--teal-100);
+        border: 1px solid var(--teal-400);
+        border-radius: 10px;
+        padding: 16px 20px;
+        margin-bottom: 40px;
+        font-size: 0.95rem;
+        color: var(--ink-soft);
+      }
+      .principle-bar strong {
+        color: var(--teal-700);
+      }
+
+      /* Idea cards */
+      .idea {
+        background: var(--bone);
+        border: 1px solid var(--slate-200);
+        border-radius: 12px;
+        margin-bottom: 28px;
+        overflow: hidden;
+      }
+      .idea-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 20px 28px;
+        border-bottom: 1px solid var(--slate-200);
+      }
+      .idea-num {
+        font-family: "Outfit", sans-serif;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--teal-600);
+        min-width: 36px;
+      }
+      .idea-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      .idea-impact {
+        margin-left: auto;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 4px 10px;
+        border-radius: 20px;
+      }
+      .idea-impact.high {
+        background: var(--green-100);
+        color: var(--green-700);
+      }
+      .idea-impact.medium {
+        background: var(--amber-100);
+        color: var(--amber-700);
+      }
+      .idea-body {
+        padding: 24px 28px;
+      }
+
+      /* Problem / Solution */
+      .problem-box {
+        background: var(--red-50);
+        border-left: 3px solid var(--red-600);
+        padding: 12px 16px;
+        border-radius: 0 8px 8px 0;
+        margin-bottom: 16px;
+        font-size: 0.92rem;
+        color: var(--ink-soft);
+      }
+      .problem-box strong {
+        color: var(--red-600);
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .solution-box {
+        background: var(--green-50);
+        border-left: 3px solid var(--green-600);
+        padding: 12px 16px;
+        border-radius: 0 8px 8px 0;
+        margin-bottom: 16px;
+        font-size: 0.92rem;
+        color: var(--ink-soft);
+      }
+      .solution-box strong {
+        color: var(--green-600);
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      /* Mockup container */
+      .mockup-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: var(--slate-400);
+        margin-bottom: 10px;
+        margin-top: 20px;
+      }
+      .mockup {
+        border: 2px solid var(--slate-200);
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 16px;
+        background: var(--paper);
+      }
+      .mockup-current,
+      .mockup-proposed {
+        padding: 20px 24px;
+      }
+      .mockup-current {
+        border-bottom: 2px dashed var(--slate-200);
+        position: relative;
+      }
+      .mockup-current::after {
+        content: "CURRENT";
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 1px;
+        color: var(--slate-400);
+        font-weight: 600;
+      }
+      .mockup-proposed {
+        position: relative;
+      }
+      .mockup-proposed::after {
+        content: "PROPOSED";
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 1px;
+        color: var(--green-600);
+        font-weight: 600;
+      }
+
+      /* Mini UI elements for mockups */
+      .m-badge {
+        display: inline-block;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #fff;
+        background: var(--teal-700);
+        padding: 3px 10px;
+        border-radius: 16px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .m-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 22px;
+        font-weight: 500;
+        color: var(--slate-700);
+        margin-bottom: 4px;
+      }
+      .m-title-sm {
+        font-family: "Outfit", sans-serif;
+        font-size: 17px;
+        font-weight: 500;
+        color: var(--slate-700);
+        margin-bottom: 4px;
+      }
+      .m-instr {
+        font-size: 13px;
+        color: var(--ink-soft);
+        margin-bottom: 10px;
+      }
+      .m-script-card {
+        background: var(--bone);
+        border: 2px solid var(--teal-400);
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 8px;
+      }
+      .m-script-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--teal-700);
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .m-script-text {
+        font-size: 14px;
+        font-style: italic;
+        color: var(--ink);
+        line-height: 1.5;
+      }
+      .m-script-text-sm {
+        font-size: 12px;
+        font-style: italic;
+        color: var(--ink-soft);
+        line-height: 1.5;
+      }
+      .m-tip {
+        background: #fff8e1;
+        border-left: 3px solid #f9a825;
+        padding: 8px 12px;
+        font-size: 12px;
+        color: var(--ink-soft);
+        border-radius: 0 6px 6px 0;
+        margin-bottom: 8px;
+      }
+      .m-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      .m-btn {
+        padding: 8px 14px;
+        border-radius: 7px;
+        font-size: 12px;
+        font-weight: 600;
+        border: 2px solid;
+        font-family: inherit;
+        flex: 1;
+        text-align: center;
+      }
+      .m-btn.pri {
+        background: var(--teal-700);
+        border-color: var(--teal-700);
+        color: #fff;
+      }
+      .m-btn.sec {
+        background: #fff;
+        border-color: var(--slate-200);
+        color: var(--ink);
+      }
+      .m-collapsed {
+        background: var(--slate-100);
+        border: 1px solid var(--slate-200);
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 11px;
+        color: var(--slate-500);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        cursor: pointer;
+      }
+      .m-collapsed .chevron {
+        font-size: 14px;
+        color: var(--slate-400);
+      }
+
+      /* Tooltip mockup */
+      .m-tooltip-trigger {
+        display: inline;
+        border-bottom: 1px dashed var(--teal-600);
+        color: var(--teal-700);
+        cursor: help;
+        position: relative;
+      }
+      .m-tooltip-box {
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--slate-900);
+        color: #fff;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-style: normal;
+        line-height: 1.5;
+        width: 280px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+      }
+      .m-tooltip-box::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid transparent;
+        border-top-color: var(--slate-900);
+      }
+
+      /* Inline info dot */
+      .m-info-dot {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--slate-200);
+        color: var(--slate-500);
+        font-size: 10px;
+        font-weight: 700;
+        cursor: help;
+        vertical-align: middle;
+        margin-left: 4px;
+        font-style: normal;
+      }
+
+      /* Focus mode */
+      .m-focus-script {
+        background: var(--bone);
+        border: 2px solid var(--teal-400);
+        border-radius: 10px;
+        padding: 20px 20px;
+        margin-bottom: 8px;
+      }
+      .m-focus-text {
+        font-size: 18px;
+        font-style: italic;
+        color: var(--ink);
+        line-height: 1.7;
+      }
+      .m-detail-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      @media (max-width: 600px) {
+        .m-detail-row {
+          grid-template-columns: 1fr;
+        }
+      }
+      .m-detail-card {
+        background: var(--slate-100);
+        border: 1px solid var(--slate-200);
+        border-radius: 8px;
+        padding: 10px 14px;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .m-detail-card:hover {
+        border-color: var(--teal-400);
+        background: var(--teal-100);
+      }
+      .m-detail-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--slate-400);
+        font-weight: 600;
+        margin-bottom: 3px;
+      }
+      .m-detail-preview {
+        font-size: 12px;
+        color: var(--ink-soft);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* Comparison grid */
+      .compare-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 12px;
+      }
+      @media (max-width: 700px) {
+        .compare-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Notes */
+      .note {
+        background: var(--blue-50);
+        border: 1px solid var(--blue-200);
+        border-radius: 8px;
+        padding: 14px 16px;
+        font-size: 0.9rem;
+        color: var(--ink-soft);
+        margin-top: 16px;
+      }
+      .note strong {
+        color: var(--blue-700);
+      }
+
+      /* Priority table */
+      .priority-card {
+        background: var(--bone);
+        border: 1px solid var(--slate-200);
+        border-radius: 12px;
+        padding: 28px;
+        margin-top: 40px;
+      }
+      .priority-card h2 {
+        font-family: "Outfit", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+      .p-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .p-table th {
+        text-align: left;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--slate-500);
+        padding: 8px 12px;
+        border-bottom: 2px solid var(--slate-200);
+      }
+      .p-table td {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        border-bottom: 1px solid var(--slate-200);
+        color: var(--ink-soft);
+        vertical-align: top;
+      }
+      .p-table tr:last-child td {
+        border-bottom: none;
+      }
+      .tag {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+      .tag.high {
+        background: var(--green-100);
+        color: var(--green-700);
+      }
+      .tag.med {
+        background: var(--amber-100);
+        color: var(--amber-700);
+      }
+      .tag.low {
+        background: var(--blue-100);
+        color: var(--blue-700);
+      }
+      .tag.easy {
+        background: var(--purple-100);
+        color: var(--purple-700);
+      }
+      .faded {
+        opacity: 0.5;
+      }
+      .strikethrough {
+        text-decoration: line-through;
+        opacity: 0.4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Call Guide &mdash; Design Simplification Ideas</h1>
+      <p class="subtitle">
+        How to make the live call guide faster to scan mid-call without removing
+        any information.
+      </p>
+
+      <div class="principle-bar">
+        <strong>Core principle:</strong> During a live call, the caller needs
+        exactly ONE thing &mdash; the script text to say. Everything else
+        (instructions, tips, alt scripts) is support material that should be
+        accessible but not competing for attention.
+        <strong
+          >Reduce visual noise. Elevate the script. Hide-but-don&rsquo;t-delete
+          everything else.</strong
+        >
+      </div>
+
+      <!-- ════════ IDEA 1 ════════ -->
+      <div class="idea">
+        <div class="idea-header">
+          <span class="idea-num">1</span>
+          <span class="idea-title"
+            >Collapse Instructions &amp; Tips Into Expandable Rows</span
+          >
+          <span class="idea-impact high">High Impact</span>
+        </div>
+        <div class="idea-body">
+          <div class="problem-box">
+            <strong>Problem</strong>
+            Every step shows 3 text blocks stacked vertically: instruction
+            paragraph, script card, and tip callout. On a live call, the caller
+            has to scan past the instruction and tip to find the script. The
+            instruction and tip are training content &mdash; useful when
+            learning, noise when performing.
+          </div>
+          <div class="solution-box">
+            <strong>Solution</strong>
+            Collapse instructions and tips into slim, clickable bars. They
+            expand on tap but stay collapsed by default. The script card becomes
+            the first thing the eye hits.
+          </div>
+
+          <div class="mockup-label">Visual comparison</div>
+          <div class="mockup">
+            <div class="mockup-current">
+              <div class="m-badge">Step 3</div>
+              <div class="m-title">Zoom Access &amp; Calendar Invite</div>
+              <div class="m-instr">
+                Make them GO FIND IT live on the call. Don&rsquo;t just take
+                their word for it. This prevents game-day emergencies.
+              </div>
+              <div class="m-script-card">
+                <div class="m-script-label">Say This</div>
+                <div class="m-script-text">
+                  &ldquo;Were you able to find that calendar invitation in your
+                  email? Can you see the Zoom link in there?&rdquo;
+                </div>
+              </div>
+              <div class="m-tip">
+                <strong>Tip:</strong> If they can&rsquo;t find it, resend it
+                right there on the call. Don&rsquo;t move on until they have
+                access.
+              </div>
+              <div class="m-actions">
+                <div class="m-btn pri">Found it &rarr; Next</div>
+                <div class="m-btn sec">Can&rsquo;t find it</div>
+              </div>
+            </div>
+            <div class="mockup-proposed">
+              <div class="m-badge">Step 3</div>
+              <div class="m-title-sm">Zoom Access &amp; Calendar Invite</div>
+              <div class="m-collapsed">
+                <span>Coaching note: Make them GO FIND IT live&hellip;</span>
+                <span class="chevron">&#9662;</span>
+              </div>
+              <div class="m-script-card">
+                <div class="m-script-label">Say This</div>
+                <div class="m-script-text">
+                  &ldquo;Were you able to find that calendar invitation in your
+                  email? Can you see the Zoom link in there?&rdquo;
+                </div>
+              </div>
+              <div class="m-collapsed">
+                <span
+                  >Tip: If they can&rsquo;t find it, resend it right
+                  there&hellip;</span
+                >
+                <span class="chevron">&#9662;</span>
+              </div>
+              <div class="m-actions">
+                <div class="m-btn pri">Found it &rarr; Next</div>
+                <div class="m-btn sec">Can&rsquo;t find it</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>Savings:</strong> ~60px of vertical scroll per step. Over 9
+            steps that&rsquo;s 540px less scrolling. The script card jumps from
+            &ldquo;third thing on screen&rdquo; to &ldquo;first thing on
+            screen.&rdquo;
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ IDEA 2 ════════ -->
+      <div class="idea">
+        <div class="idea-header">
+          <span class="idea-num">2</span>
+          <span class="idea-title"
+            >Move Alt/Extra Scripts Behind &ldquo;If&hellip;&rdquo;
+            Toggles</span
+          >
+          <span class="idea-impact high">High Impact</span>
+        </div>
+        <div class="idea-body">
+          <div class="problem-box">
+            <strong>Problem</strong>
+            Steps like Device Push show the primary script, then an alt script
+            (&ldquo;If they say just my phone&rdquo;), then sometimes an extra
+            script &mdash; all visible at once. On a call, the caller reads the
+            primary, delivers it, then has to quickly scan past it to find the
+            response for the client&rsquo;s answer. The alt/extra scripts add
+            height and visual clutter that&rsquo;s irrelevant 50-70% of the
+            time.
+          </div>
+          <div class="solution-box">
+            <strong>Solution</strong>
+            Show ONLY the primary script in the card. Alt and extra scripts
+            become labeled toggle cards below it &mdash; collapsed by default,
+            expanding on click. The label previews enough context (&ldquo;If
+            they say &lsquo;just my phone&rsquo;&hellip;&rdquo;) so the caller
+            knows which one to tap.
+          </div>
+
+          <div class="mockup-label">Visual comparison</div>
+          <div class="mockup">
+            <div class="mockup-current">
+              <div class="m-script-card">
+                <div class="m-script-label">Say This</div>
+                <div class="m-script-text">
+                  &ldquo;What device are you going to use for this call? Do you
+                  have a computer, a laptop, an iPad?&rdquo;
+                </div>
+                <div
+                  style="
+                    margin-top: 12px;
+                    padding-top: 12px;
+                    border-top: 1px dashed var(--slate-200);
+                  "
+                >
+                  <div
+                    style="
+                      font-family: &quot;IBM Plex Mono&quot;, monospace;
+                      font-size: 9px;
+                      letter-spacing: 0.08em;
+                      text-transform: uppercase;
+                      color: var(--slate-400);
+                      font-weight: 500;
+                      margin-bottom: 4px;
+                    "
+                  >
+                    If they say &ldquo;just my phone&rdquo;
+                  </div>
+                  <div class="m-script-text-sm">
+                    &ldquo;You could do it on your phone, but do you have a
+                    laptop or an iPad? We really recommend a bigger screen so
+                    you can see the charts {HAName} will be going over. It makes
+                    a big difference. Also, have a pen and paper
+                    handy&hellip;&rdquo;
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mockup-proposed">
+              <div class="m-focus-script">
+                <div class="m-script-label">Say This</div>
+                <div class="m-focus-text">
+                  &ldquo;What device are you going to use for this call? Do you
+                  have a computer, a laptop, an iPad?&rdquo;
+                </div>
+              </div>
+              <div class="m-collapsed">
+                <span
+                  >If they say &ldquo;just my phone&rdquo; &mdash;
+                  <em>tap for script</em></span
+                >
+                <span class="chevron">&#9662;</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>Benefit:</strong> The script card shrinks to just the words
+            they need to say. Alt scripts are one tap away, not stacked below.
+            Callers aren&rsquo;t reading a wall of italic text to find the right
+            response &mdash; they tap the matching scenario.
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ IDEA 3 ════════ -->
+      <div class="idea">
+        <div class="idea-header">
+          <span class="idea-num">3</span>
+          <span class="idea-title">Add a &ldquo;Focus Mode&rdquo; Toggle</span>
+          <span class="idea-impact high">High Impact</span>
+        </div>
+        <div class="idea-body">
+          <div class="problem-box">
+            <strong>Problem</strong>
+            The guide serves two purposes: (1) training &mdash; reading through
+            at your desk, learning the flow, and (2) live use &mdash; glancing
+            at it mid-call for the exact words. These have opposite needs.
+            Training needs all the context. Live needs minimal distraction. One
+            UI tries to do both.
+          </div>
+          <div class="solution-box">
+            <strong>Solution</strong>
+            Add a &ldquo;Focus Mode&rdquo; toggle in the top bar (next to Quick
+            Jump). When ON: collapses instructions, tips, and alt scripts
+            automatically. Larger primary script text. Muted background. When
+            OFF: everything visible (current behavior). Persists via
+            localStorage so they don&rsquo;t re-toggle every call.
+          </div>
+
+          <div class="mockup-label">Top bar with Focus toggle</div>
+          <div class="mockup">
+            <div
+              style="
+                background: var(--slate-900);
+                padding: 10px 16px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-radius: 8px 8px 0 0;
+              "
+            >
+              <div style="display: flex; align-items: center; gap: 10px">
+                <span style="color: var(--slate-300); font-size: 13px"
+                  >&larr; Scripts</span
+                >
+                <span
+                  style="
+                    font-family: &quot;IBM Plex Mono&quot;, monospace;
+                    font-size: 11px;
+                    letter-spacing: 0.1em;
+                    text-transform: uppercase;
+                    color: var(--teal-400);
+                    font-weight: 500;
+                  "
+                  >Live Call Guide</span
+                >
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px">
+                <span
+                  style="
+                    background: none;
+                    border: 1px solid var(--slate-500);
+                    color: var(--slate-300);
+                    padding: 4px 10px;
+                    border-radius: 5px;
+                    font-size: 11px;
+                  "
+                  >Start Over</span
+                >
+                <span
+                  style="
+                    background: #f59e0b;
+                    border: none;
+                    color: #fff;
+                    padding: 4px 10px;
+                    border-radius: 5px;
+                    font-size: 11px;
+                    font-weight: 600;
+                  "
+                  >Focus Mode</span
+                >
+                <span
+                  style="
+                    background: var(--teal-700);
+                    border: none;
+                    color: #fff;
+                    padding: 4px 10px;
+                    border-radius: 5px;
+                    font-size: 11px;
+                    font-weight: 500;
+                  "
+                  >Quick Jump</span
+                >
+              </div>
+            </div>
+            <div style="padding: 16px 20px">
+              <div
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px"
+              >
+                <div>
+                  <div
+                    style="
+                      font-size: 10px;
+                      font-weight: 700;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      color: var(--slate-400);
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Focus Mode OFF (training)
+                  </div>
+                  <div class="m-badge">Step 5</div>
+                  <div class="m-title-sm">Device Push</div>
+                  <div class="m-instr" style="font-size: 11px">
+                    Push for laptop or iPad. They&rsquo;re buying something for
+                    $14,000&hellip;
+                  </div>
+                  <div class="m-script-card" style="padding: 10px 12px">
+                    <div class="m-script-label">Say This</div>
+                    <div style="font-size: 12px; font-style: italic">
+                      &ldquo;What device are you going to use&hellip;&rdquo;
+                    </div>
+                    <div
+                      style="
+                        margin-top: 8px;
+                        padding-top: 8px;
+                        border-top: 1px dashed var(--slate-200);
+                      "
+                    >
+                      <div
+                        style="
+                          font-size: 9px;
+                          color: var(--slate-400);
+                          text-transform: uppercase;
+                          letter-spacing: 0.08em;
+                          font-family: &quot;IBM Plex Mono&quot;, monospace;
+                          margin-bottom: 3px;
+                        "
+                      >
+                        If &ldquo;just my phone&rdquo;
+                      </div>
+                      <div
+                        style="
+                          font-size: 11px;
+                          font-style: italic;
+                          color: var(--ink-soft);
+                        "
+                      >
+                        &ldquo;You could do it on your phone&hellip;&rdquo;
+                      </div>
+                    </div>
+                  </div>
+                  <div class="m-tip" style="font-size: 10px; padding: 6px 10px">
+                    <strong>Tip:</strong> Bigger screen = bigger close.
+                  </div>
+                </div>
+                <div>
+                  <div
+                    style="
+                      font-size: 10px;
+                      font-weight: 700;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      color: #f59e0b;
+                      margin-bottom: 8px;
+                    "
+                  >
+                    Focus Mode ON (live call)
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 6px;
+                      margin-bottom: 6px;
+                    "
+                  >
+                    <div class="m-badge">Step 5</div>
+                    <span
+                      style="
+                        font-family: &quot;Outfit&quot;, sans-serif;
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: var(--slate-700);
+                      "
+                      >Device Push</span
+                    >
+                  </div>
+                  <div class="m-focus-script" style="padding: 14px 16px">
+                    <div class="m-script-label">Say This</div>
+                    <div
+                      style="
+                        font-size: 16px;
+                        font-style: italic;
+                        line-height: 1.7;
+                      "
+                    >
+                      &ldquo;What device are you going to use for this call? Do
+                      you have a computer, a laptop, an iPad?&rdquo;
+                    </div>
+                  </div>
+                  <div class="m-collapsed" style="font-size: 10px">
+                    <span>If &ldquo;just my phone&rdquo; &mdash; tap</span>
+                    <span class="chevron">&#9662;</span>
+                  </div>
+                  <div class="m-collapsed" style="font-size: 10px">
+                    <span>Coaching note &amp; tip</span>
+                    <span class="chevron">&#9662;</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>Key:</strong> Focus Mode is a single toggle that applies
+            Ideas 1 and 2 together. Without Focus Mode, the guide looks exactly
+            as it does today. No information is removed &mdash; just
+            auto-collapsed.
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ IDEA 4 ════════ -->
+      <div class="idea">
+        <div class="idea-header">
+          <span class="idea-num">4</span>
+          <span class="idea-title">Tooltip Info Dots on Key Terms</span>
+          <span class="idea-impact medium">Medium Impact</span>
+        </div>
+        <div class="idea-body">
+          <div class="problem-box">
+            <strong>Problem</strong>
+            Scripts reference things like &ldquo;the neurotoxicity
+            assessment,&rdquo; &ldquo;the test kit,&rdquo; or
+            &ldquo;{HAName}&rdquo; without context. A new caller may not
+            remember what NTA link to send, or where to check kit tracking. This
+            context is currently in the instruction/tip text &mdash; which in
+            Focus Mode would be collapsed.
+          </div>
+          <div class="solution-box">
+            <strong>Solution</strong>
+            Add small info-dot icons (&#9432;) next to key terms inside the
+            script text. On hover/tap, a tooltip shows the quick reference (link
+            to send, where to check, etc.). The script stays clean &mdash;
+            context is there if needed but invisible if not.
+          </div>
+
+          <div class="mockup-label">Script with tooltip info dots</div>
+          <div class="mockup">
+            <div class="mockup-proposed" style="padding-top: 40px">
+              <div class="m-focus-script">
+                <div class="m-script-label">Say This</div>
+                <div
+                  class="m-focus-text"
+                  style="font-size: 15px; position: relative"
+                >
+                  &ldquo;It looks like you were able to complete the
+                  <span class="m-tooltip-trigger">
+                    neurotoxicity assessment<span class="m-info-dot">i</span>
+                    <span class="m-tooltip-box">
+                      <strong>NTA Link:</strong>
+                      apply.pompaworkshop.com/login<br />
+                      <strong>HubSpot field:</strong> ntq_percentage<br />
+                      <strong>Secondary:</strong>
+                      apply.pompaworkshop.com/register-secondary
+                    </span>
+                  </span>
+                  questionnaire &mdash; that long questionnaire online.
+                  Awesome!&rdquo;
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>Good for:</strong> NTA (link + HubSpot field), test kit
+            (Slack channel + tracking portal), Zoom (test call link), spouse
+            (links to Spouse Live Guide). Keeps operational details accessible
+            without cluttering the reading flow.
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ IDEA 5 ════════ -->
+      <div class="idea">
+        <div class="idea-header">
+          <span class="idea-num">5</span>
+          <span class="idea-title">Sticky Action Buttons</span>
+          <span class="idea-impact medium">Medium Impact</span>
+        </div>
+        <div class="idea-body">
+          <div class="problem-box">
+            <strong>Problem</strong>
+            Action buttons (&ldquo;They&rsquo;re engaged &rarr; Next,&rdquo;
+            &ldquo;Went to voicemail&rdquo;) sit at the bottom of the step
+            content. On longer steps (NTA, Kit, Spouse), the caller has to
+            scroll past the script card, tip, and alt scripts to reach the
+            buttons. On a live call, scrolling = wasted seconds.
+          </div>
+          <div class="solution-box">
+            <strong>Solution</strong>
+            Pin the action buttons to the bottom of the viewport as a sticky
+            footer bar. They&rsquo;re always visible regardless of scroll
+            position. Use compact horizontal pill buttons to save space.
+          </div>
+
+          <div class="mockup-label">Sticky footer actions</div>
+          <div class="mockup">
+            <div class="mockup-proposed">
+              <div
+                style="
+                  min-height: 80px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  color: var(--slate-400);
+                  font-size: 12px;
+                  font-style: italic;
+                "
+              >
+                (step content scrolls above)
+              </div>
+              <div
+                style="
+                  background: var(--bone);
+                  border-top: 1px solid var(--slate-200);
+                  padding: 12px 16px;
+                  display: flex;
+                  gap: 8px;
+                  border-radius: 0 0 10px 10px;
+                  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+                "
+              >
+                <div class="m-btn pri" style="flex: 1">
+                  They&rsquo;re engaged &rarr; Next
+                </div>
+                <div
+                  class="m-btn sec"
+                  style="flex: 0 1 auto; white-space: nowrap"
+                >
+                  Voicemail
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>Bonus:</strong> On mobile, this is critical. The caller is
+            often on their phone &mdash; thumb reaches the bottom of the screen
+            naturally. Top of the screen requires a grip change.
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ IDEA 6 ════════ -->
+      <div class="idea">
+        <div class="idea-header">
+          <span class="idea-num">6</span>
+          <span class="idea-title">Variable Highlighting in Scripts</span>
+          <span class="idea-impact medium">Medium Impact</span>
+        </div>
+        <div class="idea-body">
+          <div class="problem-box">
+            <strong>Problem</strong>
+            Placeholders like {FirstName}, {HAName}, {Day}, {Time} are shown as
+            plain italic text. The caller has to mentally parse where to
+            substitute while reading. On a fast call, they might accidentally
+            read &ldquo;{HAName}&rdquo; out loud.
+          </div>
+          <div class="solution-box">
+            <strong>Solution</strong>
+            Render placeholders as small highlighted pills with a distinct color
+            (yellow background or dashed underline). They pop visually so the
+            caller knows &ldquo;fill this in&rdquo; at a glance.
+          </div>
+
+          <div class="mockup-label">Variable highlighting</div>
+          <div class="mockup">
+            <div class="mockup-current">
+              <div class="m-focus-script">
+                <div class="m-script-label">Say This</div>
+                <div class="m-focus-text" style="font-size: 15px">
+                  &ldquo;Great! I&rsquo;m just calling to make sure you&rsquo;re
+                  all set for your appointment with {HAName} on {Day,
+                  Date}.&rdquo;
+                </div>
+              </div>
+            </div>
+            <div class="mockup-proposed">
+              <div class="m-focus-script">
+                <div class="m-script-label">Say This</div>
+                <div class="m-focus-text" style="font-size: 15px">
+                  &ldquo;Great! I&rsquo;m just calling to make sure you&rsquo;re
+                  all set for your appointment with
+                  <span
+                    style="
+                      background: #fef08a;
+                      padding: 1px 6px;
+                      border-radius: 4px;
+                      font-style: normal;
+                      font-size: 13px;
+                      font-weight: 600;
+                      color: #92400e;
+                    "
+                    >HA Name</span
+                  >
+                  on
+                  <span
+                    style="
+                      background: #fef08a;
+                      padding: 1px 6px;
+                      border-radius: 4px;
+                      font-style: normal;
+                      font-size: 13px;
+                      font-weight: 600;
+                      color: #92400e;
+                    "
+                    >Day, Date</span
+                  >.&rdquo;
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>Small effort, big UX win.</strong> Just a regex replace on
+            render: <code>{...}</code> &rarr; highlighted span. Prevents the
+            &ldquo;reading the placeholder out loud&rdquo; mistake.
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ IDEA 7 ════════ -->
+      <div class="idea">
+        <div class="idea-header">
+          <span class="idea-num">7</span>
+          <span class="idea-title">Compact Step Title With Inline Badge</span>
+          <span class="idea-impact medium">Medium Impact</span>
+        </div>
+        <div class="idea-body">
+          <div class="problem-box">
+            <strong>Problem</strong>
+            The badge (&ldquo;Step 3&rdquo;) and title (&ldquo;Zoom Access &amp;
+            Calendar Invite&rdquo;) take two lines. The badge is on its own row,
+            then the title is 32px below it. This wastes vertical space and
+            pushes the script card down.
+          </div>
+          <div class="solution-box">
+            <strong>Solution</strong>
+            Put the badge inline with the title on the same line. Reduce title
+            size slightly in Focus Mode. One line instead of two.
+          </div>
+
+          <div class="mockup-label">Inline badge + title</div>
+          <div class="mockup">
+            <div class="mockup-current" style="padding: 14px 20px">
+              <div class="m-badge">Step 3</div>
+              <div class="m-title">Zoom Access &amp; Calendar Invite</div>
+            </div>
+            <div class="mockup-proposed" style="padding: 14px 20px">
+              <div style="display: flex; align-items: center; gap: 10px">
+                <div class="m-badge">Step 3</div>
+                <span class="m-title-sm" style="margin-bottom: 0"
+                  >Zoom Access &amp; Calendar Invite</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>Saves:</strong> ~24px per step. Combined with Idea 1, the
+            script card is now essentially the first thing on screen after a
+            single-line header.
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ IDEA 8 ════════ -->
+      <div class="idea">
+        <div class="idea-header">
+          <span class="idea-num">8</span>
+          <span class="idea-title">Keyboard Shortcuts for Power Users</span>
+          <span class="idea-impact medium">Medium Impact</span>
+        </div>
+        <div class="idea-body">
+          <div class="problem-box">
+            <strong>Problem</strong>
+            Navigating requires clicking buttons. On a desktop call (Aloware +
+            HubSpot open), the caller&rsquo;s mouse is busy in other windows.
+            Switching to click &ldquo;Next&rdquo; in the call guide tab costs
+            focus.
+          </div>
+          <div class="solution-box">
+            <strong>Solution</strong>
+            Add keyboard shortcuts: <strong>1/2/3</strong> = select action
+            button by position. <strong>B</strong> = back. <strong>J</strong> =
+            open Quick Jump. <strong>C</strong> = copy script. Show a tiny
+            &ldquo;?&rdquo; help button in the top bar. For callers who keep the
+            guide in a side panel, this means zero mouse usage.
+          </div>
+
+          <div class="note">
+            <strong>Implementation:</strong> Simple keydown listener. Only fires
+            when no input/textarea is focused. The &ldquo;?&rdquo; button shows
+            a small overlay with the shortcut list.
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ PRIORITY TABLE ════════ -->
+      <div class="priority-card">
+        <h2>Implementation Priority</h2>
+        <table class="p-table">
+          <thead>
+            <tr>
+              <th>Idea</th>
+              <th>Impact</th>
+              <th>Effort</th>
+              <th>Recommendation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>3. Focus Mode toggle</strong></td>
+              <td><span class="tag high">High</span></td>
+              <td><span class="tag easy">Medium</span></td>
+              <td>
+                Do first &mdash; wraps Ideas 1 + 2 into a single feature. One
+                toggle, maximum payoff.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>6. Variable highlighting</strong></td>
+              <td><span class="tag med">Medium</span></td>
+              <td><span class="tag easy">Easy</span></td>
+              <td>
+                Quick regex in the render function. 10 minutes, instant
+                improvement.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>5. Sticky action buttons</strong></td>
+              <td><span class="tag med">Medium</span></td>
+              <td><span class="tag easy">Easy</span></td>
+              <td>
+                CSS-only change (<code>position: sticky; bottom: 0</code>).
+                Always accessible.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>7. Inline badge + title</strong></td>
+              <td><span class="tag med">Medium</span></td>
+              <td><span class="tag easy">Easy</span></td>
+              <td>Tiny layout tweak. Can combine with Focus Mode.</td>
+            </tr>
+            <tr>
+              <td><strong>4. Tooltip info dots</strong></td>
+              <td><span class="tag med">Medium</span></td>
+              <td><span class="tag easy">Medium</span></td>
+              <td>
+                Needs per-step data mapping (which terms get tooltips). Worth it
+                for NTA/Kit/Zoom steps.
+              </td>
+            </tr>
+            <tr>
+              <td><strong>8. Keyboard shortcuts</strong></td>
+              <td><span class="tag med">Medium</span></td>
+              <td><span class="tag easy">Easy</span></td>
+              <td>
+                Nice-to-have for desktop callers. Skip if team is mostly mobile.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

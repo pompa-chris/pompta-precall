@@ -1,0 +1,3750 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Call Scripts — AC Pre-Call Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --slate-900: #1b2a31;
+        --slate-800: #243841;
+        --slate-700: #2f4a56;
+        --slate-600: #3f5b68;
+        --slate-500: #5a7682;
+        --slate-400: #89a0ab;
+        --slate-300: #b5c6cd;
+        --slate-200: #dce5e9;
+        --slate-100: #edf1f3;
+        --teal-700: #1e8f86;
+        --teal-600: #2db3a6;
+        --teal-500: #4ec5b9;
+        --teal-400: #87d8d0;
+        --teal-200: #c9eae6;
+        --teal-100: #e6f5f2;
+        --paper: #f7f3ed;
+        --paper-deep: #efe8dc;
+        --bone: #fbf9f4;
+        --ink: #1a262c;
+        --ink-soft: #3d5059;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 20% 0%,
+            rgba(45, 179, 166, 0.06) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at 80% 100%,
+            rgba(30, 143, 134, 0.04) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Nav */
+      .site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: var(--bone);
+        border-bottom: 1px solid var(--slate-200);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        z-index: 200;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-decoration: none;
+      }
+      .nav-logo img {
+        height: 36px;
+        width: auto;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-link {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--slate-500);
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+      }
+      .nav-link:hover {
+        color: var(--teal-700);
+        background: var(--teal-100);
+      }
+      .nav-link.active {
+        color: var(--teal-700);
+        background: var(--teal-100);
+      }
+
+      /* Header */
+      .page-header {
+        padding: 100px 40px 40px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+      .header-eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--teal-700);
+        font-weight: 500;
+        margin-bottom: 16px;
+      }
+      .header-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 48px;
+        font-weight: 500;
+        letter-spacing: -0.025em;
+        line-height: 1.1;
+        color: var(--slate-800);
+        margin-bottom: 12px;
+      }
+
+      /* Mode Toggle */
+      .mode-toggle {
+        display: flex;
+        justify-content: center;
+        margin: 24px auto 32px;
+        position: relative;
+        z-index: 1;
+      }
+      .mode-toggle-inner {
+        display: flex;
+        background: var(--bone);
+        border: 1px solid var(--slate-200);
+        border-radius: 40px;
+        padding: 4px;
+        gap: 4px;
+      }
+      .mode-btn {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 10px 28px;
+        border-radius: 36px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        background: transparent;
+        color: var(--slate-600);
+      }
+      .mode-btn.active {
+        background: var(--teal-700);
+        color: #fff;
+      }
+      .mode-btn:hover:not(.active) {
+        background: var(--teal-100);
+        color: var(--teal-700);
+      }
+
+      /* Version Toggle */
+      .version-toggle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto 28px;
+        position: relative;
+        z-index: 1;
+      }
+      .version-toggle-inner {
+        display: flex;
+        background: var(--bone);
+        border: 1px solid var(--slate-200);
+        border-radius: 24px;
+        padding: 3px;
+        gap: 3px;
+      }
+      .version-btn {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 6px 18px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        background: transparent;
+        color: var(--slate-500);
+        letter-spacing: 0.04em;
+      }
+      .version-btn.active {
+        background: var(--teal-700);
+        color: #fff;
+      }
+      .version-btn:hover:not(.active) {
+        background: var(--teal-100);
+        color: var(--teal-700);
+      }
+      .version-desc {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 12px;
+        color: var(--slate-400);
+        margin-top: 8px;
+        text-align: center;
+        line-height: 1.4;
+      }
+      .version-badge {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        font-weight: 500;
+        padding: 2px 7px;
+        border-radius: 4px;
+        margin-left: 8px;
+        letter-spacing: 0.04em;
+        vertical-align: middle;
+      }
+      .version-badge.v1 {
+        background: #ede9fe;
+        color: #6d28d9;
+      }
+      .version-badge.v2 {
+        background: var(--teal-100);
+        color: var(--teal-700);
+      }
+
+      /* Content */
+      .content-area {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0 40px 60px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Category Filters */
+      .category-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .cat-btn {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 18px;
+        border-radius: 20px;
+        border: 1px solid var(--slate-200);
+        background: var(--bone);
+        color: var(--slate-600);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+      }
+      .cat-btn:hover {
+        border-color: var(--teal-400);
+        color: var(--teal-700);
+      }
+      .cat-btn.active {
+        background: var(--teal-100);
+        color: var(--teal-700);
+        border-color: var(--teal-400);
+      }
+
+      /* Search */
+      .search-wrap {
+        margin-bottom: 28px;
+      }
+      .search-input {
+        width: 100%;
+        padding: 14px 20px;
+        border: 1px solid var(--slate-200);
+        border-radius: 12px;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 15px;
+        color: var(--ink);
+        background: var(--bone);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .search-input::placeholder {
+        color: var(--slate-400);
+      }
+      .search-input:focus {
+        border-color: var(--teal-400);
+      }
+
+      /* Script Cards */
+      .script-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .script-card {
+        background: var(--bone);
+        border: 1px solid var(--slate-200);
+        border-radius: 12px;
+        padding: 20px 24px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .script-card:hover {
+        border-color: var(--teal-400);
+      }
+      .script-card-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .script-id {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        font-weight: 500;
+        background: var(--teal-100);
+        color: var(--teal-700);
+        padding: 4px 10px;
+        border-radius: 6px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .script-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--slate-800);
+        line-height: 1.3;
+      }
+      .script-when {
+        font-style: italic;
+        color: var(--ink-soft);
+        font-size: 14px;
+        margin-top: 6px;
+        margin-left: 0;
+      }
+      .script-body {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.4s ease,
+          opacity 0.3s ease;
+        opacity: 0;
+        margin-top: 0;
+      }
+      .script-card.expanded .script-body {
+        max-height: 4000px;
+        opacity: 1;
+        margin-top: 16px;
+      }
+      .script-line {
+        border-left: 3px solid var(--teal-400);
+        padding: 12px 16px;
+        background: var(--teal-100);
+        border-radius: 0 8px 8px 0;
+        margin-bottom: 8px;
+        font-style: italic;
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--ink);
+      }
+      .script-line .var {
+        font-family: "IBM Plex Mono", monospace;
+        background: var(--teal-100);
+        color: var(--teal-700);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-style: normal;
+        font-size: 13px;
+      }
+      .branch-label {
+        font-weight: 700;
+        font-size: 13px;
+        margin-top: 12px;
+        margin-bottom: 6px;
+        color: var(--ink);
+      }
+      .script-tip {
+        background: var(--paper-deep);
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-style: italic;
+        font-size: 14px;
+        color: var(--ink-soft);
+        margin-top: 8px;
+      }
+      .script-note {
+        background: var(--paper-deep);
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-style: italic;
+        font-size: 14px;
+        color: var(--ink-soft);
+        margin-top: 8px;
+      }
+      .no-results {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--slate-400);
+        font-size: 16px;
+      }
+      .expand-icon {
+        margin-left: auto;
+        color: var(--slate-400);
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+        font-size: 20px;
+        line-height: 1;
+      }
+      .script-card.expanded .expand-icon {
+        transform: rotate(180deg);
+      }
+
+      /* Practice Mode */
+      .scenario-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 8px;
+      }
+      .scenario-card {
+        background: var(--bone);
+        border: 1px solid var(--slate-200);
+        border-radius: 12px;
+        padding: 28px 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .scenario-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--teal-700), var(--teal-500));
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .scenario-card:hover {
+        border-color: var(--teal-400);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(30, 143, 134, 0.08);
+      }
+      .scenario-card:hover::before {
+        opacity: 1;
+      }
+      .scenario-card-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--slate-800);
+        margin-bottom: 6px;
+      }
+      .scenario-card-sub {
+        font-size: 14px;
+        color: var(--ink-soft);
+        margin-bottom: 16px;
+        line-height: 1.5;
+      }
+      .scenario-card-meta {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+      .scenario-diff {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-weight: 500;
+      }
+      .diff-easy {
+        background: var(--teal-100);
+        color: var(--teal-700);
+      }
+      .diff-medium {
+        background: #fef3c7;
+        color: #92400e;
+      }
+      .diff-hard {
+        background: #fde2e2;
+        color: #b8472e;
+      }
+      .scenario-steps-badge {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        color: var(--slate-500);
+      }
+      .best-score {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        color: var(--teal-700);
+        margin-left: auto;
+      }
+
+      /* Active Scenario */
+      .scenario-active {
+        display: none;
+      }
+      .scenario-active.visible {
+        display: block;
+      }
+      .scenario-back-btn {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 14px;
+        color: var(--slate-500);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px 0;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .scenario-back-btn:hover {
+        color: var(--teal-700);
+      }
+      .context-card {
+        background: var(--bone);
+        border: 1px solid var(--slate-200);
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 20px;
+      }
+      .context-card-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--slate-800);
+        margin-bottom: 8px;
+      }
+      .context-card-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-size: 14px;
+        color: var(--ink-soft);
+      }
+      .context-detail {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .context-label {
+        font-weight: 600;
+        color: var(--slate-600);
+      }
+      .progress-bar-wrap {
+        margin-bottom: 20px;
+      }
+      .progress-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        color: var(--slate-500);
+        margin-bottom: 6px;
+      }
+      .progress-track {
+        height: 4px;
+        background: var(--slate-200);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--teal-700), var(--teal-500));
+        border-radius: 4px;
+        transition: width 0.4s ease;
+      }
+      .transcript {
+        max-height: 400px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        padding: 16px;
+        background: var(--bone);
+        border: 1px solid var(--slate-200);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .msg {
+        max-width: 80%;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .msg-client {
+        align-self: flex-start;
+        background: var(--slate-100);
+        color: var(--ink);
+        border-bottom-left-radius: 4px;
+      }
+      .msg-ac {
+        align-self: flex-end;
+        background: var(--teal-600);
+        color: #fff;
+        border-bottom-right-radius: 4px;
+      }
+      .msg-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 4px;
+        opacity: 0.7;
+      }
+      .client-prompt {
+        background: var(--slate-100);
+        border: 1px solid var(--slate-200);
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 16px;
+      }
+      .client-prompt-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        color: var(--teal-700);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 6px;
+      }
+      .client-prompt-text {
+        font-size: 15px;
+        color: var(--ink);
+        font-style: italic;
+      }
+      .client-prompt-context {
+        font-size: 13px;
+        color: var(--ink-soft);
+        margin-top: 8px;
+      }
+      .response-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+      .response-btn {
+        width: 100%;
+        text-align: left;
+        padding: 16px 20px;
+        border: 1px solid var(--slate-200);
+        border-radius: 10px;
+        background: var(--bone);
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 14px;
+        color: var(--ink);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        line-height: 1.5;
+      }
+      .response-btn:hover:not(.chosen) {
+        border-color: var(--teal-400);
+        background: var(--teal-100);
+      }
+      .response-btn.chosen.correct {
+        border-color: var(--teal-400);
+        background: var(--teal-100);
+      }
+      .response-btn.chosen.wrong {
+        border-color: #e6a898;
+        background: #fdf0ec;
+      }
+      .response-btn.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+      .response-btn.highlight-correct {
+        border-color: var(--teal-400);
+        background: var(--teal-100);
+      }
+      .feedback-panel {
+        padding: 16px 20px;
+        border-radius: 10px;
+        margin-bottom: 16px;
+        display: none;
+      }
+      .feedback-panel.visible {
+        display: block;
+      }
+      .feedback-panel.correct {
+        background: var(--teal-100);
+        border: 1px solid var(--teal-400);
+      }
+      .feedback-panel.wrong {
+        background: #fdf0ec;
+        border: 1px solid #e6a898;
+      }
+      .feedback-label {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      .feedback-label.correct {
+        color: var(--teal-700);
+      }
+      .feedback-label.wrong {
+        color: #b8472e;
+      }
+      .feedback-text {
+        font-size: 14px;
+        color: var(--ink-soft);
+        line-height: 1.5;
+      }
+      .continue-btn {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 10px 24px;
+        background: var(--teal-700);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .continue-btn:hover {
+        background: var(--teal-600);
+      }
+
+      /* Scorecard */
+      .scorecard {
+        display: none;
+        text-align: center;
+        background: var(--bone);
+        border: 1px solid var(--slate-200);
+        border-radius: 16px;
+        padding: 48px 40px;
+      }
+      .scorecard.visible {
+        display: block;
+      }
+      .scorecard-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 32px;
+        font-weight: 500;
+        color: var(--slate-800);
+        margin-bottom: 8px;
+      }
+      .scorecard-fraction {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 56px;
+        font-weight: 500;
+        color: var(--teal-700);
+        margin: 16px 0 8px;
+      }
+      .scorecard-pct {
+        font-size: 18px;
+        color: var(--ink-soft);
+        margin-bottom: 24px;
+      }
+      .scorecard-breakdown {
+        text-align: left;
+        max-width: 500px;
+        margin: 0 auto 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .scorecard-step {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        padding: 8px 12px;
+        border-radius: 8px;
+      }
+      .scorecard-step.step-correct {
+        background: var(--teal-100);
+        color: var(--teal-700);
+      }
+      .scorecard-step.step-wrong {
+        background: #fdf0ec;
+        color: #b8472e;
+      }
+      .scorecard-step-num {
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 500;
+        width: 28px;
+      }
+      .scorecard-step-icon {
+        width: 20px;
+        text-align: center;
+      }
+      .scorecard-btns {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+      .scorecard-btn {
+        padding: 12px 28px;
+        border-radius: 10px;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+      }
+      .scorecard-btn.primary {
+        background: var(--teal-700);
+        color: #fff;
+      }
+      .scorecard-btn.primary:hover {
+        background: var(--teal-600);
+      }
+      .scorecard-btn.secondary {
+        background: var(--bone);
+        color: var(--slate-600);
+        border: 1px solid var(--slate-200);
+      }
+      .scorecard-btn.secondary:hover {
+        border-color: var(--teal-400);
+        color: var(--teal-700);
+      }
+
+      /* Practice Intro */
+      .practice-intro {
+        text-align: center;
+        margin-bottom: 28px;
+      }
+      .practice-intro-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 24px;
+        font-weight: 500;
+        color: var(--slate-800);
+        margin-bottom: 8px;
+      }
+      .practice-intro-desc {
+        font-size: 15px;
+        color: var(--ink-soft);
+        line-height: 1.6;
+        max-width: 580px;
+        margin: 0 auto;
+      }
+
+      /* Scenario Intro */
+      .scenario-intro {
+        background: var(--bone);
+        border: 1px solid var(--slate-200);
+        border-radius: 16px;
+        padding: 48px 40px;
+        text-align: center;
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      .scenario-intro-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 28px;
+        font-weight: 500;
+        color: var(--slate-800);
+        margin-bottom: 8px;
+      }
+      .scenario-intro-sub {
+        font-size: 15px;
+        color: var(--ink-soft);
+        margin-bottom: 28px;
+        line-height: 1.6;
+      }
+      .scenario-intro-how {
+        text-align: left;
+        background: var(--teal-100);
+        border: 1px solid var(--teal-200);
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 28px;
+      }
+      .scenario-intro-how-title {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--teal-700);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 12px;
+      }
+      .scenario-intro-how ol {
+        padding-left: 20px;
+        font-size: 14px;
+        color: var(--ink);
+        line-height: 1.8;
+      }
+      .scenario-intro-how li {
+        margin-bottom: 4px;
+      }
+      .scenario-intro-details {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+      }
+      .scenario-intro-detail {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        color: var(--slate-500);
+      }
+      .scenario-intro-detail strong {
+        color: var(--slate-700);
+      }
+      .start-scenario-btn {
+        padding: 14px 36px;
+        background: var(--teal-700);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .start-scenario-btn:hover {
+        background: var(--teal-600);
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        padding: 32px 40px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        color: var(--slate-400);
+        letter-spacing: 0.06em;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .scenario-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 720px) {
+        .site-nav {
+          padding: 0 16px;
+        }
+        .nav-links {
+          gap: 2px;
+        }
+        .nav-link {
+          font-size: 11px;
+          padding: 6px 10px;
+        }
+        .page-header {
+          padding: 84px 20px 28px;
+        }
+        .header-title {
+          font-size: 34px;
+        }
+        .content-area {
+          padding: 0 20px 40px;
+        }
+        .scenario-grid {
+          grid-template-columns: 1fr;
+        }
+        .scorecard {
+          padding: 32px 20px;
+        }
+        .transcript {
+          max-height: 300px;
+        }
+      }
+      @media (max-width: 640px) {
+        .category-filters {
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 4px;
+        }
+        .cat-btn {
+          flex-shrink: 0;
+        }
+        .msg {
+          max-width: 90%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a href="index.html" class="nav-logo"
+        ><img src="logo.png" alt="Dr. Pompa"
+      /></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quiz.html" class="nav-link">Quiz</a>
+        <a href="simulator.html" class="nav-link">Simulator</a>
+        <a href="live-testing.html" class="nav-link">Live Testing</a>
+        <a href="contacts.html" class="nav-link">Contacts</a>
+        <a href="call-scripts.html" class="nav-link active">Call Scripts</a>
+        <a href="spouse-training.html" class="nav-link">Spouse</a>
+        <a href="call-guide.html" class="nav-link">Call Guide</a>
+        <a href="reschedule-sop.html" class="nav-link">Reschedule SOP</a>
+      </div>
+    </nav>
+
+    <div class="page-header">
+      <div class="header-eyebrow">Phone Reference &amp; Practice</div>
+      <h1 class="header-title">Call Scripts</h1>
+    </div>
+
+    <div class="mode-toggle">
+      <div class="mode-toggle-inner">
+        <button class="mode-btn active" data-mode="reference">
+          Quick Reference
+        </button>
+        <button class="mode-btn" data-mode="practice">Practice Mode</button>
+      </div>
+    </div>
+
+    <div class="version-toggle" id="versionToggle">
+      <div class="version-toggle-inner">
+        <button class="version-btn active" data-version="v1">
+          V1 — Bree Method
+        </button>
+        <button class="version-btn" data-version="v2">V2 — Classic</button>
+      </div>
+      <div class="version-desc" id="versionDesc">
+        Direct, chest-voice approach — pain first, statements not questions
+      </div>
+    </div>
+
+    <div class="content-area">
+      <div id="referenceMode"></div>
+      <div id="practiceMode" style="display: none"></div>
+    </div>
+
+    <div class="footer">Dr. Pompa &mdash; AC Team Onboarding</div>
+
+    <script>
+      (function () {
+        function el(id) {
+          return document.getElementById(id);
+        }
+        function createEl(tag, cls, text) {
+          var e = document.createElement(tag);
+          if (cls) e.className = cls;
+          if (text) e.textContent = text;
+          return e;
+        }
+
+        var SCRIPTS = [
+          {
+            id: "SP-OPEN",
+            cat: "spouse",
+            title: "Assumptive Frame Opening",
+            when: "When first bringing up spouse attendance during the call \u2014 never ask yes/no",
+            lines: [
+              {
+                text: "For your husband \u2014 either way works for us \u2014 is he going to be with you physically on the Zoom, or will he be joining virtually from somewhere else?",
+              },
+            ],
+            branches: [
+              {
+                label: "Alternate Soft Open:",
+                lines: [
+                  {
+                    text: "Should I send the Zoom link to your husband too, or will you be on the same device?",
+                  },
+                ],
+              },
+            ],
+            tip: "Never ask a yes/no question about spouse attendance. Give two options \u2014 both mean attending.",
+          },
+
+          {
+            id: "SP-DISCOVERY",
+            cat: "spouse",
+            title: "Discovery: The Best Opening Question",
+            when: "After any spouse pushback \u2014 use to surface the real objection before giving reasons",
+            lines: [
+              {
+                text: "Does he actually fully understand what you\u2019re dealing with health-wise? What\u2019s his perspective on what\u2019s going on with you?",
+              },
+            ],
+            branches: [
+              {
+                label:
+                  '"Secret Mission" ice-breaker (when they seem to be hiding it):',
+                lines: [
+                  {
+                    text: "Oh \u2014 so are you on kind of a secret mission with this one?",
+                  },
+                ],
+              },
+            ],
+            tip: "This question opens the door to their real situation. 90% of the time, the real objection surfaces here. Ask, don\u2019t tell \u2014 what YOU say is a lie, what THEY say is the truth.",
+          },
+
+          {
+            id: "SP-NO1",
+            cat: "spouse",
+            title: "Three No\u2019s \u2014 #1: Assumptive Rebook",
+            when: 'First pushback: "My spouse can\u2019t make it"',
+            lines: [
+              {
+                text: "No problem! Let\u2019s get you rebooked for a time when they can be there. What day works for both of you?",
+              },
+            ],
+            tip: "Assume they\u2019ll reschedule. Don\u2019t ask permission \u2014 offer the solution.",
+          },
+
+          {
+            id: "SP-NO2",
+            cat: "spouse",
+            title: "Three No\u2019s \u2014 #2: Emphasize Importance",
+            when: 'Second pushback: "No, they\u2019re really too busy"',
+            lines: [
+              {
+                text: "I hear you. It is really important for us to have the spouse on \u2014 it\u2019s part of Dr. Pompa\u2019s protocol. They can really be supportive of your journey, and who knows, they may even have something with their own health they want to discuss in the future. Can we look at a time that might work for both of you?",
+              },
+            ],
+            tip: "Reinforce that this isn\u2019t optional while keeping it collaborative.",
+          },
+
+          {
+            id: "SP-NO3",
+            cat: "spouse",
+            title: "Three No\u2019s \u2014 #3: Discovery Mode",
+            when: 'Third pushback: "No, they just can\u2019t"',
+            lines: [
+              {
+                text: "Okay, walk me through that. What\u2019s coming up for you around this?",
+              },
+            ],
+            tip: "Stop pushing and start listening. Find out what\u2019s really going on. Then use the matching talk track.",
+          },
+
+          {
+            id: "SP-BUSY",
+            cat: "spouse",
+            title: 'Talk Track: "They\u2019re too busy"',
+            when: "After discovery reveals the spouse has scheduling constraints",
+            lines: [
+              {
+                text: "Tell me more about that. Are they working during all the times available, or is there something else going on?",
+              },
+              {
+                text: "I totally understand \u2014 schedules are crazy. {HAName} has some evening and early morning availability. Can we find about an hour that works for both of you?",
+              },
+            ],
+            branches: [
+              {
+                label: "If deeper issue suspected:",
+                lines: [
+                  {
+                    text: "Is it that they\u2019re busy, or are they not fully on board with you exploring this?",
+                  },
+                ],
+              },
+            ],
+          },
+
+          {
+            id: "SP-SKEPTICAL",
+            cat: "spouse",
+            title: 'Talk Track: "They\u2019re skeptical"',
+            when: "After discovery reveals the spouse doubts the approach",
+            lines: [
+              {
+                text: "Perfect! {HAName} loves skeptics. Seriously. They\u2019d rather answer tough questions directly than have your spouse wondering on the sidelines. Tell them to bring their doubts. {HAName} can handle it. Analytical people usually leave the call going \u2018okay, that actually makes sense.\u2019 Let\u2019s find a time when they can join.",
+              },
+            ],
+          },
+
+          {
+            id: "SP-SCAM",
+            cat: "spouse",
+            title: 'Talk Track: "They think this is a scam"',
+            when: "After discovery reveals the spouse questions legitimacy",
+            lines: [
+              {
+                text: "Ha, I get it. They\u2019ve probably watched you try things that didn\u2019t work, and they\u2019re protective. That\u2019s actually a good thing \u2014 they care about you. What I\u2019d say is: have them join the call and ask their hardest questions directly. {HAName} isn\u2019t going to pressure anyone. If it doesn\u2019t make sense, they\u2019ll say so. But at least your spouse will hear it firsthand instead of filtering it through their doubts.",
+              },
+            ],
+          },
+
+          {
+            id: "SP-TRIEDALL",
+            cat: "spouse",
+            title: 'Talk Track: "Tried everything / stop spending"',
+            when: "The #1 real objection \u2014 husband tired of wife spending on health things that don\u2019t work",
+            lines: [
+              {
+                text: "From his perspective \u2014 is it that you\u2019ve tried a lot of things that haven\u2019t really worked, and he doesn\u2019t want you to spend any more money? Is that the case?",
+              },
+              {
+                text: "Okay \u2014 so does he actually understand WHY those things didn\u2019t work for you? Because when he comes on the call, he gets to learn what you\u2019ve actually been going through, how it\u2019s affecting your body, what our treatment looks like, how it would help you, AND why what you tried before didn\u2019t work. That\u2019s all covered in about an hour.",
+              },
+            ],
+            tip: "This is by far the most common real objection. Surface it directly if they don\u2019t volunteer it.",
+          },
+
+          {
+            id: "SP-MYDECISION",
+            cat: "spouse",
+            title: 'Talk Track: "I make my own health decisions"',
+            when: "After discovery reveals the lead wants full autonomy",
+            lines: [
+              {
+                text: "I totally respect that. And you\u2019re absolutely the one making the decision about your health. The reason we ask for spouse involvement isn\u2019t to give them veto power \u2014 it\u2019s because this program requires real lifestyle changes. Having them understand what you\u2019re doing, and why, makes your success rate much higher. They become your accountability partner. Does that make sense?",
+              },
+            ],
+            tip: "If they\u2019re firm, move to the Financial Decision Closer (SP-CLOSER).",
+            v1: {
+              lines: [
+                {
+                  text: "And the way you\u2019ve done things in the past \u2014 you\u2019ve gone to a lot of appointments by yourself, right?",
+                },
+                { text: "And what have the results been?" },
+                {
+                  text: "So are you open to getting on the other side of what you\u2019re going through?",
+                },
+                {
+                  text: "Would you agree that it might be beneficial to do things differently than you\u2019ve done before?",
+                },
+                { text: "Has he ever been supportive of things in the past?" },
+              ],
+              tip: "Pain echo technique: use their own words and history to show why going solo hasn\u2019t worked. Don\u2019t lecture \u2014 ask questions that lead them there. If truly stuck after 2-3 genuine attempts, let it go. You\u2019re an AC, not an HA \u2014 don\u2019t lay into them.",
+            },
+          },
+
+          {
+            id: "SP-DOWNGRADE",
+            cat: "spouse",
+            title: 'Last Ask: "Just Listen In" Downgrade',
+            when: "After 3\u20134 attempts when spouse still won\u2019t commit \u2014 lowest-commitment offer",
+            lines: [
+              {
+                text: "Could he at least just listen in for a few minutes? He doesn\u2019t have to be on camera or all involved. Just there to hear a bit and support you.",
+              },
+            ],
+            tip: "This is the lowest-commitment ask. Most people will agree to \u201ca few minutes.\u201d",
+          },
+
+          {
+            id: "SP-CLOSER",
+            cat: "spouse",
+            title: "Financial Decision Closer (Last Resort)",
+            when: "After 3\u20134 failed attempts when spouse truly won\u2019t attend \u2014 your white-flag moment",
+            lines: [
+              {
+                text: "I hear you. Everyone\u2019s situation is different. If we were to find that we\u2019re able to help you and make a recommendation \u2014 do you feel that you\u2019d be able to move forward with the treatment process and make those decisions about your health, including financial decisions, without him?",
+              },
+            ],
+            branches: [
+              {
+                label: "If YES:",
+                lines: [
+                  {
+                    text: "Proceed with appointment. Tag HA: \u201cShe said she has the money, she can make the decision independently, she sounds confident. We went back and forth. It\u2019s now up to your discretion.\u201d",
+                  },
+                ],
+              },
+              {
+                label: "If NO:",
+                lines: [
+                  {
+                    text: "This confirms spouse IS needed. Offer to reschedule for a time when both can attend. If no time works, discuss cancellation.",
+                  },
+                ],
+              },
+            ],
+            tip: "Last resort ONLY. Use after genuine effort through the Three No\u2019s and talk tracks.",
+            v1: {
+              lines: [
+                {
+                  text: "You know what, {FirstName}? I hear you. It sounds like this has been something you\u2019ve been going through alone for some time.",
+                },
+                {
+                  text: "Do you think it would be helpful to have him understand what\u2019s going on?",
+                },
+              ],
+              branches: [
+                {
+                  label: "If still no:",
+                  lines: [
+                    {
+                      text: "I understand. Everyone gets a consultation \u2014 let\u2019s keep your appointment. I\u2019ll make a note for {HAName} about the situation so they\u2019re prepared.",
+                    },
+                  ],
+                },
+              ],
+              tip: "As an AC, this is your white flag. Don\u2019t push past this \u2014 the HA can be bolder on the Zoom face-to-face. A solo show is better than a no-show. Note clearly in CRM so HA knows the situation.",
+            },
+          },
+
+          {
+            id: "SP-WALL",
+            cat: "spouse",
+            title: "The \u201cWall\u201d \u2014 Rapid-Fire No",
+            when: "Client goes into \u201cno no no no no\u201d mode and won\u2019t let you speak (happens 1\u20132x/week)",
+            lines: [
+              {
+                text: "Okay, is this kind of a secret mission?",
+              },
+            ],
+            note: "Don\u2019t fight the wall. Try ONE discovery question (above). If adamant after genuine effort, let it go \u2014 a solo show is better than a no-show. Note clearly in CRM so HA knows.",
+          },
+
+          {
+            id: "SP-SEPARATED",
+            cat: "spouse",
+            title: "Exception: Separated / Not Together",
+            when: "When lead reveals they are single, divorced, separated, or in a difficult domestic situation",
+            lines: [
+              {
+                text: "I appreciate you sharing that with me. In that case, we can absolutely proceed without them. Is there someone else in your life who\u2019s part of your support system \u2014 a parent, sibling, close friend \u2014 who might want to join? If not, that\u2019s okay too. Just make sure you\u2019re in a quiet place where you can focus for about an hour.",
+              },
+            ],
+            note: "Note exception in CRM, inform HA in advance.",
+          },
+
+          {
+            id: "SP-MEDICALLY-UNABLE",
+            cat: "spouse",
+            title:
+              "Exception: Spouse Medically Unable \u2014 Enrollment Opportunity",
+            when: "When lead says spouse can\u2019t join due to medical condition (dementia, hospitalized, disabled, etc.)",
+            lines: [
+              {
+                text: "I\u2019m sorry to hear that. That must be really hard.",
+              },
+              {
+                text: "Out of curiosity \u2014 what\u2019s going on with him medically? Is this something where you ordered a second test kit for him as well?",
+              },
+            ],
+            branches: [
+              {
+                label: "If interested:",
+                lines: [
+                  {
+                    text: "You know, a lot of our clients find that when they start feeling better, the people around them get curious. {HAName} can absolutely talk about both of you on the call if you\u2019d like.",
+                  },
+                ],
+              },
+              {
+                label: "If not applicable:",
+                lines: [
+                  {
+                    text: "Totally understand. We\u2019ll proceed with just you. I\u2019ll make a note for {HAName} so they know the situation.",
+                  },
+                ],
+              },
+            ],
+            note: "The medically unable spouse may also be a potential client. Don\u2019t push \u2014 just plant the seed. Note exception in CRM.",
+            tip: "Bree\u2019s example: A client\u2019s husband had dementia and \u2018couldn\u2019t be on the call.\u2019 He ended up getting enrolled too. The spouse\u2019s condition might be exactly what Pompa\u2019s approach can help with.",
+          },
+
+          {
+            id: "OBJ-01",
+            cat: "objections",
+            title: "I'm Not Sure I'm Ready",
+            when: "When lead expresses hesitation or uncertainty about proceeding",
+            lines: [
+              {
+                text: "I totally get that, {FirstName}. Most people who end up having this conversation felt the same way going in. Here\u2019s what I can tell you \u2014 {HAName} isn\u2019t going to pressure you into anything. Their job is to give you clarity about what\u2019s happening in your body and whether our approach actually fits your situation. If it doesn\u2019t? They\u2019ll say so. The worst case is you walk away with more information than you had before. What do you have to lose?",
+              },
+            ],
+          },
+
+          {
+            id: "OBJ-02",
+            cat: "objections",
+            title: "Cost Concerns",
+            when: "When lead expresses worry about the financial investment",
+            lines: [
+              {
+                text: "I hear you \u2014 this is a real investment and I won\u2019t pretend otherwise. But here\u2019s the thing: {HAName} isn\u2019t going to try to put you in something you can\u2019t afford or that doesn\u2019t make sense for your situation. Bring your cost questions to the call. They\u2019ll be straight with you about what it would actually take and whether it\u2019s the right fit. That\u2019s what the consultation is for.",
+              },
+            ],
+          },
+
+          {
+            id: "OBJ-02B",
+            cat: "objections",
+            title: "Cost \u2014 Zero Dollar Frame",
+            when: "When lead asks \u2018How much does the program cost?\u2019 or \u2018What\u2019s the price?\u2019",
+            lines: [
+              {
+                text: "$0. The consultation is free with the kit you purchased.",
+              },
+              {
+                text: "Your health advisor is going to review your results and talk through what\u2019s going on. If you have questions about anything beyond that, write them down \u2014 your health advisor will cover all of that with you.",
+              },
+            ],
+            tip: "Never talk about program cost. Ever. The consult is free. Anything about the program itself gets deferred to the HA. You don\u2019t know the price, and that\u2019s by design.",
+          },
+
+          {
+            id: "OBJ-03",
+            cat: "objections",
+            title: "I've Tried Everything",
+            when: "When lead feels exhausted from previous failed health approaches",
+            lines: [
+              {
+                text: "I really do understand that \u2014 and honestly, most of the people {HAName} works with have said exactly that. They\u2019ve done functional medicine, keto, supplements, the whole thing. Here\u2019s what\u2019s different: all of that was addressing symptoms. What we do goes upstream \u2014 looking at what\u2019s happening at the cellular level, what\u2019s blocking your body from healing the way it\u2019s designed to. That\u2019s why people who felt like they\u2019d exhausted everything often finally see real results. Just hear what {HAName} has to say. If it doesn\u2019t click, no hard feelings.",
+              },
+            ],
+          },
+
+          {
+            id: "OBJ-04",
+            cat: "objections",
+            title: "Is This Legitimate?",
+            when: "When lead questions whether Dr. Pompa's approach is credible",
+            lines: [
+              {
+                text: "That\u2019s a completely fair question and I respect you for asking it. Dr. Pompa has been doing this work for decades, and you can read real testimonials at reviews.pompaworkshop.com/tank. But honestly, the best way to know is to have the conversation with {HAName} yourself. It\u2019s not a pitch \u2014 they\u2019re going to look at your specific situation and tell you straight whether this is a fit. Come skeptical. Ask the hard questions. That\u2019s exactly what the call is for.",
+              },
+            ],
+          },
+
+          {
+            id: "CP-01",
+            cat: "checkpoints",
+            title: "Appointment Confirmation",
+            when: "First checkpoint \u2014 confirm timezone and appointment date/time",
+            lines: [{ text: "Can you let me know which timezone you are in?" }],
+            note: "Re-confirm date/time, ask them to repeat it back.",
+            v1: {
+              lines: [{ text: "What timezone are you in?" }],
+              note: "Statement, not a request. Re-confirm date/time, have them repeat it back.",
+            },
+          },
+
+          {
+            id: "CP-02",
+            cat: "checkpoints",
+            title: "Zoom Confirmation",
+            when: "Confirm client has access to the Zoom meeting link",
+            lines: [
+              {
+                text: "Were you able to accept the calendar invitation and see the Zoom link?",
+              },
+            ],
+            note: "Client responds and confirms.",
+            v1: {
+              lines: [
+                { text: "Did you get the calendar invite with the Zoom link?" },
+              ],
+              note: "Direct confirmation. Don\u2019t say \u2018were you able to\u2019 \u2014 just ask.",
+            },
+          },
+
+          {
+            id: "CP-03",
+            cat: "checkpoints",
+            title: "Spouse/Partner Confirmation (Assumptive Frame)",
+            when: "Confirm spouse attendance \u2014 never ask yes/no, always use assumptive framing",
+            lines: [
+              {
+                text: "For your husband \u2014 either way works for us \u2014 is he going to be with you physically on the Zoom, or will he be joining virtually from somewhere else?",
+              },
+            ],
+            branches: [
+              {
+                label: "Alternate Soft Open:",
+                lines: [
+                  {
+                    text: "Should I send the Zoom link to your husband too, or will you be on the same device?",
+                  },
+                ],
+              },
+              {
+                label: "If they confirm attendance:",
+                lines: [
+                  {
+                    text: "Perfect \u2014 would you like to provide me with your spouse\u2019s email so I can add them to the calendar invitation?",
+                  },
+                ],
+              },
+              {
+                label: "If pushback:",
+                lines: [
+                  {
+                    text: "Go to Spouse scripts (SP-NO1 through SP-CLOSER) \u2014 follow the Three No\u2019s framework.",
+                  },
+                ],
+              },
+            ],
+            tip: "Save spouse for LAST in the checklist. Build rapport through other checkpoints first, then hit the hardest topic with momentum.",
+            v1: {
+              lines: [
+                {
+                  text: "I see that you\u2019re married. What\u2019s your spouse\u2019s name?",
+                },
+                { text: "Is {SpouseName} planning on joining you?" },
+              ],
+              branches: [
+                {
+                  label: "If you already know spouse name:",
+                  lines: [
+                    { text: "Was {SpouseName} planning on joining you?" },
+                  ],
+                },
+                {
+                  label: "If pushback:",
+                  lines: [
+                    {
+                      text: "Go to Spouse scripts (SP-NO1 through SP-CLOSER) \u2014 follow the Three No\u2019s framework.",
+                    },
+                  ],
+                },
+              ],
+              tip: "Save spouse for LAST \u2014 after pain discovery. You need rapport and a pain nugget before tackling spouse. Never ask yes/no.",
+            },
+          },
+
+          {
+            id: "CP-04",
+            cat: "checkpoints",
+            title: "NTA Questionnaire",
+            when: "Confirm if the Neurotoxicity Assessment has been completed",
+            lines: [
+              {
+                text: "Have you had a chance to complete the Neurotoxicity Assessment questionnaire yet?",
+              },
+            ],
+            branches: [
+              {
+                label: "If YES:",
+                lines: [
+                  {
+                    text: "Fantastic \u2014 that\u2019s going to make your conversation with {HAName} so much more specific to your situation. They\u2019ll already have context walking in.",
+                  },
+                ],
+              },
+              {
+                label: "If NO:",
+                lines: [
+                  {
+                    text: "No worries at all \u2014 I will text you the link right now. The NTA is what helps us understand your specific health concerns and background, so we can properly identify your root causes. When do you anticipate you can set aside a few minutes to complete it so I can check back in with you?",
+                  },
+                ],
+              },
+            ],
+            v1: {
+              lines: [{ text: "What was your NTA score?" }],
+              branches: [
+                {
+                  label: "If completed:",
+                  lines: [
+                    {
+                      text: "Great \u2014 {HAName} is going to have a lot to work with. That score tells us a lot about what\u2019s going on.",
+                    },
+                  ],
+                },
+                {
+                  label: "If not completed:",
+                  lines: [
+                    {
+                      text: "I\u2019ll text you the link right now. It only takes a few minutes. When can you knock that out?",
+                    },
+                  ],
+                },
+              ],
+              note: "Direct. Don\u2019t say \u2018have you had a chance\u2019 \u2014 assume they should have done it.",
+            },
+          },
+
+          {
+            id: "CP-05",
+            cat: "checkpoints",
+            title: "Urine Test Kit",
+            when: "Confirm receipt and completion of the urine test kit",
+            lines: [
+              {
+                text: "And how about your urine test kit \u2014 have you received it yet or received a tracking number for it?",
+              },
+            ],
+            branches: [
+              {
+                label: "If YES:",
+                lines: [
+                  {
+                    text: "Perfect! Have you done it yet? If not, you can scan the QR code on the box for the full instructions and information.",
+                  },
+                ],
+              },
+              {
+                label: "If NOT received:",
+                lines: [
+                  {
+                    text: "Okay \u2014 that will arrive soon and you can scan the QR code on the box for the instructions.",
+                  },
+                ],
+              },
+            ],
+            note: "If lost/not received after 72 hours, escalate in Shipping channel on Slack.",
+            v1: {
+              lines: [{ text: "Did you get that test in the mail from us?" }],
+              branches: [
+                {
+                  label: "If YES:",
+                  lines: [{ text: "Instructions are in the kit for you." }],
+                },
+                {
+                  label: "If NOT received:",
+                  lines: [
+                    {
+                      text: "Let me check on that for you. I can see when it\u2019s arriving.",
+                    },
+                  ],
+                },
+              ],
+              note: "Brief. Don\u2019t walk them through nitty-gritty details \u2014 \u2018instructions are in the kit.\u2019",
+            },
+          },
+
+          {
+            id: "OPEN-01",
+            cat: "openings",
+            title: "Standard Opening",
+            when: "Use at the beginning of every pre-call outreach",
+            lines: [
+              {
+                text: "Hey {FirstName}! This is {ACName} calling from Dr. Pompa\u2019s team. I\u2019m reaching out because you have your consultation coming up with {HAName} on {ApptDate} and I wanted to make sure everything is lined up for you.",
+              },
+            ],
+            note: "Wait for response, then move into the 5 checkpoints.",
+            v1: {
+              lines: [
+                {
+                  text: "Hey {FirstName}, it\u2019s {ACName} with Dr. Pompa\u2019s team. I\u2019ve got a few moments \u2014 I wanted to connect with you real quick about your consultation with {HAName} on {ApptDate}. Make sure you\u2019re all set.",
+                },
+              ],
+              note: "Chest voice. Statement energy \u2014 you\u2019re busy, this is high-demand. Don\u2019t linger.",
+            },
+          },
+
+          {
+            id: "OPEN-BADTIME",
+            cat: "openings",
+            title: "Bad Timing Bailout",
+            when: "When the client sounds rushed, distracted, or says it\u2019s not a good time",
+            lines: [
+              {
+                text: "Oh \u2014 this will just take a few moments. Do you have that time now, or do I need to give you a call here in just a little bit?",
+              },
+            ],
+            branches: [
+              {
+                label: "If they say now:",
+                lines: [{ text: "Great \u2014 I\u2019ll be quick." }],
+              },
+              {
+                label: "If they need time:",
+                lines: [
+                  {
+                    text: "No problem at all. When\u2019s a good time for me to call you back? I just need about five minutes.",
+                  },
+                ],
+              },
+            ],
+            tip: "Don\u2019t push through a distracted client. You\u2019re better off having them focused than trying to chase answers while they\u2019re irritated. Call back later.",
+          },
+
+          {
+            id: "DISC-L1",
+            cat: "discovery",
+            title: "Level 1 \u2014 First-Level Pain",
+            when: "Start of discovery \u2014 understand the primary health concern",
+            lines: [
+              {
+                text: "What specific health issue are you most concerned about right now?",
+              },
+              { text: "Which symptom is affecting you the most day to day?" },
+              { text: "What originally made you start looking for answers?" },
+            ],
+            note: "Listen fully. Brief validation.",
+            v1: {
+              lines: [
+                {
+                  text: "So what was it that Dr. Pompa said that resonated most with you?",
+                },
+                { text: "What originally made you book this appointment?" },
+              ],
+              note: "This is THE pain discovery opener. Sit in silence after asking \u2014 let them process. If bad timing: \u2018This will just take a few moments. Do you have that time now, or should I call you back in a bit?\u2019",
+            },
+          },
+
+          {
+            id: "DISC-L2",
+            cat: "discovery",
+            title: "Level 2 \u2014 Impact on Life",
+            when: "Go deeper \u2014 understand how the health issue affects daily life",
+            lines: [
+              { text: "How is this affecting your energy or daily life?" },
+              { text: "What has this stopped you from doing or enjoying?" },
+              { text: "How long have you been dealing with this?" },
+            ],
+          },
+
+          {
+            id: "DISC-L3",
+            cat: "discovery",
+            title: "Level 3 \u2014 Emotional Cost & Urgency",
+            when: "Deepest level \u2014 uncover emotional toll and create urgency",
+            lines: [
+              { text: "How frustrating has it been not getting real answers?" },
+              { text: "What worries you most if nothing changes?" },
+              {
+                text: "What would it mean for you to finally understand what\u2019s actually going on?",
+              },
+            ],
+            branches: [
+              {
+                label: "Spouse in pain questions:",
+                lines: [
+                  {
+                    text: "Is there anyone else in your household having symptoms?",
+                  },
+                  { text: "What does your support system look like at home?" },
+                  {
+                    text: "Is there anyone at home that joins in on your health habits, or are you always doing it alone?",
+                  },
+                ],
+              },
+            ],
+          },
+
+          {
+            id: "DISC-TRANS",
+            cat: "discovery",
+            title: "Transition to Tie-Downs",
+            when: "Bridge from discovery to tie-downs \u2014 after you understand their pain",
+            lines: [
+              {
+                text: "It sounds like you\u2019ve been dealing with [symptom] for a while now and it\u2019s really affecting [impact they shared]. What you\u2019re describing is exactly the kind of thing Dr. Pompa\u2019s approach is designed to address \u2014 not just managing it, but actually finding out why it\u2019s happening. Before your call with {HAName}, I just want to make sure this is going to be worth your time.",
+              },
+            ],
+          },
+
+          {
+            id: "TD-01",
+            cat: "discovery",
+            title: "Tie-Down #1 \u2014 Disappointment with Other Approaches",
+            when: "Confirm that past approaches have been disappointing",
+            lines: [
+              {
+                text: "It sounds like you\u2019ve tried a lot already \u2014 would you say that\u2019s true?",
+              },
+              {
+                text: "Have most of those approaches focused on managing symptoms rather than explaining why this is happening?",
+              },
+              { text: "Has that been disappointing for you?" },
+            ],
+            note: "Do not move to Tie-Down #2 until the lead acknowledges disappointment.",
+          },
+
+          {
+            id: "TD-02",
+            cat: "discovery",
+            title: "Tie-Down #2 \u2014 Dr. Pompa Philosophy",
+            when: "Introduce the root cause philosophy and get agreement",
+            lines: [
+              {
+                text: "What do you feel like is the root cause of what\u2019s going on with your health?",
+              },
+              {
+                text: "Dr. Pompa\u2019s philosophy is about getting to the root cause, not chasing symptoms. It\u2019s about clearing toxins out of the cell so the body can perform and heal the way it was designed to. When toxins build up, the cell can\u2019t function properly \u2014 and healing gets blocked.",
+              },
+              {
+                text: "Does that way of thinking make sense based on what you\u2019ve experienced?",
+              },
+              {
+                text: "Does it feel like something may be blocking your body from healing?",
+              },
+            ],
+            note: "Wait for agreement before proceeding.",
+          },
+
+          {
+            id: "TD-03",
+            cat: "discovery",
+            title: "Tie-Down #3 \u2014 Readiness for Answers",
+            when: "Final tie-down before closing \u2014 confirm they want answers now",
+            lines: [
+              {
+                text: "Does it feel like guessing isn\u2019t good enough anymore?",
+              },
+              {
+                text: "Are you ready for real answers, even if they\u2019re different from what you\u2019ve tried before?",
+              },
+              {
+                text: "If you could finally understand what\u2019s going on and have direction, would you want that now?",
+              },
+            ],
+            note: "Once you get a clear YES \u2014 transition directly to closing.",
+          },
+
+          {
+            id: "CLOSE-01",
+            cat: "closings",
+            title: "All Green",
+            when: "All 5 checkpoints confirmed, discovery done, client is prepared",
+            lines: [
+              {
+                text: "Alright {FirstName}, you are all set! Appointment confirmed, {SpouseName} is joining, NTA is done, test kit is complete \u2014 you are going into this prepared, and that makes a real difference. {HAName} is going to have a lot of great information to work with. If anything comes up before {ApptDate}, just text me back and I\u2019ll take care of it. We\u2019ll talk soon!",
+              },
+            ],
+          },
+
+          {
+            id: "CLOSE-02",
+            cat: "closings",
+            title: "Items Still Pending",
+            when: "Some checkpoints are incomplete \u2014 recap what still needs to happen",
+            lines: [
+              {
+                text: "Alright {FirstName}, great talking with you. Just a quick recap \u2014 I\u2019ll text you the NTA link right now, and try to complete the test kit as soon as you can. Your appointment with {HAName} is {ApptDate} at {ApptTime}. You\u2019re in good hands \u2014 just get those two things done and you\u2019ll be completely set. Text me if anything comes up!",
+              },
+            ],
+            note: "Log pending items. Add to follow-up sequence. Escalate if appointment within 48 hours.",
+          },
+
+          {
+            id: "CLOSE-03",
+            cat: "closings",
+            title: "Edification Close",
+            when: "Person seems nervous, unsure, or needs encouragement before their call",
+            lines: [
+              {
+                text: "I just want you to know \u2014 {HAName} is really good at what they do. They\u2019ve had this conversation with hundreds of people who felt exactly where you\u2019re at right now. Their job is to look at your situation and give you real clarity about what\u2019s going on in your body. Come with your questions. They\u2019ll meet you where you are. We\u2019re really excited for you.",
+              },
+            ],
+          },
+
+          {
+            id: "DIFF-01",
+            cat: "difficult",
+            title: "Lead Wants to Cancel",
+            when: "When a lead asks to cancel their consultation appointment",
+            lines: [
+              {
+                text: "I understand, {FirstName}. Before I do anything, can I ask \u2014 is it timing, or is there something specific making you want to step back?",
+              },
+            ],
+            branches: [
+              {
+                label: "If timing:",
+                lines: [{ text: "What if we just move it to a better time?" }],
+              },
+              {
+                label: "If cold feet:",
+                lines: [
+                  {
+                    text: "A lot of people feel that way right before the call. {HAName} is preparing to just have a conversation with you to figure out what is going on at the root of your concerns and see if there\u2019s anything we could do to help and point you in the right direction with Dr. Pompa\u2019s recommendations and protocols. If you talk and decide it\u2019s not right, that\u2019s totally fine. But at least you\u2019ll have real answers instead of wondering. Let\u2019s keep the appointment.",
+                  },
+                ],
+              },
+              {
+                label: "If adamant:",
+                lines: [
+                  {
+                    text: "I completely respect that, {FirstName}. If your situation changes, we\u2019re here. I\u2019ll go ahead and make note of that. Wishing you all the best.",
+                  },
+                ],
+              },
+            ],
+          },
+
+          {
+            id: "DIFF-02",
+            cat: "difficult",
+            title: "Lead is Upset or Frustrated",
+            when: "When a lead is expressing anger or frustration",
+            lines: [
+              {
+                text: "I can hear that you\u2019re frustrated, {FirstName}, and I\u2019m really sorry. Can you tell me more about what\u2019s going on? I want to make sure we address this.",
+              },
+            ],
+            note: "Listen fully, do not interrupt. Then offer solution or escalate.",
+          },
+
+          {
+            id: "DIFF-03",
+            cat: "difficult",
+            title: "Lead is Emotional or Overwhelmed",
+            when: "When a lead is crying, overwhelmed, or emotionally distressed",
+            lines: [
+              {
+                text: "I can hear how hard this has been, {FirstName}. And honestly \u2014 a lot of the people who talk to {HAName} are feeling exactly what you\u2019re feeling right now. Exhausted. Overwhelmed. Not sure if anything will actually work. You don\u2019t have to have it figured out before the call. {HAName} is really good at meeting people exactly where they are. Just show up. You don\u2019t have to carry this alone.",
+              },
+              { text: "(pause)" },
+              {
+                text: "How does that sound? Are you okay to keep the appointment?",
+              },
+            ],
+          },
+
+          {
+            id: "DIFF-04",
+            cat: "difficult",
+            title: "Lead is Hostile or Confrontational",
+            when: "When a lead is being aggressive, rude, or hostile",
+            lines: [
+              {
+                text: "I appreciate your honesty, {FirstName}. I\u2019m not here to pressure you or argue \u2014 I just wanted to make sure you had everything you needed. Is there something specific I can help clarify?",
+              },
+            ],
+            branches: [
+              {
+                label: "If hostility continues:",
+                lines: [
+                  {
+                    text: "I understand. I\u2019m going to let you go. If anything changes, we\u2019re here. Have a good day.",
+                  },
+                ],
+              },
+            ],
+            note: "End call professionally. Log in CRM.",
+          },
+
+          {
+            id: "NS-01",
+            cat: "noshow",
+            title: "Immediate No-Show (Within 30 Min)",
+            when: "Client missed the appointment and you're calling within 30 minutes",
+            lines: [
+              {
+                text: "Hey {FirstName}, this is {ACName} from Dr. Pompa\u2019s team. We had your consultation scheduled with {HAName} at {ApptTime} and weren\u2019t able to connect. Just wanted to check in \u2014 is everything okay?",
+              },
+              {
+                text: "No worries at all \u2014 things come up. Would you like to reschedule? {HAName} has some availability this week and I want to make sure you still get this conversation.",
+              },
+            ],
+            note: "If yes, find next time. Re-confirm spouse, NTA, test kit.",
+          },
+
+          {
+            id: "NS-02",
+            cat: "noshow",
+            title: "Day-After No-Show",
+            when: "Following up the day after a missed appointment",
+            lines: [
+              {
+                text: "Hey {FirstName}, this is {ACName} from Dr. Pompa\u2019s team. I\u2019m following up because we missed you for your call with {HAName} yesterday. Just wanted to check in and see if you\u2019re still interested in having that conversation. No pressure at all \u2014 life happens. If you\u2019d like to rebook, I can get you set up with a time that works better.",
+              },
+            ],
+          },
+
+          {
+            id: "NS-03",
+            cat: "noshow",
+            title: "Multiple No-Shows",
+            when: "Client has no-showed more than once",
+            lines: [
+              {
+                text: "{FirstName}, I\u2019m reaching out because we\u2019ve tried to connect a couple of times now. I\u2019m not trying to add pressure \u2014 I genuinely just want to make sure this is still something you want. If your circumstances have changed, that\u2019s completely okay. But if you\u2019re still looking for real answers about your health, let\u2019s find a time that actually works. What\u2019s really going on?",
+              },
+            ],
+            note: "Listen carefully. Address underlying reason. Do not push.",
+          },
+
+          {
+            id: "VM-01",
+            cat: "voicemails",
+            title: "Standard First Outreach",
+            when: "First voicemail \u2014 initial outreach before the appointment",
+            lines: [
+              {
+                text: "Hey {FirstName}, this is {ACName} from Dr. Pompa\u2019s team. I\u2019m calling because you have your consultation coming up with {HAName} and I just wanted to make sure you\u2019re all set. {HAName} has already looked at your info and is looking forward to connecting. Give me a quick call back at {CallbackNumber} or just reply to the text I\u2019ll send. Talk soon!",
+              },
+            ],
+            note: "Keep under 30 seconds.",
+          },
+
+          {
+            id: "VM-02",
+            cat: "voicemails",
+            title: "Confirmation Voicemail",
+            when: "Quick confirmation message before the appointment",
+            lines: [
+              {
+                text: "Hey {FirstName}, this is {ACName} from Dr. Pompa\u2019s team. Just confirming your call with {HAName} on {ApptDate} at {ApptTime}. We\u2019re excited for you! If anything has changed, give us a call or text back. Otherwise, we\u2019ll see you then!",
+              },
+            ],
+          },
+
+          {
+            id: "VM-03",
+            cat: "voicemails",
+            title: "Requirements Still Missing",
+            when: "NTA and/or urine test not completed before the appointment",
+            lines: [
+              {
+                text: "Hey {FirstName}, this is {ACName} from Dr. Pompa\u2019s team. Your call with {HAName} is coming up on {ApptDate} and I want to make sure you get the most out of it. We\u2019re still waiting on your NTA questionnaire and/or urine test \u2014 these are what let {HAName} personalize the whole conversation to your situation. Can you give me a call back at {CallbackNumber} or just reply to the text I\u2019ll send? I\u2019ll make it easy for you. Thanks!",
+              },
+            ],
+          },
+
+          {
+            id: "VM-04",
+            cat: "voicemails",
+            title: "No-Show Voicemail",
+            when: "Voicemail left after a missed appointment",
+            lines: [
+              {
+                text: "Hey {FirstName}, this is {ACName} from Dr. Pompa\u2019s team. We tried to connect for your call with {HAName} at {ApptTime} and weren\u2019t able to reach you. No worries at all \u2014 things happen! If you\u2019d like to reschedule, give us a call at {CallbackNumber} or reply to the text I\u2019ll send. {HAName} is happy to reconnect whenever you\u2019re ready. Take care!",
+              },
+            ],
+          },
+
+          {
+            id: "DEL-01",
+            cat: "delivery",
+            title: "Chest Voice vs. Head Voice",
+            when: "Always \u2014 this is your default speaking mode on every call",
+            lines: [
+              {
+                text: "Chest voice = authority. You\u2019re speaking from your core. Statements, not questions.",
+              },
+              {
+                text: "Head voice = cautious, nervous, uncertain. \u2018Um, do you, uh, when did you schedule your appointment? Please? Can you tell me?\u2019",
+              },
+              {
+                text: "Talk as if everything is a sentence, not a question. Watch people respond to you \u2014 it\u2019s amazing.",
+              },
+            ],
+            tip: "Exception: When you\u2019re being genuinely curious about their pain or situation, a softer tone is okay. \u2018Do you think it would be helpful for him to understand what\u2019s going on?\u2019 \u2014 curiosity is fine. Deference is not.",
+            note: "You can sit in silence for a moment and it\u2019s okay. Don\u2019t fill every gap.",
+          },
+
+          {
+            id: "DEL-02",
+            cat: "delivery",
+            title: "Language Do\u2019s & Don\u2019ts",
+            when: "Every call \u2014 you are not customer service",
+            lines: [
+              {
+                text: "You\u2019re not customer service. You\u2019re the boss. You\u2019re setting up the appointment.",
+              },
+            ],
+            branches: [
+              {
+                label: "\u274C Don\u2019t say:",
+                lines: [
+                  {
+                    text: "\u2018Please, can you give me your NTA score?\u2019",
+                  },
+                  { text: "\u2018Would you be able to...\u2019" },
+                  { text: "\u2018If it\u2019s not too much trouble...\u2019" },
+                  { text: "\u2018Thank you so much for your time\u2019" },
+                  { text: "\u2018I\u2019m sorry to bother you\u2019" },
+                ],
+              },
+              {
+                label: "\u2705 Say instead:",
+                lines: [
+                  { text: "\u2018What was your NTA score?\u2019" },
+                  { text: "\u2018Did you get the test in the mail?\u2019" },
+                  { text: "\u2018Instructions are in the kit for you.\u2019" },
+                  { text: "\u2018What timezone are you in?\u2019" },
+                  { text: "\u2018When can you knock that out?\u2019" },
+                ],
+              },
+            ],
+            tip: "When you hear yourself say \u2018please\u2019 and \u2018thank you,\u2019 make sure you\u2019re saying it at the right time and for the right reason. Don\u2019t use it as filler or as deference.",
+          },
+
+          {
+            id: "DEL-03",
+            cat: "delivery",
+            title: "Drive Urgency \u2014 Time-Frame the Call",
+            when: "Opening of every call \u2014 position yourself as busy and in-demand",
+            lines: [
+              {
+                text: "\u2018Hey, I\u2019ve got a few moments \u2014 I just wanted to connect with you.\u2019",
+              },
+              {
+                text: "This positions the call as high-demand. You\u2019re not sitting around waiting to chat \u2014 this is a valued use of your time AND theirs.",
+              },
+            ],
+            tip: "This isn\u2019t about being rushed \u2014 it\u2019s about edifying the whole process. Keep it warm but purposeful. Save your energy across a high-volume day.",
+          },
+
+          {
+            id: "DEL-04",
+            cat: "delivery",
+            title: "AC Guardrails \u2014 Know Your Lane",
+            when: "When you\u2019re tempted to push too hard, talk money, or go beyond your role",
+            lines: [
+              {
+                text: "Your job: Get them to the Zoom call prepared, with a pain nugget and (ideally) their spouse.",
+              },
+              {
+                text: "NOT your job: Closing them. Discussing program cost. Laying into them about spouse attendance.",
+              },
+            ],
+            branches: [
+              {
+                label: "\uD83D\uDEAB Never do:",
+                lines: [
+                  {
+                    text: "Talk about money or program cost. If asked: \u2018$0 \u2014 the consultation is free with the kit.\u2019",
+                  },
+                  {
+                    text: "Push spouse attendance past 2-3 genuine attempts. Note it for the HA.",
+                  },
+                  {
+                    text: "Set expectations about what happens on the Zoom (financial decisions, etc.)",
+                  },
+                  {
+                    text: "Try to \u2018lay into\u2019 a difficult client \u2014 you don\u2019t have enough experience yet.",
+                  },
+                ],
+              },
+              {
+                label: "\u2705 Always do:",
+                lines: [
+                  { text: "Confirm the 5 checkpoints" },
+                  { text: "Get at least one pain nugget" },
+                  { text: "Note everything clearly in CRM for the HA" },
+                  {
+                    text: "Keep a positive attitude \u2014 you attract what you expect",
+                  },
+                ],
+              },
+            ],
+            tip: "The HA will be super clear on the Zoom. They set boundaries. They handle the hard conversations. Your job is to get people there prepared and feeling good about it.",
+          },
+
+          {
+            id: "DEL-05",
+            cat: "delivery",
+            title: "Outreach Strategy \u2014 Call First, Then Text",
+            when: "Before any outreach attempt \u2014 especially with 50+ demographic",
+            lines: [
+              {
+                text: "Call \u2192 leave voicemail \u2192 then text. In that order.",
+              },
+              {
+                text: "Most leads are 50+ and texting isn\u2019t their primary form of contact. If you just text first, they think \u2018I don\u2019t know who that is.\u2019 But if you call \u2014 even if you leave a message \u2014 they realize this is a real person, not a bot.",
+              },
+              {
+                text: "The call primes them to actually read and respond to the follow-up text.",
+              },
+            ],
+            tip: "Even if the call goes to voicemail, it dramatically increases text response rates. The call signals legitimacy.",
+          },
+        ];
+
+        var CATEGORIES = [
+          { key: "spouse", label: "Spouse / Partner" },
+          { key: "objections", label: "Objections" },
+          { key: "checkpoints", label: "Checkpoints" },
+          { key: "openings", label: "Openings" },
+          { key: "discovery", label: "Discovery & Tie-Downs" },
+          { key: "closings", label: "Closings" },
+          { key: "difficult", label: "Difficult Situations" },
+          { key: "noshow", label: "No-Show Recovery" },
+          { key: "voicemails", label: "Voicemails" },
+          { key: "delivery", label: "Voice & Delivery" },
+        ];
+
+        var SCENARIOS = [
+          {
+            key: "happy-path",
+            title: "Happy Path Call",
+            sub: "Smooth confirmation call \u2014 all checkpoints pass with no resistance.",
+            diff: "easy",
+            stepCount: 10,
+            steps: [
+              {
+                client: "Hey! Yes, I\u2019m excited for the call.",
+                context:
+                  "Client answered, sounds positive. Start with checkpoint flow.",
+                options: [
+                  {
+                    text: "Great! Can you let me know which timezone you\u2019re in?",
+                    correct: true,
+                    why: "Timezone confirmation is Checkpoint 1 \u2014 always start here.",
+                  },
+                  {
+                    text: "So tell me about your health concerns.",
+                    correct: false,
+                    why: "Discovery comes AFTER checkpoints. You need to confirm logistics first.",
+                  },
+                  {
+                    text: "Did you get the Zoom link?",
+                    correct: false,
+                    why: "Zoom is Checkpoint 2, but timezone/appointment confirmation comes first.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "I\u2019m in Eastern time, and yes the appointment is Monday at 2 PM right?",
+                context:
+                  "They confirmed timezone. Re-confirm the appointment details.",
+                options: [
+                  {
+                    text: "That\u2019s correct \u2014 Monday May 5th at 2:00 PM Eastern. Can you repeat that back for me?",
+                    correct: true,
+                    why: "Always confirm and ask them to repeat back to lock it in.",
+                  },
+                  {
+                    text: "Perfect, let\u2019s move on to the next thing.",
+                    correct: false,
+                    why: "You should confirm the details and ask them to repeat back.",
+                  },
+                  {
+                    text: "Yes. Now were you able to accept the calendar invite?",
+                    correct: false,
+                    why: "Good instinct moving to Checkpoint 2, but you skipped the repeat-back step.",
+                  },
+                ],
+              },
+              {
+                client: "Yep \u2014 Monday May 5th, 2 PM Eastern. Got it!",
+                context: "Appointment confirmed. Move to Checkpoint 2: Zoom.",
+                options: [
+                  {
+                    text: "Perfect! And were you able to accept the calendar invitation and see the Zoom link?",
+                    correct: true,
+                    why: "Checkpoint 2: Confirm Zoom access.",
+                  },
+                  {
+                    text: "Great, will your spouse be joining?",
+                    correct: false,
+                    why: "Spouse is Checkpoint 3 \u2014 Zoom confirmation comes first.",
+                  },
+                  {
+                    text: "Awesome! Have you completed the NTA questionnaire?",
+                    correct: false,
+                    why: "NTA is Checkpoint 4. Follow the order: Zoom first.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Yes, I accepted it and I can see the Zoom link in my calendar.",
+                context: "Zoom confirmed. Move to Checkpoint 3: Spouse.",
+                options: [
+                  {
+                    text: "Great! And will your spouse or partner be joining you on that call?",
+                    correct: true,
+                    why: "Checkpoint 3: Always ask about spouse attendance.",
+                  },
+                  {
+                    text: "Perfect. Have you done the NTA yet?",
+                    correct: false,
+                    why: "NTA is Checkpoint 4 \u2014 spouse confirmation comes next.",
+                  },
+                  {
+                    text: "Awesome, you\u2019re all set then!",
+                    correct: false,
+                    why: "You still have 3 more checkpoints to cover.",
+                  },
+                ],
+              },
+              {
+                client: "Yes! My husband will be on the call with me.",
+                context: "Spouse confirmed. Validate and move to Checkpoint 4.",
+                options: [
+                  {
+                    text: "Perfect \u2014 you\u2019ll both get to learn a lot, ask questions together, and figure out the next best steps. Have you both had a chance to watch the webinar?",
+                    correct: true,
+                    why: "Validate spouse attendance and confirm webinar viewing.",
+                  },
+                  {
+                    text: "Great. Have you completed the NTA?",
+                    correct: false,
+                    why: "You should validate the spouse joining before moving on.",
+                  },
+                  {
+                    text: "Oh nice, what\u2019s his name so I can add him to the invite?",
+                    correct: false,
+                    why: "Good thought, but the script calls for validation first, then webinar check.",
+                  },
+                ],
+              },
+              {
+                client: "Yes, we watched it together last night actually!",
+                context: "Webinar confirmed. Move to Checkpoint 4: NTA.",
+                options: [
+                  {
+                    text: "That\u2019s great! Have you had a chance to complete the Neurotoxicity Assessment questionnaire yet?",
+                    correct: true,
+                    why: "Checkpoint 4: NTA confirmation.",
+                  },
+                  {
+                    text: "Wonderful! And the urine test kit \u2014 have you received that?",
+                    correct: false,
+                    why: "Urine test is Checkpoint 5 \u2014 NTA comes first.",
+                  },
+                  {
+                    text: "Perfect, sounds like you\u2019re all set for the call!",
+                    correct: false,
+                    why: "You haven\u2019t confirmed NTA or urine test kit yet.",
+                  },
+                ],
+              },
+              {
+                client: "Yes, I finished it yesterday!",
+                context:
+                  "NTA complete. Validate and move to Checkpoint 5: Urine test.",
+                options: [
+                  {
+                    text: "Fantastic \u2014 that\u2019s going to make your conversation with Dr. Anderson so much more specific to your situation. And how about your urine test kit \u2014 have you received it?",
+                    correct: true,
+                    why: "Validate NTA, then Checkpoint 5: Urine test kit.",
+                  },
+                  {
+                    text: "Great. So let me tell you a bit about what to expect on the call.",
+                    correct: false,
+                    why: "You still need to check on the urine test kit \u2014 Checkpoint 5.",
+                  },
+                  {
+                    text: "Perfect, you\u2019re totally prepared!",
+                    correct: false,
+                    why: "Still need Checkpoint 5: urine test kit confirmation.",
+                  },
+                ],
+              },
+              {
+                client: "Yes, I got it and already sent it in!",
+                context:
+                  "All 5 checkpoints confirmed. Transition to brief discovery.",
+                options: [
+                  {
+                    text: "You are on top of it! So before the call, I\u2019d love to understand a bit more \u2014 what specific health issue are you most concerned about right now?",
+                    correct: true,
+                    why: "All checkpoints green \u2014 transition to Level 1 Discovery.",
+                  },
+                  {
+                    text: "Amazing! Well you\u2019re all set. We\u2019ll see you Monday!",
+                    correct: false,
+                    why: "You should still do some brief discovery before closing the call.",
+                  },
+                  {
+                    text: "Perfect. Let me give you a rundown of what Dr. Anderson will cover.",
+                    correct: false,
+                    why: "Discovery questions come before closing \u2014 let the client share their story.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Honestly, I\u2019ve been dealing with chronic fatigue for years. I\u2019ve tried everything and nothing has worked. I\u2019m just so tired of being tired.",
+                context:
+                  "Client shared Level 1 pain. Validate and do a brief tie-down.",
+                options: [
+                  {
+                    text: "I\u2019m really glad you reached out. It sounds like you\u2019ve tried a lot already \u2014 would you say that\u2019s true? And have those approaches mostly focused on managing symptoms rather than explaining why this is happening?",
+                    correct: true,
+                    why: "Validate, then Tie-Down #1: Confirm disappointment with other approaches.",
+                  },
+                  {
+                    text: "I\u2019m sorry to hear that. Dr. Anderson will definitely help you.",
+                    correct: false,
+                    why: "Too vague. You need to tie down their experience with previous approaches.",
+                  },
+                  {
+                    text: "That must be frustrating. What supplements have you tried?",
+                    correct: false,
+                    why: "You don\u2019t need to go deep into their history \u2014 tie down the disappointment.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Yes, absolutely. Nothing has actually explained WHY I feel this way.",
+                context:
+                  "Disappointment confirmed. Close the call \u2014 all green.",
+                options: [
+                  {
+                    text: "Alright Sarah, you are all set! Appointment confirmed, your husband is joining, NTA is done, test kit is complete \u2014 you are going into this prepared, and that makes a real difference. Dr. Anderson is going to have a lot of great information to work with. If anything comes up before Monday, just text me back. We\u2019ll talk soon!",
+                    correct: true,
+                    why: "CLOSE-01: All Green \u2014 everything confirmed. Perfect close.",
+                  },
+                  {
+                    text: "Great, I\u2019ll let Dr. Anderson know. Bye!",
+                    correct: false,
+                    why: "Too abrupt. Use the full closing script to reinforce preparation and confidence.",
+                  },
+                  {
+                    text: "OK so let me explain Dr. Pompa\u2019s philosophy to you...",
+                    correct: false,
+                    why: "She\u2019s already bought in. Don\u2019t oversell \u2014 close the call confidently.",
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            key: "objection-gauntlet",
+            title: "Objection Gauntlet",
+            sub: "Multiple objections back-to-back \u2014 spouse, skepticism, legitimacy.",
+            diff: "hard",
+            stepCount: 12,
+            steps: [
+              {
+                client: "Hello?",
+                context:
+                  "Client answered but sounds uncertain. Open with standard intro.",
+                options: [
+                  {
+                    text: "Hey Sarah! This is Alex calling from Dr. Pompa\u2019s team. I\u2019m reaching out because you have your consultation coming up with Dr. Anderson on Monday and I wanted to make sure everything is lined up for you.",
+                    correct: true,
+                    why: "OPEN-01: Standard opening \u2014 warm, clear, sets context.",
+                  },
+                  {
+                    text: "Hi, is this Sarah? I need to go over some things for your appointment.",
+                    correct: false,
+                    why: "Too transactional. Use the warm standard opening.",
+                  },
+                  {
+                    text: "Hey! Are you excited for your call on Monday?",
+                    correct: false,
+                    why: "Too casual. Start with the standard opening to establish who you are.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Oh right, yes. Um, about that \u2014 my husband doesn\u2019t really want to be on the call.",
+                context:
+                  "Spouse objection early. This is SPOUSE-OBJ-01 territory.",
+                options: [
+                  {
+                    text: "I hear you. Help me understand \u2014 why do you think he wouldn\u2019t want to join?",
+                    correct: true,
+                    why: "SPOUSE-OBJ-01: Open with curiosity, not pressure. Understand the reason first.",
+                  },
+                  {
+                    text: "That\u2019s okay, he doesn\u2019t have to join.",
+                    correct: false,
+                    why: "Never give up on spouse attendance this easily. Ask why first.",
+                  },
+                  {
+                    text: "Well, he really needs to be there. It\u2019s required.",
+                    correct: false,
+                    why: "Spouse attendance is strongly encouraged but don\u2019t force it. Understand the resistance first.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "He just thinks we\u2019ve already spent too much money on health stuff that hasn\u2019t worked. He doesn\u2019t want me spending more.",
+                context: "This is SPOUSE-OBJ-02: spouse tired of spending.",
+                options: [
+                  {
+                    text: "That makes total sense. Does he understand why the other things you tried didn\u2019t work? What usually happens is: when spouses come to the call, they finally learn what you\u2019ve actually been going through \u2014 and they hear why what you tried before didn\u2019t get to the root cause, in a clear way.",
+                    correct: true,
+                    why: "SPOUSE-OBJ-02: Validate, then reframe \u2014 spouse hearing it directly changes the dynamic.",
+                  },
+                  {
+                    text: "I understand. We do have payment plans available.",
+                    correct: false,
+                    why: "Don\u2019t jump to cost solutions. The objection is about the spouse, not payment.",
+                  },
+                  {
+                    text: "Well this is different from what you\u2019ve tried before.",
+                    correct: false,
+                    why: "Too defensive. Validate first, then help them see why the spouse hearing it directly matters.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "I guess... but what if he still says no? Can I just do it myself?",
+                context:
+                  "She\u2019s wavering. Give her the empowered choice question.",
+                options: [
+                  {
+                    text: "If we find we can help you and you decide to move forward, do you feel you\u2019d be able to do that without his support? Or would it be better for him to hear it directly and ask questions?",
+                    correct: true,
+                    why: "SPOUSE-OBJ-02 closer: Let her realize she needs his buy-in without pressuring.",
+                  },
+                  {
+                    text: "Sure, you can do it yourself if you want.",
+                    correct: false,
+                    why: "Don\u2019t give up. Ask the empowered choice question first.",
+                  },
+                  {
+                    text: "Let me talk to him directly and explain.",
+                    correct: false,
+                    why: "That\u2019s overstepping. Let her process the question.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "You\u2019re right, he should probably hear it. I\u2019ll ask him. But I haven\u2019t done that questionnaire thing yet either.",
+                context:
+                  "Spouse handled! Now NTA is not done \u2014 Checkpoint 4.",
+                options: [
+                  {
+                    text: "No worries at all \u2014 I\u2019ll text you the link right now. The NTA is what helps us understand your specific health concerns and background, so we can properly identify your root causes. When do you think you can set aside a few minutes to complete it?",
+                    correct: true,
+                    why: "Checkpoint 4 (NTA not done): Send link, explain why it matters, get commitment on timing.",
+                  },
+                  {
+                    text: "You really need to get that done before the call.",
+                    correct: false,
+                    why: "Too pushy. Send the link and make it easy for them.",
+                  },
+                  {
+                    text: "That\u2019s fine, you can do it after the call.",
+                    correct: false,
+                    why: "NTA should be done before the call so the HA has context.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Maybe tonight after dinner. But honestly, I\u2019m not even sure this is going to work. I\u2019ve tried SO many things.",
+                context:
+                  "OBJ-03: \u2018I\u2019ve tried everything\u2019 objection.",
+                options: [
+                  {
+                    text: "I really do understand that \u2014 and most of the people Dr. Anderson works with have said exactly that. Here\u2019s what\u2019s different: all of that was addressing symptoms. What we do goes upstream \u2014 looking at what\u2019s happening at the cellular level, what\u2019s blocking your body from healing. That\u2019s why people who felt like they\u2019d exhausted everything often finally see real results. Just hear what Dr. Anderson has to say.",
+                    correct: true,
+                    why: "OBJ-03: Validate, differentiate the approach, lower the stakes.",
+                  },
+                  {
+                    text: "I promise this is different.",
+                    correct: false,
+                    why: "Empty promise. You need to explain WHY it\u2019s different.",
+                  },
+                  {
+                    text: "What have you tried before?",
+                    correct: false,
+                    why: "You don\u2019t need their full history. Address the objection directly.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Okay... but is this actually legitimate? How do I know this isn\u2019t just another thing?",
+                context: "OBJ-04: \u2018Is this legitimate?\u2019 objection.",
+                options: [
+                  {
+                    text: "That\u2019s a completely fair question and I respect you for asking it. Dr. Pompa has been doing this work for decades, and you can read real testimonials at reviews.pompaworkshop.com/tank. But honestly, the best way to know is to have the conversation with Dr. Anderson yourself. Come skeptical. Ask the hard questions. That\u2019s exactly what the call is for.",
+                    correct: true,
+                    why: "OBJ-04: Respect the question, point to evidence, lower the stakes.",
+                  },
+                  {
+                    text: "Oh yes, Dr. Pompa is very well known. He\u2019s been on many podcasts.",
+                    correct: false,
+                    why: "Too vague. Use the specific script with testimonial link and empowerment.",
+                  },
+                  {
+                    text: "I understand your concern. Would you like to cancel?",
+                    correct: false,
+                    why: "Never offer cancellation when handling an objection. Address it confidently.",
+                  },
+                ],
+              },
+              {
+                client: "Fair enough. I\u2019ll keep the appointment.",
+                context: "Objections handled. Confirm remaining checkpoints.",
+                options: [
+                  {
+                    text: "I\u2019m glad to hear that. Now let me just make sure we\u2019re squared away \u2014 can you confirm which timezone you\u2019re in and that you have Monday May 5th at 2 PM on your calendar?",
+                    correct: true,
+                    why: "Good \u2014 circle back to confirm Checkpoints 1 and 2 that got skipped during objection handling.",
+                  },
+                  {
+                    text: "Great! You\u2019re all set then.",
+                    correct: false,
+                    why: "You haven\u2019t confirmed timezone, appointment time, Zoom, or urine test kit yet.",
+                  },
+                  {
+                    text: "Perfect. So tell me about your health issues.",
+                    correct: false,
+                    why: "You need to finish checkpoints before moving to discovery.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Eastern time, Monday at 2. I have the Zoom link in my calendar.",
+                context: "Checkpoints 1 and 2 confirmed. Check urine test kit.",
+                options: [
+                  {
+                    text: "And how about your urine test kit \u2014 have you received it yet or received a tracking number?",
+                    correct: true,
+                    why: "Checkpoint 5: Urine test kit. You already handled spouse (3) and NTA (4).",
+                  },
+                  {
+                    text: "Perfect, let\u2019s talk about what to expect on the call.",
+                    correct: false,
+                    why: "Still need to check on urine test kit \u2014 Checkpoint 5.",
+                  },
+                  {
+                    text: "Great. I\u2019ll send you a reminder text the day before.",
+                    correct: false,
+                    why: "You haven\u2019t checked on the urine test kit yet.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "I think it came in the mail but I haven\u2019t opened it yet.",
+                context: "Kit received but not done. Guide them.",
+                options: [
+                  {
+                    text: "Perfect! When you open it, you can scan the QR code on the box for the full instructions and information. Try to get that completed before your call so Dr. Anderson has those results.",
+                    correct: true,
+                    why: "Checkpoint 5 handled: Kit received, guide on next steps.",
+                  },
+                  {
+                    text: "You need to do that ASAP.",
+                    correct: false,
+                    why: "Too urgent. Guide them gently.",
+                  },
+                  {
+                    text: "That\u2019s fine, don\u2019t worry about it.",
+                    correct: false,
+                    why: "The test is important for the HA to have results. Encourage completion.",
+                  },
+                ],
+              },
+              {
+                client: "Okay, I\u2019ll try to do that this week.",
+                context: "Items pending. Close with CLOSE-02.",
+                options: [
+                  {
+                    text: "Great. So to recap \u2014 I\u2019ll text you the NTA link right now, try to complete the urine test, and I\u2019ll confirm with you once your husband is on board for the call. Your appointment is Monday at 2 PM Eastern. You\u2019re in good hands \u2014 text me if anything comes up!",
+                    correct: true,
+                    why: "CLOSE-02: Items Still Pending \u2014 recap action items, reinforce appointment, leave door open.",
+                  },
+                  {
+                    text: "Alright, you\u2019re all set! Talk soon.",
+                    correct: false,
+                    why: "There are pending items \u2014 use CLOSE-02 to recap what still needs to happen.",
+                  },
+                  {
+                    text: "Make sure you get everything done or we might need to reschedule.",
+                    correct: false,
+                    why: "Too threatening. Close with encouragement, not pressure.",
+                  },
+                ],
+              },
+              {
+                client: "Thanks, Alex. I feel better about it now.",
+                context: "Call ending on a positive note. Final words.",
+                options: [
+                  {
+                    text: "I\u2019m really glad! Dr. Anderson is going to have a great conversation with you. We\u2019re excited for you. Talk soon, Sarah!",
+                    correct: true,
+                    why: "Warm, confident close. Builds anticipation for the call.",
+                  },
+                  {
+                    text: "Bye!",
+                    correct: false,
+                    why: "Too abrupt. End with warmth and edification.",
+                  },
+                  {
+                    text: "Remember to do the NTA tonight!",
+                    correct: false,
+                    why: "You already told her. End on a positive, not a reminder.",
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            key: "difficult-caller",
+            title: "Difficult Caller",
+            sub: "Cancel request, emotional overwhelm, and recovery \u2014 high empathy required.",
+            diff: "hard",
+            stepCount: 10,
+            steps: [
+              {
+                client:
+                  "Look, I need to talk to someone. I want to cancel my appointment.",
+                context: "Lead wants to cancel. DIFF-01.",
+                options: [
+                  {
+                    text: "I understand, Sarah. Before I do anything, can I ask \u2014 is it timing, or is there something specific making you want to step back?",
+                    correct: true,
+                    why: "DIFF-01: Always isolate the reason before taking action.",
+                  },
+                  {
+                    text: "I\u2019m sorry to hear that. Let me cancel it for you.",
+                    correct: false,
+                    why: "Never cancel immediately. Always ask why first.",
+                  },
+                  {
+                    text: "Why would you want to cancel? This could really help you.",
+                    correct: false,
+                    why: "Too confrontational. Use the script to gently isolate the reason.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "I just... I don\u2019t know. I\u2019m scared. What if it doesn\u2019t work? I\u2019ve been let down so many times.",
+                context:
+                  "Cold feet. This is the \u2018cold feet\u2019 path of DIFF-01.",
+                options: [
+                  {
+                    text: "A lot of people feel that way right before the call. Dr. Anderson is preparing to just have a conversation with you to figure out what\u2019s going on at the root of your concerns and see if there\u2019s anything we could do to help. If you talk and decide it\u2019s not right, that\u2019s totally fine. But at least you\u2019ll have real answers instead of wondering. Let\u2019s keep the appointment.",
+                    correct: true,
+                    why: "DIFF-01 cold feet script: Normalize the feeling, lower stakes, ask to keep appointment.",
+                  },
+                  {
+                    text: "I promise it\u2019ll be worth it!",
+                    correct: false,
+                    why: "Empty promise. Use the script that normalizes fear and lowers the stakes.",
+                  },
+                  {
+                    text: "I understand. Do you want me to cancel then?",
+                    correct: false,
+                    why: "She said she\u2019s scared, not that she\u2019s firm. Address the fear first.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "I guess... but I just feel so overwhelmed. Like I don\u2019t even know where to start. Everything feels like too much right now.",
+                context: "She\u2019s emotional and overwhelmed. DIFF-03.",
+                options: [
+                  {
+                    text: "I can hear how hard this has been, Sarah. And honestly \u2014 a lot of the people who talk to Dr. Anderson are feeling exactly what you\u2019re feeling right now. Exhausted. Overwhelmed. Not sure if anything will actually work. You don\u2019t have to have it figured out before the call. Dr. Anderson is really good at meeting people exactly where they are. Just show up. You don\u2019t have to carry this alone.",
+                    correct: true,
+                    why: "DIFF-03: Match her emotion, normalize it, remove the burden of needing to be \u2018ready\u2019.",
+                  },
+                  {
+                    text: "You don\u2019t need to be overwhelmed. Dr. Anderson will handle everything.",
+                    correct: false,
+                    why: "Dismissive of her feelings. Validate the emotion first.",
+                  },
+                  {
+                    text: "What specifically is overwhelming you?",
+                    correct: false,
+                    why: "She just told you. Validate and reassure rather than probing deeper.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "(long pause) ...okay. Yeah. I think I needed to hear that. I\u2019ll keep it.",
+                context: "She\u2019s staying. Pause, then gently transition.",
+                options: [
+                  {
+                    text: "I\u2019m really glad, Sarah. How does that sound \u2014 are you okay to keep the appointment?",
+                    correct: true,
+                    why: "DIFF-03 follow-up: Gentle confirmation after emotional moment.",
+                  },
+                  {
+                    text: "Great! Let\u2019s run through the checklist then.",
+                    correct: false,
+                    why: "Too abrupt after an emotional moment. Confirm gently first.",
+                  },
+                  {
+                    text: "Perfect. Now your husband needs to be on the call too.",
+                    correct: false,
+                    why: "Way too jarring. She just had an emotional moment \u2014 ease into logistics.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Yes. I\u2019m okay. Thank you for being so patient with me.",
+                context:
+                  "She\u2019s settled. Now gently move into checkpoints.",
+                options: [
+                  {
+                    text: "Of course. I just want to make sure you feel good going in. Let me ask \u2014 what specific health issue are you most concerned about right now?",
+                    correct: true,
+                    why: "Transition to Discovery Level 1 \u2014 she\u2019s open and vulnerable, this is a good time to understand her pain.",
+                  },
+                  {
+                    text: "No problem! So let\u2019s confirm your appointment details.",
+                    correct: false,
+                    why: "After an emotional exchange, discovery is more natural than jumping to logistics.",
+                  },
+                  {
+                    text: "You\u2019re welcome. So has your husband watched the webinar?",
+                    correct: false,
+                    why: "Too abrupt. Ease into a discovery question to maintain the emotional connection.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Chronic fatigue mostly. And brain fog. Some days I can barely get through the afternoon. I\u2019ve seen so many doctors and nobody can tell me what\u2019s wrong.",
+                context: "Deep Level 2 pain. Validate and connect.",
+                options: [
+                  {
+                    text: "That sounds incredibly frustrating \u2014 dealing with that every day while nobody can give you a real answer. How long have you been going through this?",
+                    correct: true,
+                    why: "Level 2 Discovery: Validate and go deeper on the impact.",
+                  },
+                  {
+                    text: "Dr. Pompa\u2019s approach is about getting to the root cause.",
+                    correct: false,
+                    why: "Don\u2019t jump to the pitch. Let her share more first.",
+                  },
+                  {
+                    text: "Have you had your thyroid checked?",
+                    correct: false,
+                    why: "You\u2019re not the doctor. Stay in your role \u2014 listen and validate.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Almost four years now. It\u2019s affected everything \u2014 my work, my marriage, my time with my kids. I\u2019m just so tired of being tired.",
+                context:
+                  "She\u2019s shared deep pain. Time for transition and tie-down.",
+                options: [
+                  {
+                    text: "I\u2019m so sorry you\u2019ve been going through that, Sarah. It sounds like you\u2019ve tried a lot already \u2014 would you say that\u2019s true? And have those approaches mostly focused on managing symptoms rather than explaining why this is happening?",
+                    correct: true,
+                    why: "Transition + Tie-Down #1: Connect to disappointment with past approaches.",
+                  },
+                  {
+                    text: "Four years is a long time. You definitely need to be on this call.",
+                    correct: false,
+                    why: "Too prescriptive. Use the tie-down to let HER confirm the disappointment.",
+                  },
+                  {
+                    text: "I can hear that. What worries you most if nothing changes?",
+                    correct: false,
+                    why: "Good Level 3 question, but you should do Tie-Down #1 first to build the bridge.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Yes. Absolutely. Nothing has actually gotten to the WHY of it all.",
+                context: "Disappointment confirmed. Tie-Down #2.",
+                options: [
+                  {
+                    text: "What do you feel like is the root cause of what\u2019s going on? ...Dr. Pompa\u2019s philosophy is about getting to the root cause, not chasing symptoms. It\u2019s about clearing toxins out of the cell so the body can heal the way it was designed to. Does that way of thinking make sense based on what you\u2019ve experienced?",
+                    correct: true,
+                    why: "Tie-Down #2: Ask what they think, then introduce the philosophy, then tie it down.",
+                  },
+                  {
+                    text: "Well Dr. Pompa has the answer. That\u2019s why you should do the call.",
+                    correct: false,
+                    why: "Too salesy. Let her arrive at the conclusion through the tie-down process.",
+                  },
+                  {
+                    text: "Great, so are you ready for the call then?",
+                    correct: false,
+                    why: "You skipped Tie-Down #2 and #3. Complete the sequence.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Yes, that actually makes a lot of sense. I do feel like something is blocking my body from healing.",
+                context: "TD-02 confirmed. Quick TD-03 and close.",
+                options: [
+                  {
+                    text: "If you could finally understand what\u2019s going on and have real direction, would you want that now?",
+                    correct: true,
+                    why: "Tie-Down #3: Readiness for answers. Once she says yes, close.",
+                  },
+                  {
+                    text: "Great! So your appointment is Monday at 2 PM.",
+                    correct: false,
+                    why: "Close to right, but do Tie-Down #3 first to lock in readiness.",
+                  },
+                  {
+                    text: "Perfect. Let me explain the program pricing.",
+                    correct: false,
+                    why: "You don\u2019t discuss pricing \u2014 that\u2019s the HA\u2019s job.",
+                  },
+                ],
+              },
+              {
+                client: "Yes. I really do. I\u2019m ready.",
+                context:
+                  "All tie-downs done. She was a cancel risk, now she\u2019s committed. Use CLOSE-03 (Edification).",
+                options: [
+                  {
+                    text: "I just want you to know \u2014 Dr. Anderson is really good at what they do. They\u2019ve had this conversation with hundreds of people who felt exactly where you\u2019re at right now. Their job is to look at your situation and give you real clarity. Come with your questions. They\u2019ll meet you where you are. We\u2019re really excited for you, Sarah.",
+                    correct: true,
+                    why: "CLOSE-03: Edification Close \u2014 perfect for a nervous or emotional client. Build confidence in the HA.",
+                  },
+                  {
+                    text: "Great, we\u2019ll see you Monday! Bye!",
+                    correct: false,
+                    why: "She was on the verge of canceling \u2014 she needs the edification close to feel confident.",
+                  },
+                  {
+                    text: "Awesome! Make sure you do the NTA and complete the test kit.",
+                    correct: false,
+                    why: "You haven\u2019t confirmed those checkpoints, and this isn\u2019t the right energy after an emotional call.",
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            key: "no-show-recovery",
+            title: "No-Show Recovery",
+            sub: "Post no-show outreach \u2014 rescheduling with objection handling.",
+            diff: "medium",
+            stepCount: 8,
+            steps: [
+              {
+                client: "(phone rings, picks up) Hello?",
+                context: "Post no-show outreach. NS-01.",
+                options: [
+                  {
+                    text: "Hey Sarah, this is Alex from Dr. Pompa\u2019s team. We had your consultation scheduled with Dr. Anderson at 2 PM and weren\u2019t able to connect. Just wanted to check in \u2014 is everything okay?",
+                    correct: true,
+                    why: "NS-01: Immediate no-show call. Warm, concerned, no pressure.",
+                  },
+                  {
+                    text: "Sarah, you missed your appointment. What happened?",
+                    correct: false,
+                    why: "Too confrontational. Lead with concern, not accusation.",
+                  },
+                  {
+                    text: "Hi Sarah, I\u2019m calling to reschedule your missed appointment.",
+                    correct: false,
+                    why: "Don\u2019t jump to rescheduling. Check in on them first.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Oh my gosh, I\u2019m so sorry. My daughter got sick and I completely forgot. I feel terrible.",
+                context: "Genuine reason. Reassure and offer reschedule.",
+                options: [
+                  {
+                    text: "No worries at all \u2014 things come up! I hope your daughter is feeling better. Would you like to reschedule? Dr. Anderson has some availability this week and I want to make sure you still get this conversation.",
+                    correct: true,
+                    why: "NS-01: Reassure, show concern for her situation, offer reschedule.",
+                  },
+                  {
+                    text: "It\u2019s fine. Should I just cancel your appointment?",
+                    correct: false,
+                    why: "Never offer cancellation on a no-show. Always offer rescheduling.",
+                  },
+                  {
+                    text: "You need to let us know in advance if you can\u2019t make it.",
+                    correct: false,
+                    why: "Don\u2019t scold. She already feels bad. Be gracious and solution-oriented.",
+                  },
+                ],
+              },
+              {
+                client: "Yes, definitely. What do you have available?",
+                context: "She wants to reschedule. Find a time.",
+                options: [
+                  {
+                    text: "How about Wednesday at 3 PM Eastern? We also have Thursday morning if that works better. What time works best for you and your husband so he can be there too?",
+                    correct: true,
+                    why: "Offer options AND re-confirm spouse attendance (Checkpoint 3 re-do).",
+                  },
+                  {
+                    text: "We have Wednesday at 3. Does that work?",
+                    correct: false,
+                    why: "Good but you missed the opportunity to re-confirm spouse attendance.",
+                  },
+                  {
+                    text: "Let me check the calendar and get back to you.",
+                    correct: false,
+                    why: "Have options ready. Don\u2019t lose momentum.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Wednesday at 3 works. But... my husband said he doesn\u2019t want to do it. He thinks it\u2019s a waste of time.",
+                context: "Spouse objection during reschedule. SPOUSE-OBJ-03.",
+                options: [
+                  {
+                    text: "I hear you. Can you tell me a bit more \u2014 what doesn\u2019t he understand about it? This is exactly why having him there helps. Dr. Anderson can explain it at a logical and scientific level and answer all of his questions in real time.",
+                    correct: true,
+                    why: "SPOUSE-OBJ-03: Understand the resistance, then reframe \u2014 having him there IS the solution.",
+                  },
+                  {
+                    text: "That\u2019s okay, you can do the call alone.",
+                    correct: false,
+                    why: "Don\u2019t give up on spouse attendance this quickly. Address the objection.",
+                  },
+                  {
+                    text: "He needs to understand this is important for your health.",
+                    correct: false,
+                    why: "Too preachy. Ask questions, don\u2019t lecture.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "I think he\u2019d actually have a lot of questions. But he\u2019s stubborn about this stuff.",
+                context: "She admitted he\u2019d have questions. Use that.",
+                options: [
+                  {
+                    text: "That\u2019s exactly why having him there helps \u2014 he can ask those questions directly to Dr. Anderson in real time, instead of you trying to relay an hour-long conversation. Do you think he\u2019d be open to just listening in to see if this could help you?",
+                    correct: true,
+                    why: "Use his questions as the reason he should be there. Lower the ask to \u2018just listening in\u2019.",
+                  },
+                  {
+                    text: "Well, we can\u2019t force him. Let\u2019s proceed without him.",
+                    correct: false,
+                    why: "She just said he\u2019d have questions \u2014 that\u2019s your opening. Don\u2019t give up.",
+                  },
+                  {
+                    text: "Maybe I should call him and explain?",
+                    correct: false,
+                    why: "Overstepping. Work through her.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "Okay, I\u2019ll talk to him. I think if I frame it as just listening in, he might do it.",
+                context: "Spouse handled. Re-confirm other checkpoints.",
+                options: [
+                  {
+                    text: "Perfect. Now before Wednesday \u2014 I know you started the NTA questionnaire. Were you able to finish that? And how about the urine test kit?",
+                    correct: true,
+                    why: "Re-confirm Checkpoints 4 and 5 since this is a rescheduled appointment.",
+                  },
+                  {
+                    text: "Great! See you Wednesday then!",
+                    correct: false,
+                    why: "You need to re-confirm NTA and urine test status for the rescheduled appointment.",
+                  },
+                  {
+                    text: "Awesome. I\u2019ll send you a new calendar invite.",
+                    correct: false,
+                    why: "Re-confirm checkpoints first before wrapping up.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "I did the NTA but I still haven\u2019t done the urine test. Honestly... I\u2019m just not sure I\u2019m ready for all this.",
+                context:
+                  "OBJ-01: \u2018I\u2019m not sure I\u2019m ready\u2019.",
+                options: [
+                  {
+                    text: "I totally get that, Sarah. Most people who end up having this conversation felt the same way going in. Dr. Anderson isn\u2019t going to pressure you into anything. Their job is to give you clarity. The worst case is you walk away with more information than you had before. What do you have to lose?",
+                    correct: true,
+                    why: "OBJ-01: Normalize the feeling, lower the stakes, reframe the outcome.",
+                  },
+                  {
+                    text: "You\u2019re definitely ready. Don\u2019t overthink it.",
+                    correct: false,
+                    why: "Dismissive of her feelings. Use the script to validate and reframe.",
+                  },
+                  {
+                    text: "We can push it out if you need more time.",
+                    correct: false,
+                    why: "She\u2019s already no-showed once. Address the readiness objection, don\u2019t enable delay.",
+                  },
+                ],
+              },
+              {
+                client:
+                  "You\u2019re right. I have nothing to lose. Okay, Wednesday at 3. I\u2019ll get the urine test done and talk to my husband.",
+                context:
+                  "She\u2019s committed. Close with CLOSE-03 (Edification).",
+                options: [
+                  {
+                    text: "I just want you to know \u2014 Dr. Anderson is really good at what they do. They\u2019ve had this conversation with hundreds of people who felt exactly where you\u2019re at. Come with your questions. They\u2019ll meet you where you are. We\u2019re really excited for you, Sarah. I\u2019ll send the updated calendar invite now!",
+                    correct: true,
+                    why: "CLOSE-03 Edification Close \u2014 she\u2019s nervous, build her confidence in the HA and the process.",
+                  },
+                  {
+                    text: "Great, see you Wednesday!",
+                    correct: false,
+                    why: "After a no-show recovery with objections, she needs the edification close.",
+                  },
+                  {
+                    text: "Perfect. Don\u2019t forget the urine test!",
+                    correct: false,
+                    why: "End on an encouraging note, not a to-do reminder.",
+                  },
+                ],
+              },
+            ],
+          },
+        ];
+
+        /* ── State ── */
+        var currentMode = "reference";
+        var currentVersion = "v1";
+        var currentCategory = "objections";
+        var searchTerm = "";
+        var expandedCards = {};
+        var currentScenario = null;
+        var currentStep = 0;
+        var score = 0;
+        var stepResults = [];
+        var savedScores = JSON.parse(
+          localStorage.getItem("ac-call-scripts-scores") || "{}",
+        );
+
+        var VERSION_DESCS = {
+          v1: "Direct, chest-voice approach \u2014 pain first, statements not questions",
+          v2: "Standard collaborative approach",
+        };
+
+        /* ── Mode Toggle ── */
+        document.querySelectorAll(".mode-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            document.querySelectorAll(".mode-btn").forEach(function (b) {
+              b.classList.remove("active");
+            });
+            btn.classList.add("active");
+            currentMode = btn.getAttribute("data-mode");
+            if (currentMode === "reference") {
+              el("referenceMode").style.display = "";
+              el("practiceMode").style.display = "none";
+              el("versionToggle").style.display = "";
+            } else {
+              el("referenceMode").style.display = "none";
+              el("practiceMode").style.display = "";
+              el("versionToggle").style.display = "none";
+              currentScenario = null;
+              renderPracticeMode();
+            }
+          });
+        });
+
+        /* ── Version Toggle ── */
+        document.querySelectorAll(".version-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            document.querySelectorAll(".version-btn").forEach(function (b) {
+              b.classList.remove("active");
+            });
+            btn.classList.add("active");
+            currentVersion = btn.getAttribute("data-version");
+            el("versionDesc").textContent = VERSION_DESCS[currentVersion];
+            renderReferenceMode();
+          });
+        });
+
+        /* ── Highlight Variables ── */
+        function highlightVars(text) {
+          return text.replace(/\{(\w+)\}/g, '<span class="var">{$1}</span>');
+        }
+
+        /* ── REFERENCE MODE ── */
+        function renderReferenceMode() {
+          var container = el("referenceMode");
+          container.innerHTML = "";
+
+          /* Category filters */
+          var filterRow = createEl("div", "category-filters");
+          CATEGORIES.forEach(function (cat) {
+            var btn = createEl(
+              "button",
+              "cat-btn" + (cat.key === currentCategory ? " active" : ""),
+              cat.label,
+            );
+            btn.addEventListener("click", function () {
+              currentCategory = cat.key;
+              renderReferenceMode();
+            });
+            filterRow.appendChild(btn);
+          });
+          container.appendChild(filterRow);
+
+          /* Search */
+          var searchWrap = createEl("div", "search-wrap");
+          var searchInput = document.createElement("input");
+          searchInput.type = "text";
+          searchInput.className = "search-input";
+          searchInput.placeholder = "Search scripts by keyword...";
+          searchInput.value = searchTerm;
+          searchInput.addEventListener("input", function () {
+            searchTerm = this.value;
+            renderScriptCards();
+          });
+          searchWrap.appendChild(searchInput);
+          container.appendChild(searchWrap);
+
+          /* Cards container */
+          var cardsDiv = createEl("div", "script-cards");
+          cardsDiv.id = "scriptCards";
+          container.appendChild(cardsDiv);
+
+          renderScriptCards();
+        }
+
+        function renderScriptCards() {
+          var cardsDiv = el("scriptCards");
+          cardsDiv.innerHTML = "";
+
+          var filtered = SCRIPTS.filter(function (s) {
+            return s.cat === currentCategory;
+          });
+
+          if (searchTerm.trim()) {
+            var term = searchTerm.toLowerCase();
+            filtered = filtered.filter(function (s) {
+              var haystack = (
+                s.id +
+                " " +
+                s.title +
+                " " +
+                s.when +
+                " " +
+                (s.lines || [])
+                  .map(function (l) {
+                    return l.text;
+                  })
+                  .join(" ")
+              ).toLowerCase();
+              if (s.branches) {
+                s.branches.forEach(function (b) {
+                  haystack +=
+                    " " +
+                    b.label +
+                    " " +
+                    b.lines
+                      .map(function (l) {
+                        return l.text;
+                      })
+                      .join(" ");
+                });
+              }
+              if (s.tip) haystack += " " + s.tip;
+              if (s.note) haystack += " " + s.note;
+              return haystack.indexOf(term) !== -1;
+            });
+          }
+
+          if (filtered.length === 0) {
+            cardsDiv.appendChild(
+              createEl("div", "no-results", "No scripts match your search."),
+            );
+            return;
+          }
+
+          filtered.forEach(function (script) {
+            /* Resolve versioned content: v1 overrides fall back to base */
+            var hasV1 = !!script.v1;
+            var useV1 = hasV1 && currentVersion === "v1";
+            var displayLines =
+              useV1 && script.v1.lines ? script.v1.lines : script.lines;
+            var displayBranches =
+              useV1 && script.v1.branches !== undefined
+                ? script.v1.branches
+                : script.branches;
+            var displayTip =
+              useV1 && script.v1.tip !== undefined ? script.v1.tip : script.tip;
+            var displayNote =
+              useV1 && script.v1.note !== undefined
+                ? script.v1.note
+                : script.note;
+
+            var card = createEl(
+              "div",
+              "script-card" + (expandedCards[script.id] ? " expanded" : ""),
+            );
+
+            /* Header */
+            var header = createEl("div", "script-card-header");
+            var idSpan = createEl("span", "script-id", script.id);
+            header.appendChild(idSpan);
+            var titleCol = createEl("div", "");
+            var titleRow = createEl("div", "script-title");
+            titleRow.textContent = script.title;
+            if (hasV1) {
+              var badge = createEl(
+                "span",
+                "version-badge " + currentVersion,
+                currentVersion === "v1" ? "V1" : "V2",
+              );
+              titleRow.appendChild(badge);
+            }
+            titleCol.appendChild(titleRow);
+            if (script.when) {
+              titleCol.appendChild(createEl("div", "script-when", script.when));
+            }
+            header.appendChild(titleCol);
+            header.appendChild(createEl("span", "expand-icon", "\u25BC"));
+            card.appendChild(header);
+
+            /* Body */
+            var body = createEl("div", "script-body");
+
+            if (displayLines && displayLines.length > 0) {
+              displayLines.forEach(function (line) {
+                var lineEl = createEl("div", "script-line");
+                lineEl.innerHTML = highlightVars(
+                  line.text,
+                ); /* static script data only */
+                body.appendChild(lineEl);
+              });
+            }
+
+            if (displayBranches) {
+              displayBranches.forEach(function (branch) {
+                body.appendChild(createEl("div", "branch-label", branch.label));
+                branch.lines.forEach(function (line) {
+                  var lineEl = createEl("div", "script-line");
+                  lineEl.innerHTML = highlightVars(
+                    line.text,
+                  ); /* static script data only */
+                  body.appendChild(lineEl);
+                });
+              });
+            }
+
+            if (displayTip) {
+              body.appendChild(
+                createEl("div", "script-tip", "Tip: " + displayTip),
+              );
+            }
+            if (displayNote) {
+              body.appendChild(
+                createEl("div", "script-note", "Note: " + displayNote),
+              );
+            }
+
+            card.appendChild(body);
+
+            card.addEventListener("click", function () {
+              if (expandedCards[script.id]) {
+                delete expandedCards[script.id];
+                card.classList.remove("expanded");
+              } else {
+                expandedCards[script.id] = true;
+                card.classList.add("expanded");
+              }
+            });
+
+            cardsDiv.appendChild(card);
+          });
+        }
+
+        /* ── PRACTICE MODE ── */
+        function renderPracticeMode() {
+          var container = el("practiceMode");
+          container.innerHTML = "";
+
+          if (currentScenario === null) {
+            renderScenarioSelection(container);
+          } else {
+            renderActiveScenario(container);
+          }
+        }
+
+        function renderScenarioSelection(container) {
+          var intro = createEl("div", "practice-intro");
+          intro.appendChild(
+            createEl("div", "practice-intro-title", "Practice Call Scenarios"),
+          );
+          intro.appendChild(
+            createEl(
+              "p",
+              "practice-intro-desc",
+              "Role-play as the AC on simulated phone calls. Each scenario presents a different type of caller \u2014 read what the client says, pick the best response from your call scripts, and get instant feedback. Pick a scenario to start.",
+            ),
+          );
+          container.appendChild(intro);
+
+          var grid = createEl("div", "scenario-grid");
+
+          SCENARIOS.forEach(function (sc, idx) {
+            var card = createEl("div", "scenario-card");
+            card.appendChild(createEl("div", "scenario-card-title", sc.title));
+            card.appendChild(createEl("div", "scenario-card-sub", sc.sub));
+
+            var meta = createEl("div", "scenario-card-meta");
+            var diffCls =
+              sc.diff === "easy"
+                ? "diff-easy"
+                : sc.diff === "medium"
+                  ? "diff-medium"
+                  : "diff-hard";
+            meta.appendChild(
+              createEl(
+                "span",
+                "scenario-diff " + diffCls,
+                sc.diff.charAt(0).toUpperCase() + sc.diff.slice(1),
+              ),
+            );
+            meta.appendChild(
+              createEl("span", "scenario-steps-badge", sc.stepCount + " steps"),
+            );
+
+            if (savedScores[sc.key] !== undefined) {
+              meta.appendChild(
+                createEl(
+                  "span",
+                  "best-score",
+                  "Best: " + savedScores[sc.key] + "/" + sc.stepCount,
+                ),
+              );
+            }
+
+            card.appendChild(meta);
+
+            card.addEventListener("click", function () {
+              currentScenario = idx;
+              currentStep = -1;
+              score = 0;
+              stepResults = [];
+              renderPracticeMode();
+            });
+
+            grid.appendChild(card);
+          });
+
+          container.appendChild(grid);
+        }
+
+        function renderActiveScenario(container) {
+          var sc = SCENARIOS[currentScenario];
+          var isComplete = currentStep >= sc.steps.length;
+
+          /* Back button */
+          var backBtn = createEl(
+            "button",
+            "scenario-back-btn",
+            "\u2190 Back to Scenarios",
+          );
+          backBtn.addEventListener("click", function () {
+            currentScenario = null;
+            renderPracticeMode();
+          });
+          container.appendChild(backBtn);
+
+          /* Intro screen */
+          if (currentStep === -1) {
+            var intro = createEl("div", "scenario-intro");
+            intro.appendChild(
+              createEl("div", "scenario-intro-title", sc.title),
+            );
+            intro.appendChild(createEl("div", "scenario-intro-sub", sc.sub));
+
+            var how = createEl("div", "scenario-intro-how");
+            how.appendChild(
+              createEl("div", "scenario-intro-how-title", "How it works"),
+            );
+            var ol = document.createElement("ol");
+            var howSteps = [
+              "You are the AC (Admissions Coordinator) on a live call",
+              "Read what the client says, then pick the best response",
+              "Get instant feedback on each choice \u2014 correct or not ideal",
+              "The call continues regardless, so you see the full flow",
+              "At the end you get a scorecard with your results",
+            ];
+            howSteps.forEach(function (s) {
+              var li = document.createElement("li");
+              li.textContent = s;
+              ol.appendChild(li);
+            });
+            how.appendChild(ol);
+            intro.appendChild(how);
+
+            var detailsRow = createEl("div", "scenario-intro-details");
+            var d1 = createEl("span", "scenario-intro-detail");
+            var d1b = document.createElement("strong");
+            d1b.textContent = sc.stepCount;
+            d1.appendChild(d1b);
+            d1.appendChild(document.createTextNode(" steps"));
+            var d2 = createEl("span", "scenario-intro-detail");
+            d2.appendChild(document.createTextNode("Client: "));
+            var d2b = document.createElement("strong");
+            d2b.textContent = "Sarah Mitchell";
+            d2.appendChild(d2b);
+            var d3 = createEl("span", "scenario-intro-detail");
+            d3.appendChild(document.createTextNode("HA: "));
+            var d3b = document.createElement("strong");
+            d3b.textContent = "Dr. Anderson";
+            d3.appendChild(d3b);
+            detailsRow.appendChild(d1);
+            detailsRow.appendChild(d2);
+            detailsRow.appendChild(d3);
+            intro.appendChild(detailsRow);
+
+            var startBtn = createEl(
+              "button",
+              "start-scenario-btn",
+              "Start Scenario",
+            );
+            startBtn.addEventListener("click", function () {
+              currentStep = 0;
+              renderPracticeMode();
+            });
+            intro.appendChild(startBtn);
+
+            container.appendChild(intro);
+            return;
+          }
+
+          var step = sc.steps[currentStep];
+
+          if (isComplete) {
+            renderScorecard(container, sc);
+            return;
+          }
+
+          /* Context card */
+          var ctx = createEl("div", "context-card");
+          ctx.appendChild(createEl("div", "context-card-title", sc.title));
+          var details = createEl("div", "context-card-details");
+          details.innerHTML =
+            '<span class="context-detail"><span class="context-label">Client:</span> Sarah Mitchell</span>' +
+            '<span class="context-detail"><span class="context-label">HA:</span> Dr. Anderson</span>' +
+            '<span class="context-detail"><span class="context-label">Appt:</span> May 5 at 2:00 PM EST</span>';
+          ctx.appendChild(details);
+          container.appendChild(ctx);
+
+          /* Progress */
+          var progWrap = createEl("div", "progress-bar-wrap");
+          progWrap.appendChild(
+            createEl(
+              "div",
+              "progress-label",
+              "Step " + (currentStep + 1) + " of " + sc.steps.length,
+            ),
+          );
+          var track = createEl("div", "progress-track");
+          var fill = createEl("div", "progress-fill");
+          fill.style.width = (currentStep / sc.steps.length) * 100 + "%";
+          track.appendChild(fill);
+          progWrap.appendChild(track);
+          container.appendChild(progWrap);
+
+          /* Transcript (only show if there are past messages) */
+          if (currentStep > 0) {
+            var transcript = createEl("div", "transcript");
+            transcript.id = "transcript";
+            for (var i = 0; i < currentStep; i++) {
+              var pastStep = sc.steps[i];
+              var clientMsg = createEl("div", "msg msg-client");
+              var clientLabel = createEl("div", "msg-label", "Client");
+              clientMsg.appendChild(clientLabel);
+              clientMsg.appendChild(document.createTextNode(pastStep.client));
+              transcript.appendChild(clientMsg);
+
+              if (stepResults[i] !== undefined) {
+                var chosenOpt = pastStep.options[stepResults[i]];
+                var acMsg = createEl("div", "msg msg-ac");
+                var acLabel = createEl("div", "msg-label", "You");
+                acMsg.appendChild(acLabel);
+                acMsg.appendChild(document.createTextNode(chosenOpt.text));
+                transcript.appendChild(acMsg);
+              }
+            }
+            container.appendChild(transcript);
+            setTimeout(function () {
+              transcript.scrollTop = transcript.scrollHeight;
+            }, 50);
+          }
+
+          /* Client prompt */
+          var prompt = createEl("div", "client-prompt");
+          prompt.appendChild(
+            createEl("div", "client-prompt-label", "Client says:"),
+          );
+          prompt.appendChild(
+            createEl("div", "client-prompt-text", step.client),
+          );
+          prompt.appendChild(
+            createEl("div", "client-prompt-context", step.context),
+          );
+          container.appendChild(prompt);
+
+          /* Response options */
+          var optionsDiv = createEl("div", "response-options");
+          optionsDiv.id = "responseOptions";
+          step.options.forEach(function (opt, oi) {
+            var btn = createEl("button", "response-btn", opt.text);
+            btn.setAttribute("data-idx", oi);
+            btn.addEventListener("click", function () {
+              handleResponse(oi, opt, step);
+            });
+            optionsDiv.appendChild(btn);
+          });
+          container.appendChild(optionsDiv);
+
+          /* Feedback panel placeholder */
+          var feedback = createEl("div", "feedback-panel");
+          feedback.id = "feedbackPanel";
+          container.appendChild(feedback);
+        }
+
+        function handleResponse(idx, opt, step) {
+          var buttons = document.querySelectorAll(
+            "#responseOptions .response-btn",
+          );
+          var wasCorrect = opt.correct;
+
+          buttons.forEach(function (btn) {
+            btn.classList.add("disabled");
+            var bi = parseInt(btn.getAttribute("data-idx"));
+            if (bi === idx) {
+              btn.classList.add("chosen");
+              btn.classList.add(wasCorrect ? "correct" : "wrong");
+            }
+            if (step.options[bi].correct && bi !== idx) {
+              btn.classList.add("highlight-correct");
+            }
+          });
+
+          if (wasCorrect) score++;
+          stepResults.push(idx);
+
+          /* Show feedback */
+          var panel = el("feedbackPanel");
+          panel.className =
+            "feedback-panel visible " + (wasCorrect ? "correct" : "wrong");
+          panel.innerHTML = "";
+          panel.appendChild(
+            createEl(
+              "div",
+              "feedback-label " + (wasCorrect ? "correct" : "wrong"),
+              wasCorrect ? "Correct!" : "Not Ideal",
+            ),
+          );
+          panel.appendChild(createEl("div", "feedback-text", opt.why));
+
+          var contBtn = createEl("button", "continue-btn", "Continue");
+          contBtn.addEventListener("click", function () {
+            currentStep++;
+            renderPracticeMode();
+          });
+          panel.appendChild(contBtn);
+        }
+
+        function renderScorecard(container, sc) {
+          var pct = Math.round((score / sc.steps.length) * 100);
+
+          /* Save best score */
+          if (
+            savedScores[sc.key] === undefined ||
+            score > savedScores[sc.key]
+          ) {
+            savedScores[sc.key] = score;
+            localStorage.setItem(
+              "ac-call-scripts-scores",
+              JSON.stringify(savedScores),
+            );
+          }
+
+          var card = createEl("div", "scorecard visible");
+          card.appendChild(
+            createEl("div", "scorecard-title", "Scenario Complete"),
+          );
+          card.appendChild(
+            createEl(
+              "div",
+              "scorecard-fraction",
+              score + "/" + sc.steps.length,
+            ),
+          );
+          card.appendChild(createEl("div", "scorecard-pct", pct + "% correct"));
+
+          /* Breakdown */
+          var breakdown = createEl("div", "scorecard-breakdown");
+          sc.steps.forEach(function (step, i) {
+            var chosen = stepResults[i];
+            var wasCorrect =
+              step.options[chosen] && step.options[chosen].correct;
+            var row = createEl(
+              "div",
+              "scorecard-step " + (wasCorrect ? "step-correct" : "step-wrong"),
+            );
+            row.appendChild(
+              createEl("span", "scorecard-step-num", "#" + (i + 1)),
+            );
+            row.appendChild(
+              createEl(
+                "span",
+                "scorecard-step-icon",
+                wasCorrect ? "\u2713" : "\u2717",
+              ),
+            );
+            var label =
+              step.client.length > 60
+                ? step.client.substring(0, 57) + "..."
+                : step.client;
+            row.appendChild(createEl("span", "", label));
+            breakdown.appendChild(row);
+          });
+          card.appendChild(breakdown);
+
+          /* Buttons */
+          var btns = createEl("div", "scorecard-btns");
+
+          var tryAgain = createEl(
+            "button",
+            "scorecard-btn secondary",
+            "Try Again",
+          );
+          tryAgain.addEventListener("click", function () {
+            currentStep = 0;
+            score = 0;
+            stepResults = [];
+            renderPracticeMode();
+          });
+          btns.appendChild(tryAgain);
+
+          var nextIdx = (currentScenario + 1) % SCENARIOS.length;
+          var nextBtn = createEl(
+            "button",
+            "scorecard-btn primary",
+            "Next Scenario",
+          );
+          nextBtn.addEventListener("click", function () {
+            currentScenario = nextIdx;
+            currentStep = 0;
+            score = 0;
+            stepResults = [];
+            renderPracticeMode();
+          });
+          btns.appendChild(nextBtn);
+
+          card.appendChild(btns);
+          container.appendChild(card);
+        }
+
+        /* ── Init ── */
+        renderReferenceMode();
+      })();
+    </script>
+  </body>
+</html>

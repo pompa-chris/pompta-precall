@@ -1,0 +1,2582 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Reschedule SOP Training — AC Pre-Call Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --slate-900: #1b2a31;
+        --slate-800: #243841;
+        --slate-700: #2f4a56;
+        --slate-600: #3f5b68;
+        --slate-500: #5a7682;
+        --slate-400: #89a0ab;
+        --slate-300: #b5c6cd;
+        --slate-200: #dce5e9;
+        --slate-100: #edf1f3;
+        --teal-700: #1e8f86;
+        --teal-600: #2db3a6;
+        --teal-500: #4ec5b9;
+        --teal-400: #87d8d0;
+        --teal-200: #c9eae6;
+        --teal-100: #e6f5f2;
+        --paper: #f7f3ed;
+        --paper-deep: #efe8dc;
+        --bone: #fbf9f4;
+        --ink: #1a262c;
+        --ink-soft: #3d5059;
+        --alert: #b8472e;
+        --correct-bg: #e6f5f2;
+        --correct-border: #2db3a6;
+        --incorrect-bg: #fdf0ec;
+        --incorrect-border: #b8472e;
+        --warning: #d97706;
+        --warning-bg: #fef3c7;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 20% 0%,
+            rgba(45, 179, 166, 0.06) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at 80% 100%,
+            rgba(30, 143, 134, 0.04) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+      .site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: var(--bone);
+        border-bottom: 1px solid var(--slate-200);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        z-index: 200;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-decoration: none;
+      }
+      .nav-logo img {
+        height: 36px;
+        width: auto;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow-x: auto;
+      }
+      .nav-link {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--slate-500);
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+      }
+      .nav-link:hover {
+        color: var(--teal-700);
+        background: var(--teal-100);
+      }
+      .nav-link.active {
+        color: var(--teal-700);
+        background: var(--teal-100);
+      }
+      .container {
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 100px 32px 80px;
+        position: relative;
+        z-index: 1;
+      }
+      .screen {
+        display: none;
+      }
+      .screen.active {
+        display: block;
+      }
+      /* XP/Streak Header */
+      .xp-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        padding: 16px 0 8px;
+        margin-bottom: 16px;
+      }
+      .xp-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--slate-600);
+      }
+      .xp-item .icon {
+        font-size: 20px;
+      }
+      .xp-item .val {
+        color: var(--teal-700);
+        font-weight: 600;
+        font-size: 16px;
+      }
+      /* Level Map */
+      .level-path {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 20px 0;
+      }
+      .level-row {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        padding: 12px 0;
+        position: relative;
+      }
+      .level-row:nth-child(odd) {
+        align-self: flex-start;
+        margin-left: 10%;
+      }
+      .level-row:nth-child(even) {
+        align-self: flex-end;
+        margin-right: 10%;
+      }
+      .level-connector {
+        width: 2px;
+        height: 32px;
+        background: var(--slate-300);
+        margin: 0 auto;
+      }
+      .level-node {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Outfit", sans-serif;
+        font-size: 28px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 3px solid var(--slate-300);
+        background: var(--bone);
+        color: var(--slate-400);
+        position: relative;
+      }
+      .level-node.unlocked {
+        border-color: var(--teal-600);
+        background: var(--teal-100);
+        color: var(--teal-700);
+      }
+      .level-node.unlocked:hover {
+        transform: scale(1.08);
+        box-shadow: 0 8px 24px rgba(30, 143, 134, 0.15);
+      }
+      .level-node.completed {
+        border-color: var(--teal-700);
+        background: var(--teal-700);
+        color: #fff;
+      }
+      .level-node.locked {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+      .level-node .lock-icon {
+        font-size: 24px;
+      }
+      .level-info {
+        min-width: 200px;
+      }
+      .level-info h3 {
+        font-family: "Outfit", sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--slate-800);
+        line-height: 1.2;
+      }
+      .level-info .level-sub {
+        font-size: 13px;
+        color: var(--ink-soft);
+        margin-top: 4px;
+      }
+      .stars-row {
+        display: flex;
+        gap: 4px;
+        margin-top: 8px;
+      }
+      .stars-row .star {
+        font-size: 18px;
+        color: var(--slate-300);
+      }
+      .stars-row .star.earned {
+        color: #f59e0b;
+      }
+      /* Level Intro */
+      .intro-card {
+        text-align: center;
+        padding-top: 60px;
+      }
+      .intro-eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--teal-700);
+        font-weight: 500;
+        margin-bottom: 16px;
+      }
+      .intro-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 44px;
+        font-weight: 500;
+        letter-spacing: -0.025em;
+        color: var(--slate-800);
+        margin-bottom: 16px;
+        line-height: 1.1;
+      }
+      .intro-desc {
+        font-size: 17px;
+        color: var(--ink-soft);
+        max-width: 520px;
+        margin: 0 auto 32px;
+        line-height: 1.55;
+      }
+      .intro-meta {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+      .intro-meta-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+      .intro-meta-num {
+        font-family: "Outfit", sans-serif;
+        font-size: 32px;
+        font-weight: 400;
+        color: var(--slate-800);
+      }
+      .intro-meta-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--slate-500);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 16px 40px;
+        border: none;
+        border-radius: 8px;
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .btn-primary {
+        background: var(--teal-700);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--teal-600);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(30, 143, 134, 0.3);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--slate-500);
+        border: 1px solid var(--slate-300);
+      }
+      .btn-ghost:hover {
+        background: var(--slate-100);
+        color: var(--slate-700);
+      }
+      .btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        transform: none !important;
+        box-shadow: none !important;
+      }
+      /* Progress Bar */
+      .progress-bar {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      .progress-track {
+        flex: 1;
+        height: 6px;
+        background: var(--slate-200);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--teal-700), var(--teal-500));
+        border-radius: 3px;
+        transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .progress-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        color: var(--slate-500);
+        white-space: nowrap;
+      }
+      /* Question Card */
+      .question-card {
+        animation: fadeSlideIn 0.4s ease;
+      }
+      @keyframes fadeSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .question-text {
+        font-family: "Outfit", sans-serif;
+        font-size: 24px;
+        font-weight: 500;
+        color: var(--slate-800);
+        line-height: 1.3;
+        margin-bottom: 24px;
+        letter-spacing: -0.01em;
+      }
+      /* MC/TF Options */
+      .options-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+      .option {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px 20px;
+        background: #fff;
+        border: 2px solid var(--slate-200);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        font-size: 15px;
+        line-height: 1.5;
+      }
+      .option:hover {
+        border-color: var(--teal-500);
+        background: var(--teal-100);
+      }
+      .option.selected {
+        border-color: var(--teal-600);
+        background: var(--teal-100);
+      }
+      .option.disabled {
+        pointer-events: none;
+      }
+      .option.correct-answer {
+        border-color: var(--correct-border);
+        background: var(--correct-bg);
+      }
+      .option.incorrect-answer {
+        border-color: var(--incorrect-border);
+        background: var(--incorrect-bg);
+      }
+      .option-letter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        border-radius: 50%;
+        border: 2px solid var(--slate-300);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--slate-500);
+        transition: all 0.15s;
+      }
+      .option.selected .option-letter {
+        border-color: var(--teal-600);
+        background: var(--teal-600);
+        color: #fff;
+      }
+      .option.correct-answer .option-letter {
+        border-color: var(--correct-border);
+        background: var(--correct-border);
+        color: #fff;
+      }
+      .option.incorrect-answer .option-letter {
+        border-color: var(--incorrect-border);
+        background: var(--incorrect-border);
+        color: #fff;
+      }
+      .option-text {
+        flex: 1;
+        color: var(--ink);
+      }
+      /* ORDER type */
+      .order-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .order-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 18px;
+        background: #fff;
+        border: 2px solid var(--slate-200);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.15s;
+        font-size: 15px;
+      }
+      .order-item:hover {
+        border-color: var(--teal-400);
+      }
+      .order-item.picked {
+        border-color: var(--teal-600);
+        background: var(--teal-100);
+      }
+      .order-item.disabled {
+        pointer-events: none;
+      }
+      .order-item.correct-pos {
+        border-color: var(--correct-border);
+        background: var(--correct-bg);
+      }
+      .order-item.incorrect-pos {
+        border-color: var(--incorrect-border);
+        background: var(--incorrect-bg);
+      }
+      .order-num {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        border-radius: 50%;
+        background: var(--slate-200);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--slate-500);
+        transition: all 0.15s;
+      }
+      .order-item.picked .order-num {
+        background: var(--teal-600);
+        color: #fff;
+      }
+      /* TREE scenario */
+      .scenario-header {
+        background: var(--slate-800);
+        color: var(--slate-100);
+        border-radius: 10px;
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      .scenario-header .sh-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--teal-400);
+        margin-bottom: 8px;
+      }
+      .scenario-header .sh-client {
+        font-family: "Outfit", sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+      .scenario-header .sh-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 13px;
+        color: var(--slate-300);
+      }
+      .scenario-header .sh-details span {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 3px 10px;
+        border-radius: 12px;
+      }
+      .sys-pill {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        background: var(--paper-deep);
+        color: var(--ink-soft);
+        margin-bottom: 16px;
+      }
+      .transcript {
+        margin-bottom: 20px;
+      }
+      .transcript-msg {
+        padding: 10px 16px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .transcript-msg.client {
+        background: #fff;
+        border: 1px solid var(--slate-200);
+        border-left: 3px solid #1565c0;
+      }
+      .transcript-msg.ac {
+        background: var(--teal-100);
+        border: 1px solid var(--teal-200);
+        border-left: 3px solid var(--teal-600);
+      }
+      .transcript-msg .msg-who {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--slate-400);
+        margin-bottom: 4px;
+      }
+      /* Consequence Interlude */
+      .consequence {
+        padding: 20px 24px;
+        border-radius: 10px;
+        margin: 16px 0;
+        border-left: 4px solid;
+        animation: fadeSlideIn 0.4s ease;
+      }
+      .consequence.severity-red {
+        border-color: var(--alert);
+        background: var(--incorrect-bg);
+      }
+      .consequence.severity-amber {
+        border-color: var(--warning);
+        background: var(--warning-bg);
+      }
+      .consequence .con-icon {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+      .consequence .con-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .consequence.severity-red .con-title {
+        color: var(--alert);
+      }
+      .consequence.severity-amber .con-title {
+        color: var(--warning);
+      }
+      .consequence .con-narrative {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--ink-soft);
+      }
+      /* Feedback */
+      .feedback-panel {
+        margin-top: 20px;
+        padding: 20px 24px;
+        border-radius: 8px;
+        border-left: 4px solid;
+        animation: fadeSlideIn 0.3s ease;
+      }
+      .feedback-panel.correct {
+        border-color: var(--correct-border);
+        background: var(--correct-bg);
+      }
+      .feedback-panel.incorrect {
+        border-color: var(--incorrect-border);
+        background: var(--incorrect-bg);
+      }
+      .feedback-panel .fb-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .feedback-panel.correct .fb-title {
+        color: var(--teal-700);
+      }
+      .feedback-panel.incorrect .fb-title {
+        color: var(--alert);
+      }
+      .feedback-panel .fb-text {
+        font-size: 14px;
+        line-height: 1.55;
+        color: var(--ink-soft);
+      }
+      .action-row {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 24px;
+      }
+      /* Level Complete */
+      .complete-card {
+        text-align: center;
+        padding-top: 40px;
+      }
+      .stars-big {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .stars-big .star-big {
+        font-size: 48px;
+        color: var(--slate-300);
+        transition: all 0.4s ease;
+      }
+      .stars-big .star-big.earned {
+        color: #f59e0b;
+        animation: starPop 0.5s ease;
+      }
+      @keyframes starPop {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.3);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .complete-score {
+        font-family: "Outfit", sans-serif;
+        font-size: 56px;
+        font-weight: 400;
+        color: var(--slate-800);
+        margin-bottom: 8px;
+      }
+      .complete-pct {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 16px;
+        color: var(--slate-500);
+        margin-bottom: 24px;
+      }
+      .xp-earned {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 24px;
+        border-radius: 20px;
+        background: var(--teal-100);
+        color: var(--teal-700);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 32px;
+      }
+      /* Responsive */
+      @media (max-width: 720px) {
+        .site-nav {
+          padding: 0 16px;
+        }
+        .nav-links {
+          gap: 4px;
+        }
+        .nav-link {
+          padding: 6px 10px;
+          font-size: 11px;
+        }
+        .container {
+          padding: 80px 16px 60px;
+        }
+        .intro-title {
+          font-size: 32px;
+        }
+        .question-text {
+          font-size: 20px;
+        }
+        .level-row:nth-child(odd),
+        .level-row:nth-child(even) {
+          margin-left: 0;
+          margin-right: 0;
+          align-self: center;
+        }
+        .level-info h3 {
+          font-size: 17px;
+        }
+        .scenario-header .sh-details {
+          flex-direction: column;
+          gap: 6px;
+        }
+        .intro-meta {
+          gap: 24px;
+        }
+        .intro-meta-num {
+          font-size: 26px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a href="index.html" class="nav-logo"
+        ><img src="logo.png" alt="Dr. Pompa"
+      /></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quiz.html" class="nav-link">Quiz</a>
+        <a href="simulator.html" class="nav-link">Simulator</a>
+        <a href="live-testing.html" class="nav-link">Live Testing</a>
+        <a href="contacts.html" class="nav-link">Contacts</a>
+        <a href="call-scripts.html" class="nav-link">Call Scripts</a>
+        <a href="spouse-training.html" class="nav-link">Spouse</a>
+        <a href="call-guide.html" class="nav-link">Call Guide</a>
+        <a href="reschedule-sop.html" class="nav-link active">Reschedule SOP</a>
+      </div>
+    </nav>
+    <div class="container">
+      <div id="levelMap" class="screen active"></div>
+      <div id="levelIntro" class="screen"></div>
+      <div id="questionScreen" class="screen"></div>
+      <div id="levelComplete" class="screen"></div>
+    </div>
+    <script>
+      (function () {
+        "use strict";
+        var LS_KEY = "ac-reschedule-sop";
+        var XP_PER_LEVEL = [25, 35, 40, 50];
+        var BONUS_PER_LEVEL = [100, 150, 200, 250];
+        var UNLOCK_GATES = [0, 75, 70, 70];
+
+        var LEVELS = [
+          {
+            id: 1,
+            title: "The Rules",
+            description:
+              "Core reschedule rules, calendar standards, and priority order. Master the fundamentals before handling real scenarios.",
+            questions: [
+              {
+                type: "MC",
+                question:
+                  "A client wants to reschedule their consultation. What is the #1 priority when offering new times?",
+                options: [
+                  "Find the earliest available slot with any HA",
+                  "Keep the client with their SAME Health Advisor",
+                  "Offer only times within the same week",
+                  "Let the client pick from the full round-robin calendar",
+                ],
+                correct: 1,
+                explanation:
+                  "Same-HA priority is the #1 rule. The client has been prepped for a specific HA. Switching HAs means losing context and rapport built during onboarding.",
+              },
+              {
+                type: "TF",
+                question:
+                  "When rescheduling, you should mark BOTH the old and new appointments with [RESCHEDULED] in the calendar.",
+                correct: false,
+                explanation:
+                  "Only the OLD appointment gets marked [RESCHEDULED]. The new appointment is a clean booking \u2014 no tag needed. Marking both creates confusion about which one is active.",
+              },
+              {
+                type: "MC",
+                question:
+                  "A client needs to reschedule but their HA has no availability this week. What\u2019s the correct priority order?",
+                options: [
+                  "Round robin immediately \u2014 speed matters most",
+                  "Same HA next week > Round robin this week > Escalate to Slack",
+                  "Cancel and rebook when HA has openings",
+                  "Same HA next week only \u2014 never use round robin",
+                ],
+                correct: 1,
+                explanation:
+                  "The priority ladder is: (1) Same HA same week, (2) Same HA next week, (3) Round robin if client can\u2019t wait, (4) Escalate to Slack if nothing works.",
+              },
+              {
+                type: "TF",
+                question:
+                  "When a client reschedules, you should cancel the original appointment in HubSpot.",
+                correct: false,
+                explanation:
+                  "NEVER cancel in HubSpot \u2014 it can trigger automations and lose tracking data. Mark the Google Calendar event [RESCHEDULED] and set it to FREE, but leave HubSpot untouched.",
+              },
+              {
+                type: "ORDER",
+                question: "Put these reschedule steps in the correct order:",
+                items: [
+                  "Send same-HA scheduling link",
+                  "Confirm new booking appeared in calendar",
+                  "Mark old appointment [RESCHEDULED] and set to FREE",
+                  "Update HubSpot contact notes with reschedule reason",
+                  "Verify no double-booking on the new time slot",
+                ],
+                correctOrder: [0, 1, 4, 2, 3],
+                explanation:
+                  "Send link first, confirm booking, verify no conflicts, then mark old appointment and update notes. Calendar hygiene comes after the new booking is secured.",
+              },
+              {
+                type: "MC",
+                question:
+                  "Which deal stages should be EXCLUDED from the round-robin calendar when rescheduling?",
+                options: [
+                  "Only 'Closed Won' contacts",
+                  "Closed Won, Closed Lost, No Show, Cancelled, Rescheduled, and other post-decision stages",
+                  "Contacts in 'Appointment Scheduled' or later stages",
+                  "No exclusions \u2014 everyone uses the same calendar",
+                ],
+                correct: 1,
+                explanation:
+                  "Multiple deal stages are excluded: Closed Won, Closed Lost, No Show, Cancelled, Rescheduled, DQ\u2019d, and other post-decision stages. The HubSpot Booking Rule filters these out so they don\u2019t clog the round-robin calendar.",
+              },
+              {
+                type: "TF",
+                question:
+                  "If a client\u2019s OnceHub link isn\u2019t working, you should text them available dates and times manually rather than troubleshoot the link.",
+                correct: true,
+                explanation:
+                  "Don\u2019t make the client wait while you debug tech issues. Text 2-3 specific date/time options manually, confirm via Slack with the HA, and sort out the link issue separately.",
+              },
+              {
+                type: "MC",
+                question:
+                  "When marking an old appointment as [RESCHEDULED] in Google Calendar, what else must you change?",
+                options: [
+                  "Delete the event entirely",
+                  "Change the event color to red",
+                  "Set the event to FREE (not Busy)",
+                  "Move it to a separate 'Cancelled' calendar",
+                ],
+                correct: 2,
+                explanation:
+                  "Set the event to FREE so it doesn\u2019t block the HA\u2019s availability. The [RESCHEDULED] prefix in the title preserves the audit trail. Never delete calendar events.",
+              },
+            ],
+          },
+          {
+            id: 2,
+            title: "Client Scenarios",
+            description:
+              "Handle the 4 most common reschedule situations: client-initiated, broken links, agreed times, and availability requests.",
+            questions: [
+              {
+                type: "TREE",
+                scenario: {
+                  client: "Marcus Rivera",
+                  ha: "Tiger",
+                  appointment: "May 20, 2:00 PM ET",
+                  dealStage: "Appointment Scheduled",
+                  systemState:
+                    "OnceHub booking active, Google Calendar shows Busy",
+                },
+                intro:
+                  "Marcus texts: \u2018Hey, something came up at work. Is there any way I can move my call to a different day?\u2019",
+                steps: [
+                  {
+                    transcript:
+                      "Marcus: Hey, something came up at work. Is there any way I can move my call to a different day?",
+                    prompt:
+                      "Marcus wants to reschedule. What should you try FIRST?",
+                    options: [
+                      {
+                        text: "Try to keep the original appointment \u2014 acknowledge the conflict and see if the current time can still work",
+                        correct: true,
+                      },
+                      {
+                        text: "Send Tiger\u2019s personal scheduling link right away",
+                        correct: false,
+                        consequence: {
+                          title: "Skipped the Keep-It Step",
+                          narrative:
+                            "Marcus actually could have made the original time work with a small adjustment. But you jumped to rescheduling, adding unnecessary complexity and risking a worse time slot.",
+                          severity: "amber",
+                        },
+                      },
+                      {
+                        text: "Send the round-robin scheduling link for maximum availability",
+                        correct: false,
+                        consequence: {
+                          title: "Wrong Calendar Link + Skipped Steps",
+                          narrative:
+                            "You skipped trying to keep the original time AND sent the wrong link. Marcus booked with Bre instead of Tiger.",
+                          severity: "red",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    transcript:
+                      "You: I totally understand, Marcus! Before we reschedule, is there any way the current time could still work? Sometimes we can adjust.\nMarcus: No, I really need a different day. I have a big presentation on the 20th.",
+                    prompt:
+                      "Marcus can\u2019t keep the original time. What\u2019s next?",
+                    options: [
+                      {
+                        text: "Send Tiger\u2019s personal scheduling link so Marcus stays with his HA",
+                        correct: true,
+                      },
+                      {
+                        text: "Send the round-robin scheduling link for maximum availability",
+                        correct: false,
+                        consequence: {
+                          title: "Wrong Calendar Link",
+                          narrative:
+                            "You sent Marcus to the round-robin calendar. He booked with Bre instead of Tiger. Now Tiger\u2019s prep work is wasted and Marcus has to re-explain his health history to a new HA.",
+                          severity: "red",
+                        },
+                      },
+                      {
+                        text: "Ask Marcus what day works and manually check Tiger\u2019s calendar",
+                        correct: false,
+                        consequence: {
+                          title: "Unnecessary Back-and-forth",
+                          narrative:
+                            "Three texts later, you\u2019re still going back and forth on times. Marcus is getting frustrated. The scheduling link would have let him self-serve in 30 seconds.",
+                          severity: "amber",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    transcript:
+                      "You: No problem at all, Marcus! Here\u2019s Tiger\u2019s link to grab a new time that works for you: [Tiger\u2019s OnceHub link]",
+                    prompt:
+                      "Marcus booked a new slot: May 22, 10:00 AM ET. What do you do next?",
+                    options: [
+                      {
+                        text: "Confirm the new booking and verify it appeared in Google Calendar",
+                        correct: true,
+                      },
+                      {
+                        text: "Tell Marcus \u2018You\u2019re all set!\u2019 and move on",
+                        correct: false,
+                        consequence: {
+                          title: "Unverified Booking",
+                          narrative:
+                            "The booking didn\u2019t actually sync to Google Calendar due to a OnceHub glitch. Tiger doesn\u2019t know about the new appointment. Marcus shows up to a Zoom call with no one there.",
+                          severity: "red",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    transcript:
+                      "You verified the new booking in Google Calendar. May 22, 10:00 AM ET with Tiger is confirmed.",
+                    prompt:
+                      "The new booking is confirmed. What do you do with the OLD May 20 appointment?",
+                    options: [
+                      {
+                        text: "Delete the old calendar event",
+                        correct: false,
+                        consequence: {
+                          title: "Lost Audit Trail",
+                          narrative:
+                            "The old event is gone. When the team reviews the calendar next week, there\u2019s no record that Marcus was ever scheduled for May 20.",
+                          severity: "amber",
+                        },
+                      },
+                      {
+                        text: "Mark it [RESCHEDULED] in the title and set to FREE",
+                        correct: true,
+                      },
+                      {
+                        text: "Cancel it in HubSpot",
+                        correct: false,
+                        consequence: {
+                          title: "HubSpot Automation Triggered",
+                          narrative:
+                            "Cancelling in HubSpot fired an automated \u2018Sorry to see you go\u2019 email to Marcus. He\u2019s confused and annoyed \u2014 he just rescheduled, he didn\u2019t cancel.",
+                          severity: "red",
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: "TREE",
+                scenario: {
+                  client: "Priya Sharma",
+                  ha: "Bre",
+                  appointment: "May 18, 3:00 PM ET",
+                  dealStage: "Appointment Scheduled",
+                  systemState: "OnceHub link returning 404 error",
+                },
+                intro:
+                  "Priya texts: \u2018I tried to use the link you sent to reschedule but it\u2019s not working.\u2019",
+                steps: [
+                  {
+                    transcript:
+                      "Priya: I tried to use the link you sent to reschedule but it\u2019s not working. Just shows an error page.",
+                    prompt:
+                      "Priya\u2019s scheduling link is broken. What do you do?",
+                    options: [
+                      {
+                        text: "Ask Priya to try a different browser or clear her cache",
+                        correct: false,
+                        consequence: {
+                          title: "Client Doing Your Troubleshooting",
+                          narrative:
+                            "Priya tried three browsers and it still doesn\u2019t work. She\u2019s spent 15 minutes on a tech problem that isn\u2019t hers to solve.",
+                          severity: "amber",
+                        },
+                      },
+                      {
+                        text: "Text Priya 2-3 specific available dates/times manually",
+                        correct: true,
+                      },
+                      {
+                        text: "Tell Priya you\u2019ll fix the link and get back to her",
+                        correct: false,
+                        consequence: {
+                          title: "Dropped Ball",
+                          narrative:
+                            "You got pulled into other tasks and didn\u2019t get back to Priya for 4 hours. By then she\u2019s disengaged.",
+                          severity: "red",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    transcript:
+                      "You: No worries! Let me check Bre\u2019s availability. How about:\n- Thu May 22 at 11 AM ET\n- Fri May 23 at 2 PM ET\n- Mon May 26 at 10 AM ET",
+                    prompt:
+                      "Priya picks Thursday May 22 at 11:00 AM. What\u2019s your next step?",
+                    options: [
+                      {
+                        text: "Confirm with Priya and book it directly in Google Calendar yourself",
+                        correct: false,
+                        consequence: {
+                          title: "Missing HubSpot Booking Rule",
+                          narrative:
+                            "You booked directly in Calendar but skipped the HubSpot Booking Rule. No HubSpot activity logged, no deal stage update, no automated confirmations.",
+                          severity: "red",
+                        },
+                      },
+                      {
+                        text: "Confirm with Bre via Slack, then use the HubSpot Booking Rule to create the meeting",
+                        correct: true,
+                      },
+                      {
+                        text: "Send Priya a new OnceHub link and ask her to try booking again",
+                        correct: false,
+                        consequence: {
+                          title: "Same Broken Link",
+                          narrative:
+                            "The link is still broken. Priya gets the same error page. Now she\u2019s really frustrated.",
+                          severity: "red",
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: "TREE",
+                scenario: {
+                  client: "Tom & Lisa Chen",
+                  ha: "Mike",
+                  appointment: "May 19, 1:00 PM ET",
+                  dealStage: "Appointment Scheduled",
+                  systemState:
+                    "Active booking in OnceHub, Google Calendar confirmed",
+                },
+                intro:
+                  "Tom texts: \u2018Lisa and I talked and Wednesday at 1pm works better. Can we switch?\u2019",
+                steps: [
+                  {
+                    transcript:
+                      "Tom: Lisa and I talked and Wednesday at 1pm works better for us. Can we switch to that instead?",
+                    prompt:
+                      "Tom wants to switch to Wednesday 1 PM. What do you do?",
+                    options: [
+                      {
+                        text: "Send the scheduling link so Tom can book Wednesday 1 PM himself",
+                        correct: false,
+                        consequence: {
+                          title: "Duplicate Booking Risk",
+                          narrative:
+                            "Tom booked via the link but the old appointment is still active. Now Mike has two bookings.",
+                          severity: "amber",
+                        },
+                      },
+                      {
+                        text: "Use the calendar reschedule function (not a new booking) to move the existing appointment",
+                        correct: true,
+                      },
+                      {
+                        text: "Cancel the old booking first, then send the link",
+                        correct: false,
+                        consequence: {
+                          title: "Gap Without Booking",
+                          narrative:
+                            "You cancelled the old booking. Now there\u2019s a window where Tom has NO appointment. If he doesn\u2019t rebook, he falls through the cracks.",
+                          severity: "amber",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    transcript:
+                      "You used the calendar reschedule function to move the appointment to Wed May 21, 1:00 PM ET with Mike.",
+                    prompt:
+                      "The appointment is moved. What do you do about the original time slot?",
+                    options: [
+                      {
+                        text: "Nothing \u2014 the reschedule function already handled it",
+                        correct: false,
+                        consequence: {
+                          title: "Stale Calendar Entry",
+                          narrative:
+                            "The reschedule function moved the event but didn\u2019t mark the change. No audit trail.",
+                          severity: "amber",
+                        },
+                      },
+                      {
+                        text: "Verify the old slot is freed up, confirm the new booking, and update notes",
+                        correct: true,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: "TREE",
+                scenario: {
+                  client: "Keisha Washington",
+                  ha: "Tiger",
+                  appointment: "May 21, 11:00 AM ET",
+                  dealStage: "Appointment Scheduled",
+                  systemState: "Tiger fully booked this week and next",
+                },
+                intro:
+                  "Keisha texts: \u2018I really need to push my call back but I need it soon. Do you have anything else available?\u2019",
+                steps: [
+                  {
+                    transcript:
+                      "Keisha: I really need to push my call back but I need it soon. Do you have anything else available?",
+                    prompt:
+                      "Tiger is fully booked and Keisha needs to reschedule urgently. What\u2019s the right approach?",
+                    options: [
+                      {
+                        text: "Tell Keisha Tiger has nothing available and she\u2019ll have to wait",
+                        correct: false,
+                        consequence: {
+                          title: "Lost Urgency",
+                          narrative:
+                            "Keisha was ready to commit but the delay killed her momentum. Two weeks later, she\u2019s gone cold.",
+                          severity: "red",
+                        },
+                      },
+                      {
+                        text: "Offer the round-robin calendar so Keisha can see all HA availability",
+                        correct: true,
+                      },
+                      {
+                        text: "Ask Tiger to squeeze Keisha in during lunch",
+                        correct: false,
+                        consequence: {
+                          title: "HA Boundary Violation",
+                          narrative:
+                            "Tiger reluctantly agreed but was rushed during the call. The consultation quality suffered.",
+                          severity: "amber",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    transcript:
+                      "You: I totally understand the urgency, Keisha! Tiger\u2019s schedule is full right now, but let me check our other advisors\u2019 availability.",
+                    prompt:
+                      "Before Keisha books via round-robin, what must you verify?",
+                    options: [
+                      {
+                        text: "That Keisha\u2019s deal stage isn\u2019t excluded from the round-robin calendar",
+                        correct: true,
+                      },
+                      {
+                        text: "That Keisha has completed her NTA",
+                        correct: false,
+                        consequence: {
+                          title: "Missed the Real Check",
+                          narrative:
+                            "NTA completion is important but not the booking gate. The real risk is deal stage exclusion.",
+                          severity: "amber",
+                        },
+                      },
+                      {
+                        text: "Nothing \u2014 just let her book",
+                        correct: false,
+                        consequence: {
+                          title: "Booking Error",
+                          narrative:
+                            "Keisha\u2019s deal stage was set to \u2018Closed Lost\u2019. The round-robin showed zero availability. She texted: \u2018There are no times??\u2019",
+                          severity: "red",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    transcript:
+                      "Keisha booked via round-robin and got Bre for May 23, 2:00 PM ET. The old appointment with Tiger on May 21 at 11:00 AM is still on the calendar.",
+                    prompt:
+                      "Keisha is now booked with a DIFFERENT HA. What do you do with Tiger\u2019s original May 21 calendar event?",
+                    options: [
+                      {
+                        text: "Mark it [RESCHEDULED] and set to FREE \u2014 same as any reschedule",
+                        correct: false,
+                        consequence: {
+                          title: "Wrong Notation for HA Switch",
+                          narrative:
+                            "Keisha isn\u2019t coming back to Tiger \u2014 she switched HAs. Marking [RESCHEDULED] implies the appointment moved on Tiger\u2019s calendar. It didn\u2019t. Tiger wastes time looking for Keisha\u2019s new slot on his own schedule.",
+                          severity: "amber",
+                        },
+                      },
+                      {
+                        text: "Cancel the original Google Calendar event on Tiger\u2019s calendar",
+                        correct: true,
+                      },
+                      {
+                        text: "Leave it \u2014 it\u2019ll sort itself out",
+                        correct: false,
+                        consequence: {
+                          title: "Ghost Appointment",
+                          narrative:
+                            "Tiger shows up ready for Keisha\u2019s call on May 21. She doesn\u2019t join. He Slacks you: \u2018Where\u2019s Keisha?\u2019 The old event blocked a slot he could have used.",
+                          severity: "red",
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: "MC",
+                question:
+                  "A client says \u2018Can I just reschedule online?\u2019 What link do you send FIRST?",
+                options: [
+                  "The round-robin calendar link",
+                  "The OnceHub general booking page",
+                  "Their assigned HA\u2019s personal scheduling link",
+                  "A Google Calendar invite directly",
+                ],
+                correct: 2,
+                explanation:
+                  "Always send the assigned HA\u2019s personal link first. Same-HA priority means the client tries their own advisor\u2019s calendar before round-robin.",
+              },
+              {
+                type: "MC",
+                question:
+                  "When texting dates/times manually because a link is broken, how many options should you provide?",
+                options: [
+                  "1 \u2014 keep it simple",
+                  "2-3 specific options",
+                  "5+ options for maximum flexibility",
+                  "Just say \u2018when works for you?\u2019 and let them choose",
+                ],
+                correct: 1,
+                explanation:
+                  "2-3 options is the sweet spot. One feels rigid, too many is overwhelming, and open-ended creates back-and-forth.",
+              },
+              {
+                type: "MC",
+                question:
+                  "A client rescheduled via the link and got a confirmation, but the event is NOT in Google Calendar. What happened?",
+                options: [
+                  "The client booked the wrong HA",
+                  "There may be a sync issue between OnceHub and Google Calendar",
+                  "The client made a mistake",
+                  "Google Calendar is down",
+                ],
+                correct: 1,
+                explanation:
+                  "OnceHub-to-Calendar sync issues happen. This is exactly why you ALWAYS verify the booking appeared in Google Calendar after a reschedule.",
+              },
+              {
+                type: "MC",
+                question:
+                  "Marcus rescheduled to a new time with Tiger. You verified the booking. What do you update in HubSpot?",
+                options: [
+                  "Change the deal stage to 'Rescheduled'",
+                  "Cancel the old meeting activity",
+                  "Add a contact note with reschedule reason and new date/time",
+                  "Nothing \u2014 HubSpot updates automatically",
+                ],
+                correct: 2,
+                explanation:
+                  "Add a contact note documenting the reschedule: reason, old date, new date. Don\u2019t cancel meetings in HubSpot and don\u2019t change deal stages for reschedules.",
+              },
+              {
+                type: "MC",
+                question:
+                  "Tom already agreed on Wednesday 1 PM with Lisa. Why should you use the calendar reschedule function instead of sending a new booking link?",
+                options: [
+                  "It\u2019s faster for you",
+                  "It prevents a duplicate booking \u2014 the old appointment is moved, not duplicated",
+                  "The client prefers it",
+                  "OnceHub requires it",
+                ],
+                correct: 1,
+                explanation:
+                  "When the client already has a time confirmed, use the reschedule function to MOVE the existing event. A new booking link creates a second event, risking double-booking and orphaned calendar entries.",
+              },
+              {
+                type: "MC",
+                question:
+                  "Keisha booked via round-robin and got Bre instead of Tiger. What should you document in HubSpot notes?",
+                options: [
+                  "Nothing \u2014 the system tracks it",
+                  "Note that Keisha was originally assigned to Tiger but rescheduled to Bre due to Tiger\u2019s full schedule",
+                  "Just update the HA field",
+                  "Send a Slack message instead of noting it",
+                ],
+                correct: 1,
+                explanation:
+                  "Document the HA change: original HA, reason for switch, and new HA. This gives Bre full context and explains why the client\u2019s onboarding mentions Tiger.",
+              },
+            ],
+          },
+          {
+            id: 3,
+            title: "Edge Cases & Escalations",
+            description:
+              "Handle sync issues, time conflicts, no-shows, escalation protocols, and the trickiest reschedule scenarios.",
+            questions: [
+              {
+                type: "TREE",
+                scenario: {
+                  client: "Derek Lawson",
+                  ha: "Tiger",
+                  appointment: "May 23, 9:00 AM ET",
+                  dealStage: "Appointment Scheduled",
+                  systemState: "Client wants a time not showing on OnceHub",
+                },
+                intro:
+                  "Derek texts: \u2018I can only do 4 PM on Thursday. I don\u2019t see that time on the calendar.\u2019",
+                steps: [
+                  {
+                    transcript:
+                      "Derek: I can only do 4 PM on Thursday. I don\u2019t see that time on the calendar though.",
+                    prompt:
+                      "Derek wants a time not on OnceHub. What\u2019s the right approach?",
+                    options: [
+                      {
+                        text: "Tell Derek that time isn\u2019t available since it\u2019s not on the calendar",
+                        correct: false,
+                        consequence: {
+                          title: "Rigid Response",
+                          narrative:
+                            "Tiger actually had 4 PM free \u2014 it just wasn\u2019t configured in OnceHub. Derek got frustrated and asked to cancel entirely.",
+                          severity: "red",
+                        },
+                      },
+                      {
+                        text: "Use the HubSpot Booking Rule to manually create the meeting at 4 PM Thursday",
+                        correct: true,
+                      },
+                      {
+                        text: "Ask Tiger directly if 4 PM works and book it in Google Calendar only",
+                        correct: false,
+                        consequence: {
+                          title: "Partial Booking",
+                          narrative:
+                            "You booked in Calendar but not through the Booking Rule. No HubSpot activity logged, no confirmation emails, no deal tracking.",
+                          severity: "amber",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    transcript:
+                      "You\u2019re using the HubSpot Booking Rule to create the meeting.",
+                    prompt: "What are the 3 steps of the HubSpot Booking Rule?",
+                    options: [
+                      {
+                        text: "Open contact > Create Meeting > Select correct Meeting Type (HA-specific)",
+                        correct: true,
+                      },
+                      {
+                        text: "Open contact > Update Deal Stage > Create Calendar Event",
+                        correct: false,
+                        consequence: {
+                          title: "Wrong Process",
+                          narrative:
+                            "You changed the deal stage manually and created a Calendar event directly. The Booking Rule wasn\u2019t used, so none of the automations fired.",
+                          severity: "red",
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: "TREE",
+                scenario: {
+                  client: "Amanda Park",
+                  ha: "Mike",
+                  appointment: "May 25, 2:00 PM ET",
+                  dealStage: "Appointment Scheduled",
+                  systemState:
+                    "36 hours out, client has not responded to any messages",
+                },
+                intro:
+                  "It\u2019s May 23. Amanda\u2019s appointment is ~36 hours away and she hasn\u2019t responded to any outreach.",
+                steps: [
+                  {
+                    transcript:
+                      "Amanda has not responded to 3 texts and 1 voicemail over the past 5 days. Her appointment is about 36 hours away.",
+                    prompt:
+                      "Amanda is non-responsive 48 hours out. What notation do you add?",
+                    options: [
+                      {
+                        text: "Add [CANCELLED] to the calendar event title",
+                        correct: false,
+                        consequence: {
+                          title: "Premature Cancellation",
+                          narrative:
+                            "Amanda showed up to her Zoom call. But you cancelled her event, so Mike didn\u2019t have it on his calendar. Amanda waited alone for 15 minutes then left.",
+                          severity: "red",
+                        },
+                      },
+                      {
+                        text: "Add [NO RESPONSE] to the calendar event title",
+                        correct: true,
+                      },
+                      {
+                        text: "Cancel the appointment in HubSpot since she\u2019s not responding",
+                        correct: false,
+                        consequence: {
+                          title: "HubSpot Automation Chaos",
+                          narrative:
+                            "The cancellation triggered a \u2018Sorry you cancelled\u2019 email. If Amanda was just busy and planning to show, this email tells her SHE was cancelled on.",
+                          severity: "red",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    transcript: "You marked the event [NO RESPONSE].",
+                    prompt:
+                      "What\u2019s critical about your language when following up with a non-responsive client?",
+                    options: [
+                      {
+                        text: "Use direct language like \u2018Since you haven\u2019t responded, we\u2019re cancelling your appointment\u2019",
+                        correct: false,
+                        consequence: {
+                          title: "Guilt + Cancellation Language",
+                          narrative:
+                            "Amanda checks her phone and sees \u2018we\u2019re cancelling.\u2019 She thinks SHE was cancelled on. The word \u2018cancel\u2019 killed the relationship.",
+                          severity: "red",
+                        },
+                      },
+                      {
+                        text: "Avoid the word \u2018cancelled\u2019 entirely \u2014 keep the door open with warm, no-pressure language",
+                        correct: true,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: "TREE",
+                scenario: {
+                  client: "Jordan Ellis",
+                  ha: "Bre",
+                  appointment: "May 20, 11:00 AM ET",
+                  dealStage: "Appointment Scheduled",
+                  systemState:
+                    "OnceHub and Google Calendar showing different times",
+                },
+                intro:
+                  "OnceHub says 11:00 AM but Google Calendar shows 10:00 AM for the same appointment.",
+                steps: [
+                  {
+                    transcript:
+                      "OnceHub shows Jordan Ellis \u2014 May 20, 11:00 AM ET with Bre. Google Calendar shows May 20, 10:00 AM ET with Bre. The times don\u2019t match.",
+                    prompt:
+                      "You\u2019ve found a sync conflict. What do you do first?",
+                    options: [
+                      {
+                        text: "Assume Google Calendar is correct and go with 10:00 AM",
+                        correct: false,
+                        consequence: {
+                          title: "Wrong Assumption",
+                          narrative:
+                            "OnceHub was the source of truth \u2014 the Calendar event was edited manually. Jordan shows up at 11 AM and Bre is in another call.",
+                          severity: "red",
+                        },
+                      },
+                      {
+                        text: "Check the OnceHub confirmation email to the client to determine the source of truth, then escalate in Slack",
+                        correct: true,
+                      },
+                      {
+                        text: "Just pick one and update the other to match",
+                        correct: false,
+                        consequence: {
+                          title: "Unresolved Root Cause",
+                          narrative:
+                            "You picked 11 AM and updated Calendar. But the underlying sync issue persists. Next week it happens again.",
+                          severity: "amber",
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: "MC",
+                question:
+                  "When should you escalate a reschedule situation to Slack?",
+                options: [
+                  "Every time a client reschedules",
+                  "Only when the HA asks you to",
+                  "When you can\u2019t find availability, there\u2019s a sync conflict, or the situation is complex",
+                  "Never \u2014 handle everything yourself",
+                ],
+                correct: 2,
+                explanation:
+                  "Escalate when you\u2019re stuck: no availability anywhere, calendar sync conflicts, complex multi-reschedule clients, or when something feels off.",
+              },
+              {
+                type: "TF",
+                question:
+                  "If a client has rescheduled 3+ times, you should tell them this is their last chance to reschedule.",
+                correct: false,
+                explanation:
+                  "Never use ultimatum language. Frequent reschedulers may have legitimate reasons. Flag it in Slack and notes for the HA, but don\u2019t pressure the client.",
+              },
+              {
+                type: "MC",
+                question:
+                  "Amanda hasn\u2019t responded in 5 days. Her appointment is tomorrow. Which word should you NEVER use in your follow-up?",
+                options: [
+                  "Rescheduled",
+                  "Cancelled",
+                  "Appointment",
+                  "Tomorrow",
+                ],
+                correct: 1,
+                explanation:
+                  "\u2018Cancelled\u2019 is the most dangerous word in reschedule communication. It signals finality and can make a client think THEY were cancelled on.",
+              },
+              {
+                type: "ORDER",
+                question: "Put these sync issue resolution steps in order:",
+                items: [
+                  "Check the OnceHub confirmation email to the client",
+                  "Compare OnceHub booking with Google Calendar event",
+                  "Escalate the discrepancy in the team Slack channel",
+                  "Confirm the correct time directly with the client",
+                  "Update the incorrect system to match the source of truth",
+                ],
+                correctOrder: [1, 0, 2, 4, 3],
+                explanation:
+                  "Compare first, check confirmation email (source of truth), escalate in Slack, fix the incorrect system, then confirm with the client last.",
+              },
+              {
+                type: "MC",
+                question:
+                  "A [NO RESPONSE] client texts back 2 hours before their appointment saying \u2018I\u2019ll be there!\u2019 What do you do?",
+                options: [
+                  "Tell them the appointment was cancelled due to no response",
+                  "Immediately alert the HA, remove [NO RESPONSE], set back to BUSY, and confirm with the client",
+                  "Ask them to reschedule since you freed the slot",
+                  "Just say \u2018Great, see you soon!\u2019 and hope the HA checks",
+                ],
+                correct: 1,
+                explanation:
+                  "Reactivate immediately: alert HA, fix calendar (remove [NO RESPONSE], set to BUSY), confirm with client. The client is showing up \u2014 don\u2019t let process block the outcome.",
+              },
+              {
+                type: "MC",
+                question:
+                  "At what point should you apply the [NO RESPONSE] protocol for a non-responsive client?",
+                options: [
+                  "24 hours before the appointment",
+                  "36 hours before the appointment",
+                  "48 hours before the appointment",
+                  "The day of the appointment",
+                ],
+                correct: 1,
+                explanation:
+                  "The [NO RESPONSE] protocol kicks in at 36 hours before the appointment. This gives the HA enough lead time to plan while still leaving a window for the client to respond.",
+              },
+              {
+                type: "TF",
+                question:
+                  "When escalating a sync issue in Slack, you should include screenshots of both the OnceHub booking and the Google Calendar event.",
+                correct: true,
+                explanation:
+                  "Screenshots give the team immediate visual context. Include both views, the client name, conflicting times, and what you\u2019ve done so far.",
+              },
+              {
+                type: "MC",
+                question:
+                  "What\u2019s the main risk of setting a calendar event to FREE without adding [RESCHEDULED] or [NO RESPONSE] to the title?",
+                options: [
+                  "The client gets a cancellation email",
+                  "The HA might book someone else in that slot with no context about why it was freed",
+                  "HubSpot automations fire",
+                  "The event disappears from the calendar",
+                ],
+                correct: 1,
+                explanation:
+                  "A FREE event with no label is invisible context loss. Someone might fill the slot (fine) but no one knows WHY it\u2019s free. Always label before freeing.",
+              },
+            ],
+          },
+          {
+            id: 4,
+            title: "Full Mastery",
+            description:
+              "Communication standards, verification checklists, and mixed-review scenarios. Prove you can handle anything.",
+            questions: [
+              {
+                type: "TREE",
+                scenario: {
+                  client: "Rachel Gomez",
+                  ha: "Tiger",
+                  appointment: "May 28, 3:00 PM ET",
+                  dealStage: "Appointment Scheduled",
+                  systemState: "Client is in Pacific time (12:00 PM local)",
+                },
+                intro:
+                  "Rachel texts: \u2018Wait, is my appointment at noon my time or 3pm my time? I\u2019m in California.\u2019",
+                steps: [
+                  {
+                    transcript:
+                      "Rachel: Wait, is my appointment at noon my time or 3pm my time? I\u2019m in California.",
+                    prompt:
+                      "Rachel is confused about her appointment time. How do you respond?",
+                    options: [
+                      {
+                        text: "\u2018Your appointment is at 3:00 PM ET.\u2019",
+                        correct: false,
+                        consequence: {
+                          title: "Timezone Confusion Persists",
+                          narrative:
+                            "Rachel is in Pacific time. Telling her only ET doesn\u2019t answer her question. She shows up at 3 PM Pacific (6 PM ET) and Tiger left 3 hours ago.",
+                          severity: "red",
+                        },
+                      },
+                      {
+                        text: "\u2018Your appointment is at 3:00 PM Eastern, which is noon your time in California!\u2019",
+                        correct: true,
+                      },
+                      {
+                        text: "\u2018It\u2019s at 12 PM Pacific.\u2019",
+                        correct: false,
+                        consequence: {
+                          title: "Missing Reference Time",
+                          narrative:
+                            "You only gave the Pacific time. If Rachel checks the calendar invite (which shows ET), she\u2019ll be confused again. Always state BOTH timezones.",
+                          severity: "amber",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    transcript:
+                      "You: Your appointment is at 3:00 PM Eastern, which is noon your time in California!",
+                    prompt:
+                      "Rachel says \u2018Oh perfect, noon works great!\u2019 What should you do to prevent future confusion?",
+                    options: [
+                      {
+                        text: "Just confirm and move on",
+                        correct: false,
+                        consequence: {
+                          title: "No Safety Net",
+                          narrative:
+                            "Day of the appointment, Rachel sees 3:00 PM ET on her calendar invite and second-guesses herself again.",
+                          severity: "amber",
+                        },
+                      },
+                      {
+                        text: "Add her timezone to contact notes and confirm in reminders using BOTH timezones",
+                        correct: true,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: "TREE",
+                scenario: {
+                  client: "David & Maria Santos",
+                  ha: "Bre",
+                  appointment: "May 22, 10:00 AM ET",
+                  dealStage: "Appointment Scheduled",
+                  systemState:
+                    "Spouse confirmed to attend, David wants to reschedule",
+                },
+                intro:
+                  "David texts: \u2018Maria and I need to move our Thursday call. She can\u2019t get off work. Can we do an evening?\u2019",
+                steps: [
+                  {
+                    transcript:
+                      "David: Maria and I need to move our Thursday call. She can\u2019t get off work that morning. Can we do an evening?",
+                    prompt:
+                      "David needs an evening time and his spouse was confirmed. What\u2019s unique about this reschedule?",
+                    options: [
+                      {
+                        text: "Nothing special \u2014 treat it like any other reschedule",
+                        correct: false,
+                        consequence: {
+                          title: "Spouse Attendance at Risk",
+                          narrative:
+                            "You rescheduled to an evening for David but didn\u2019t confirm Maria could make it. On the new date, David shows up alone.",
+                          severity: "red",
+                        },
+                      },
+                      {
+                        text: "You must ensure the new time works for BOTH David and Maria since spouse attendance was confirmed",
+                        correct: true,
+                      },
+                      {
+                        text: "Tell David evening appointments aren\u2019t available",
+                        correct: false,
+                        consequence: {
+                          title: "False Limitation",
+                          narrative:
+                            "Bre has evening availability. David is frustrated because you didn\u2019t even check.",
+                          severity: "amber",
+                        },
+                      },
+                    ],
+                  },
+                  {
+                    transcript:
+                      "You: Since Maria\u2019s joining too, I want to make sure the new time works for both of you. Let me check Bre\u2019s evening availability.",
+                    prompt:
+                      "You found Bre has Tue 6 PM and Wed 7 PM. How do you present the options?",
+                    options: [
+                      {
+                        text: "\u2018Bre has Tuesday 6 PM or Wednesday 7 PM. Which works?\u2019",
+                        correct: false,
+                        consequence: {
+                          title: "Forgot to Confirm Both",
+                          narrative:
+                            "David picked Tuesday 6 PM but didn\u2019t check with Maria. Maria has a commitment at 6. Back to square one.",
+                          severity: "amber",
+                        },
+                      },
+                      {
+                        text: "\u2018Can you check with Maria which works for both of you? Tuesday 6 PM ET or Wednesday 7 PM ET with Bre.\u2019",
+                        correct: true,
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                type: "MC",
+                question:
+                  "Which is the BEST way to phrase a reschedule confirmation text?",
+                options: [
+                  "\u2018Your appointment has been rescheduled to May 22 at 2 PM.\u2019",
+                  "\u2018You\u2019re all set! Your new call with Tiger is Wednesday May 22 at 2:00 PM Eastern. Looking forward to it!\u2019",
+                  "\u2018Reschedule confirmed. New time: 5/22, 2PM ET. Reply to confirm.\u2019",
+                  "\u2018Per your request, your consultation has been moved to May 22, 2026 at 14:00 ET.\u2019",
+                ],
+                correct: 1,
+                explanation:
+                  "Warm, clear, conversational. Include HA name, day of week, full date, and timezone. No clinical language, no military time, no abbreviations.",
+              },
+              {
+                type: "MC",
+                question:
+                  "A client reschedules for the 3rd time. Which note is MOST useful in HubSpot?",
+                options: [
+                  "\u2018Client rescheduled again.\u2019",
+                  "\u2018Rescheduled \u2014 client may not be committed.\u2019",
+                  "\u2018Rescheduled from 5/20 to 5/28. Reason: work conflict. 3rd reschedule (previous: 5/15>5/18, 5/18>5/20). Spouse still confirmed.\u2019",
+                  "\u2018Please call client to discuss commitment.\u2019",
+                ],
+                correct: 2,
+                explanation:
+                  "Good notes tell a complete story: old date, new date, reason, how many times, status of other factors. The HA reads this in 10 seconds and knows the full picture.",
+              },
+              {
+                type: "ORDER",
+                question:
+                  "Put the post-reschedule verification checklist in order:",
+                items: [
+                  "New booking confirmed in Google Calendar",
+                  "Old event marked [RESCHEDULED] and set to FREE",
+                  "HubSpot contact notes updated with reschedule details",
+                  "Client received confirmation text with both timezones",
+                  "No double-booking on new time slot",
+                ],
+                correctOrder: [0, 4, 1, 3, 2],
+                explanation:
+                  "Confirm new booking, verify no conflicts, mark old event, send client confirmation, then update notes. Notes come last \u2014 client-facing actions take priority.",
+              },
+              {
+                type: "TF",
+                question:
+                  "When a client says \u2018Can I just cancel instead of rescheduling?\u2019, you should immediately process the cancellation.",
+                correct: false,
+                explanation:
+                  "Never immediately cancel. Explore the reason \u2014 they might be overwhelmed or need a different time. Only cancel after genuine exploration.",
+              },
+              {
+                type: "MC",
+                question:
+                  "Your verification checklist has 5 items. You completed 4 but forgot to check for double-booking. What\u2019s the realistic worst case?",
+                options: [
+                  "Nothing \u2014 double bookings rarely happen",
+                  "The HA has two clients at the same time, one gets bumped last-minute, both have a bad experience",
+                  "The calendar looks messy",
+                  "You get a Slack message asking about it",
+                ],
+                correct: 1,
+                explanation:
+                  "Double-booking is the most operationally damaging mistake. One client gets bumped or rushed, both get a degraded experience, and the HA loses trust in the process.",
+              },
+              {
+                type: "MC",
+                question:
+                  "Which should NEVER appear in a client-facing reschedule message?",
+                options: [
+                  "The HA\u2019s first name",
+                  "The day of the week",
+                  "Internal terms like \u2018Booking Rule\u2019, \u2018OnceHub\u2019, or \u2018deal stage\u2019",
+                  "The client\u2019s timezone",
+                ],
+                correct: 2,
+                explanation:
+                  "Internal tools and jargon should never appear in client messages. The client should only see a smooth, simple experience.",
+              },
+            ],
+          },
+        ];
+        var LETTERS = ["A", "B", "C", "D"];
+        function el(id) {
+          return document.getElementById(id);
+        }
+        function ce(tag, cls, txt) {
+          var e = document.createElement(tag);
+          if (cls) e.className = cls;
+          if (txt) e.textContent = txt;
+          return e;
+        }
+        function clr(n) {
+          while (n.firstChild) n.removeChild(n.firstChild);
+        }
+
+        /* ── localStorage ── */
+        function loadData() {
+          try {
+            return JSON.parse(localStorage.getItem(LS_KEY)) || initData();
+          } catch (e) {
+            return initData();
+          }
+        }
+        function initData() {
+          var d = {
+            levels: {},
+            totalXP: 0,
+            streak: { current: 0, lastDate: null },
+          };
+          LEVELS.forEach(function (lv) {
+            d.levels[lv.id] = {
+              bestScore: 0,
+              totalQuestions: lv.questions.length,
+              bestPercent: 0,
+              attempts: 0,
+              lastAttempt: null,
+            };
+          });
+          return d;
+        }
+        function saveData(d) {
+          try {
+            localStorage.setItem(LS_KEY, JSON.stringify(d));
+          } catch (e) {}
+        }
+        var data = loadData();
+
+        /* ── Streak ── */
+        function updateStreak() {
+          var today = new Date().toISOString().slice(0, 10);
+          if (data.streak.lastDate === today) return;
+          if (data.streak.lastDate) {
+            var last = new Date(data.streak.lastDate);
+            var now = new Date(today);
+            var diff = Math.floor((now - last) / (1000 * 60 * 60 * 24));
+            if (diff === 1) data.streak.current++;
+            else if (diff > 1) data.streak.current = 1;
+          } else {
+            data.streak.current = 1;
+          }
+          data.streak.lastDate = today;
+          saveData(data);
+        }
+
+        /* ── State ── */
+        var currentLevel = null,
+          currentQ = 0,
+          score = 0,
+          treeCorrect = true,
+          selectedOpt = null,
+          orderPicks = [];
+        var inConsequence = false;
+
+        /* ── Screen switching ── */
+        function showScreen(id) {
+          ["levelMap", "levelIntro", "questionScreen", "levelComplete"].forEach(
+            function (s) {
+              el(s).classList.remove("active");
+            },
+          );
+          el(id).classList.add("active");
+        }
+
+        /* ── Level Map ── */
+        function renderLevelMap() {
+          var c = el("levelMap");
+          clr(c);
+          var bar = ce("div", "xp-bar");
+          bar.innerHTML =
+            '<div class="xp-item"><span class="icon">\u26A1</span> <span class="val">' +
+            data.totalXP +
+            '</span> XP</div><div class="xp-item"><span class="icon">\uD83D\uDD25</span> <span class="val">' +
+            data.streak.current +
+            "</span> day streak</div>";
+          c.appendChild(bar);
+          var title = ce("div", "");
+          title.style.cssText = "text-align:center;margin-bottom:32px";
+          title.innerHTML =
+            '<div style="font-family:IBM Plex Mono,monospace;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-700);font-weight:500;margin-bottom:12px">SOP TRAINING</div><div style="font-family:Outfit,sans-serif;font-size:44px;font-weight:500;color:var(--slate-800);letter-spacing:-.025em">Reschedule SOP</div>';
+          c.appendChild(title);
+          var path = ce("div", "level-path");
+          LEVELS.forEach(function (lv, i) {
+            if (i > 0) {
+              var conn = ce("div", "level-connector");
+              path.appendChild(conn);
+            }
+            var row = ce("div", "level-row");
+            var ld = data.levels[lv.id];
+            var unlocked =
+              i === 0 ||
+              data.levels[LEVELS[i - 1].id].bestPercent >= UNLOCK_GATES[i];
+            var completed = ld.bestPercent > 0;
+            var node = ce(
+              "div",
+              "level-node" +
+                (unlocked
+                  ? completed
+                    ? " completed"
+                    : " unlocked"
+                  : " locked"),
+            );
+            if (unlocked) {
+              node.textContent = lv.id;
+            } else {
+              node.innerHTML = '<span class="lock-icon">\uD83D\uDD12</span>';
+            }
+            if (unlocked)
+              node.addEventListener("click", function () {
+                showLevelIntro(lv.id);
+              });
+            row.appendChild(node);
+            var info = ce("div", "level-info");
+            info.innerHTML =
+              "<h3>" +
+              lv.title +
+              '</h3><div class="level-sub">' +
+              lv.questions.length +
+              " questions" +
+              (ld.bestPercent > 0
+                ? " \u00B7 Best: " + ld.bestPercent + "%"
+                : "") +
+              "</div>";
+            var stars = ce("div", "stars-row");
+            var numStars = getStars(ld.bestPercent);
+            for (var s = 0; s < 3; s++) {
+              var st = ce("span", "star" + (s < numStars ? " earned" : ""));
+              st.textContent = "\u2B50";
+              stars.appendChild(st);
+            }
+            info.appendChild(stars);
+            if (!unlocked) {
+              var req = ce("div", "");
+              req.style.cssText =
+                "font-size:12px;color:var(--slate-400);margin-top:4px;font-family:IBM Plex Mono,monospace";
+              req.textContent =
+                "Requires Level " + i + " \u2265 " + UNLOCK_GATES[i] + "%";
+              info.appendChild(req);
+            }
+            row.appendChild(info);
+            path.appendChild(row);
+          });
+          c.appendChild(path);
+        }
+
+        function getStars(pct) {
+          if (pct >= 90) return 3;
+          if (pct >= 75) return 2;
+          if (pct >= 50) return 1;
+          return 0;
+        }
+
+        /* ── Level Intro ── */
+        function showLevelIntro(lvId) {
+          currentLevel = lvId;
+          var lv = LEVELS[lvId - 1];
+          var ld = data.levels[lvId];
+          var c = el("levelIntro");
+          clr(c);
+          var card = ce("div", "intro-card");
+          card.innerHTML =
+            '<div class="intro-eyebrow">LEVEL ' +
+            lvId +
+            '</div><div class="intro-title">' +
+            lv.title +
+            '</div><div class="intro-desc">' +
+            lv.description +
+            "</div>";
+          var meta = ce("div", "intro-meta");
+          meta.innerHTML =
+            '<div class="intro-meta-item"><div class="intro-meta-num">' +
+            lv.questions.length +
+            '</div><div class="intro-meta-label">Questions</div></div><div class="intro-meta-item"><div class="intro-meta-num">' +
+            (ld.bestPercent > 0 ? ld.bestPercent + "%" : "\u2014") +
+            '</div><div class="intro-meta-label">Best Score</div></div><div class="intro-meta-item"><div class="intro-meta-num">' +
+            ld.attempts +
+            '</div><div class="intro-meta-label">Attempts</div></div>';
+          card.appendChild(meta);
+          var startBtn = ce("button", "btn btn-primary", "Start Level");
+          startBtn.addEventListener("click", function () {
+            startLevel(lvId);
+          });
+          card.appendChild(startBtn);
+          var backBtn = ce("button", "btn btn-ghost", "Back to Map");
+          backBtn.style.marginLeft = "12px";
+          backBtn.addEventListener("click", function () {
+            showScreen("levelMap");
+            renderLevelMap();
+          });
+          card.appendChild(backBtn);
+          c.appendChild(card);
+          showScreen("levelIntro");
+        }
+
+        /* ── Start Level ── */
+        function startLevel(lvId) {
+          currentLevel = lvId;
+          currentQ = 0;
+          score = 0;
+          showScreen("questionScreen");
+          renderQuestion();
+        }
+
+        /* ── Render Question ── */
+        function renderQuestion() {
+          var lv = LEVELS[currentLevel - 1];
+          if (currentQ >= lv.questions.length) {
+            finishLevel();
+            return;
+          }
+          var q = lv.questions[currentQ];
+          var c = el("questionScreen");
+          clr(c);
+          selectedOpt = null;
+          orderPicks = [];
+          treeCorrect = true;
+          inConsequence = false;
+          // Progress bar
+          var pb = ce("div", "progress-bar");
+          var pct = Math.round((currentQ / lv.questions.length) * 100);
+          pb.innerHTML =
+            '<div class="progress-track"><div class="progress-fill" style="width:' +
+            pct +
+            '%"></div></div><div class="progress-label">' +
+            currentQ +
+            " / " +
+            lv.questions.length +
+            "</div>";
+          c.appendChild(pb);
+          var card = ce("div", "question-card");
+          if (q.type === "TREE") renderTree(card, q);
+          else if (q.type === "ORDER") renderOrder(card, q);
+          else renderMCTF(card, q);
+          c.appendChild(card);
+        }
+
+        /* ── MC / TF ── */
+        function renderMCTF(card, q) {
+          card.appendChild(ce("div", "question-text", q.question));
+          var opts = ce("div", "options-list");
+          var choices = q.type === "TF" ? ["True", "False"] : q.options;
+          choices.forEach(function (txt, i) {
+            var opt = ce("div", "option");
+            var letter = ce(
+              "div",
+              "option-letter",
+              q.type === "TF" ? (i === 0 ? "T" : "F") : LETTERS[i],
+            );
+            var text = ce("div", "option-text", txt);
+            opt.appendChild(letter);
+            opt.appendChild(text);
+            opt.addEventListener("click", function () {
+              if (opt.classList.contains("disabled")) return;
+              opts.querySelectorAll(".option").forEach(function (o) {
+                o.classList.remove("selected");
+              });
+              opt.classList.add("selected");
+              selectedOpt = i;
+              submitBtn.disabled = false;
+            });
+            opts.appendChild(opt);
+          });
+          card.appendChild(opts);
+          var row = ce("div", "action-row");
+          var submitBtn = ce("button", "btn btn-primary", "Submit");
+          submitBtn.disabled = true;
+          submitBtn.addEventListener("click", function () {
+            submitMCTF(card, q, opts, submitBtn);
+          });
+          row.appendChild(submitBtn);
+          card.appendChild(row);
+        }
+
+        function submitMCTF(card, q, opts, submitBtn) {
+          submitBtn.disabled = true;
+          var correctIdx = q.type === "TF" ? (q.correct ? 0 : 1) : q.correct;
+          var isCorrect = selectedOpt === correctIdx;
+          if (isCorrect) score++;
+          opts.querySelectorAll(".option").forEach(function (o, i) {
+            o.classList.add("disabled");
+            if (i === correctIdx) o.classList.add("correct-answer");
+            if (i === selectedOpt && !isCorrect)
+              o.classList.add("incorrect-answer");
+          });
+          var fb = ce(
+            "div",
+            "feedback-panel " + (isCorrect ? "correct" : "incorrect"),
+          );
+          fb.innerHTML =
+            '<div class="fb-title">' +
+            (isCorrect ? "\u2705 Correct!" : "\u274C Incorrect") +
+            '</div><div class="fb-text">' +
+            q.explanation +
+            "</div>";
+          card.appendChild(fb);
+          var row = ce("div", "action-row");
+          var nextBtn = ce("button", "btn btn-primary", "Next");
+          nextBtn.addEventListener("click", function () {
+            currentQ++;
+            renderQuestion();
+          });
+          row.appendChild(nextBtn);
+          card.appendChild(row);
+        }
+
+        /* ── ORDER ── */
+        function renderOrder(card, q) {
+          card.appendChild(ce("div", "question-text", q.question));
+          var hint = ce("div", "");
+          hint.style.cssText =
+            "font-size:13px;color:var(--slate-500);margin-bottom:16px;font-family:IBM Plex Mono,monospace";
+          hint.textContent =
+            "Tap items in the correct order (1st, 2nd, 3rd...)";
+          card.appendChild(hint);
+          var items = ce("div", "order-items");
+          q.items.forEach(function (txt, i) {
+            var item = ce("div", "order-item");
+            var num = ce("div", "order-num", "\u00B7");
+            var text = ce("div", "option-text", txt);
+            item.appendChild(num);
+            item.appendChild(text);
+            item.dataset.idx = i;
+            item.addEventListener("click", function () {
+              if (item.classList.contains("disabled")) return;
+              var pos = orderPicks.indexOf(i);
+              if (pos > -1) {
+                orderPicks.splice(pos, 1);
+                item.classList.remove("picked");
+              } else {
+                orderPicks.push(i);
+                item.classList.add("picked");
+              }
+              updateOrderNums(items);
+              submitBtn.disabled = orderPicks.length !== q.items.length;
+            });
+            items.appendChild(item);
+          });
+          card.appendChild(items);
+          var row = ce("div", "action-row");
+          var submitBtn = ce("button", "btn btn-primary", "Submit");
+          submitBtn.disabled = true;
+          submitBtn.addEventListener("click", function () {
+            submitOrder(card, q, items, submitBtn);
+          });
+          row.appendChild(submitBtn);
+          card.appendChild(row);
+        }
+
+        function updateOrderNums(items) {
+          items.querySelectorAll(".order-item").forEach(function (item) {
+            var idx = parseInt(item.dataset.idx);
+            var num = item.querySelector(".order-num");
+            var pos = orderPicks.indexOf(idx);
+            num.textContent = pos > -1 ? pos + 1 : "\u00B7";
+          });
+        }
+
+        function submitOrder(card, q, items, submitBtn) {
+          submitBtn.disabled = true;
+          var isCorrect = true;
+          for (var i = 0; i < q.correctOrder.length; i++) {
+            if (orderPicks[i] !== q.correctOrder[i]) {
+              isCorrect = false;
+              break;
+            }
+          }
+          if (isCorrect) score++;
+          items.querySelectorAll(".order-item").forEach(function (item) {
+            item.classList.add("disabled");
+            var idx = parseInt(item.dataset.idx);
+            var userPos = orderPicks.indexOf(idx);
+            var correctPos = q.correctOrder.indexOf(idx);
+            if (userPos === correctPos) item.classList.add("correct-pos");
+            else item.classList.add("incorrect-pos");
+            var num = item.querySelector(".order-num");
+            num.textContent = correctPos + 1;
+          });
+          var fb = ce(
+            "div",
+            "feedback-panel " + (isCorrect ? "correct" : "incorrect"),
+          );
+          fb.innerHTML =
+            '<div class="fb-title">' +
+            (isCorrect ? "\u2705 Correct order!" : "\u274C Wrong order") +
+            '</div><div class="fb-text">' +
+            q.explanation +
+            "</div>";
+          card.appendChild(fb);
+          var row = ce("div", "action-row");
+          var nextBtn = ce("button", "btn btn-primary", "Next");
+          nextBtn.addEventListener("click", function () {
+            currentQ++;
+            renderQuestion();
+          });
+          row.appendChild(nextBtn);
+          card.appendChild(row);
+        }
+
+        /* ── TREE ── */
+        function renderTree(card, q) {
+          var sc = q.scenario;
+          var hdr = ce("div", "scenario-header");
+          hdr.innerHTML =
+            '<div class="sh-label">SCENARIO</div><div class="sh-client">' +
+            sc.client +
+            '</div><div class="sh-details"><span>HA: ' +
+            sc.ha +
+            "</span><span>" +
+            sc.appointment +
+            "</span><span>" +
+            sc.dealStage +
+            "</span></div>";
+          card.appendChild(hdr);
+          var pill = ce("div", "sys-pill", sc.systemState);
+          card.appendChild(pill);
+          renderTreeStep(card, q, 0, []);
+        }
+
+        function renderTreeStep(card, q, stepIdx, transcriptMsgs) {
+          if (stepIdx >= q.steps.length) {
+            // Tree complete
+            if (treeCorrect) score++;
+            var fb = ce(
+              "div",
+              "feedback-panel " + (treeCorrect ? "correct" : "incorrect"),
+            );
+            fb.innerHTML =
+              '<div class="fb-title">' +
+              (treeCorrect
+                ? "\u2705 Scenario complete \u2014 perfect!"
+                : "\u274C Scenario complete \u2014 some missteps") +
+              '</div><div class="fb-text">Review the consequences above to reinforce the correct actions.</div>';
+            card.appendChild(fb);
+            var row = ce("div", "action-row");
+            var nextBtn = ce("button", "btn btn-primary", "Next");
+            nextBtn.addEventListener("click", function () {
+              currentQ++;
+              renderQuestion();
+            });
+            row.appendChild(nextBtn);
+            card.appendChild(row);
+            return;
+          }
+          var step = q.steps[stepIdx];
+          // Add transcript
+          var newMsgs = step.transcript.split("\n");
+          newMsgs.forEach(function (msg) {
+            msg = msg.trim();
+            if (!msg) return;
+            transcriptMsgs.push(msg);
+          });
+          // Remove old transcript+prompt+options
+          var oldT = card.querySelector(".transcript");
+          if (oldT) oldT.remove();
+          var oldP = card.querySelector(".tree-prompt");
+          if (oldP) oldP.remove();
+          var oldO = card.querySelector(".tree-options");
+          if (oldO) oldO.remove();
+          var oldR = card.querySelector(".action-row");
+          if (oldR) oldR.remove();
+          var oldC = card.querySelector(".consequence");
+          if (oldC) oldC.remove();
+
+          var trans = ce("div", "transcript");
+          transcriptMsgs.forEach(function (msg) {
+            var isClient =
+              msg.indexOf("You:") === -1 && msg.indexOf("You ") === -1;
+            if (msg.startsWith("You:")) isClient = false;
+            var bubble = ce(
+              "div",
+              "transcript-msg " + (isClient ? "client" : "ac"),
+            );
+            bubble.innerHTML =
+              '<div class="msg-who">' +
+              (isClient ? "Client" : "You") +
+              "</div>" +
+              msg.replace(
+                /^(You:|Marcus:|Priya:|Tom:|Keisha:|Derek:|Amanda:|Jordan:|Rachel:|David:)\s*/,
+                "",
+              );
+            trans.appendChild(bubble);
+          });
+          card.appendChild(trans);
+
+          var prompt = ce("div", "tree-prompt");
+          prompt.appendChild(ce("div", "question-text", step.prompt));
+          card.appendChild(prompt);
+
+          var opts = ce("div", "tree-options options-list");
+          step.options.forEach(function (opt, i) {
+            var el = ce("div", "option");
+            var letter = ce("div", "option-letter", LETTERS[i]);
+            var text = ce("div", "option-text", opt.text);
+            el.appendChild(letter);
+            el.appendChild(text);
+            el.addEventListener("click", function () {
+              if (el.classList.contains("disabled")) return;
+              // Disable all
+              opts.querySelectorAll(".option").forEach(function (o) {
+                o.classList.add("disabled");
+              });
+              if (opt.correct) {
+                el.classList.add("correct-answer");
+                // Add to transcript and move to next step
+                transcriptMsgs.push("You: " + opt.text);
+                setTimeout(function () {
+                  renderTreeStep(card, q, stepIdx + 1, transcriptMsgs);
+                }, 400);
+              } else {
+                treeCorrect = false;
+                el.classList.add("incorrect-answer");
+                // Find correct
+                step.options.forEach(function (o2, j) {
+                  if (o2.correct)
+                    opts.children[j].classList.add("correct-answer");
+                });
+                // Show consequence
+                if (opt.consequence) {
+                  var con = ce(
+                    "div",
+                    "consequence severity-" + opt.consequence.severity,
+                  );
+                  con.innerHTML =
+                    '<div class="con-icon">' +
+                    (opt.consequence.severity === "red"
+                      ? "\u26D4"
+                      : "\u26A0\uFE0F") +
+                    '</div><div class="con-title">' +
+                    opt.consequence.title +
+                    '</div><div class="con-narrative">' +
+                    opt.consequence.narrative +
+                    "</div>";
+                  card.appendChild(con);
+                }
+                var row = ce("div", "action-row");
+                var contBtn = ce("button", "btn btn-primary", "Continue");
+                contBtn.addEventListener("click", function () {
+                  // Find the correct option text for transcript
+                  var correctText = "";
+                  step.options.forEach(function (o2) {
+                    if (o2.correct) correctText = o2.text;
+                  });
+                  transcriptMsgs.push("You: " + correctText);
+                  var oldCon = card.querySelector(".consequence");
+                  if (oldCon) oldCon.remove();
+                  row.remove();
+                  renderTreeStep(card, q, stepIdx + 1, transcriptMsgs);
+                });
+                row.appendChild(contBtn);
+                card.appendChild(row);
+              }
+            });
+            opts.appendChild(el);
+          });
+          card.appendChild(opts);
+          // Scroll to bottom
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          });
+        }
+
+        /* ── Level Complete ── */
+        function finishLevel() {
+          updateStreak();
+          var lv = LEVELS[currentLevel - 1];
+          var total = lv.questions.length;
+          var pct = Math.round((score / total) * 100);
+          var stars = getStars(pct);
+          var xpBase = score * XP_PER_LEVEL[currentLevel - 1];
+          var bonus = BONUS_PER_LEVEL[currentLevel - 1];
+          var multiplier = pct === 100 ? 2 : 1;
+          var xpEarned = (xpBase + bonus) * multiplier;
+          // Update data
+          var ld = data.levels[currentLevel];
+          ld.attempts++;
+          ld.lastAttempt = new Date().toISOString().slice(0, 10);
+          if (pct > ld.bestPercent) {
+            ld.bestScore = score;
+            ld.bestPercent = pct;
+          }
+          data.totalXP += xpEarned;
+          saveData(data);
+          // Render
+          var c = el("levelComplete");
+          clr(c);
+          var card = ce("div", "complete-card");
+          var starsDiv = ce("div", "stars-big");
+          for (var i = 0; i < 3; i++) {
+            var s = ce("span", "star-big" + (i < stars ? " earned" : ""));
+            s.textContent = "\u2B50";
+            if (i < stars) s.style.animationDelay = i * 0.2 + "s";
+            starsDiv.appendChild(s);
+          }
+          card.appendChild(starsDiv);
+          card.appendChild(ce("div", "complete-score", score + " / " + total));
+          card.appendChild(
+            ce(
+              "div",
+              "complete-pct",
+              pct + "%" + (pct === 100 ? " \u2014 PERFECT!" : ""),
+            ),
+          );
+          var xpBadge = ce(
+            "div",
+            "xp-earned",
+            "\u26A1 +" +
+              xpEarned +
+              " XP" +
+              (multiplier === 2 ? " (2x bonus!)" : ""),
+          );
+          card.appendChild(xpBadge);
+          var row = ce("div", "action-row");
+          var retryBtn = ce("button", "btn btn-ghost", "Retry Level");
+          retryBtn.addEventListener("click", function () {
+            startLevel(currentLevel);
+          });
+          row.appendChild(retryBtn);
+          // Next level button if applicable
+          if (currentLevel < 4) {
+            var nextLvIdx = currentLevel; // 0-indexed for LEVELS array: current is currentLevel-1, next is currentLevel
+            var gate = UNLOCK_GATES[nextLvIdx];
+            var unlocked = pct >= gate;
+            var nextBtn = ce(
+              "button",
+              "btn btn-primary",
+              unlocked
+                ? "Next Level"
+                : "Need " + gate + "% to unlock Level " + (currentLevel + 1),
+            );
+            nextBtn.disabled = !unlocked;
+            if (unlocked)
+              nextBtn.addEventListener("click", function () {
+                showLevelIntro(currentLevel + 1);
+              });
+            row.appendChild(nextBtn);
+          }
+          var mapBtn = ce("button", "btn btn-ghost", "Back to Map");
+          mapBtn.addEventListener("click", function () {
+            showScreen("levelMap");
+            renderLevelMap();
+          });
+          row.appendChild(mapBtn);
+          card.appendChild(row);
+          c.appendChild(card);
+          showScreen("levelComplete");
+        }
+
+        /* ── Init ── */
+        renderLevelMap();
+      })();
+    </script>
+  </body>
+</html>

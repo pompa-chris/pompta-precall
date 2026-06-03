@@ -1,0 +1,1365 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spouse Live Call Guide — AC Pre-Call Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --slate-900: #1b2a31;
+        --slate-800: #243841;
+        --slate-700: #2f4a56;
+        --slate-600: #3f5b68;
+        --slate-500: #5a7682;
+        --slate-400: #89a0ab;
+        --slate-300: #b5c6cd;
+        --slate-200: #dce5e9;
+        --slate-100: #edf1f3;
+        --teal-700: #1e8f86;
+        --teal-600: #2db3a6;
+        --teal-500: #4ec5b9;
+        --teal-400: #87d8d0;
+        --teal-200: #c9eae6;
+        --teal-100: #e6f5f2;
+        --paper: #f7f3ed;
+        --paper-deep: #efe8dc;
+        --bone: #fbf9f4;
+        --ink: #1a262c;
+        --ink-soft: #3d5059;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Top bar */
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 52px;
+        background: var(--slate-800);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        z-index: 200;
+      }
+      .top-bar-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .top-bar-left a {
+        color: var(--slate-300);
+        text-decoration: none;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.15s;
+      }
+      .top-bar-left a:hover {
+        color: white;
+      }
+      .top-bar-title {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: var(--teal-400);
+      }
+      .top-bar-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .btn-restart {
+        background: none;
+        border: 1px solid var(--slate-500);
+        color: var(--slate-300);
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 13px;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.15s;
+      }
+      .btn-restart:hover {
+        border-color: var(--teal-400);
+        color: white;
+      }
+      .btn-toggle-jump {
+        background: var(--teal-700);
+        border: none;
+        color: white;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 13px;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 500;
+        transition: all 0.15s;
+      }
+      .btn-toggle-jump:hover {
+        background: var(--teal-600);
+      }
+
+      /* Progress */
+      .progress-bar {
+        position: fixed;
+        top: 52px;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--slate-200);
+        z-index: 199;
+      }
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--teal-700), var(--teal-500));
+        transition: width 0.4s ease;
+        width: 0%;
+      }
+
+      /* Main layout */
+      .layout {
+        margin-top: 56px;
+        flex: 1;
+        display: flex;
+        position: relative;
+        min-height: calc(100vh - 56px);
+      }
+
+      /* Main content */
+      .main {
+        flex: 1;
+        padding: 32px 40px 120px;
+        max-width: 800px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      /* Step header */
+      .step-badge {
+        display: inline-block;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: white;
+        background: var(--teal-700);
+        padding: 4px 12px;
+        border-radius: 20px;
+        margin-bottom: 12px;
+        font-weight: 600;
+      }
+      .step-badge.talk-track {
+        background: #7c3aed;
+      }
+      .step-badge.last-resort {
+        background: #e65100;
+      }
+      .step-badge.success {
+        background: #2e7d32;
+      }
+      .step-badge.wall {
+        background: #c62828;
+      }
+
+      .step-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 32px;
+        font-weight: 500;
+        color: var(--slate-800);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        margin-bottom: 8px;
+      }
+      .step-instruction {
+        font-size: 15px;
+        color: var(--ink-soft);
+        margin-bottom: 24px;
+        max-width: 600px;
+      }
+
+      /* Script card */
+      .script-card {
+        background: var(--bone);
+        border: 2px solid var(--teal-400);
+        border-radius: 14px;
+        padding: 28px 32px;
+        margin-bottom: 16px;
+        position: relative;
+      }
+      .script-card-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--teal-700);
+        font-weight: 600;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .script-text {
+        font-size: 19px;
+        line-height: 1.65;
+        color: var(--ink);
+        font-style: italic;
+      }
+      .script-alt {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px dashed var(--slate-200);
+      }
+      .script-alt-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--slate-400);
+        font-weight: 500;
+        margin-bottom: 6px;
+      }
+      .script-alt .script-text {
+        font-size: 16px;
+        color: var(--ink-soft);
+      }
+
+      /* Copy button */
+      .btn-copy {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: var(--slate-100);
+        border: 1px solid var(--slate-200);
+        color: var(--slate-500);
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        cursor: pointer;
+        font-family: "IBM Plex Mono", monospace;
+        transition: all 0.15s;
+      }
+      .btn-copy:hover {
+        background: var(--teal-100);
+        border-color: var(--teal-400);
+        color: var(--teal-700);
+      }
+      .btn-copy.copied {
+        background: var(--teal-100);
+        border-color: var(--teal-400);
+        color: var(--teal-700);
+      }
+
+      /* Tip */
+      .tip {
+        background: #fff8e1;
+        border-left: 4px solid #f9a825;
+        padding: 14px 18px;
+        border-radius: 0 8px 8px 0;
+        font-size: 14px;
+        color: var(--ink-soft);
+        margin-bottom: 20px;
+      }
+
+      /* Action buttons */
+      .actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 28px;
+        flex-wrap: wrap;
+      }
+      .btn-action {
+        padding: 14px 24px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        border: 2px solid;
+        font-family: inherit;
+        transition: all 0.2s;
+        flex: 1;
+        min-width: 180px;
+        text-align: center;
+      }
+      .btn-action.primary {
+        background: var(--teal-700);
+        border-color: var(--teal-700);
+        color: white;
+      }
+      .btn-action.primary:hover {
+        background: var(--teal-600);
+        border-color: var(--teal-600);
+      }
+      .btn-action.secondary {
+        background: white;
+        border-color: var(--slate-200);
+        color: var(--ink);
+      }
+      .btn-action.secondary:hover {
+        border-color: var(--teal-400);
+        background: var(--teal-100);
+      }
+      .btn-action.success {
+        background: #2e7d32;
+        border-color: #2e7d32;
+        color: white;
+      }
+      .btn-action.success:hover {
+        background: #1b5e20;
+        border-color: #1b5e20;
+      }
+      .btn-action.warning {
+        background: #e65100;
+        border-color: #e65100;
+        color: white;
+      }
+      .btn-action.warning:hover {
+        background: #bf360c;
+        border-color: #bf360c;
+      }
+      .btn-action.danger {
+        background: #c62828;
+        border-color: #c62828;
+        color: white;
+      }
+      .btn-action.danger:hover {
+        background: #b71c1c;
+        border-color: #b71c1c;
+      }
+
+      /* Back button in flow */
+      .btn-back {
+        background: none;
+        border: none;
+        color: var(--slate-400);
+        font-size: 14px;
+        cursor: pointer;
+        font-family: inherit;
+        padding: 8px 0;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.15s;
+      }
+      .btn-back:hover {
+        color: var(--teal-700);
+      }
+
+      /* Quick Jump drawer */
+      .drawer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 300;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+      .drawer-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .drawer {
+        position: fixed;
+        top: 0;
+        right: -380px;
+        bottom: 0;
+        width: 380px;
+        background: var(--bone);
+        z-index: 301;
+        box-shadow: -8px 0 40px rgba(0, 0, 0, 0.15);
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+      }
+      .drawer.open {
+        right: 0;
+      }
+
+      .drawer-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--slate-200);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .drawer-title {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--teal-700);
+        font-weight: 600;
+      }
+      .drawer-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--slate-400);
+        cursor: pointer;
+        padding: 4px;
+        transition: color 0.15s;
+      }
+      .drawer-close:hover {
+        color: var(--ink);
+      }
+
+      .drawer-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+      }
+
+      .drawer-section-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--slate-400);
+        font-weight: 600;
+        padding: 8px 8px 6px;
+        margin-top: 8px;
+      }
+
+      .drawer-btn {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: white;
+        border: 1px solid var(--slate-200);
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin-bottom: 6px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        color: var(--ink);
+        transition: all 0.15s;
+      }
+      .drawer-btn:hover {
+        border-color: var(--teal-400);
+        background: var(--teal-100);
+      }
+      .drawer-btn-sub {
+        font-size: 12px;
+        color: var(--slate-400);
+        margin-top: 2px;
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      /* Note card for done states */
+      .note-card {
+        background: #e8f5e9;
+        border: 1px solid #a5d6a7;
+        border-radius: 10px;
+        padding: 16px 20px;
+        margin-bottom: 12px;
+      }
+      .note-card.warning-note {
+        background: #fff3e0;
+        border-color: #ffcc80;
+      }
+
+      /* Checklist */
+      .checklist {
+        list-style: none;
+        margin: 8px 0 0;
+      }
+      .checklist li {
+        padding: 6px 0 6px 28px;
+        position: relative;
+        font-size: 14px;
+        color: var(--ink-soft);
+      }
+      .checklist li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 16px;
+        height: 16px;
+        border: 2px solid var(--slate-300);
+        border-radius: 4px;
+      }
+
+      /* Responsive */
+      @media (max-width: 640px) {
+        .main {
+          padding: 24px 16px 100px;
+        }
+        .step-title {
+          font-size: 24px;
+        }
+        .script-text {
+          font-size: 17px;
+        }
+        .actions {
+          flex-direction: column;
+        }
+        .btn-action {
+          min-width: unset;
+        }
+        .drawer {
+          width: 100%;
+          right: -100%;
+        }
+        .top-bar {
+          padding: 0 12px;
+        }
+        .top-bar-title {
+          font-size: 11px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <a href="spouse-training.html">&larr; Training</a>
+        <span class="top-bar-title">Live Call Guide</span>
+      </div>
+      <div class="top-bar-right">
+        <button class="btn-restart" id="btnRestart">Start Over</button>
+        <button class="btn-toggle-jump" id="btnToggle">Quick Jump</button>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- Quick Jump Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="drawer" id="drawer">
+      <div class="drawer-header">
+        <span class="drawer-title">Quick Jump</span>
+        <button class="drawer-close" id="drawerClose">&times;</button>
+      </div>
+      <div class="drawer-body" id="drawerBody">
+        <div class="drawer-section-label">Flow Steps</div>
+        <button class="drawer-btn" data-step="opening">
+          Assumptive Frame Opening
+          <div class="drawer-btn-sub">Step 1 &mdash; Start here</div>
+        </button>
+        <button class="drawer-btn" data-step="no1">
+          No #1: Assumptive Rebook
+          <div class="drawer-btn-sub">Step 2</div>
+        </button>
+        <button class="drawer-btn" data-step="no2">
+          No #2: Emphasize Importance
+          <div class="drawer-btn-sub">Step 3</div>
+        </button>
+        <button class="drawer-btn" data-step="no3">
+          No #3: Discovery Mode
+          <div class="drawer-btn-sub">Step 4</div>
+        </button>
+
+        <div class="drawer-section-label">Talk Tracks</div>
+        <button class="drawer-btn" data-step="tt_triedall">
+          Tried Everything / Stop Spending
+          <div class="drawer-btn-sub">#1 most common objection</div>
+        </button>
+        <button class="drawer-btn" data-step="tt_busy">
+          "They're Too Busy"
+        </button>
+        <button class="drawer-btn" data-step="tt_notinterested">
+          "Not Interested / Doesn't Understand"
+        </button>
+        <button class="drawer-btn" data-step="tt_skeptical">
+          "They're Skeptical"
+        </button>
+        <button class="drawer-btn" data-step="tt_scam">
+          "They Think It's a Scam"
+        </button>
+        <button class="drawer-btn" data-step="tt_mydecision">
+          "I Make My Own Decisions"
+        </button>
+        <button class="drawer-btn" data-step="tt_alreadytalked">
+          "Already Talked to Them"
+        </button>
+        <button class="drawer-btn" data-step="tt_separated">
+          "We're Separated / Not Together"
+        </button>
+
+        <div class="drawer-section-label">Closers &amp; Edge Cases</div>
+        <button class="drawer-btn" data-step="downgrade">
+          "Just Listen In" Downgrade
+          <div class="drawer-btn-sub">Lowest-commitment ask</div>
+        </button>
+        <button class="drawer-btn" data-step="closer">
+          Financial Decision Closer
+          <div class="drawer-btn-sub">Last resort</div>
+        </button>
+        <button class="drawer-btn" data-step="wall">
+          The "Wall" &mdash; Rapid-Fire No
+          <div class="drawer-btn-sub">When they won't let you speak</div>
+        </button>
+        <button class="drawer-btn" data-step="confirmed">
+          Spouse Confirmed!
+          <div class="drawer-btn-sub">What to do next</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="layout">
+      <div class="main" id="mainContent"></div>
+    </div>
+
+    <script>
+      (function () {
+        var navHistory = [];
+        var current = "opening";
+        var mainEl = document.getElementById("mainContent");
+        var progressEl = document.getElementById("progressFill");
+
+        var STEPS = {
+          opening: {
+            badge: "Step 1",
+            badgeClass: "",
+            progress: 10,
+            title: "Assumptive Frame Opening",
+            instruction:
+              "Never ask yes/no about spouse attendance. Give two options \u2014 both mean attending.",
+            script:
+              "For your husband \u2014 either way works for us \u2014 is he going to be with you physically on the Zoom, or will he be joining virtually from somewhere else?",
+            altLabel: "Alternate Soft Open",
+            altScript:
+              "Should I send the Zoom link to your husband too, or will you be on the same device?",
+            tip: "If they haven\u2019t mentioned a spouse, use: \u201cObviously you\u2019ve got the Zoom information and everything \u2014 should I also send that information to your husband?\u201d",
+            actions: [
+              {
+                label: "They confirmed \u2713",
+                cls: "success",
+                next: "confirmed",
+              },
+              { label: "They pushed back", cls: "secondary", next: "no1" },
+            ],
+          },
+          no1: {
+            badge: "Step 2 \u2014 No #1",
+            badgeClass: "",
+            progress: 25,
+            title: "Assumptive Rebook",
+            instruction:
+              "Assume they\u2019ll reschedule. Don\u2019t ask permission \u2014 offer the solution.",
+            script:
+              "No problem! Let\u2019s get you rebooked for a time when they can be there. What day works for both of you?",
+            actions: [
+              {
+                label: "They agreed to rebook \u2713",
+                cls: "success",
+                next: "confirmed",
+              },
+              { label: "Still pushing back", cls: "secondary", next: "no2" },
+            ],
+          },
+          no2: {
+            badge: "Step 3 \u2014 No #2",
+            badgeClass: "",
+            progress: 40,
+            title: "Emphasize Importance",
+            instruction:
+              "Reinforce that this isn\u2019t optional while keeping it collaborative.",
+            script:
+              "I hear you. It is really important for us to have the spouse on \u2014 it\u2019s part of Dr. Pompa\u2019s protocol. They can really be supportive of your journey, and who knows, they may even have something with their own health they want to discuss in the future. Can we look at a time that might work for both of you?",
+            actions: [
+              {
+                label: "They agreed \u2713",
+                cls: "success",
+                next: "confirmed",
+              },
+              { label: "Still pushing back", cls: "secondary", next: "no3" },
+            ],
+          },
+          no3: {
+            badge: "Step 4 \u2014 No #3",
+            badgeClass: "",
+            progress: 55,
+            title: "Discovery Mode",
+            instruction:
+              "Stop pushing and start listening. Find out what\u2019s really going on. Then pick the matching talk track.",
+            script:
+              "Okay, walk me through that. What\u2019s coming up for you around this?",
+            altLabel: "Best Discovery Question",
+            altScript:
+              "Does he actually fully understand what you\u2019re dealing with health-wise? What\u2019s his perspective on what\u2019s going on with you?",
+            tip: "Ask, don\u2019t tell. What YOU say is a lie \u2014 what THEY say is the truth. Let the real objection surface, then pick ONE matching talk track below.",
+            actions: [
+              {
+                label: "Tried Everything / Spending",
+                cls: "primary",
+                next: "tt_triedall",
+              },
+              { label: "Too Busy", cls: "secondary", next: "tt_busy" },
+              { label: "Skeptical", cls: "secondary", next: "tt_skeptical" },
+              { label: "Scam", cls: "secondary", next: "tt_scam" },
+              {
+                label: "Not Interested",
+                cls: "secondary",
+                next: "tt_notinterested",
+              },
+              { label: "My Decision", cls: "secondary", next: "tt_mydecision" },
+              {
+                label: "Already Talked",
+                cls: "secondary",
+                next: "tt_alreadytalked",
+              },
+              { label: "Separated", cls: "secondary", next: "tt_separated" },
+              {
+                label: "THE WALL \u2014 won\u2019t let me speak",
+                cls: "danger",
+                next: "wall",
+              },
+            ],
+          },
+
+          // Talk Tracks
+          tt_triedall: {
+            badge: "#1 Real Objection",
+            badgeClass: "talk-track",
+            progress: 70,
+            title: "Tried Everything / Stop Spending",
+            instruction:
+              "The husband is tired of the wife spending money on health things that don\u2019t work. She\u2019s tried 20 things in 5 years. He\u2019s done.",
+            script:
+              "From his perspective \u2014 is it that you\u2019ve tried a lot of things that haven\u2019t really worked, and he doesn\u2019t want you to spend any more money? Is that the case?",
+            altLabel: "After they confirm (and they usually will)",
+            altScript:
+              "Okay \u2014 so does he actually understand WHY those things didn\u2019t work for you? Because when he comes on the call, he gets to learn what you\u2019ve actually been going through, how it\u2019s affecting your body, what our treatment looks like, how it would help you, AND why what you tried before didn\u2019t work. That\u2019s all covered in about an hour.",
+            actions: [
+              {
+                label: "They agreed \u2713",
+                cls: "success",
+                next: "confirmed",
+              },
+              {
+                label: "Try \u201cJust Listen In\u201d",
+                cls: "secondary",
+                next: "downgrade",
+              },
+              {
+                label: "Financial Closer (last resort)",
+                cls: "warning",
+                next: "closer",
+              },
+            ],
+          },
+          tt_busy: {
+            badge: "Talk Track",
+            badgeClass: "talk-track",
+            progress: 70,
+            title: '"They\'re Too Busy"',
+            instruction:
+              "Dig deeper \u2014 is it really scheduling, or something else?",
+            script:
+              "Tell me more about that. Are they working during all the times available, or is there something else going on?",
+            altLabel: "If scheduling",
+            altScript:
+              "I totally understand \u2014 schedules are crazy. {HAName} has some evening and early morning availability. Can we find about an hour that works for both of you?",
+            extraLabel: "If deeper issue",
+            extraScript:
+              "Is it that they\u2019re busy, or are they not fully on board with you exploring this?",
+            actions: [
+              {
+                label: "They agreed \u2713",
+                cls: "success",
+                next: "confirmed",
+              },
+              {
+                label: "Try \u201cJust Listen In\u201d",
+                cls: "secondary",
+                next: "downgrade",
+              },
+              { label: "Financial Closer", cls: "warning", next: "closer" },
+            ],
+          },
+          tt_notinterested: {
+            badge: "Talk Track",
+            badgeClass: "talk-track",
+            progress: 70,
+            title: '"Not Interested / Doesn\'t Understand"',
+            instruction:
+              "Reframe: this affects them whether they realize it or not.",
+            script:
+              "That\u2019s actually really common. Here\u2019s the thing though \u2014 this is going to affect them whether they realize it or not. Lifestyle changes, kitchen overhauls, understanding what you\u2019re going through. When they hear it directly from {HAName}, they become part of your support system instead of feeling left out. It\u2019s only about an hour. Would they be willing to just listen in?",
+            actions: [
+              {
+                label: "They agreed \u2713",
+                cls: "success",
+                next: "confirmed",
+              },
+              {
+                label: "Try \u201cJust Listen In\u201d",
+                cls: "secondary",
+                next: "downgrade",
+              },
+              { label: "Financial Closer", cls: "warning", next: "closer" },
+            ],
+          },
+          tt_skeptical: {
+            badge: "Talk Track",
+            badgeClass: "talk-track",
+            progress: 70,
+            title: '"They\'re Skeptical"',
+            instruction: "Lean into it \u2014 skeptics are our best audience.",
+            script:
+              "Perfect! {HAName} loves skeptics. Seriously. They\u2019d rather answer tough questions directly than have your spouse wondering on the sidelines. Tell them to bring their doubts. {HAName} can handle it. Analytical people usually leave the call going \u2018okay, that actually makes sense.\u2019 Let\u2019s find a time when they can join.",
+            actions: [
+              {
+                label: "They agreed \u2713",
+                cls: "success",
+                next: "confirmed",
+              },
+              {
+                label: "Try \u201cJust Listen In\u201d",
+                cls: "secondary",
+                next: "downgrade",
+              },
+              { label: "Financial Closer", cls: "warning", next: "closer" },
+            ],
+          },
+          tt_scam: {
+            badge: "Talk Track",
+            badgeClass: "talk-track",
+            progress: 70,
+            title: '"They Think It\'s a Scam"',
+            instruction:
+              "Validate the spouse\u2019s protectiveness. Redirect to direct Q&A.",
+            script:
+              "Ha, I get it. They\u2019ve probably watched you try things that didn\u2019t work, and they\u2019re protective. That\u2019s actually a good thing \u2014 they care about you. What I\u2019d say is: have them join the call and ask their hardest questions directly. {HAName} isn\u2019t going to pressure anyone. If it doesn\u2019t make sense, they\u2019ll say so. But at least your spouse will hear it firsthand instead of filtering it through their doubts.",
+            actions: [
+              {
+                label: "They agreed \u2713",
+                cls: "success",
+                next: "confirmed",
+              },
+              {
+                label: "Try \u201cJust Listen In\u201d",
+                cls: "secondary",
+                next: "downgrade",
+              },
+              { label: "Financial Closer", cls: "warning", next: "closer" },
+            ],
+          },
+          tt_mydecision: {
+            badge: "Talk Track",
+            badgeClass: "talk-track",
+            progress: 70,
+            title: '"I Make My Own Health Decisions"',
+            instruction:
+              "Respect autonomy. Reframe as support, not veto power.",
+            script:
+              "I totally respect that. And you\u2019re absolutely the one making the decision about your health. The reason we ask for spouse involvement isn\u2019t to give them veto power \u2014 it\u2019s because this program requires real lifestyle changes. Having them understand what you\u2019re doing, and why, makes your success rate much higher. They become your accountability partner. Does that make sense?",
+            tip: "If they\u2019re firm after this, go straight to the Financial Decision Closer.",
+            actions: [
+              {
+                label: "They agreed \u2713",
+                cls: "success",
+                next: "confirmed",
+              },
+              { label: "Financial Closer", cls: "warning", next: "closer" },
+            ],
+          },
+          tt_alreadytalked: {
+            badge: "Talk Track",
+            badgeClass: "talk-track",
+            progress: 70,
+            title: '"Already Talked to Them / They Said It\'s Fine"',
+            instruction: "Permission is not the same as understanding.",
+            script:
+              "That\u2019s awesome that you\u2019ve talked about it! Here\u2019s the thing though \u2014 giving you permission is different from really understanding. {HAName} is going to cover a lot in about an hour. Having them hear it directly means you won\u2019t have to try to explain it all afterward. Plus, they might have questions of their own. Can we find a time when they\u2019re available?",
+            actions: [
+              {
+                label: "They agreed \u2713",
+                cls: "success",
+                next: "confirmed",
+              },
+              {
+                label: "Try \u201cJust Listen In\u201d",
+                cls: "secondary",
+                next: "downgrade",
+              },
+              { label: "Financial Closer", cls: "warning", next: "closer" },
+            ],
+          },
+          tt_separated: {
+            badge: "Exception",
+            badgeClass: "talk-track",
+            progress: 90,
+            title: '"We\'re Separated / Not Together"',
+            instruction:
+              "Proceed without spouse. Ask about alternative support person.",
+            script:
+              "I appreciate you sharing that with me. In that case, we can absolutely proceed without them. Is there someone else in your life who\u2019s part of your support system \u2014 a parent, sibling, close friend \u2014 who might want to join? If not, that\u2019s okay too. Just make sure you\u2019re in a quiet place where you can focus for about an hour.",
+            crmNote:
+              "Note in CRM: Spouse not attending \u2014 [separated/single/divorced]. Proceed without.",
+            actions: [
+              {
+                label: "Continue with appointment \u2713",
+                cls: "success",
+                next: "done_exception",
+              },
+            ],
+          },
+
+          // Closers
+          downgrade: {
+            badge: "Lowest Ask",
+            badgeClass: "",
+            progress: 80,
+            title: '"Just Listen In" Downgrade',
+            instruction:
+              "This is the lowest-commitment offer. Most people will agree to \u201ca few minutes.\u201d",
+            script:
+              "Could he at least just listen in for a few minutes? He doesn\u2019t have to be on camera or all involved. Just there to hear a bit and support you.",
+            actions: [
+              {
+                label: "They agreed \u2713",
+                cls: "success",
+                next: "confirmed",
+              },
+              { label: "Still refusing", cls: "secondary", next: "closer" },
+            ],
+          },
+          closer: {
+            badge: "Last Resort",
+            badgeClass: "last-resort",
+            progress: 90,
+            title: "Financial Decision Closer",
+            instruction:
+              "Use after 3\u20134 failed attempts. This is your white-flag moment.",
+            script:
+              "I hear you. Everyone\u2019s situation is different. If we were to find that we\u2019re able to help you and make a recommendation \u2014 do you feel that you\u2019d be able to move forward with the treatment process and make those decisions about your health, including financial decisions, without him?",
+            actions: [
+              {
+                label: "They said YES \u2014 proceed",
+                cls: "success",
+                next: "done_yes",
+              },
+              {
+                label: "They said NO \u2014 need spouse",
+                cls: "warning",
+                next: "done_no",
+              },
+            ],
+          },
+          wall: {
+            badge: "Edge Case",
+            badgeClass: "wall",
+            progress: 90,
+            title: 'The "Wall" \u2014 Rapid-Fire No',
+            instruction:
+              "They\u2019re going \u201cno no no no no\u201d and won\u2019t let you speak. This happens 1\u20132x per week. Don\u2019t fight it.",
+            script: "Okay, is this kind of a secret mission?",
+            tip: "Don\u2019t fight the wall. You will NOT win by talking louder. Try this ONE question (above). If they\u2019re still adamant, let it go. A solo show is better than a no-show.",
+            actions: [
+              {
+                label: "Humor worked \u2014 they opened up",
+                cls: "success",
+                next: "no3",
+              },
+              {
+                label: "Still walled \u2014 let it go",
+                cls: "danger",
+                next: "done_wall",
+              },
+            ],
+          },
+
+          // Done States
+          confirmed: {
+            badge: "Spouse Confirmed",
+            badgeClass: "success",
+            progress: 100,
+            title: "Spouse Is Joining!",
+            done: true,
+            instruction: "Great work. Here\u2019s what to do next.",
+            doneNotes: [
+              {
+                type: "success",
+                title: "Next Steps",
+                items: [
+                  "Ask for spouse\u2019s email to add to calendar invite",
+                  "Edify: \u201cI\u2019m so glad you and {SpouseName} will both be on the call. {HAName} loves when both partners are there.\u201d",
+                  "Continue with remaining checkpoints (NTA, urine kit, webinar)",
+                  "Note spouse confirmed in CRM",
+                ],
+              },
+            ],
+          },
+          done_yes: {
+            badge: "Proceeding Solo",
+            badgeClass: "last-resort",
+            progress: 100,
+            title: "They Said YES \u2014 Can Decide Alone",
+            done: true,
+            instruction: "Proceed with appointment. Tag the HA with context.",
+            doneNotes: [
+              {
+                type: "warning",
+                title: "Tag the HA",
+                items: [
+                  '"She said she has the money, she can make the decision independently, she sounds confident."',
+                  '"We went back and forth. It\u2019s now up to your discretion."',
+                ],
+              },
+              {
+                type: "success",
+                title: "Continue with",
+                items: [
+                  "Remaining checkpoints (NTA, urine kit, webinar)",
+                  "Note in CRM: Spouse not attending \u2014 client confirmed independent decision-making",
+                ],
+              },
+            ],
+          },
+          done_no: {
+            badge: "Needs Rebook",
+            badgeClass: "last-resort",
+            progress: 100,
+            title: "They Said NO \u2014 Spouse IS Needed",
+            done: true,
+            instruction:
+              "This confirms the spouse is a true decision-maker. Offer to rebook.",
+            doneNotes: [
+              {
+                type: "warning",
+                title: "Actions",
+                items: [
+                  "Offer to reschedule for a time when both can attend",
+                  "If no time works, discuss cancellation",
+                  "Update CRM with context",
+                ],
+              },
+            ],
+          },
+          done_wall: {
+            badge: "Proceeding Solo",
+            badgeClass: "wall",
+            progress: 100,
+            title: "The Wall \u2014 Proceeding Without Spouse",
+            done: true,
+            instruction:
+              "You gave genuine effort. A solo show is better than a no-show.",
+            doneNotes: [
+              {
+                type: "warning",
+                title: "Note in CRM",
+                items: [
+                  '"Spouse will NOT be present. Client was adamant/walled. Genuine effort made."',
+                  "Include context so HA understands the situation",
+                ],
+              },
+              {
+                type: "success",
+                title: "Continue with",
+                items: [
+                  "Remaining checkpoints (NTA, urine kit, webinar)",
+                  "Move forward with positive energy \u2014 don\u2019t let the spouse conversation color the rest",
+                ],
+              },
+            ],
+          },
+          done_exception: {
+            badge: "Exception Noted",
+            badgeClass: "success",
+            progress: 100,
+            title: "Proceeding \u2014 Valid Exception",
+            done: true,
+            instruction:
+              "Spouse not applicable. Continue with remaining checkpoints.",
+            doneNotes: [
+              {
+                type: "success",
+                title: "Actions",
+                items: [
+                  "Note exception in CRM with reason",
+                  "Inform HA in advance",
+                  "Confirm lead will be in a quiet, focused environment",
+                  "Continue with remaining checkpoints",
+                ],
+              },
+            ],
+          },
+        };
+
+        function escapeText(str) {
+          var d = document.createElement("span");
+          d.textContent = str;
+          return d.innerHTML;
+        }
+
+        function buildScriptCard(s) {
+          var card = document.createElement("div");
+          card.className = "script-card";
+
+          var copyBtn = document.createElement("button");
+          copyBtn.className = "btn-copy";
+          copyBtn.textContent = "Copy";
+          copyBtn.addEventListener("click", function () {
+            var text = s.script;
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(text);
+            } else {
+              var ta = document.createElement("textarea");
+              ta.value = text;
+              document.body.appendChild(ta);
+              ta.select();
+              document.execCommand("copy");
+              document.body.removeChild(ta);
+            }
+            copyBtn.textContent = "Copied!";
+            copyBtn.classList.add("copied");
+            setTimeout(function () {
+              copyBtn.textContent = "Copy";
+              copyBtn.classList.remove("copied");
+            }, 1500);
+          });
+          card.appendChild(copyBtn);
+
+          var label = document.createElement("div");
+          label.className = "script-card-label";
+          label.textContent = "Say This";
+          card.appendChild(label);
+
+          var text = document.createElement("div");
+          text.className = "script-text";
+          text.textContent = s.script;
+          card.appendChild(text);
+
+          if (s.altScript) {
+            var alt = document.createElement("div");
+            alt.className = "script-alt";
+            var altLbl = document.createElement("div");
+            altLbl.className = "script-alt-label";
+            altLbl.textContent = s.altLabel || "Alternative";
+            alt.appendChild(altLbl);
+            var altTxt = document.createElement("div");
+            altTxt.className = "script-text";
+            altTxt.textContent = s.altScript;
+            alt.appendChild(altTxt);
+            card.appendChild(alt);
+          }
+
+          if (s.extraScript) {
+            var extra = document.createElement("div");
+            extra.className = "script-alt";
+            var extraLbl = document.createElement("div");
+            extraLbl.className = "script-alt-label";
+            extraLbl.textContent = s.extraLabel || "Alternative";
+            extra.appendChild(extraLbl);
+            var extraTxt = document.createElement("div");
+            extraTxt.className = "script-text";
+            extraTxt.textContent = s.extraScript;
+            extra.appendChild(extraTxt);
+            card.appendChild(extra);
+          }
+
+          return card;
+        }
+
+        function render() {
+          var s = STEPS[current];
+          if (!s) return;
+
+          // Clear
+          while (mainEl.firstChild) mainEl.removeChild(mainEl.firstChild);
+
+          // Progress
+          progressEl.style.width = (s.progress || 0) + "%";
+
+          // Back button
+          if (navHistory.length > 0) {
+            var backBtn = document.createElement("button");
+            backBtn.className = "btn-back";
+            backBtn.textContent = "\u2190 Back";
+            backBtn.addEventListener("click", goBack);
+            mainEl.appendChild(backBtn);
+          }
+
+          // Badge
+          var badge = document.createElement("span");
+          badge.className = "step-badge " + (s.badgeClass || "");
+          badge.textContent = s.badge;
+          mainEl.appendChild(badge);
+
+          // Title
+          var title = document.createElement("h1");
+          title.className = "step-title";
+          title.textContent = s.title;
+          mainEl.appendChild(title);
+
+          // Instruction
+          if (s.instruction) {
+            var instr = document.createElement("p");
+            instr.className = "step-instruction";
+            instr.textContent = s.instruction;
+            mainEl.appendChild(instr);
+          }
+
+          // Script card
+          if (s.script) {
+            mainEl.appendChild(buildScriptCard(s));
+          }
+
+          // Tip
+          if (s.tip) {
+            var tip = document.createElement("div");
+            tip.className = "tip";
+            var tipB = document.createElement("strong");
+            tipB.textContent = "Tip: ";
+            tip.appendChild(tipB);
+            tip.appendChild(document.createTextNode(s.tip));
+            mainEl.appendChild(tip);
+          }
+
+          // CRM note
+          if (s.crmNote) {
+            var crm = document.createElement("div");
+            crm.className = "note-card warning-note";
+            var crmP = document.createElement("p");
+            crmP.textContent = s.crmNote;
+            crm.appendChild(crmP);
+            mainEl.appendChild(crm);
+          }
+
+          // Done notes
+          if (s.done && s.doneNotes) {
+            s.doneNotes.forEach(function (note) {
+              var card = document.createElement("div");
+              card.className =
+                "note-card" + (note.type === "warning" ? " warning-note" : "");
+              var t = document.createElement("p");
+              var b = document.createElement("strong");
+              b.textContent = note.title;
+              t.appendChild(b);
+              card.appendChild(t);
+              var ul = document.createElement("ul");
+              ul.className = "checklist";
+              note.items.forEach(function (item) {
+                var li = document.createElement("li");
+                li.textContent = item;
+                ul.appendChild(li);
+              });
+              card.appendChild(ul);
+              mainEl.appendChild(card);
+            });
+          }
+
+          // Actions
+          if (s.actions) {
+            var actDiv = document.createElement("div");
+            actDiv.className = "actions";
+            s.actions.forEach(function (a) {
+              var btn = document.createElement("button");
+              btn.className = "btn-action " + (a.cls || "secondary");
+              btn.textContent = a.label;
+              btn.addEventListener("click", function () {
+                goTo(a.next);
+              });
+              actDiv.appendChild(btn);
+            });
+            mainEl.appendChild(actDiv);
+          }
+
+          // Start over for done states
+          if (s.done) {
+            var restartDiv = document.createElement("div");
+            restartDiv.className = "actions";
+            restartDiv.style.marginTop = "12px";
+            var restartBtn = document.createElement("button");
+            restartBtn.className = "btn-action secondary";
+            restartBtn.textContent = "Start Over";
+            restartBtn.addEventListener("click", function () {
+              goTo("opening");
+            });
+            restartDiv.appendChild(restartBtn);
+            mainEl.appendChild(restartDiv);
+          }
+
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function goTo(step) {
+          if (step === "opening") {
+            navHistory = [];
+          } else {
+            navHistory.push(current);
+          }
+          current = step;
+          render();
+        }
+
+        function goBack() {
+          if (navHistory.length > 0) {
+            current = navHistory.pop();
+            render();
+          }
+        }
+
+        function toggleDrawer() {
+          document.getElementById("drawer").classList.toggle("open");
+          document.getElementById("drawerOverlay").classList.toggle("open");
+        }
+
+        // Event listeners
+        document
+          .getElementById("btnRestart")
+          .addEventListener("click", function () {
+            goTo("opening");
+          });
+        document
+          .getElementById("btnToggle")
+          .addEventListener("click", toggleDrawer);
+        document
+          .getElementById("drawerOverlay")
+          .addEventListener("click", toggleDrawer);
+        document
+          .getElementById("drawerClose")
+          .addEventListener("click", toggleDrawer);
+
+        // Drawer buttons
+        document
+          .getElementById("drawerBody")
+          .addEventListener("click", function (e) {
+            var btn = e.target.closest("[data-step]");
+            if (btn) {
+              goTo(btn.getAttribute("data-step"));
+              toggleDrawer();
+            }
+          });
+
+        // Init
+        render();
+      })();
+    </script>
+  </body>
+</html>

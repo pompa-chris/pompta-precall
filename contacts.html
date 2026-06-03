@@ -1,0 +1,2317 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>AC HubSpot Contact Views — Dr. Pompa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --s9: #1b2a31;
+        --s8: #243841;
+        --s7: #2f4a56;
+        --s6: #3f5b68;
+        --s5: #5a7682;
+        --s4: #89a0ab;
+        --s3: #b5c6cd;
+        --s2: #dce5e9;
+        --s1: #edf1f3;
+        --t7: #1e8f86;
+        --t6: #2db3a6;
+        --t5: #4ec5b9;
+        --t4: #87d8d0;
+        --t2: #c9eae6;
+        --t1: #e6f5f2;
+        --paper: #f7f3ed;
+        --bone: #fbf9f4;
+        --ink: #1a262c;
+        --ink2: #3d5059;
+        --danger: #b8472e;
+        --danger-bg: #fdf0ec;
+        --hs-blue: #0091ae;
+        --hs-blue-light: #e5f5f8;
+        --hs-orange: #ff7a59;
+        --hs-dark: #33475b;
+        --hs-gray: #516f90;
+        --hs-border: #cbd6e2;
+        --hs-bg: #f5f8fa;
+        --hs-white: #ffffff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--hs-bg);
+        color: var(--hs-dark);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+      .site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: var(--bone);
+        border-bottom: 1px solid var(--s2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        z-index: 100;
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-decoration: none;
+      }
+      .nav-logo img {
+        height: 36px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 8px;
+      }
+      .nav-link {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--s5);
+        padding: 8px 16px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+      }
+      .nav-link:hover {
+        color: var(--t7);
+        background: var(--t1);
+      }
+      .nav-link.active {
+        color: var(--t7);
+        background: var(--t1);
+      }
+      .page {
+        padding-top: 64px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .page-header {
+        background: var(--hs-white);
+        border-bottom: 1px solid var(--hs-border);
+        padding: 20px 32px 0;
+      }
+      .page-header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .page-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--hs-dark);
+        letter-spacing: -0.01em;
+      }
+      .btn-reset {
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--danger);
+        background: var(--danger-bg);
+        border: 1px solid var(--danger);
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-reset:hover {
+        background: var(--danger);
+        color: #fff;
+      }
+      .view-tabs {
+        display: flex;
+        gap: 0;
+        overflow-x: auto;
+        scrollbar-width: thin;
+      }
+      .view-tab {
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--hs-gray);
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        padding: 10px 16px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.15s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .view-tab:hover {
+        color: var(--hs-dark);
+        background: var(--hs-bg);
+      }
+      .view-tab.active {
+        color: var(--hs-blue);
+        border-bottom-color: var(--hs-blue);
+        font-weight: 600;
+      }
+      .view-tab .badge {
+        font-size: 11px;
+        font-weight: 700;
+        min-width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 6px;
+        background: var(--hs-border);
+        color: var(--hs-gray);
+      }
+      .view-tab.active .badge {
+        background: var(--hs-blue-light);
+        color: var(--hs-blue);
+      }
+      .table-wrap {
+        flex: 1;
+        overflow: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+      thead {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      thead th {
+        background: var(--hs-white);
+        border-bottom: 2px solid var(--hs-border);
+        padding: 10px 16px;
+        text-align: left;
+        font-weight: 600;
+        color: var(--hs-gray);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+      }
+      tbody tr {
+        border-bottom: 1px solid #eaf0f6;
+        transition: background 0.1s;
+      }
+      tbody tr:hover {
+        background: #f0f5fa;
+      }
+      tbody td {
+        padding: 10px 16px;
+        vertical-align: middle;
+      }
+      .contact-cell {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        color: #fff;
+        flex-shrink: 0;
+      }
+      .contact-name {
+        color: var(--hs-blue);
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .contact-name:hover {
+        text-decoration: underline;
+      }
+      .chat-icon {
+        display: inline-flex;
+        align-items: center;
+        margin-left: 6px;
+        color: var(--hs-gray);
+        transition: color 0.15s;
+        vertical-align: middle;
+      }
+      .chat-icon:hover {
+        color: var(--hs-blue);
+      }
+      .chat-icon svg {
+        width: 14px;
+        height: 14px;
+      }
+      .status-select,
+      .checklist-select {
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        font-size: 13px;
+        padding: 4px 8px;
+        border: 1px solid var(--hs-border);
+        border-radius: 4px;
+        background: var(--hs-white);
+        color: var(--hs-dark);
+        cursor: pointer;
+        max-width: 160px;
+      }
+      .status-select:focus,
+      .checklist-select:focus {
+        outline: 2px solid var(--hs-blue);
+        outline-offset: -1px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .pill-wr {
+        background: #fff3cd;
+        color: #856404;
+      }
+      .pill-r {
+        background: #d4edda;
+        color: #155724;
+      }
+      .pill-ready {
+        background: #cce5ff;
+        color: #004085;
+      }
+      .pill-confirmed {
+        background: #d1ecf1;
+        color: #0c5460;
+      }
+      .pill-nc {
+        background: #f8d7da;
+        color: #721c24;
+      }
+      .pill-canceled {
+        background: #e2e3e5;
+        color: #383d41;
+      }
+      .pill-blank {
+        background: #f5f5f5;
+        color: #999;
+      }
+      .pill-p {
+        background: #fef3c7;
+        color: #d97706;
+      }
+      /* Multi-select checklist dropdown */
+      .checklist-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      .checklist-toggle {
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 4px 10px;
+        border: 1px solid var(--hs-border);
+        border-radius: 4px;
+        background: var(--hs-white);
+        color: var(--hs-dark);
+        cursor: pointer;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        min-width: 60px;
+        transition: border-color 0.15s;
+      }
+      .checklist-toggle:hover {
+        border-color: var(--hs-blue);
+      }
+      .checklist-toggle.open {
+        border-color: var(--hs-blue);
+        box-shadow: 0 0 0 1px var(--hs-blue);
+      }
+      .checklist-toggle .caret {
+        font-size: 10px;
+        margin-left: auto;
+        opacity: 0.6;
+      }
+      .checklist-panel {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 4px;
+        background: var(--hs-white);
+        border: 1px solid var(--hs-border);
+        border-radius: 6px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        z-index: 50;
+        min-width: 180px;
+        padding: 6px 0;
+      }
+      .checklist-panel.open {
+        display: block;
+      }
+      .checklist-panel label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: background 0.1s;
+      }
+      .checklist-panel label:hover {
+        background: var(--hs-bg);
+      }
+      .checklist-panel input[type="checkbox"] {
+        accent-color: var(--hs-blue);
+      }
+      .checklist-summary-pills {
+        display: flex;
+        gap: 3px;
+        flex-wrap: wrap;
+      }
+      .checklist-pip {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--hs-border);
+      }
+      .checklist-pip.checked {
+        background: var(--hs-blue);
+      }
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(80px);
+        background: var(--hs-dark);
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        z-index: 9999;
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        pointer-events: none;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        text-align: center;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      .empty-state {
+        text-align: center;
+        padding: 80px 20px;
+        color: var(--hs-gray);
+      }
+      .empty-state svg {
+        margin-bottom: 16px;
+        opacity: 0.4;
+      }
+      .empty-state h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+        color: var(--hs-dark);
+      }
+      @media (max-width: 1024px) {
+        .page-header {
+          padding: 16px 16px 0;
+        }
+        tbody td,
+        thead th {
+          padding: 8px 10px;
+        }
+        .col-phone,
+        .col-checklist,
+        .col-priority-date {
+          display: none;
+        }
+      }
+      @media (max-width: 720px) {
+        .site-nav {
+          padding: 0 16px;
+        }
+        .nav-links {
+          gap: 4px;
+        }
+        .nav-link {
+          padding: 6px 10px;
+          font-size: 11px;
+        }
+        .col-priority,
+        .col-time {
+          display: none;
+        }
+        .view-tab {
+          padding: 8px 10px;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="site-nav">
+      <a href="index.html" class="nav-logo"
+        ><img src="logo.png" alt="Dr. Pompa"
+      /></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="quiz.html" class="nav-link">Quiz</a>
+        <a href="simulator.html" class="nav-link">Simulator</a>
+        <a href="live-testing.html" class="nav-link">Live Testing</a>
+        <a href="contacts.html" class="nav-link active">Contacts</a>
+        <a href="call-scripts.html" class="nav-link">Call Scripts</a>
+        <a href="spouse-training.html" class="nav-link">Spouse</a>
+        <a href="call-guide.html" class="nav-link">Call Guide</a>
+        <a href="reschedule-sop.html" class="nav-link">Reschedule SOP</a>
+      </div>
+    </nav>
+    <div class="page">
+      <div class="page-header">
+        <div class="page-header-top">
+          <h1 class="page-title">Contacts</h1>
+          <button class="btn-reset" id="resetBtn">Reset All</button>
+        </div>
+        <div class="view-tabs" id="viewTabs"></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 36px">
+                <input type="checkbox" id="selectAll" />
+              </th>
+              <th>Name</th>
+              <th class="col-phone">Phone</th>
+              <th>Meeting Date</th>
+              <th class="col-time">Time Until Call</th>
+              <th>CC Confirmation Status</th>
+              <th class="col-priority">Call Priority</th>
+              <th class="col-priority-date">Priority Date</th>
+              <th class="col-checklist">Pre-Call Checklist</th>
+            </tr>
+          </thead>
+          <tbody id="contactsBody"></tbody>
+        </table>
+        <div class="empty-state" id="emptyState" style="display: none">
+          <svg
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <h3>No contacts in this view</h3>
+          <p>Contacts matching this view's criteria will appear here.</p>
+        </div>
+      </div>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script>
+      // NOTE: All data rendered in this page is hardcoded seed data for training purposes.
+      // No user-generated content is rendered, so DOM construction from these strings is safe.
+
+      var AVATAR_COLORS = [
+        "#0091ae",
+        "#ff7a59",
+        "#00bda5",
+        "#7c98b6",
+        "#516f90",
+        "#f5c26b",
+        "#8b45a6",
+        "#e8584f",
+        "#47b881",
+        "#1e8f86",
+      ];
+      function avatarColor(name) {
+        var h = 0;
+        for (var i = 0; i < name.length; i++)
+          h = name.charCodeAt(i) + ((h << 5) - h);
+        return AVATAR_COLORS[Math.abs(h) % AVATAR_COLORS.length];
+      }
+      function initials(f, l) {
+        return (f ? f[0] : "") + (l ? l[0] : "");
+      }
+      function isWithin48Hours(dateStr) {
+        if (!dateStr) return false;
+        var d = new Date(dateStr).getTime(),
+          now = Date.now();
+        var diff = d - now;
+        return diff > 0 && diff <= 48 * 3600000;
+      }
+      function isToday(dateStr) {
+        if (!dateStr) return false;
+        return new Date(dateStr).toDateString() === new Date().toDateString();
+      }
+      function isBeforeToday(dateStr) {
+        if (!dateStr) return false;
+        var now = new Date();
+        now.setHours(0, 0, 0, 0);
+        return new Date(dateStr) < now;
+      }
+      function daysUntil(dateStr) {
+        if (!dateStr) return "";
+        var diff = Math.ceil((new Date(dateStr) - new Date()) / 86400000);
+        if (diff < 0) return diff + "d (past)";
+        if (diff === 0) return "Today";
+        return diff + (diff === 1 ? " day" : " days");
+      }
+      function fmtDate(dateStr) {
+        if (!dateStr) return "";
+        return (
+          new Date(dateStr).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "2-digit",
+            timeZone: "America/New_York",
+          }) + " EDT"
+        );
+      }
+      function fmtShortDate(dateStr) {
+        if (!dateStr) return "";
+        return new Date(dateStr).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+        });
+      }
+
+      var VIEWS = [
+        {
+          id: "all",
+          label: "All Contacts",
+          filter: function () {
+            return true;
+          },
+        },
+        {
+          id: "s1-nr",
+          label: "S1 - NR",
+          filter: function (c) {
+            return !c.closingCallConfirmationStatus;
+          },
+        },
+        {
+          id: "s2-wr",
+          label: "S2 - WR",
+          filter: function (c) {
+            return c.closingCallConfirmationStatus === "Waiting on Reply";
+          },
+        },
+        {
+          id: "s3-np",
+          label: "S3 - NP",
+          filter: function (c) {
+            return c.escalatedToCaller === true;
+          },
+        },
+        {
+          id: "s4-r",
+          label: "S4 - R",
+          filter: function (c) {
+            return c.closingCallConfirmationStatus === "Responsive";
+          },
+        },
+        {
+          id: "s5-n",
+          label: "S5 - N",
+          filter: function (c) {
+            return c.closingCallConfirmationStatus === "Ready";
+          },
+        },
+        {
+          id: "s6-c",
+          label: "S6 - C",
+          filter: function (c) {
+            return isWithin48Hours(c.meetingStartDate);
+          },
+        },
+        {
+          id: "p1",
+          label: "P1",
+          filter: function (c) {
+            return c.callPriority && isToday(c.callPriorityDateTime);
+          },
+        },
+        {
+          id: "p2",
+          label: "P2",
+          filter: function (c) {
+            return c.callPriority && isBeforeToday(c.callPriorityDateTime);
+          },
+        },
+        {
+          id: "closes",
+          label: "Closes",
+          filter: function (c) {
+            return (
+              ["Responsive", "Ready", "Confirmed"].indexOf(
+                c.closingCallConfirmationStatus,
+              ) !== -1
+            );
+          },
+        },
+        {
+          id: "cancels",
+          label: "Cancels",
+          filter: function (c) {
+            return c.closingCallConfirmationStatus === "Canceled";
+          },
+        },
+        {
+          id: "reschedule",
+          label: "Needs Reschedule",
+          filter: function (c) {
+            return c.needsReschedule === true;
+          },
+        },
+      ];
+      var STATUS_OPTIONS = [
+        "",
+        "Waiting on Reply",
+        "Responsive",
+        "Ready",
+        "Confirmed",
+        "Never Confirmed",
+        "Canceled",
+      ];
+      var PRIORITY_OPTIONS = [
+        "",
+        "48 hours | Ghosting",
+        "Spouse Objection",
+        "Needs Attention",
+        "Technical difficulties",
+        "Reschedule Request",
+        "New booking | Ghosting",
+        "Responsive - Course",
+        "Cancel Request",
+      ];
+      var CHECKLIST_KEYS = [
+        "spouseConfirmed",
+        "metaOxyKit",
+        "zoomAccess",
+        "dateTime",
+      ];
+      var CHECKLIST_LABELS = {
+        spouseConfirmed: "Spouse Confirmed",
+        metaOxyKit: "MetaOxy Kit",
+        zoomAccess: "Zoom Access",
+        dateTime: "Date/Time",
+      };
+      var STORAGE_KEY = "ac-hubspot-contacts";
+      var activeView = localStorage.getItem("ac-hubspot-active-view") || "all";
+      var contacts;
+      var toastTimer;
+
+      function makeSeedContacts() {
+        var now = new Date();
+        function rel(days) {
+          var d = new Date(now);
+          d.setDate(d.getDate() + days);
+          d.setHours(10, 0, 0, 0);
+          return d.toISOString();
+        }
+        function relH(days, hours) {
+          var d = new Date(now);
+          d.setDate(d.getDate() + days);
+          d.setHours(hours, 0, 0, 0);
+          return d.toISOString();
+        }
+        var base = {
+          closingCallOutcome: "",
+          booked: "Yes",
+          double: "No",
+          zoomLink: "",
+          escalatedToCaller: false,
+          needsReschedule: false,
+          contactOwner: "Sarah Chen",
+          closerOwner: "",
+          confirmationOwner: "Sales POD-H",
+          setterOwner: "",
+          sdrOwner: "",
+          hubspotTeam: "Sales POD-H",
+          lifecycleStage: "Lead",
+          leadStatus: "New",
+          leadSource: "",
+          contactPriority: "Medium",
+          city: "",
+          stateRegion: "",
+          age: 0,
+          doNotContact: false,
+          testKitPurchaseDate: "",
+          testKitResult: "",
+          metaOxyTracking: "",
+          reportIssue: "",
+          salesLifecycle: "",
+          kitTrackingStatus: "",
+          lastContacted: "",
+          lastActivityDate: "",
+          lastOutgoingCall: "",
+          numAlowareOutboundDials: 0,
+          numTimesContacted: 0,
+          outboundCallDisposition: "",
+          followUpSequenceV3: "",
+          followUpSequence: "",
+          setterSummary: "",
+          engagementSource: "",
+          engagementOwner: "",
+          samcartOrderDate: "",
+          daysToBuyKit: 0,
+          createDate: "",
+          leadDate: "",
+          dealPipeline: "",
+          dealStage: "",
+          dealCloseDate: "",
+          ntqTotalScore: 0,
+          dateOfBirth: "",
+          occupation: "",
+          maritalStatus: "",
+          ntqPercentage: 0,
+          hq1: "",
+          hq2: "",
+          hq3: "",
+          hq4: "",
+          hq5: "",
+          hq6: "",
+          hq7: "",
+          hq8: "",
+          liveWith: "",
+          hoursWorked: "",
+          pregnancyQuestion: "",
+          closedBySalesDate: "",
+          closedBy: "",
+          collectedPayments: 0,
+          associatedTickets: "",
+          ntqLink: "",
+          ntqComplete: false,
+          ntqUpdated: "",
+        };
+        function c(overrides) {
+          var o = {};
+          for (var k in base) o[k] = base[k];
+          for (var k in overrides) o[k] = overrides[k];
+          return o;
+        }
+        return [
+          c({
+            id: "c1",
+            firstName: "Jammie",
+            lastName: "Castle",
+            email: "jammie.castle@email.com",
+            mobilePhone: "(555) 234-5678",
+            maritalStatus: "Married",
+            ntqPercentage: 72,
+            closingCallConfirmationStatus: "",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(12),
+            closerOwner: "Mike Torres",
+            leadSource: "Facebook Ad",
+            contactPriority: "High",
+            city: "Austin",
+            stateRegion: "TX",
+            age: 42,
+            testKitPurchaseDate: rel(-5),
+            testKitResult: "Pending",
+            metaOxyTracking: "Shipped",
+            salesLifecycle: "Qualification",
+            kitTrackingStatus: "In Transit",
+            lastContacted: rel(-1),
+            lastActivityDate: rel(-1),
+            lastOutgoingCall: rel(-2),
+            numAlowareOutboundDials: 4,
+            numTimesContacted: 6,
+            outboundCallDisposition: "Voicemail",
+            followUpSequenceV3: "Day 3",
+            followUpSequence: "Active",
+            setterSummary:
+              "Interested in detox after watching webinar. Concerned about brain fog and fatigue. Spouse supportive.",
+            engagementSource: "Facebook Lead Ad",
+            engagementOwner: "Digital Team",
+            samcartOrderDate: rel(-5),
+            daysToBuyKit: 2,
+            createDate: rel(-7),
+            leadDate: rel(-7),
+            dealPipeline: "Sales Pipeline",
+            dealStage: "Appointment Scheduled",
+            dealCloseDate: rel(14),
+            ntqTotalScore: 58,
+            dateOfBirth: "1984-03-15",
+            occupation: "Marketing Manager",
+            hq1: "Moderate",
+            hq2: "Frequent",
+            hq3: "Yes",
+            hq4: "Sometimes",
+            hq5: "Moderate",
+            hq6: "Rarely",
+            hq7: "Yes",
+            hq8: "No",
+            liveWith: "Spouse + 2 children",
+            hoursWorked: "45",
+            pregnancyQuestion: "N/A",
+            zoomLink: "https://zoom.us/j/example1",
+            booked: "Yes",
+            ntqLink: "https://ntq.drpompa.com/results/jc-1",
+            ntqComplete: true,
+            ntqUpdated: rel(-4),
+          }),
+          c({
+            id: "c2",
+            firstName: "Ravikanth",
+            lastName: "Bandari",
+            email: "r.bandari@email.com",
+            mobilePhone: "(555) 345-6789",
+            closingCallConfirmationStatus: "",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(15),
+            leadSource: "Organic",
+            city: "San Jose",
+            stateRegion: "CA",
+            age: 35,
+            createDate: rel(-3),
+            leadDate: rel(-3),
+            engagementSource: "Google Search",
+          }),
+          c({
+            id: "c3",
+            firstName: "Suzette",
+            lastName: "Sommers",
+            email: "suzette.s@email.com",
+            mobilePhone: "(555) 456-7890",
+            maritalStatus: "Married",
+            closingCallConfirmationStatus: "Waiting on Reply",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(10),
+            closerOwner: "Mike Torres",
+            leadStatus: "Open",
+            leadSource: "Referral",
+            city: "Denver",
+            stateRegion: "CO",
+            age: 48,
+            lastContacted: rel(-1),
+            lastActivityDate: rel(-1),
+            numAlowareOutboundDials: 2,
+            numTimesContacted: 3,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Day 1",
+            followUpSequence: "Active",
+            engagementSource: "Referral",
+            createDate: rel(-5),
+            leadDate: rel(-5),
+            occupation: "Teacher",
+          }),
+          c({
+            id: "c4",
+            firstName: "Sharon",
+            lastName: "Wood",
+            email: "sharon.wood@email.com",
+            mobilePhone: "(555) 567-8901",
+            maritalStatus: "Divorced",
+            closingCallConfirmationStatus: "Waiting on Reply",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(8),
+            leadStatus: "Open",
+            leadSource: "Podcast",
+            contactPriority: "Low",
+            city: "Nashville",
+            stateRegion: "TN",
+            age: 55,
+            lastContacted: rel(-2),
+            lastActivityDate: rel(-2),
+            lastOutgoingCall: rel(-2),
+            numAlowareOutboundDials: 1,
+            numTimesContacted: 2,
+            outboundCallDisposition: "No Answer",
+            engagementSource: "Podcast",
+            createDate: rel(-6),
+            leadDate: rel(-6),
+          }),
+          c({
+            id: "c5",
+            firstName: "Marcus",
+            lastName: "Reeves",
+            email: "marcus.reeves@email.com",
+            mobilePhone: "(555) 678-9012",
+            maritalStatus: "Married",
+            ntqPercentage: 85,
+            closingCallConfirmationStatus: "Responsive",
+            preCallChecklist: {
+              spouseConfirmed: true,
+              metaOxyKit: false,
+              zoomAccess: true,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(6),
+            closerOwner: "Mike Torres",
+            setterOwner: "Jessica Park",
+            sdrOwner: "Tom Blake",
+            lifecycleStage: "MQL",
+            leadStatus: "Working",
+            leadSource: "Webinar",
+            contactPriority: "High",
+            city: "Chicago",
+            stateRegion: "IL",
+            age: 39,
+            testKitPurchaseDate: rel(-8),
+            testKitResult: "Received",
+            metaOxyTracking: "Delivered",
+            salesLifecycle: "Engaged",
+            kitTrackingStatus: "Delivered",
+            lastContacted: rel(0),
+            lastActivityDate: rel(0),
+            lastOutgoingCall: rel(-1),
+            numAlowareOutboundDials: 7,
+            numTimesContacted: 12,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Day 5",
+            followUpSequence: "Active",
+            setterSummary:
+              "Highly motivated. Wife also interested. Brain fog, joint pain, fatigue. Exercises regularly. Tried functional medicine before.",
+            engagementSource: "Live Webinar",
+            engagementOwner: "Events Team",
+            samcartOrderDate: rel(-8),
+            daysToBuyKit: 1,
+            createDate: rel(-14),
+            leadDate: rel(-14),
+            dealPipeline: "Sales Pipeline",
+            dealStage: "Qualified",
+            dealCloseDate: rel(8),
+            ntqTotalScore: 72,
+            dateOfBirth: "1987-07-22",
+            occupation: "Software Engineer",
+            hq1: "Severe",
+            hq2: "Daily",
+            hq3: "Yes",
+            hq4: "Often",
+            hq5: "High",
+            hq6: "Sometimes",
+            hq7: "Yes",
+            hq8: "Yes",
+            liveWith: "Spouse + 1 child",
+            hoursWorked: "50",
+            pregnancyQuestion: "N/A",
+            double: "Yes",
+            zoomLink: "https://zoom.us/j/example5",
+            ntqLink: "https://ntq.drpompa.com/results/mr-5",
+            ntqComplete: true,
+            ntqUpdated: rel(-6),
+          }),
+          c({
+            id: "c6",
+            firstName: "Linda",
+            lastName: "Kowalski",
+            email: "linda.k@email.com",
+            mobilePhone: "(555) 789-0123",
+            maritalStatus: "Married",
+            closingCallConfirmationStatus: "Responsive",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(5),
+            leadStatus: "Working",
+            leadSource: "Facebook Ad",
+            city: "Phoenix",
+            stateRegion: "AZ",
+            age: 51,
+            lastContacted: rel(-1),
+            lastActivityDate: rel(-1),
+            numAlowareOutboundDials: 3,
+            numTimesContacted: 5,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Day 2",
+            followUpSequence: "Active",
+            engagementSource: "Facebook Ad",
+            createDate: rel(-4),
+            leadDate: rel(-4),
+            occupation: "Nurse",
+          }),
+          c({
+            id: "c7",
+            firstName: "Daniel",
+            lastName: "Okafor",
+            email: "daniel.okafor@email.com",
+            mobilePhone: "(555) 890-1234",
+            maritalStatus: "Married",
+            ntqPercentage: 68,
+            closingCallConfirmationStatus: "Ready",
+            preCallChecklist: {
+              spouseConfirmed: true,
+              metaOxyKit: true,
+              zoomAccess: true,
+              dateTime: true,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(4),
+            closerOwner: "Mike Torres",
+            setterOwner: "Jessica Park",
+            lifecycleStage: "MQL",
+            leadStatus: "Working",
+            leadSource: "Webinar",
+            contactPriority: "High",
+            city: "Atlanta",
+            stateRegion: "GA",
+            age: 44,
+            testKitPurchaseDate: rel(-10),
+            testKitResult: "Results Ready",
+            metaOxyTracking: "Delivered",
+            salesLifecycle: "Closing",
+            kitTrackingStatus: "Delivered",
+            lastContacted: rel(0),
+            lastActivityDate: rel(0),
+            lastOutgoingCall: rel(0),
+            numAlowareOutboundDials: 10,
+            numTimesContacted: 15,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Complete",
+            followUpSequence: "Complete",
+            setterSummary:
+              "Very engaged. Completed all prep. Wife joining call. Main concerns: chronic fatigue, gut issues, mold exposure history.",
+            engagementSource: "Webinar Replay",
+            engagementOwner: "Events Team",
+            samcartOrderDate: rel(-10),
+            daysToBuyKit: 1,
+            createDate: rel(-18),
+            leadDate: rel(-18),
+            dealPipeline: "Sales Pipeline",
+            dealStage: "Presentation",
+            dealCloseDate: rel(5),
+            ntqTotalScore: 65,
+            dateOfBirth: "1982-11-08",
+            occupation: "Financial Advisor",
+            hq1: "Severe",
+            hq2: "Daily",
+            hq3: "Yes",
+            hq4: "Often",
+            hq5: "Severe",
+            hq6: "Often",
+            hq7: "Yes",
+            hq8: "No",
+            liveWith: "Spouse + 3 children",
+            hoursWorked: "55",
+            pregnancyQuestion: "N/A",
+            double: "Yes",
+            zoomLink: "https://zoom.us/j/example7",
+            ntqLink: "https://ntq.drpompa.com/results/do-7",
+            ntqComplete: true,
+            ntqUpdated: rel(-8),
+          }),
+          c({
+            id: "c8",
+            firstName: "Teresa",
+            lastName: "Huang",
+            email: "teresa.h@email.com",
+            mobilePhone: "(555) 901-2345",
+            closingCallConfirmationStatus: "Ready",
+            preCallChecklist: {
+              spouseConfirmed: true,
+              metaOxyKit: true,
+              zoomAccess: true,
+              dateTime: true,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(3),
+            closerOwner: "Mike Torres",
+            lifecycleStage: "MQL",
+            leadStatus: "Working",
+            leadSource: "Instagram",
+            city: "Seattle",
+            stateRegion: "WA",
+            age: 33,
+            lastContacted: rel(-1),
+            lastActivityDate: rel(-1),
+            numAlowareOutboundDials: 5,
+            numTimesContacted: 8,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Day 4",
+            followUpSequence: "Active",
+            engagementSource: "Instagram",
+            createDate: rel(-8),
+            leadDate: rel(-8),
+            occupation: "Designer",
+          }),
+          c({
+            id: "c9",
+            firstName: "Robert",
+            lastName: "Fitzgerald",
+            email: "robert.fitz@email.com",
+            mobilePhone: "(555) 012-3456",
+            maritalStatus: "Married",
+            ntqPercentage: 91,
+            closingCallConfirmationStatus: "Confirmed",
+            preCallChecklist: {
+              spouseConfirmed: true,
+              metaOxyKit: true,
+              zoomAccess: true,
+              dateTime: true,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: relH(1, 14),
+            closingCallOutcome: "Scheduled",
+            closerOwner: "Mike Torres",
+            setterOwner: "Jessica Park",
+            sdrOwner: "Tom Blake",
+            lifecycleStage: "SQL",
+            leadStatus: "Working",
+            leadSource: "Webinar",
+            contactPriority: "High",
+            city: "Boston",
+            stateRegion: "MA",
+            age: 47,
+            testKitPurchaseDate: rel(-12),
+            testKitResult: "Results Ready",
+            metaOxyTracking: "Delivered",
+            salesLifecycle: "Closing",
+            kitTrackingStatus: "Delivered",
+            lastContacted: rel(0),
+            lastActivityDate: rel(0),
+            lastOutgoingCall: rel(0),
+            numAlowareOutboundDials: 14,
+            numTimesContacted: 22,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Complete",
+            followUpSequence: "Complete",
+            setterSummary:
+              "Top prospect. Both spouses attending. Completed NTQ, kit results strong. History of Lyme disease, mold exposure. Very motivated.",
+            engagementSource: "Live Webinar",
+            engagementOwner: "Events Team",
+            samcartOrderDate: rel(-12),
+            daysToBuyKit: 1,
+            createDate: rel(-21),
+            leadDate: rel(-21),
+            dealPipeline: "Sales Pipeline",
+            dealStage: "Contract Sent",
+            dealCloseDate: rel(2),
+            ntqTotalScore: 85,
+            dateOfBirth: "1979-05-12",
+            occupation: "Attorney",
+            hq1: "Severe",
+            hq2: "Daily",
+            hq3: "Yes",
+            hq4: "Always",
+            hq5: "Severe",
+            hq6: "Often",
+            hq7: "Yes",
+            hq8: "Yes",
+            liveWith: "Spouse",
+            hoursWorked: "60",
+            pregnancyQuestion: "N/A",
+            double: "Yes",
+            zoomLink: "https://zoom.us/j/example9",
+            ntqLink: "https://ntq.drpompa.com/results/rf-9",
+            ntqComplete: true,
+            ntqUpdated: rel(-10),
+          }),
+          c({
+            id: "c10",
+            firstName: "Angela",
+            lastName: "Petrov",
+            email: "angela.p@email.com",
+            mobilePhone: "(555) 123-4567",
+            maritalStatus: "Married",
+            closingCallConfirmationStatus: "Responsive",
+            preCallChecklist: {
+              spouseConfirmed: true,
+              metaOxyKit: false,
+              zoomAccess: true,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: relH(1, 18),
+            closerOwner: "Mike Torres",
+            lifecycleStage: "MQL",
+            leadStatus: "Working",
+            leadSource: "Facebook Ad",
+            contactPriority: "High",
+            city: "Miami",
+            stateRegion: "FL",
+            age: 41,
+            lastContacted: rel(0),
+            lastActivityDate: rel(0),
+            numAlowareOutboundDials: 6,
+            numTimesContacted: 9,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Day 3",
+            followUpSequence: "Active",
+            engagementSource: "Facebook Ad",
+            createDate: rel(-6),
+            leadDate: rel(-6),
+          }),
+          c({
+            id: "c11",
+            firstName: "William",
+            lastName: "Tran",
+            email: "william.tran@email.com",
+            mobilePhone: "(555) 234-5670",
+            closingCallConfirmationStatus: "",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(7),
+            escalatedToCaller: true,
+            leadStatus: "Open",
+            leadSource: "Organic",
+            contactPriority: "Low",
+            city: "Portland",
+            stateRegion: "OR",
+            age: 29,
+            lastContacted: rel(-3),
+            lastActivityDate: rel(-3),
+            lastOutgoingCall: rel(-3),
+            numAlowareOutboundDials: 2,
+            numTimesContacted: 3,
+            outboundCallDisposition: "No Answer",
+            engagementSource: "Google Search",
+            createDate: rel(-5),
+            leadDate: rel(-5),
+          }),
+          c({
+            id: "c12",
+            firstName: "Priya",
+            lastName: "Sharma",
+            email: "priya.sharma@email.com",
+            mobilePhone: "(555) 345-6780",
+            maritalStatus: "Married",
+            closingCallConfirmationStatus: "Responsive",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(9),
+            escalatedToCaller: true,
+            leadStatus: "Working",
+            leadSource: "Referral",
+            city: "Dallas",
+            stateRegion: "TX",
+            age: 37,
+            lastContacted: rel(-1),
+            lastActivityDate: rel(-1),
+            numAlowareOutboundDials: 4,
+            numTimesContacted: 6,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Day 2",
+            followUpSequence: "Active",
+            engagementSource: "Referral",
+            createDate: rel(-7),
+            leadDate: rel(-7),
+          }),
+          c({
+            id: "c13",
+            firstName: "Frank",
+            lastName: "DeLuca",
+            email: "frank.deluca@email.com",
+            mobilePhone: "(555) 456-7801",
+            maritalStatus: "Married",
+            ntqPercentage: 78,
+            closingCallConfirmationStatus: "",
+            preCallChecklist: {
+              spouseConfirmed: true,
+              metaOxyKit: false,
+              zoomAccess: true,
+              dateTime: false,
+            },
+            callPriority: "Needs Attention",
+            callPriorityDateTime: new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(),
+              14,
+              0,
+              0,
+            ).toISOString(),
+            meetingStartDate: rel(3),
+            closerOwner: "Mike Torres",
+            setterOwner: "Jessica Park",
+            sdrOwner: "Tom Blake",
+            lifecycleStage: "MQL",
+            leadStatus: "Working",
+            leadSource: "Webinar",
+            contactPriority: "High",
+            city: "Philadelphia",
+            stateRegion: "PA",
+            age: 52,
+            testKitPurchaseDate: rel(-6),
+            testKitResult: "Received",
+            metaOxyTracking: "Delivered",
+            salesLifecycle: "Engaged",
+            kitTrackingStatus: "Delivered",
+            lastContacted: rel(0),
+            lastActivityDate: rel(0),
+            lastOutgoingCall: rel(0),
+            numAlowareOutboundDials: 8,
+            numTimesContacted: 14,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Day 5",
+            followUpSequence: "Active",
+            setterSummary:
+              "Priority callback requested. Interested in heavy metal detox. Had amalgam removal last year. Wife skeptical but coming around.",
+            engagementSource: "Live Webinar",
+            engagementOwner: "Events Team",
+            samcartOrderDate: rel(-6),
+            daysToBuyKit: 1,
+            createDate: rel(-12),
+            leadDate: rel(-12),
+            dealPipeline: "Sales Pipeline",
+            dealStage: "Qualified",
+            dealCloseDate: rel(4),
+            ntqTotalScore: 70,
+            dateOfBirth: "1974-09-20",
+            occupation: "Contractor",
+            hq1: "Moderate",
+            hq2: "Frequent",
+            hq3: "Yes",
+            hq4: "Sometimes",
+            hq5: "High",
+            hq6: "Sometimes",
+            hq7: "Yes",
+            hq8: "No",
+            liveWith: "Spouse",
+            hoursWorked: "50",
+            pregnancyQuestion: "N/A",
+            double: "Yes",
+            zoomLink: "https://zoom.us/j/example13",
+            ntqLink: "https://ntq.drpompa.com/results/fd-13",
+            ntqComplete: true,
+            ntqUpdated: rel(-4),
+          }),
+          c({
+            id: "c14",
+            firstName: "Nancy",
+            lastName: "Bergstrom",
+            email: "nancy.b@email.com",
+            mobilePhone: "(555) 567-8902",
+            maritalStatus: "Widowed",
+            closingCallConfirmationStatus: "Never Confirmed",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(-2),
+            closingCallOutcome: "No-Show",
+            leadStatus: "Unresponsive",
+            leadSource: "Facebook Ad",
+            contactPriority: "Low",
+            city: "Minneapolis",
+            stateRegion: "MN",
+            age: 62,
+            lastContacted: rel(-3),
+            lastActivityDate: rel(-3),
+            lastOutgoingCall: rel(-4),
+            numAlowareOutboundDials: 6,
+            numTimesContacted: 8,
+            outboundCallDisposition: "No Answer",
+            followUpSequence: "Exhausted",
+            engagementSource: "Facebook Ad",
+            createDate: rel(-14),
+            leadDate: rel(-14),
+          }),
+          c({
+            id: "c15",
+            firstName: "Carlos",
+            lastName: "Mendez",
+            email: "carlos.m@email.com",
+            mobilePhone: "(555) 678-9013",
+            maritalStatus: "Married",
+            closingCallConfirmationStatus: "Canceled",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(5),
+            needsReschedule: true,
+            leadStatus: "Open",
+            leadSource: "Organic",
+            city: "San Antonio",
+            stateRegion: "TX",
+            age: 38,
+            lastContacted: rel(-2),
+            lastActivityDate: rel(-2),
+            numAlowareOutboundDials: 3,
+            numTimesContacted: 4,
+            outboundCallDisposition: "Connected",
+            engagementSource: "Google Search",
+            createDate: rel(-9),
+            leadDate: rel(-9),
+          }),
+          c({
+            id: "c16",
+            firstName: "Diane",
+            lastName: "Moretti",
+            email: "diane.m@email.com",
+            mobilePhone: "(555) 111-2233",
+            maritalStatus: "Married",
+            closingCallConfirmationStatus: "Responsive",
+            preCallChecklist: {
+              spouseConfirmed: true,
+              metaOxyKit: true,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(4),
+            closerOwner: "Mike Torres",
+            leadStatus: "Working",
+            leadSource: "Webinar",
+            contactPriority: "High",
+            city: "Charlotte",
+            stateRegion: "NC",
+            age: 46,
+            lastContacted: rel(0),
+            lastActivityDate: rel(0),
+            numAlowareOutboundDials: 5,
+            numTimesContacted: 8,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Day 4",
+            followUpSequence: "Active",
+            engagementSource: "Webinar Replay",
+            createDate: rel(-10),
+            leadDate: rel(-10),
+          }),
+          c({
+            id: "c17",
+            firstName: "Kevin",
+            lastName: "Park",
+            email: "kevin.park@email.com",
+            mobilePhone: "(555) 222-3344",
+            closingCallConfirmationStatus: "",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "48 hours | Ghosting",
+            callPriorityDateTime: new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(),
+              9,
+              0,
+              0,
+            ).toISOString(),
+            meetingStartDate: rel(5),
+            leadSource: "Facebook Ad",
+            city: "Orlando",
+            stateRegion: "FL",
+            age: 31,
+            lastContacted: rel(-2),
+            lastActivityDate: rel(-2),
+            numAlowareOutboundDials: 3,
+            numTimesContacted: 3,
+            outboundCallDisposition: "No Answer",
+            engagementSource: "Facebook Ad",
+            createDate: rel(-4),
+            leadDate: rel(-4),
+          }),
+          c({
+            id: "c18",
+            firstName: "Rachel",
+            lastName: "Nguyen",
+            email: "rachel.n@email.com",
+            mobilePhone: "(555) 333-4455",
+            maritalStatus: "Single",
+            closingCallConfirmationStatus: "Waiting on Reply",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: true,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(7),
+            leadStatus: "Open",
+            leadSource: "Instagram",
+            city: "San Diego",
+            stateRegion: "CA",
+            age: 28,
+            lastContacted: rel(-1),
+            lastActivityDate: rel(-1),
+            numAlowareOutboundDials: 2,
+            numTimesContacted: 4,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Day 2",
+            followUpSequence: "Active",
+            engagementSource: "Instagram",
+            createDate: rel(-5),
+            leadDate: rel(-5),
+          }),
+          c({
+            id: "c19",
+            firstName: "Gregory",
+            lastName: "Walsh",
+            email: "greg.walsh@email.com",
+            mobilePhone: "(555) 444-5566",
+            maritalStatus: "Married",
+            ntqPercentage: 62,
+            closingCallConfirmationStatus: "Ready",
+            preCallChecklist: {
+              spouseConfirmed: true,
+              metaOxyKit: true,
+              zoomAccess: true,
+              dateTime: true,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: relH(1, 10),
+            closerOwner: "Mike Torres",
+            setterOwner: "Jessica Park",
+            lifecycleStage: "MQL",
+            leadStatus: "Working",
+            leadSource: "Webinar",
+            contactPriority: "High",
+            city: "Tampa",
+            stateRegion: "FL",
+            age: 50,
+            testKitPurchaseDate: rel(-9),
+            testKitResult: "Results Ready",
+            metaOxyTracking: "Delivered",
+            salesLifecycle: "Closing",
+            kitTrackingStatus: "Delivered",
+            lastContacted: rel(0),
+            lastActivityDate: rel(0),
+            lastOutgoingCall: rel(0),
+            numAlowareOutboundDials: 11,
+            numTimesContacted: 18,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Complete",
+            followUpSequence: "Complete",
+            setterSummary:
+              "Fully engaged. Wife joining. Heavy metal concerns after dental work. Very motivated.",
+            engagementSource: "Live Webinar",
+            engagementOwner: "Events Team",
+            samcartOrderDate: rel(-9),
+            daysToBuyKit: 1,
+            createDate: rel(-16),
+            leadDate: rel(-16),
+            dealPipeline: "Sales Pipeline",
+            dealStage: "Presentation",
+            dealCloseDate: rel(3),
+            ntqTotalScore: 60,
+            dateOfBirth: "1976-02-28",
+            ntqLink: "https://ntq.drpompa.com/results/gw-19",
+            ntqComplete: true,
+            ntqUpdated: rel(-7),
+            double: "Yes",
+            zoomLink: "https://zoom.us/j/example19",
+          }),
+          c({
+            id: "c20",
+            firstName: "Jasmine",
+            lastName: "Brooks",
+            email: "jasmine.b@email.com",
+            mobilePhone: "(555) 555-6677",
+            maritalStatus: "Married",
+            closingCallConfirmationStatus: "Confirmed",
+            preCallChecklist: {
+              spouseConfirmed: true,
+              metaOxyKit: true,
+              zoomAccess: true,
+              dateTime: true,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: relH(0, 16),
+            closerOwner: "Mike Torres",
+            lifecycleStage: "SQL",
+            leadStatus: "Working",
+            leadSource: "Referral",
+            contactPriority: "High",
+            city: "Houston",
+            stateRegion: "TX",
+            age: 43,
+            lastContacted: rel(0),
+            lastActivityDate: rel(0),
+            numAlowareOutboundDials: 9,
+            numTimesContacted: 16,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Complete",
+            followUpSequence: "Complete",
+            engagementSource: "Referral",
+            createDate: rel(-12),
+            leadDate: rel(-12),
+            double: "Yes",
+            zoomLink: "https://zoom.us/j/example20",
+          }),
+          c({
+            id: "c21",
+            firstName: "Patrick",
+            lastName: "O'Brien",
+            email: "patrick.ob@email.com",
+            mobilePhone: "(555) 666-7788",
+            closingCallConfirmationStatus: "",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "Spouse Objection",
+            callPriorityDateTime: new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate() - 1,
+              11,
+              0,
+              0,
+            ).toISOString(),
+            meetingStartDate: rel(6),
+            leadSource: "Podcast",
+            city: "Detroit",
+            stateRegion: "MI",
+            age: 44,
+            lastContacted: rel(-1),
+            lastActivityDate: rel(-1),
+            lastOutgoingCall: rel(-1),
+            numAlowareOutboundDials: 4,
+            numTimesContacted: 5,
+            outboundCallDisposition: "Connected",
+            engagementSource: "Podcast",
+            createDate: rel(-6),
+            leadDate: rel(-6),
+          }),
+          c({
+            id: "c22",
+            firstName: "Maria",
+            lastName: "Gonzalez",
+            email: "maria.g@email.com",
+            mobilePhone: "(555) 777-8899",
+            maritalStatus: "Married",
+            closingCallConfirmationStatus: "Canceled",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "Cancel Request",
+            callPriorityDateTime: rel(-1),
+            meetingStartDate: rel(3),
+            needsReschedule: true,
+            leadStatus: "Open",
+            leadSource: "Facebook Ad",
+            city: "Las Vegas",
+            stateRegion: "NV",
+            age: 36,
+            lastContacted: rel(-1),
+            lastActivityDate: rel(-1),
+            numAlowareOutboundDials: 5,
+            numTimesContacted: 7,
+            outboundCallDisposition: "Connected",
+            engagementSource: "Facebook Ad",
+            createDate: rel(-8),
+            leadDate: rel(-8),
+          }),
+          c({
+            id: "c23",
+            firstName: "Brian",
+            lastName: "Chambers",
+            email: "brian.c@email.com",
+            mobilePhone: "(555) 888-9900",
+            maritalStatus: "Divorced",
+            closingCallConfirmationStatus: "Responsive",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: true,
+              zoomAccess: true,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(9),
+            escalatedToCaller: true,
+            closerOwner: "Mike Torres",
+            leadStatus: "Working",
+            leadSource: "Organic",
+            city: "Denver",
+            stateRegion: "CO",
+            age: 48,
+            lastContacted: rel(-1),
+            lastActivityDate: rel(-1),
+            numAlowareOutboundDials: 6,
+            numTimesContacted: 9,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Day 3",
+            followUpSequence: "Active",
+            engagementSource: "Google Search",
+            createDate: rel(-11),
+            leadDate: rel(-11),
+          }),
+          c({
+            id: "c24",
+            firstName: "Stephanie",
+            lastName: "Kim",
+            email: "steph.kim@email.com",
+            mobilePhone: "(555) 999-0011",
+            closingCallConfirmationStatus: "Never Confirmed",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: false,
+            },
+            callPriority: "",
+            callPriorityDateTime: "",
+            meetingStartDate: rel(-1),
+            closingCallOutcome: "No-Show",
+            leadStatus: "Unresponsive",
+            leadSource: "Webinar",
+            contactPriority: "Low",
+            city: "Raleigh",
+            stateRegion: "NC",
+            age: 34,
+            lastContacted: rel(-2),
+            lastActivityDate: rel(-2),
+            numAlowareOutboundDials: 7,
+            numTimesContacted: 10,
+            outboundCallDisposition: "No Answer",
+            followUpSequence: "Exhausted",
+            engagementSource: "Webinar Replay",
+            createDate: rel(-15),
+            leadDate: rel(-15),
+          }),
+          c({
+            id: "c25",
+            firstName: "Anthony",
+            lastName: "Russo",
+            email: "anthony.r@email.com",
+            mobilePhone: "(555) 000-1122",
+            maritalStatus: "Married",
+            closingCallConfirmationStatus: "Waiting on Reply",
+            preCallChecklist: {
+              spouseConfirmed: false,
+              metaOxyKit: false,
+              zoomAccess: false,
+              dateTime: true,
+            },
+            callPriority: "Reschedule Request",
+            callPriorityDateTime: new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(),
+              10,
+              0,
+              0,
+            ).toISOString(),
+            meetingStartDate: rel(11),
+            needsReschedule: true,
+            leadStatus: "Open",
+            leadSource: "Referral",
+            city: "Pittsburgh",
+            stateRegion: "PA",
+            age: 57,
+            lastContacted: rel(-1),
+            lastActivityDate: rel(-1),
+            numAlowareOutboundDials: 3,
+            numTimesContacted: 5,
+            outboundCallDisposition: "Connected",
+            followUpSequenceV3: "Day 1",
+            followUpSequence: "Active",
+            engagementSource: "Referral",
+            createDate: rel(-7),
+            leadDate: rel(-7),
+          }),
+        ];
+      }
+
+      function migrateContact(c) {
+        if (typeof c.preCallChecklist === "string" || !c.preCallChecklist) {
+          var old = c.preCallChecklist;
+          c.preCallChecklist = {
+            spouseConfirmed: false,
+            metaOxyKit: false,
+            zoomAccess: false,
+            dateTime: false,
+          };
+          if (old === "Complete") {
+            c.preCallChecklist = {
+              spouseConfirmed: true,
+              metaOxyKit: true,
+              zoomAccess: true,
+              dateTime: true,
+            };
+          } else if (old === "In Progress") {
+            c.preCallChecklist = {
+              spouseConfirmed: true,
+              metaOxyKit: false,
+              zoomAccess: true,
+              dateTime: false,
+            };
+          }
+        }
+        if (typeof c.callPriority === "number")
+          c.callPriority = c.callPriority ? "Needs Attention" : "";
+        if (!c.ntqLink && c.ntqLink !== "") c.ntqLink = "";
+        if (c.ntqComplete === undefined) c.ntqComplete = false;
+        if (!c.ntqUpdated && c.ntqUpdated !== "") c.ntqUpdated = "";
+        if (c.hubspotTeam === "AC Team") c.hubspotTeam = "Sales POD-H";
+        if (c.confirmationOwner === "AC Team")
+          c.confirmationOwner = "Sales POD-H";
+        return c;
+      }
+      function loadContacts() {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          try {
+            var data = JSON.parse(raw);
+            if (data._version === 1 && data.contacts) {
+              var migrated = false;
+              data.contacts.forEach(function (c) {
+                if (
+                  typeof c.preCallChecklist === "string" ||
+                  typeof c.callPriority === "number" ||
+                  c.hubspotTeam === "AC Team"
+                ) {
+                  migrateContact(c);
+                  migrated = true;
+                }
+              });
+              if (migrated) saveContacts(data.contacts);
+              return data.contacts;
+            }
+          } catch (e) {}
+        }
+        return seedContacts();
+      }
+      function seedContacts() {
+        var c = makeSeedContacts();
+        saveContacts(c);
+        return c;
+      }
+      function saveContacts(list) {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({
+            _version: 1,
+            _seededAt: new Date().toISOString(),
+            contacts: list,
+          }),
+        );
+      }
+
+      function showToast(msg) {
+        var el = document.getElementById("toast");
+        el.textContent = msg;
+        el.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          el.classList.remove("show");
+        }, 3000);
+      }
+
+      function statusPillClass(s) {
+        var m = {
+          "Waiting on Reply": "pill-wr",
+          Responsive: "pill-r",
+          Ready: "pill-ready",
+          Confirmed: "pill-confirmed",
+          "Never Confirmed": "pill-nc",
+          Canceled: "pill-canceled",
+        };
+        return m[s] || "pill-blank";
+      }
+
+      function buildChecklistDropdown(c, cl) {
+        var wrapper = document.createElement("div");
+        wrapper.className = "checklist-dropdown";
+
+        var toggle = document.createElement("button");
+        toggle.className = "checklist-toggle";
+        toggle.type = "button";
+
+        var checked = CHECKLIST_KEYS.filter(function (k) {
+          return !!cl[k];
+        }).length;
+
+        // Show pill dots + count
+        var pills = document.createElement("span");
+        pills.className = "checklist-summary-pills";
+        CHECKLIST_KEYS.forEach(function (k) {
+          var pip = document.createElement("span");
+          pip.className = "checklist-pip" + (cl[k] ? " checked" : "");
+          pills.appendChild(pip);
+        });
+        toggle.appendChild(pills);
+        var countSpan = document.createElement("span");
+        countSpan.textContent = checked + "/" + CHECKLIST_KEYS.length;
+        toggle.appendChild(countSpan);
+        var caret = document.createElement("span");
+        caret.className = "caret";
+        caret.textContent = "\u25BE";
+        toggle.appendChild(caret);
+
+        var panel = document.createElement("div");
+        panel.className = "checklist-panel";
+
+        CHECKLIST_KEYS.forEach(function (key) {
+          var label = document.createElement("label");
+          var cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.checked = !!cl[key];
+          cb.addEventListener("change", function () {
+            if (!c.preCallChecklist || typeof c.preCallChecklist === "string")
+              c.preCallChecklist = {};
+            c.preCallChecklist[key] = cb.checked;
+            saveContacts(contacts);
+            // Update toggle display
+            var newChecked = CHECKLIST_KEYS.filter(function (k) {
+              return !!c.preCallChecklist[k];
+            }).length;
+            countSpan.textContent = newChecked + "/" + CHECKLIST_KEYS.length;
+            // Update pips
+            var pips = pills.querySelectorAll(".checklist-pip");
+            CHECKLIST_KEYS.forEach(function (k, i) {
+              if (c.preCallChecklist[k]) pips[i].classList.add("checked");
+              else pips[i].classList.remove("checked");
+            });
+          });
+          label.appendChild(cb);
+          label.appendChild(document.createTextNode(CHECKLIST_LABELS[key]));
+          panel.appendChild(label);
+        });
+
+        toggle.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var isOpen = panel.classList.contains("open");
+          // Close all other open panels
+          document
+            .querySelectorAll(".checklist-panel.open")
+            .forEach(function (p) {
+              p.classList.remove("open");
+              p.previousElementSibling &&
+                p.previousElementSibling.classList.remove("open");
+            });
+          document
+            .querySelectorAll(".checklist-toggle.open")
+            .forEach(function (t) {
+              t.classList.remove("open");
+            });
+          if (!isOpen) {
+            panel.classList.add("open");
+            toggle.classList.add("open");
+          }
+        });
+
+        wrapper.appendChild(toggle);
+        wrapper.appendChild(panel);
+        return wrapper;
+      }
+
+      // Close checklist dropdowns on outside click
+      document.addEventListener("click", function () {
+        document
+          .querySelectorAll(".checklist-panel.open")
+          .forEach(function (p) {
+            p.classList.remove("open");
+          });
+        document
+          .querySelectorAll(".checklist-toggle.open")
+          .forEach(function (t) {
+            t.classList.remove("open");
+          });
+      });
+
+      function buildRow(c) {
+        var tr = document.createElement("tr");
+        var name = c.firstName + " " + c.lastName;
+        var color = avatarColor(name);
+        var ini = initials(c.firstName, c.lastName);
+
+        // Checkbox
+        var td0 = document.createElement("td");
+        td0.appendChild(document.createElement("input"));
+        td0.firstChild.type = "checkbox";
+        tr.appendChild(td0);
+
+        // Name + avatar
+        var td1 = document.createElement("td");
+        var cell = document.createElement("div");
+        cell.className = "contact-cell";
+        var av = document.createElement("div");
+        av.className = "avatar";
+        av.style.background = color;
+        av.textContent = ini;
+        var link = document.createElement("a");
+        link.className = "contact-name";
+        link.href = "contact-detail.html?id=" + c.id;
+        link.textContent = name;
+        var chatLink = document.createElement("a");
+        chatLink.className = "chat-icon";
+        chatLink.href = "conversation.html?id=" + c.id;
+        chatLink.title = "View conversation";
+        var chatSvg = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg",
+        );
+        chatSvg.setAttribute("viewBox", "0 0 24 24");
+        chatSvg.setAttribute("fill", "none");
+        chatSvg.setAttribute("stroke", "currentColor");
+        chatSvg.setAttribute("stroke-width", "2");
+        chatSvg.setAttribute("stroke-linecap", "round");
+        chatSvg.setAttribute("stroke-linejoin", "round");
+        var chatPath = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "path",
+        );
+        chatPath.setAttribute(
+          "d",
+          "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z",
+        );
+        chatSvg.appendChild(chatPath);
+        chatLink.appendChild(chatSvg);
+        cell.appendChild(av);
+        cell.appendChild(link);
+        cell.appendChild(chatLink);
+        td1.appendChild(cell);
+        tr.appendChild(td1);
+
+        // Phone
+        var td2 = document.createElement("td");
+        td2.className = "col-phone";
+        td2.textContent = c.mobilePhone || "";
+        tr.appendChild(td2);
+
+        // Meeting date
+        var td3 = document.createElement("td");
+        td3.textContent = fmtDate(c.meetingStartDate);
+        tr.appendChild(td3);
+
+        // Time until call
+        var td4 = document.createElement("td");
+        td4.className = "col-time";
+        td4.textContent = daysUntil(c.meetingStartDate);
+        tr.appendChild(td4);
+
+        // Status dropdown
+        var td5 = document.createElement("td");
+        var sel = document.createElement("select");
+        sel.className = "status-select";
+        STATUS_OPTIONS.forEach(function (s) {
+          var opt = document.createElement("option");
+          opt.value = s;
+          opt.textContent = s || "(No Status)";
+          if (s === c.closingCallConfirmationStatus) opt.selected = true;
+          sel.appendChild(opt);
+        });
+        sel.addEventListener("change", function (e) {
+          var oldStatus = c.closingCallConfirmationStatus;
+          c.closingCallConfirmationStatus = e.target.value;
+          saveContacts(contacts);
+          if (e.target.value !== oldStatus) {
+            var cName = c.firstName + " " + c.lastName;
+            var newView = null;
+            for (var i = 1; i < VIEWS.length; i++) {
+              if (VIEWS[i].filter(c)) {
+                newView = VIEWS[i];
+                break;
+              }
+            }
+            showToast(
+              cName + " moved to " + (newView ? newView.label : "All Contacts"),
+            );
+          }
+          render();
+        });
+        td5.appendChild(sel);
+        tr.appendChild(td5);
+
+        // Priority dropdown
+        var td6 = document.createElement("td");
+        td6.className = "col-priority";
+        var pSel = document.createElement("select");
+        pSel.className = "status-select";
+        PRIORITY_OPTIONS.forEach(function (s) {
+          var opt = document.createElement("option");
+          opt.value = s;
+          opt.textContent = s || "(None)";
+          if (s === c.callPriority) opt.selected = true;
+          pSel.appendChild(opt);
+        });
+        pSel.addEventListener("change", function (e) {
+          c.callPriority = e.target.value;
+          c.callPriorityDateTime = e.target.value
+            ? new Date().toISOString()
+            : "";
+          saveContacts(contacts);
+          var cName = c.firstName + " " + c.lastName;
+          if (e.target.value) {
+            showToast(cName + " priority set to " + e.target.value);
+          } else {
+            showToast(cName + " priority cleared");
+          }
+          render();
+        });
+        td6.appendChild(pSel);
+        tr.appendChild(td6);
+
+        // Priority date
+        var td7 = document.createElement("td");
+        td7.className = "col-priority-date";
+        td7.textContent = fmtShortDate(c.callPriorityDateTime);
+        tr.appendChild(td7);
+
+        // Checklist multi-select dropdown
+        var td8 = document.createElement("td");
+        td8.className = "col-checklist";
+        var cl = c.preCallChecklist || {};
+        if (typeof cl === "string") cl = {};
+        td8.appendChild(buildChecklistDropdown(c, cl));
+        tr.appendChild(td8);
+
+        return tr;
+      }
+
+      function renderTabs() {
+        var tabsEl = document.getElementById("viewTabs");
+        tabsEl.textContent = "";
+        VIEWS.forEach(function (v) {
+          var count = contacts.filter(v.filter).length;
+          var btn = document.createElement("button");
+          btn.className = "view-tab" + (v.id === activeView ? " active" : "");
+          btn.dataset.view = v.id;
+          var span = document.createElement("span");
+          span.className = "badge";
+          span.textContent = count;
+          btn.appendChild(document.createTextNode(v.label + " "));
+          btn.appendChild(span);
+          btn.addEventListener("click", function () {
+            activeView = v.id;
+            localStorage.setItem("ac-hubspot-active-view", activeView);
+            render();
+          });
+          tabsEl.appendChild(btn);
+        });
+      }
+
+      function renderTable() {
+        var view = VIEWS.filter(function (v) {
+          return v.id === activeView;
+        })[0];
+        var filtered = contacts.filter(view.filter);
+        var body = document.getElementById("contactsBody");
+        var empty = document.getElementById("emptyState");
+        body.textContent = "";
+        if (filtered.length === 0) {
+          empty.style.display = "block";
+          return;
+        }
+        empty.style.display = "none";
+        filtered.forEach(function (c) {
+          body.appendChild(buildRow(c));
+        });
+      }
+
+      function render() {
+        renderTabs();
+        renderTable();
+      }
+
+      document
+        .getElementById("resetBtn")
+        .addEventListener("click", function () {
+          if (
+            !confirm("Reset all contacts to defaults? This cannot be undone.")
+          )
+            return;
+          localStorage.removeItem(STORAGE_KEY);
+          contacts = seedContacts();
+          render();
+          showToast("All contacts reset to defaults");
+        });
+
+      contacts = loadContacts();
+      render();
+    </script>
+  </body>
+</html>

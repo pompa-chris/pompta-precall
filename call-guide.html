@@ -1,0 +1,3109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Call Guide — AC Pre-Call Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --slate-900: #1b2a31;
+        --slate-800: #243841;
+        --slate-700: #2f4a56;
+        --slate-600: #3f5b68;
+        --slate-500: #5a7682;
+        --slate-400: #89a0ab;
+        --slate-300: #b5c6cd;
+        --slate-200: #dce5e9;
+        --slate-100: #edf1f3;
+        --teal-700: #1e8f86;
+        --teal-600: #2db3a6;
+        --teal-500: #4ec5b9;
+        --teal-400: #87d8d0;
+        --teal-200: #c9eae6;
+        --teal-100: #e6f5f2;
+        --paper: #f7f3ed;
+        --bone: #fbf9f4;
+        --ink: #1a262c;
+        --ink-soft: #3d5059;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 52px;
+        background: var(--slate-800);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        z-index: 200;
+      }
+      .top-bar-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .top-bar-left a {
+        color: var(--slate-300);
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.15s;
+      }
+      .top-bar-left a:hover {
+        color: #fff;
+      }
+      .top-bar-title {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: var(--teal-400);
+      }
+      .top-bar-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .btn-restart {
+        background: none;
+        border: 1px solid var(--slate-500);
+        color: var(--slate-300);
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 13px;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.15s;
+      }
+      .btn-restart:hover {
+        border-color: var(--teal-400);
+        color: #fff;
+      }
+      .btn-toggle {
+        background: var(--teal-700);
+        border: none;
+        color: #fff;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 13px;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 500;
+        transition: all 0.15s;
+      }
+      .btn-toggle:hover {
+        background: var(--teal-600);
+      }
+
+      .progress-bar {
+        position: fixed;
+        top: 52px;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--slate-200);
+        z-index: 199;
+      }
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--teal-700), var(--teal-500));
+        transition: width 0.4s ease;
+        width: 0%;
+      }
+
+      .layout {
+        margin-top: 88px;
+        flex: 1;
+        position: relative;
+        min-height: calc(100vh - 88px);
+      }
+      .main {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 32px 40px 160px;
+        width: 100%;
+      }
+
+      .step-badge {
+        display: inline-block;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #fff;
+        background: var(--teal-700);
+        padding: 4px 12px;
+        border-radius: 20px;
+        margin-bottom: 12px;
+        font-weight: 600;
+      }
+      .step-badge.objection {
+        background: #7c3aed;
+      }
+      .step-badge.noshow {
+        background: #e65100;
+      }
+      .step-badge.difficult {
+        background: #c62828;
+      }
+      .step-badge.voicemail {
+        background: #1565c0;
+      }
+      .step-badge.tips {
+        background: #2e7d32;
+      }
+      .step-badge.spouse {
+        background: #e91e63;
+      }
+
+      .step-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 32px;
+        font-weight: 500;
+        color: var(--slate-800);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        margin-bottom: 8px;
+      }
+      .step-instruction {
+        font-size: 15px;
+        color: var(--ink-soft);
+        margin-bottom: 24px;
+        max-width: 600px;
+      }
+
+      .script-card {
+        background: var(--bone);
+        border: 2px solid var(--teal-400);
+        border-radius: 14px;
+        padding: 28px 32px;
+        margin-bottom: 16px;
+        position: relative;
+      }
+      .script-card-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--teal-700);
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .script-text {
+        font-size: 19px;
+        line-height: 1.65;
+        color: var(--ink);
+        font-style: italic;
+      }
+      .script-alt {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px dashed var(--slate-200);
+      }
+      .script-alt-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--slate-400);
+        font-weight: 500;
+        margin-bottom: 6px;
+      }
+      .script-alt .script-text {
+        font-size: 16px;
+        color: var(--ink-soft);
+      }
+
+      .btn-copy {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: var(--slate-100);
+        border: 1px solid var(--slate-200);
+        color: var(--slate-500);
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        cursor: pointer;
+        font-family: "IBM Plex Mono", monospace;
+        transition: all 0.15s;
+      }
+      .btn-copy:hover {
+        background: var(--teal-100);
+        border-color: var(--teal-400);
+        color: var(--teal-700);
+      }
+      .btn-copy.copied {
+        background: var(--teal-100);
+        border-color: var(--teal-400);
+        color: var(--teal-700);
+      }
+
+      .tip {
+        background: #fff8e1;
+        border-left: 4px solid #f9a825;
+        padding: 14px 18px;
+        border-radius: 0 8px 8px 0;
+        font-size: 14px;
+        color: var(--ink-soft);
+        margin-bottom: 20px;
+      }
+      .tip-green {
+        background: #e8f5e9;
+        border-left-color: #2e7d32;
+      }
+      .tip-purple {
+        background: #f3e8ff;
+        border-left-color: #7c3aed;
+      }
+      .tip-red {
+        background: #ffebee;
+        border-left-color: #c62828;
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 28px;
+        flex-wrap: wrap;
+      }
+      .btn-action {
+        padding: 14px 24px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        border: 2px solid;
+        font-family: inherit;
+        transition: all 0.2s;
+        flex: 1;
+        min-width: 160px;
+        text-align: center;
+      }
+      .btn-action.primary {
+        background: var(--teal-700);
+        border-color: var(--teal-700);
+        color: #fff;
+      }
+      .btn-action.primary:hover {
+        background: var(--teal-600);
+        border-color: var(--teal-600);
+      }
+      .btn-action.secondary {
+        background: #fff;
+        border-color: var(--slate-200);
+        color: var(--ink);
+      }
+      .btn-action.secondary:hover {
+        border-color: var(--teal-400);
+        background: var(--teal-100);
+      }
+      .btn-action.success {
+        background: #2e7d32;
+        border-color: #2e7d32;
+        color: #fff;
+      }
+      .btn-action.success:hover {
+        background: #1b5e20;
+      }
+      .btn-action.warning {
+        background: #e65100;
+        border-color: #e65100;
+        color: #fff;
+      }
+      .btn-action.warning:hover {
+        background: #bf360c;
+      }
+      .btn-action.danger {
+        background: #c62828;
+        border-color: #c62828;
+        color: #fff;
+      }
+      .btn-action.danger:hover {
+        background: #b71c1c;
+      }
+      .btn-action.pink {
+        background: #e91e63;
+        border-color: #e91e63;
+        color: #fff;
+      }
+      .btn-action.pink:hover {
+        background: #c2185b;
+      }
+      .btn-action.small {
+        padding: 10px 16px;
+        font-size: 13px;
+        min-width: 120px;
+        flex: 0 1 auto;
+      }
+
+      .btn-back {
+        background: none;
+        border: none;
+        color: var(--slate-400);
+        font-size: 14px;
+        cursor: pointer;
+        font-family: inherit;
+        padding: 8px 0;
+        margin-bottom: 12px;
+        transition: color 0.15s;
+      }
+      .btn-back:hover {
+        color: var(--teal-700);
+      }
+
+      .note-card {
+        background: #e8f5e9;
+        border: 1px solid #a5d6a7;
+        border-radius: 10px;
+        padding: 16px 20px;
+        margin-bottom: 12px;
+      }
+      .note-card.warn {
+        background: #fff3e0;
+        border-color: #ffcc80;
+      }
+      .note-card.info {
+        background: #e3f2fd;
+        border-color: #90caf9;
+      }
+      .note-card.warning {
+        background: #fff3e0;
+        border-color: #ffcc80;
+      }
+      .note-card.danger {
+        background: #ffebee;
+        border-color: #ef9a9a;
+      }
+      .note-card.success {
+        background: #e8f5e9;
+        border-color: #a5d6a7;
+      }
+      .checklist {
+        list-style: none;
+        margin: 8px 0 0;
+      }
+      .checklist li {
+        padding: 6px 0 6px 28px;
+        position: relative;
+        font-size: 14px;
+        color: var(--ink-soft);
+      }
+      .checklist li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 16px;
+        height: 16px;
+        border: 2px solid var(--slate-300);
+        border-radius: 4px;
+      }
+
+      .drawer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 300;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+      .drawer-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .drawer {
+        position: fixed;
+        top: 0;
+        right: -400px;
+        bottom: 0;
+        width: 400px;
+        background: var(--bone);
+        z-index: 301;
+        box-shadow: -8px 0 40px rgba(0, 0, 0, 0.15);
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+      }
+      .drawer.open {
+        right: 0;
+      }
+      .drawer-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--slate-200);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .drawer-title {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--teal-700);
+        font-weight: 600;
+      }
+      .drawer-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--slate-400);
+        cursor: pointer;
+        padding: 4px;
+        transition: color 0.15s;
+      }
+      .drawer-close:hover {
+        color: var(--ink);
+      }
+      .drawer-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+      }
+      .drawer-section-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--slate-400);
+        font-weight: 600;
+        padding: 8px 8px 6px;
+        margin-top: 8px;
+      }
+      .drawer-btn {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: #fff;
+        border: 1px solid var(--slate-200);
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin-bottom: 6px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        color: var(--ink);
+        transition: all 0.15s;
+      }
+      .drawer-btn:hover {
+        border-color: var(--teal-400);
+        background: var(--teal-100);
+      }
+      .drawer-btn-sub {
+        font-size: 12px;
+        color: var(--slate-400);
+        margin-top: 2px;
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      /* === NEW CSS: Focus Mode button === */
+      .btn-focus {
+        background: none;
+        border: 1px solid var(--slate-500);
+        color: var(--slate-300);
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 13px;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.15s;
+      }
+      .btn-focus:hover {
+        border-color: #f59e0b;
+        color: #fff;
+      }
+      .btn-focus.active {
+        background: #f59e0b;
+        border-color: #f59e0b;
+        color: #fff;
+        font-weight: 600;
+      }
+
+      /* === NEW CSS: Collapsible === */
+      .collapsible {
+        background: var(--slate-100);
+        border: 1px solid var(--slate-200);
+        border-radius: 6px;
+        padding: 8px 12px;
+        margin-bottom: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--slate-500);
+        transition: all 0.15s;
+        user-select: none;
+      }
+      .collapsible:hover {
+        border-color: var(--teal-400);
+        background: var(--teal-100);
+      }
+      .collapsible .chevron {
+        font-size: 14px;
+        transition: transform 0.2s;
+      }
+      .collapsible.expanded .chevron {
+        transform: rotate(180deg);
+      }
+      .collapsible-content {
+        display: none;
+        margin-bottom: 12px;
+      }
+      .collapsible-content.expanded {
+        display: block;
+      }
+
+      /* === NEW CSS: Tooltip === */
+      .tooltip-trigger {
+        position: relative;
+        border-bottom: 1px dashed var(--teal-600);
+        cursor: help;
+      }
+      .info-dot {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--slate-200);
+        color: var(--slate-500);
+        font-size: 9px;
+        font-weight: 700;
+        cursor: help;
+        vertical-align: super;
+        margin-left: 2px;
+        font-style: normal;
+      }
+      .tooltip-box {
+        display: none;
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--slate-900);
+        color: #fff;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-style: normal;
+        line-height: 1.5;
+        width: 280px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        z-index: 50;
+        white-space: normal;
+      }
+      .tooltip-box::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid transparent;
+        border-top-color: var(--slate-900);
+      }
+      .tooltip-trigger:hover .tooltip-box {
+        display: block;
+      }
+
+      /* === NEW CSS: Variable pill === */
+      .var-pill {
+        background: #fef08a;
+        padding: 1px 6px;
+        border-radius: 4px;
+        font-style: normal;
+        font-size: 0.85em;
+        font-weight: 600;
+        color: #92400e;
+      }
+
+      /* === NEW CSS: Sticky actions === */
+      .sticky-actions {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--bone);
+        border-top: 1px solid var(--slate-200);
+        padding: 12px 20px;
+        display: none;
+        justify-content: center;
+        gap: 10px;
+        z-index: 100;
+        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+      }
+      .sticky-actions.visible {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .sticky-actions .btn-action {
+        flex: 0 1 auto;
+        min-width: 140px;
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+
+      /* === NEW CSS: Inline badge + title === */
+      .step-header-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .step-header-row .step-badge {
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+      .step-header-row .step-title {
+        margin-bottom: 0;
+        font-size: 24px;
+      }
+      body.focus-on .step-header-row .step-title {
+        font-size: 20px;
+      }
+
+      /* === NEW CSS: Keyboard shortcuts === */
+      .btn-kb-help {
+        background: none;
+        border: 1px solid var(--slate-500);
+        color: var(--slate-300);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.15s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn-kb-help:hover {
+        border-color: var(--teal-400);
+        color: #fff;
+      }
+      .kb-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 400;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .kb-overlay.open {
+        display: flex;
+      }
+      .kb-card {
+        background: var(--bone);
+        border-radius: 12px;
+        padding: 28px 32px;
+        max-width: 340px;
+        width: 90%;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+      }
+      .kb-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+      .kb-row {
+        padding: 6px 0;
+        font-size: 14px;
+        color: var(--ink-soft);
+      }
+      .kb-key {
+        display: inline-block;
+        background: var(--slate-100);
+        border: 1px solid var(--slate-200);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ink);
+        margin-right: 4px;
+        min-width: 24px;
+        text-align: center;
+      }
+      .kb-close {
+        margin-top: 16px;
+        background: var(--teal-700);
+        color: #fff;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        width: 100%;
+      }
+
+      /* Breadcrumb */
+      .breadcrumb {
+        display: flex;
+        justify-content: center;
+        gap: 2px;
+        padding: 5px 20px;
+        background: var(--bone);
+        border-bottom: 1px solid var(--slate-200);
+        position: fixed;
+        top: 56px;
+        left: 0;
+        right: 0;
+        z-index: 90;
+      }
+      .bc-step {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        color: var(--slate-400);
+        font-family: "IBM Plex Mono", monospace;
+        transition: all 0.15s;
+        white-space: nowrap;
+      }
+      .bc-step:hover {
+        background: var(--slate-100);
+        color: var(--ink);
+      }
+      .bc-step.active {
+        background: var(--teal-700);
+        color: #fff;
+      }
+      .bc-step.done {
+        color: var(--teal-700);
+      }
+      .bc-step .bc-check {
+        display: none;
+      }
+      .bc-step.done .bc-check {
+        display: inline;
+      }
+      .bc-arrow {
+        color: var(--slate-300);
+        font-size: 10px;
+        line-height: 26px;
+        padding: 0 1px;
+      }
+      /* Floating objection button */
+      .fab-obj {
+        position: fixed;
+        bottom: 80px;
+        left: 16px;
+        z-index: 200;
+      }
+      .fab-obj-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: #c0392b;
+        color: #fff;
+        border: none;
+        font-size: 22px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(192, 57, 43, 0.4);
+        font-family: inherit;
+        transition: transform 0.15s;
+      }
+      .fab-obj-btn:hover {
+        transform: scale(1.1);
+      }
+      .fab-obj-menu {
+        display: none;
+        position: absolute;
+        bottom: 56px;
+        left: 0;
+        background: var(--bone);
+        border-radius: 10px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+        padding: 6px;
+        min-width: 210px;
+      }
+      .fab-obj-menu.open {
+        display: block;
+      }
+      .fab-obj-item {
+        display: block;
+        width: 100%;
+        padding: 8px 12px;
+        border: none;
+        background: none;
+        text-align: left;
+        font-size: 13px;
+        font-family: inherit;
+        cursor: pointer;
+        border-radius: 6px;
+        color: var(--ink);
+      }
+      .fab-obj-item:hover {
+        background: var(--slate-100);
+      }
+      /* Client info modal */
+      .ci-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 500;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .ci-overlay.open {
+        display: flex;
+      }
+      .ci-card {
+        background: var(--bone);
+        border-radius: 12px;
+        padding: 24px 28px;
+        max-width: 380px;
+        width: 90%;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+      }
+      .ci-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+      .ci-field {
+        margin-bottom: 10px;
+      }
+      .ci-label {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--slate-500);
+        margin-bottom: 3px;
+      }
+      .ci-input {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid var(--slate-200);
+        border-radius: 6px;
+        font-size: 14px;
+        font-family: inherit;
+        background: #fff;
+      }
+      .ci-input:focus {
+        outline: none;
+        border-color: var(--teal-600);
+      }
+      .ci-row {
+        display: flex;
+        gap: 8px;
+      }
+      .ci-row .ci-field {
+        flex: 1;
+      }
+      .ci-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .ci-btn {
+        flex: 1;
+        padding: 8px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        border: none;
+      }
+      .ci-btn-save {
+        background: var(--teal-700);
+        color: #fff;
+      }
+      .ci-btn-clear {
+        background: var(--slate-100);
+        color: var(--ink);
+      }
+      /* Client info top bar button */
+      .btn-client {
+        padding: 6px 12px;
+        background: transparent;
+        border: 1px solid var(--slate-500);
+        color: var(--slate-300);
+        border-radius: 6px;
+        font-size: 13px;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.15s;
+      }
+      .btn-client:hover {
+        border-color: var(--teal-400);
+        color: #fff;
+      }
+      .btn-client.has-data {
+        border-color: var(--teal-500);
+        color: var(--teal-400);
+      }
+      /* Call timer */
+      .call-timer {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        color: var(--teal-400);
+        font-weight: 500;
+        min-width: 44px;
+        text-align: center;
+      }
+      .call-timer.warn {
+        color: #f39c12;
+      }
+      .call-timer.over {
+        color: #e74c3c;
+      }
+      /* Copy text button */
+      .btn-copy-text {
+        position: absolute;
+        top: 12px;
+        right: 70px;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 4px;
+        border: 1px solid var(--teal-600);
+        background: var(--teal-100);
+        color: var(--teal-700);
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .btn-copy-text:hover {
+        background: var(--teal-200);
+      }
+      .btn-copy-text.copied {
+        background: var(--teal-600);
+        color: #fff;
+        border-color: var(--teal-600);
+      }
+      /* Filled variable pill */
+      .var-pill.filled {
+        background: #d5f0d0;
+        color: #2d7a25;
+      }
+      /* Confetti */
+      .confetti-wrap {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 999;
+        overflow: hidden;
+      }
+      .confetti-piece {
+        position: absolute;
+        top: -20px;
+        animation: confetti-fall 3s ease-out forwards;
+      }
+      @keyframes confetti-fall {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+      /* Version toggle pills */
+      .version-toggle {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        background: var(--slate-700);
+        border-radius: 6px;
+        padding: 2px;
+      }
+      .version-toggle button {
+        background: none;
+        border: none;
+        color: var(--slate-400);
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: "IBM Plex Mono", monospace;
+        letter-spacing: 0.05em;
+        transition: all 0.15s;
+      }
+      .version-toggle button:hover {
+        color: var(--slate-200);
+      }
+      .version-toggle button.active {
+        background: var(--teal-700);
+        color: #fff;
+      }
+      .version-badge {
+        display: inline-block;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 3px;
+        margin-left: 8px;
+        vertical-align: middle;
+      }
+      .version-badge.v1 {
+        background: #fef08a;
+        color: #92400e;
+      }
+      .version-badge.v2 {
+        background: var(--slate-200);
+        color: var(--slate-600);
+      }
+
+      /* Deeper focus mode — hide instructions and tips, keep alt scripts */
+      body.focus-on .step-instruction {
+        display: none !important;
+      }
+      body.focus-on .tip {
+        display: none !important;
+      }
+
+      @media (max-width: 640px) {
+        .main {
+          padding: 24px 16px 160px;
+        }
+        .step-title {
+          font-size: 24px;
+        }
+        .script-text {
+          font-size: 17px;
+        }
+        .actions {
+          flex-direction: column;
+        }
+        .btn-action {
+          min-width: unset;
+        }
+        .drawer {
+          width: 100%;
+          right: -100%;
+        }
+        .top-bar {
+          padding: 0 12px;
+        }
+        .version-toggle button {
+          font-size: 9px;
+          padding: 3px 6px;
+        }
+        .top-bar-title {
+          font-size: 11px;
+        }
+        .sticky-actions {
+          flex-direction: column;
+          padding: 10px 16px;
+        }
+        .sticky-actions .btn-action {
+          min-width: unset;
+          width: 100%;
+        }
+        .breadcrumb {
+          padding: 4px 10px;
+          gap: 1px;
+        }
+        .bc-step {
+          font-size: 10px;
+          padding: 2px 5px;
+        }
+        .bc-arrow {
+          font-size: 8px;
+        }
+        .fab-obj {
+          bottom: 160px;
+        }
+        .call-timer {
+          font-size: 11px;
+          min-width: 36px;
+        }
+        .btn-client {
+          padding: 4px 8px;
+          font-size: 11px;
+        }
+        .btn-copy-text {
+          right: 60px;
+          font-size: 11px;
+          padding: 3px 7px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <a href="call-scripts.html">&larr; Scripts</a>
+        <span class="top-bar-title">Live Call Guide</span>
+        <div class="version-toggle" id="versionToggle">
+          <button class="active" data-version="v1">V1 Bree</button>
+          <button data-version="v2">V2 Classic</button>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <span class="call-timer" id="callTimer"></span>
+        <button class="btn-restart" id="btnRestart">Start Over</button>
+        <button class="btn-focus" id="btnFocus">Focus</button>
+        <button class="btn-client" id="btnClient" title="Set client info">
+          Client
+        </button>
+        <button class="btn-toggle" id="btnToggle">Quick Jump</button>
+        <button class="btn-kb-help" id="btnKbHelp" title="Keyboard shortcuts">
+          ?
+        </button>
+      </div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="breadcrumb" id="breadcrumb"></div>
+
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="drawer" id="drawer">
+      <div class="drawer-header">
+        <span class="drawer-title">Quick Jump</span>
+        <button class="drawer-close" id="drawerClose">&times;</button>
+      </div>
+      <div class="drawer-body" id="drawerBody">
+        <div class="drawer-section-label">Call Flow (Steps 1-9)</div>
+        <button class="drawer-btn" data-step="opening">
+          1. Opening &mdash; "Dr. Pompa's Office"
+          <div class="drawer-btn-sub">3-beat pattern</div>
+        </button>
+        <button class="drawer-btn" data-step="timezone">
+          2. Time Zone Verification
+        </button>
+        <button class="drawer-btn" data-step="zoom_access">
+          3. Zoom Access &amp; Calendar
+        </button>
+        <button class="drawer-btn" data-step="zoom_exp">
+          4. Zoom Experience Check
+        </button>
+        <button class="drawer-btn" data-step="device">
+          5. Device Push
+          <div class="drawer-btn-sub">Push for laptop/iPad</div>
+        </button>
+        <button class="drawer-btn" data-step="nta">6. NTA Verification</button>
+        <button class="drawer-btn" data-step="kit">7. Test Kit Tracking</button>
+        <button class="drawer-btn" data-step="spouse_intro">
+          8. Spouse
+          <div class="drawer-btn-sub">Links to Spouse Live Guide</div>
+        </button>
+        <button class="drawer-btn" data-step="close">
+          9. Testimonials &amp; Close
+          <div class="drawer-btn-sub">Keep it open, never sign off</div>
+        </button>
+
+        <div class="drawer-section-label">Objections</div>
+        <button class="drawer-btn" data-step="obj_notsure">
+          Not Sure / Hesitant
+        </button>
+        <button class="drawer-btn" data-step="obj_cost">Cost Concerns</button>
+        <button class="drawer-btn" data-step="obj_triedall">
+          Tried Everything
+        </button>
+        <button class="drawer-btn" data-step="obj_legitimacy">
+          Questions Legitimacy
+        </button>
+        <button class="drawer-btn" data-step="obj_cancel">
+          Wants to Cancel
+        </button>
+
+        <div class="drawer-section-label">No-Show Recovery</div>
+        <button class="drawer-btn" data-step="ns_immediate">
+          Immediate No-Show
+          <div class="drawer-btn-sub">Within 30 min</div>
+        </button>
+        <button class="drawer-btn" data-step="ns_dayafter">
+          Day-After No-Show
+        </button>
+        <button class="drawer-btn" data-step="ns_multiple">
+          Multiple No-Shows
+        </button>
+
+        <div class="drawer-section-label">Difficult Situations</div>
+        <button class="drawer-btn" data-step="diff_upset">
+          Lead is Upset / Frustrated
+        </button>
+        <button class="drawer-btn" data-step="diff_emotional">
+          Lead is Emotional
+        </button>
+        <button class="drawer-btn" data-step="diff_hostile">
+          Lead is Hostile
+        </button>
+        <button class="drawer-btn" data-step="diff_veteran">
+          Veteran &mdash; Functional Med Background
+        </button>
+
+        <div class="drawer-section-label">Voicemails</div>
+        <button class="drawer-btn" data-step="vm_standard">
+          Standard Voicemail
+        </button>
+        <button class="drawer-btn" data-step="vm_confirm">
+          Confirmation Voicemail
+        </button>
+        <button class="drawer-btn" data-step="vm_urgent">
+          Urgent &mdash; Requirements Missing
+        </button>
+        <button class="drawer-btn" data-step="vm_noshow">
+          No-Show Voicemail
+        </button>
+
+        <div class="drawer-section-label">Tips &amp; Techniques</div>
+        <button class="drawer-btn" data-step="tip_tone">
+          Tonality &amp; Voice Tips
+          <div class="drawer-btn-sub">5 vocal techniques</div>
+        </button>
+        <button class="drawer-btn" data-step="tip_open">
+          Keep the Conversation Open
+          <div class="drawer-btn-sub">Never sign off</div>
+        </button>
+        <button class="drawer-btn" data-step="tip_cadence">
+          Calling Cadence
+          <div class="drawer-btn-sub">4-6 calls, varied times</div>
+        </button>
+        <button class="drawer-btn" data-step="tip_reinforce">
+          Positive Reinforcement
+          <div class="drawer-btn-sub">Celebrate every completed item</div>
+        </button>
+
+        <div class="drawer-section-label">Voice &amp; Delivery</div>
+        <button class="drawer-btn" data-step="del_tips">
+          Voice &amp; Delivery Tips
+          <div class="drawer-btn-sub">Chest voice, guardrails, language</div>
+        </button>
+      </div>
+    </div>
+
+    <div class="layout"><div class="main" id="mainContent"></div></div>
+
+    <div class="sticky-actions" id="stickyActions"></div>
+
+    <div class="kb-overlay" id="kbOverlay">
+      <div class="kb-card">
+        <div class="kb-title">Keyboard Shortcuts</div>
+        <div class="kb-row">
+          <span class="kb-key">1</span><span class="kb-key">2</span
+          ><span class="kb-key">3</span> Select action button
+        </div>
+        <div class="kb-row"><span class="kb-key">B</span> Go back</div>
+        <div class="kb-row">
+          <span class="kb-key">J</span> Quick Jump drawer
+        </div>
+        <div class="kb-row"><span class="kb-key">C</span> Copy script</div>
+        <div class="kb-row"><span class="kb-key">I</span> Client info</div>
+        <div class="kb-row">
+          <span class="kb-key">F</span> Toggle Focus Mode
+        </div>
+        <div class="kb-row"><span class="kb-key">Esc</span> Close modal</div>
+        <div class="kb-row"><span class="kb-key">V</span> Toggle V1/V2</div>
+        <div class="kb-row"><span class="kb-key">?</span> This help</div>
+        <button class="kb-close" id="kbClose">Got it</button>
+      </div>
+    </div>
+
+    <div class="fab-obj" id="fabObj">
+      <div class="fab-obj-menu" id="fabObjMenu">
+        <button class="fab-obj-item" data-step="obj_notsure">
+          Not Sure / Hesitant
+        </button>
+        <button class="fab-obj-item" data-step="obj_cost">Cost Concerns</button>
+        <button class="fab-obj-item" data-step="obj_triedall">
+          Tried Everything
+        </button>
+        <button class="fab-obj-item" data-step="obj_legitimacy">
+          Questions Legitimacy
+        </button>
+        <button class="fab-obj-item" data-step="obj_cancel">
+          Wants to Cancel
+        </button>
+        <button class="fab-obj-item" data-step="bad_timing">Bad Timing</button>
+        <button class="fab-obj-item" data-step="obj_cost_zero">
+          Cost Question ($0)
+        </button>
+        <button class="fab-obj-item" data-step="obj_spouse_medical">
+          Spouse Medical Exception
+        </button>
+      </div>
+      <button class="fab-obj-btn" id="fabObjBtn" title="Objections">!</button>
+    </div>
+
+    <div class="ci-overlay" id="ciOverlay">
+      <div class="ci-card">
+        <div class="ci-title">Client Info</div>
+        <div class="ci-field">
+          <div class="ci-label">Client First Name</div>
+          <input class="ci-input" id="ciFirstName" placeholder="e.g. Sarah" />
+        </div>
+        <div class="ci-field">
+          <div class="ci-label">Your Name (AC)</div>
+          <input class="ci-input" id="ciACName" placeholder="e.g. Kody" />
+        </div>
+        <div class="ci-field">
+          <div class="ci-label">Health Advisor</div>
+          <input class="ci-input" id="ciHAName" placeholder="e.g. Jessica" />
+        </div>
+        <div class="ci-row">
+          <div class="ci-field">
+            <div class="ci-label">Appt Day &amp; Date</div>
+            <input
+              class="ci-input"
+              id="ciDay"
+              placeholder="e.g. Tuesday, June 3rd"
+            />
+          </div>
+          <div class="ci-field">
+            <div class="ci-label">Appt Time</div>
+            <input class="ci-input" id="ciTime" placeholder="e.g. 2:00 PM" />
+          </div>
+        </div>
+        <div class="ci-field">
+          <div class="ci-label">Spouse / Partner Name</div>
+          <input class="ci-input" id="ciSpouseName" placeholder="e.g. Mike" />
+        </div>
+        <div class="ci-actions">
+          <button class="ci-btn ci-btn-clear" id="ciClear">Clear All</button>
+          <button class="ci-btn ci-btn-save" id="ciSave">
+            Save &amp; Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="confetti-wrap" id="confettiWrap"></div>
+
+    <script>
+      (function () {
+        var navHistory = [];
+        var current = "opening";
+        var currentVersion = localStorage.getItem("callGuideVersion") || "v1";
+        var mainEl = document.getElementById("mainContent");
+        var progressEl = document.getElementById("progressFill");
+
+        var S = {
+          // ═══════════ CALL FLOW ═══════════
+          opening: {
+            badge: "Step 1",
+            bc: "",
+            p: 8,
+            title: 'Opening \u2014 "Dr. Pompa\'s Office"',
+            instr:
+              "3-beat pattern. Lead with Dr. Pompa (they know that name), NOT yours. Keep it SHORT. One sentence, then stop.",
+            script:
+              "Hi {FirstName}, this is Dr. Pompa\u2019s office. My name is {ACName}. Can you hear me okay?",
+            altLabel: "After they respond",
+            altScript:
+              "Great! I\u2019m calling to make sure you\u2019re all set for your appointment with {HAName} on {Day, Date}.",
+            tip: '"Can you hear me okay?" forces an immediate micro-commitment \u2014 they\u2019re now engaged. Match their energy: calm for calm, upbeat for upbeat. Don\u2019t say a paragraph \u2014 they stopped listening after "Hey."',
+            v1: {
+              script:
+                "Hey {FirstName}, it\u2019s {ACName} with Dr. Pompa\u2019s team. I\u2019ve got a few moments \u2014 I wanted to connect with you real quick about your consultation with {HAName} on {ApptDate}. Make sure you\u2019re all set.",
+              tip: "Chest voice. Statement energy \u2014 you\u2019re busy and in demand. Don\u2019t linger on pleasantries.",
+            },
+            actions: [
+              {
+                label: "They\u2019re engaged \u2192 Next",
+                cls: "primary",
+                next: "timezone",
+              },
+              {
+                label: "Went to voicemail",
+                cls: "secondary",
+                next: "vm_standard",
+              },
+            ],
+          },
+          timezone: {
+            badge: "Step 2",
+            bc: "",
+            p: 18,
+            title: "Time Zone Verification",
+            instr:
+              "ALWAYS verify on the phone, even if they texted it. AI Blaze/Aloware can show 3 different times. Some clients don\u2019t even know their own time zone.",
+            script:
+              "What time zone are you in? Want to make sure we have the right time locked in for you.",
+            altLabel: "Verify their appointment time",
+            altScript:
+              "So it should be 1:45 PM for you right now, right? Perfect. Your appointment is {Day} at {Time} your time.",
+            tip: "Glance at their phone area code in Aloware mini-HubSpot view while the call is ringing \u2014 area code = time zone ~95% of the time. Convert the appointment to THEIR time zone.",
+            v1: {
+              script: "What timezone are you in?",
+              instr:
+                "Statement, not a request. Re-confirm date/time, have them repeat it back. No \u2018can you\u2019 or \u2018please.\u2019",
+            },
+            actions: [
+              {
+                label: "Confirmed \u2192 Next",
+                cls: "primary",
+                next: "zoom_access",
+              },
+            ],
+          },
+          zoom_access: {
+            badge: "Step 3",
+            bc: "",
+            p: 28,
+            title: "Zoom Access & Calendar Invite",
+            instr:
+              "Make them GO FIND IT live on the call. Don\u2019t just take their word for it. This prevents game-day emergencies.",
+            script:
+              "Pull up the calendar invite in your email real quick \u2014 can you see the Zoom link in there?",
+            altLabel: "If they can\u2019t find it",
+            altScript:
+              "No worries! Look for it right now for me \u2014 search for \u2018Pompa\u2019 or \u2018Zoom\u2019 in your inbox.",
+            tip: "If they can\u2019t find it, resend it right there on the call. Don\u2019t move on until they have access.",
+            v1: {
+              script: "Did you get the calendar invite with the Zoom link?",
+            },
+            actions: [
+              {
+                label: "Found it \u2192 Next",
+                cls: "primary",
+                next: "zoom_exp",
+              },
+              {
+                label: "Can\u2019t find it \u2014 resending",
+                cls: "secondary",
+                next: "zoom_exp",
+              },
+            ],
+          },
+          zoom_exp: {
+            badge: "Step 4",
+            bc: "",
+            p: 38,
+            title: "Zoom Experience Check",
+            instr:
+              "You need to know where they stand technically BEFORE game day. Half an HA\u2019s income rides on this appointment \u2014 don\u2019t let tech issues kill the call.",
+            script: "Have you been on a Zoom call before?",
+            tip: "If they haven\u2019t used Zoom, walk them through it or flag for extra support. There\u2019s a Zoom test call link they can use to practice joining.",
+            actions: [
+              {
+                label: "Yes, experienced \u2192 Next",
+                cls: "primary",
+                next: "device",
+              },
+              {
+                label: "No \u2014 walking them through it",
+                cls: "secondary",
+                next: "device",
+              },
+            ],
+          },
+          device: {
+            badge: "Step 5",
+            bc: "",
+            p: 46,
+            title: "Device Push",
+            instr:
+              "Push for laptop or iPad. They\u2019re buying something for $14,000 over the phone \u2014 the HA has a whiteboard drawing that IS the consultation. Bigger screen = best chance at a close.",
+            script:
+              "You\u2019ve got a laptop or iPad you can use for this, right?",
+            altLabel: 'If they say "just my phone"',
+            altScript:
+              "You can, but {HAName} has a whiteboard they\u2019ll be drawing on \u2014 it\u2019s hard to read on a phone. Even an iPad would be way better. Do you have anything with a bigger screen? And grab a pen and paper \u2014 treat this like a real doctor\u2019s appointment.",
+            actions: [
+              {
+                label: "Got a good device \u2192 Next",
+                cls: "primary",
+                next: "nta",
+              },
+              {
+                label: "Sticking with phone (noted)",
+                cls: "secondary",
+                next: "nta",
+              },
+            ],
+          },
+          nta: {
+            badge: "Step 6",
+            bc: "",
+            p: 56,
+            title: "NTA Verification",
+            instr:
+              "ASK first, then branch. If done, celebrate it tight \u2014 one sentence. If not, get a TIME COMMITMENT \u2014 ask WHEN before explaining WHY.",
+            script:
+              "Have you had a chance to fill out that online assessment \u2014 the neurotoxicity questionnaire?",
+            altLabel: "If YES \u2014 completed",
+            altScript:
+              "That\u2019s the hardest part and you already knocked it out. {HAName} is going to have real context walking into your conversation \u2014 that makes a huge difference.",
+            extraLabel: "If NO \u2014 not completed",
+            extraScript:
+              "No worries \u2014 I\u2019ll send you the link right now. When do you think you could set aside a few minutes to get it done? That way I can check back in with you.",
+            tip: 'Send/text the NTA link LIVE on the call. Ask "WHEN, not IF" \u2014 "When do you think you could..." forces a commitment. Only explain WHY if they push back.',
+            v1: {
+              script: "What was your NTA score?",
+              altLabel: "If not completed",
+              altScript:
+                "I\u2019ll text you the link right now. When can you knock that out?",
+            },
+            actions: [
+              { label: "NTA done \u2192 Next", cls: "success", next: "kit" },
+              {
+                label: "Got a time commitment \u2192 Next",
+                cls: "primary",
+                next: "kit",
+              },
+              {
+                label: "They\u2019re resistant",
+                cls: "secondary",
+                next: "nta_push",
+              },
+            ],
+          },
+          nta_push: {
+            badge: "Step 6 \u2014 NTA Push",
+            bc: "",
+            p: 58,
+            title: "NTA \u2014 Gentle Push",
+            instr: "They\u2019re hesitating. Use the doctor analogy.",
+            script:
+              "I hear you \u2014 life gets busy. But without the NTA, {HAName} is flying blind. It\u2019s like going to a doctor without telling them your symptoms. Ten minutes now saves you an hour of generic conversation. Can you knock it out by end of day today?",
+            actions: [
+              {
+                label: "Got commitment \u2192 Next",
+                cls: "primary",
+                next: "kit",
+              },
+            ],
+          },
+          kit: {
+            badge: "Step 7",
+            bc: "",
+            p: 66,
+            title: "Test Kit Tracking",
+            instr:
+              "Check if received. If not, ping the shipping Slack channel LIVE on the call. Send testing instructions proactively.",
+            script: "Have you received your test kit in the mail yet?",
+            altLabel: "If they haven\u2019t / don\u2019t know",
+            altScript:
+              "No problem. I\u2019m pinging our shipping team right now \u2014 they\u2019ll get back to me in under a minute. Let\u2019s keep going.",
+            tip: "Have the Slack tracking channel open \u2014 responses usually under 1 minute. Also have the admin portal open for self-service tracking. Send testing instructions proactively. Circle back with tracking info before ending the call.",
+            v1: {
+              script: "Did you get that test in the mail from us?",
+              altLabel: "If not received",
+              altScript:
+                "Let me check on that for you \u2014 I can see when it\u2019s arriving.",
+              tip: "Brief. \u2018Instructions are in the kit for you.\u2019 Don\u2019t walk them through details.",
+            },
+            extraLabel: "When shipping responds",
+            extraScript:
+              "Okay awesome, just got an answer \u2014 it\u2019s actually going to be delivered Thursday between 2 and 6 PM. So make sure when you get home tomorrow, you check and make sure it\u2019s there by 6 o\u2019clock. If you don\u2019t see it, just let us know and we\u2019ll track it down again.",
+            actions: [
+              {
+                label: "Kit handled \u2192 Spouse",
+                cls: "primary",
+                next: "spouse_intro",
+              },
+            ],
+          },
+          spouse_intro: {
+            badge: "Step 8 \u2014 Spouse",
+            bc: "spouse",
+            p: 78,
+            title: "Spouse / Partner",
+            instr:
+              "Save spouse for LAST \u2014 you\u2019ve built rapport through 7 checkpoints. You have points on the board. Now tackle the hardest part from a position of trust. Use the dedicated Spouse Live Guide for the full decision tree.",
+            script:
+              "Is {SpouseName} going to be on the Zoom with you, or do they need their own link?",
+            altLabel: "Alternate Soft Open",
+            altScript:
+              "Should I send {SpouseName} their own Zoom link, or will you two be on the same screen?",
+            tip: "Never ask yes/no. The Spouse Live Guide has the full Three No\u2019s framework, 9 talk tracks, the Financial Closer, and Wall handling.",
+            v1: {
+              instr:
+                "Save spouse for LAST \u2014 after pain discovery. You need a pain nugget before tackling spouse. By this point they trust you. Use the Spouse Live Guide for the full decision tree.",
+              script:
+                "I see that you\u2019re married. What\u2019s your spouse\u2019s name?",
+              altLabel: "If you know the name already",
+              altScript: "Was {SpouseName} planning on joining you?",
+              tip: "Never ask yes/no. After 2-3 genuine attempts, let it go \u2014 you\u2019re an AC, not an HA. Note it in CRM so the HA can push harder on Zoom.",
+            },
+            actions: [
+              {
+                label: "Spouse confirmed \u2713",
+                cls: "success",
+                next: "close",
+              },
+              {
+                label: "Open Spouse Live Guide \u2192",
+                cls: "pink",
+                next: "_spouse_live",
+              },
+              { label: "No spouse / single", cls: "secondary", next: "close" },
+            ],
+          },
+          close: {
+            badge: "Step 9",
+            bc: "tips",
+            p: 92,
+            title: "Testimonials & Positive Close",
+            instr:
+              "Send the testimonials link at the END of every call. End on a high note. NEVER sign off \u2014 keep the conversation open.",
+            script:
+              "You\u2019re all set. One more thing \u2014 I sent you our testimonials link. Every type of condition and symptom in there, real people on video. Worth a look before your call.",
+            altLabel: "Keep-it-open close (NEVER sign off)",
+            altScript:
+              "You\u2019re all set. {HAName} already has everything we went over, so the Zoom picks up right where we left off. Anything you want me to flag for them?",
+            tip: 'DO NOT say "Great, see you then!" or "That\u2019s everything, have a great day." These are stop signs. Always end on a question or forward-looking line. Leave a thread hanging.',
+            actions: [
+              {
+                label: "Call complete \u2713",
+                cls: "success",
+                next: "call_done",
+              },
+            ],
+          },
+          call_done: {
+            badge: "Call Complete",
+            bc: "tips",
+            p: 100,
+            title: "Post-Call Checklist",
+            instr: "Wrap up your CRM notes and team communication.",
+            done: true,
+            doneNotes: [
+              {
+                type: "success",
+                title: "After Every Call",
+                items: [
+                  "Set disposition in Aloware (No Answer, Connected, etc.)",
+                  "Update confirmation status in HubSpot",
+                  "Update calendar (color-code for confirmed)",
+                  "Tag texter + HA in Slack/CRM with status",
+                ],
+              },
+              {
+                type: "info",
+                title: "HA Tag Template",
+                items: [
+                  "@{HAName} \u2014 {ClientName} is good to go. NTA done, kit received, spouse {SpouseName} will be joining. Just needs to [finish urine test / test Zoom link].",
+                ],
+              },
+            ],
+          },
+
+          // ═══════════ OBJECTIONS ═══════════
+          obj_notsure: {
+            badge: "Objection",
+            bc: "objection",
+            p: 50,
+            title: "\"I'm Not Sure I'm Ready\"",
+            instr:
+              "Most people who end up working with us felt the same way. The call is free \u2014 worst case, they learn something.",
+            script:
+              "I totally get that, {FirstName}. Most people who end up having this conversation felt the same way going in. Here\u2019s what I can tell you \u2014 {HAName} isn\u2019t going to pressure you into anything. Their job is to give you clarity about what\u2019s happening in your body and whether our approach actually fits your situation. If it doesn\u2019t? They\u2019ll say so. The worst case is you walk away with more information than you had before. What do you have to lose?",
+            actions: [
+              {
+                label: "They\u2019re staying \u2192 Resume flow",
+                cls: "success",
+                next: "_back",
+              },
+              {
+                label: "Wants to cancel",
+                cls: "secondary",
+                next: "obj_cancel",
+              },
+            ],
+          },
+          obj_cost: {
+            badge: "Objection",
+            bc: "objection",
+            p: 50,
+            title: "Cost Concerns",
+            instr:
+              "Don\u2019t pretend it\u2019s not a real investment. Redirect to the call as the place to get clarity.",
+            script:
+              "I hear you \u2014 this is a real investment and I won\u2019t pretend otherwise. But here\u2019s the thing: {HAName} isn\u2019t going to try to put you in something you can\u2019t afford or that doesn\u2019t make sense for your situation. Bring your cost questions to the call. They\u2019ll be straight with you about what it would actually take and whether it\u2019s the right fit. That\u2019s what the consultation is for.",
+            actions: [
+              {
+                label: "Concern addressed \u2192 Resume",
+                cls: "success",
+                next: "_back",
+              },
+            ],
+          },
+          obj_triedall: {
+            badge: "Objection",
+            bc: "objection",
+            p: 50,
+            title: '"I\'ve Tried Everything"',
+            instr:
+              "They\u2019ve been through the wringer \u2014 functional medicine, keto, supplements. Reframe: all that treated symptoms, not root cause.",
+            script:
+              "I get it. I really do. Most of the people {HAName} talks to have been through the wringer \u2014 functional medicine, keto, supplements, you name it. And nothing stuck. Here\u2019s why: all that stuff was treating symptoms, not the root cause. What we do is look at what\u2019s happening at the cellular level. That\u2019s why people who \u2018tried everything\u2019 often finally see results. I\u2019m not saying it\u2019s magic. But it\u2019s a fundamentally different approach. Just hear what {HAName} has to say. If it doesn\u2019t click, no hard feelings.",
+            actions: [
+              {
+                label: "They\u2019re open \u2192 Resume",
+                cls: "success",
+                next: "_back",
+              },
+            ],
+          },
+          obj_legitimacy: {
+            badge: "Objection",
+            bc: "objection",
+            p: 50,
+            title: 'Questions Legitimacy / "Is This Real?"',
+            instr:
+              "Don\u2019t get defensive. Redirect to the call as the proof point.",
+            script:
+              "That\u2019s a fair question. Dr. Pompa has been doing this for decades. But honestly? The best way to know is to have the call with {HAName}. It\u2019s not a pitch. {HAName} will look at YOUR specific situation and be straight with you about whether this is a fit. If it\u2019s not, they\u2019ll tell you. Come skeptical. Ask the hard questions. That\u2019s what the call is for.",
+            actions: [
+              {
+                label: "Addressed \u2192 Resume",
+                cls: "success",
+                next: "_back",
+              },
+            ],
+          },
+          obj_cancel: {
+            badge: "Objection",
+            bc: "objection",
+            p: 50,
+            title: "Wants to Cancel",
+            instr:
+              "Find out what\u2019s behind the decision. Timing vs. cold feet vs. adamant.",
+            script:
+              "I understand, {FirstName}. Before I cancel, can I ask what\u2019s behind the decision? Is it timing, or is there something specific that\u2019s making you want to step back?",
+            altLabel: "If timing",
+            altScript:
+              "What if we just reschedule to a better time? No pressure to decide anything \u2014 just get the information.",
+            extraLabel: "If cold feet",
+            extraScript:
+              "I hear you. A lot of people feel nervous before the call. {HAName} isn\u2019t going to pressure you \u2014 the call is just a conversation. If after you talk you decide it\u2019s not right, totally fine. But at least you\u2019ll have real information instead of wondering.",
+            tip: 'If adamant: "Okay, I completely respect that. If your situation changes, we\u2019re here. I\u2019ll go ahead and cancel. Wishing you the best, {FirstName}."',
+            actions: [
+              {
+                label: "They\u2019re staying \u2192 Resume",
+                cls: "success",
+                next: "_back",
+              },
+              {
+                label: "Adamant \u2014 cancel it",
+                cls: "danger",
+                next: "_back",
+              },
+            ],
+          },
+
+          // ═══════════ NO-SHOW ═══════════
+          ns_immediate: {
+            badge: "No-Show",
+            bc: "noshow",
+            p: 50,
+            title: "Immediate No-Show Call",
+            instr:
+              "Within 30 minutes of missed appointment. Be warm, not accusatory.",
+            script:
+              "Hey {FirstName}, this is {ACName} from Dr. Pompa\u2019s team. We had your call scheduled with {HAName} at {ApptTime} and weren\u2019t able to connect with you. Is everything okay?",
+            altLabel: "If they want to reschedule",
+            altScript:
+              "No worries at all. Things come up. Would you like to reschedule? {HAName} has some availability this week. What works better for you \u2014 mornings or afternoons?",
+            actions: [
+              { label: "Rescheduled \u2713", cls: "success", next: "_back" },
+              {
+                label: "No answer \u2014 leave VM",
+                cls: "secondary",
+                next: "vm_noshow",
+              },
+            ],
+          },
+          ns_dayafter: {
+            badge: "No-Show",
+            bc: "noshow",
+            p: 50,
+            title: "Day-After No-Show Call",
+            instr: "Following up the day after a missed appointment.",
+            script:
+              "Hey {FirstName}, this is {ACName} from Dr. Pompa\u2019s team. I\u2019m following up because we missed you for your call with {HAName} yesterday. I wanted to check in and see if you\u2019re still interested in having that conversation. No pressure at all \u2014 life happens. If you\u2019d like to rebook, I can help you find a time that works better.",
+            actions: [
+              { label: "Rescheduled \u2713", cls: "success", next: "_back" },
+            ],
+          },
+          ns_multiple: {
+            badge: "No-Show",
+            bc: "noshow",
+            p: 50,
+            title: "Multiple No-Shows (2+)",
+            instr:
+              "Lead has missed 2+ appointments. Be direct but empathetic. Find the underlying issue.",
+            script:
+              "{FirstName}, I\u2019m reaching out because we\u2019ve tried to connect with you a couple of times now and haven\u2019t been able to. I totally understand that scheduling can be tricky. I\u2019m not trying to add pressure \u2014 I just want to make sure this is still something you want. If circumstances have changed, that\u2019s completely okay. But if you\u2019re still interested in getting clarity about your health, let\u2019s find a time that actually works. What\u2019s really going on?",
+            tip: "Listen to their response. Address the underlying issue. If they\u2019re done, let them go gracefully.",
+            actions: [
+              { label: "Rescheduled \u2713", cls: "success", next: "_back" },
+              {
+                label: "They\u2019re done \u2014 close out",
+                cls: "secondary",
+                next: "_back",
+              },
+            ],
+          },
+
+          // ═══════════ DIFFICULT ═══════════
+          diff_upset: {
+            badge: "Difficult",
+            bc: "difficult",
+            p: 50,
+            title: "Lead is Upset or Frustrated",
+            instr:
+              "Listen fully. Don\u2019t interrupt. Acknowledge, then offer a specific solution.",
+            script:
+              "I can hear that you\u2019re frustrated, {FirstName}, and I\u2019m really sorry you\u2019ve had a tough experience. Can you tell me more about what\u2019s going on?",
+            altLabel: "After listening",
+            altScript:
+              "Thank you for sharing that with me. Here\u2019s what I can do...",
+            tip: "Let them vent. Don\u2019t rush to fix. After they feel heard, THEN offer the solution or escalate.",
+            actions: [
+              {
+                label: "Resolved \u2192 Resume",
+                cls: "success",
+                next: "_back",
+              },
+              { label: "Needs escalation", cls: "warning", next: "_back" },
+            ],
+          },
+          diff_emotional: {
+            badge: "Difficult",
+            bc: "difficult",
+            p: 50,
+            title: "Lead is Emotional or Overwhelmed",
+            instr:
+              "They\u2019re exhausted, overwhelmed, not sure if anything will work. Meet them where they are.",
+            script:
+              "I can hear that this has been really hard for you, {FirstName}. And honestly? A lot of people who talk to {HAName} are feeling exactly what you\u2019re feeling right now \u2014 exhausted, overwhelmed, not sure if anything will work. You don\u2019t have to have it all figured out before the call. {HAName} is really good at meeting people where they are. Just show up. Let them help you see a path forward. You don\u2019t have to carry this alone.",
+            altLabel: "After pause",
+            altScript: "How does that sound? You okay to keep the appointment?",
+            actions: [
+              {
+                label: "They\u2019re keeping it \u2192 Resume",
+                cls: "success",
+                next: "_back",
+              },
+            ],
+          },
+          diff_hostile: {
+            badge: "Difficult",
+            bc: "difficult",
+            p: 50,
+            title: "Lead is Hostile or Confrontational",
+            instr:
+              "Stay professional. Don\u2019t match their energy. Offer clarity, not argument.",
+            script:
+              "I appreciate your honesty, {FirstName}. I\u2019m not here to argue with you or pressure you into anything. If now isn\u2019t the right time, that\u2019s completely okay. I just wanted to check in and make sure you had all the information. Is there anything specific I can help clarify?",
+            altLabel: "If they continue to be hostile",
+            altScript:
+              "I understand. I\u2019m going to let you go. If you change your mind, we\u2019re here. Have a good day.",
+            tip: "End call professionally. Note in CRM. Don\u2019t take it personally.",
+            actions: [
+              {
+                label: "De-escalated \u2192 Resume",
+                cls: "success",
+                next: "_back",
+              },
+              {
+                label: "Ended call \u2014 noted",
+                cls: "danger",
+                next: "_back",
+              },
+            ],
+          },
+          diff_veteran: {
+            badge: "Difficult",
+            bc: "difficult",
+            p: 50,
+            title: "Veteran \u2014 Functional Medicine Background",
+            instr:
+              "Client knows protocols, asks detailed clinical questions. You are NOT a coach or health advisor. Deflect warmly but firmly to the HA.",
+            script:
+              "That\u2019s great that you have that background! I\u2019ve learned a lot from Dr. Pompa working here over the years, but I am certainly no doctor and no specialist. At the end of the day, I\u2019m just the office person making sure you\u2019re set up for success.",
+            altLabel: "If they keep pushing for clinical details",
+            altScript:
+              "What I can tell you is that our main goal is figuring out the best strategy around cellular detox and fixing your cells so everything can operate properly \u2014 but what that looks like is going to be different for everybody. That\u2019s exactly what {HAName} is going to go over with you.",
+            extraLabel: "Redirect to action",
+            extraScript:
+              "Any questions you have running through your head \u2014 write them down. Put them in your phone notes, put them on a notepad. Every single one will get answered on your consultation. I want to make sure you come prepared so {HAName} can give you the most personalized answers.",
+            tip: "You don\u2019t get paid to answer clinical questions \u2014 the HAs do, and they deserve to because they take on 2 hours with every person. Your job is to set them up for success.",
+            actions: [
+              {
+                label: "Redirected \u2192 Resume",
+                cls: "success",
+                next: "_back",
+              },
+            ],
+          },
+
+          // ═══════════ VOICEMAILS ═══════════
+          vm_standard: {
+            badge: "Voicemail",
+            bc: "voicemail",
+            p: 50,
+            title: "Standard Voicemail",
+            instr:
+              "Keep it short. Lead with Dr. Pompa\u2019s team. Default: don\u2019t leave voicemails (they eat 30-60 seconds). Exception: ghosting within 48hrs or urgent.",
+            script:
+              "Hi {FirstName}, this is {ACName} calling from Dr. Pompa\u2019s team. I\u2019m reaching out because you have a call coming up with {HAName} and I just wanted to make sure you\u2019re all set. {HAName} has already reviewed your information and is looking forward to connecting with you. If you could give us a quick call back at {CallbackNumber}, or just reply to the text we sent, that would be great. Talk soon!",
+            actions: [
+              { label: "Done \u2192 Resume", cls: "primary", next: "_back" },
+            ],
+          },
+          vm_confirm: {
+            badge: "Voicemail",
+            bc: "voicemail",
+            p: 50,
+            title: "Confirmation Voicemail",
+            instr: "Confirming an upcoming appointment.",
+            script:
+              "Hi {FirstName}, this is {ACName} from Dr. Pompa\u2019s team. Just confirming your call with {HAName} on {ApptDate} at {ApptTime}. We\u2019re excited to connect with you! If anything\u2019s changed, give us a call or text back. Otherwise, we\u2019ll talk to you then!",
+            actions: [
+              { label: "Done \u2192 Resume", cls: "primary", next: "_back" },
+            ],
+          },
+          vm_urgent: {
+            badge: "Voicemail",
+            bc: "voicemail",
+            p: 50,
+            title: "Urgent \u2014 Requirements Missing",
+            instr: "Appointment is coming up and NTA / kit is incomplete.",
+            script:
+              "Hi {FirstName}, this is {ACName} from Dr. Pompa\u2019s team. Your call with {HAName} is coming up on {ApptDate} and I wanted to make sure we have everything ready for you. We\u2019re still waiting on your NTA questionnaire \u2014 this is what helps {HAName} make your conversation really personalized. Can you give us a call at {CallbackNumber} or check the text I\u2019ll send? Want to make sure you get the most out of your time with {HAName}. Thanks!",
+            actions: [
+              { label: "Done \u2192 Resume", cls: "primary", next: "_back" },
+            ],
+          },
+          vm_noshow: {
+            badge: "Voicemail",
+            bc: "voicemail",
+            p: 50,
+            title: "No-Show Voicemail",
+            instr: "They missed their appointment. Warm, no guilt.",
+            script:
+              "Hi {FirstName}, this is {ACName} from Dr. Pompa\u2019s team. We tried to reach you for your call with {HAName} at {ApptTime} and weren\u2019t able to connect. No worries at all \u2014 things happen! If you\u2019d like to reschedule, give us a call at {CallbackNumber} or reply to the text we\u2019ll send. {HAName} is happy to reconnect whenever you\u2019re ready. Take care!",
+            actions: [
+              { label: "Done \u2192 Resume", cls: "primary", next: "_back" },
+            ],
+          },
+
+          // ═══════════ TIPS ═══════════
+          tip_tone: {
+            badge: "Tips",
+            bc: "tips",
+            p: 50,
+            title: "Tonality & Voice Tips",
+            instr:
+              "Your voice is your only tool on a phone call. How you say it matters more than what you say.",
+            done: true,
+            doneNotes: [
+              {
+                type: "info",
+                title: "5 Vocal Techniques",
+                items: [
+                  "1. STAND UP \u2014 Standing puts you in a position of power. Shoulders back.",
+                  "2. BREATHE NORMALLY \u2014 When nervous, you forget to breathe. Pause if you have to.",
+                  "3. SPEAK FROM YOUR DIAPHRAGM \u2014 Put your hand below your chest. Make the sound come from there. Deeper, more commanding.",
+                  "4. HAVE DIFFERENT CHARACTERS \u2014 Match the client: confident for dominant, soft for reserved, patient for confused.",
+                  "5. PRACTICE SHOWING EMOTION \u2014 Say the same sentence happy, concerned, confident, empathetic. Tone IS the message.",
+                ],
+              },
+              {
+                type: "success",
+                title: "Assertiveness Mindset",
+                items: [
+                  "You are the leader of this process. The client follows YOUR process.",
+                  "Being nice \u2260 being effective. Firm and caring saves lives.",
+                  'Don\u2019t let them settle. Phone for Zoom? Push laptop. "Whenever" for NTA? Get a specific time.',
+                ],
+              },
+            ],
+          },
+          tip_open: {
+            badge: "Tips",
+            bc: "tips",
+            p: 50,
+            title: "Keep the Conversation Open",
+            instr:
+              'Never sign off. No goodbyes, no "have a great day" as a closer. Every message should leave a small thread hanging.',
+            done: true,
+            doneNotes: [
+              {
+                type: "warn",
+                title: "Avoid These (Stop Signs)",
+                items: [
+                  '"Great, I\u2019ll see you on the 25th."',
+                  '"You\u2019re all set. Have a great day."',
+                  '"Perfect, that\u2019s everything. Talk soon."',
+                  '"Thanks, you\u2019re confirmed."',
+                ],
+              },
+              {
+                type: "success",
+                title: "Use These Instead",
+                items: [
+                  '"Got it locked in. I\u2019ll give you a quick call before your Zoom to go over a few final steps."',
+                  '"You\u2019re set for Thursday at 2. Quick question \u2014 did you already get your test kit done?"',
+                  '"I\u2019ll check back in with you before the call so you\u2019re not walking in cold."',
+                  '"Perfect, you\u2019re all set. The advisor already has everything we went over, so the Zoom picks up right where we are now."',
+                ],
+              },
+              {
+                type: "info",
+                title: "Quick Rules",
+                items: [
+                  "End on a question or a forward-looking line, never a flat period.",
+                  "Frame each call as the next step, never the finish line.",
+                  "Always tell the lead you WILL be calling before the Zoom.",
+                  'Never hint at a handoff. It is always "I" and "me" \u2014 one name per lead.',
+                ],
+              },
+            ],
+          },
+          tip_cadence: {
+            badge: "Tips",
+            bc: "tips",
+            p: 50,
+            title: "Calling Cadence",
+            instr:
+              "Connection rates depend on persistence and variety. Work the contact properly before giving up.",
+            done: true,
+            doneNotes: [
+              {
+                type: "info",
+                title: "Standard",
+                items: [
+                  "Call 4\u20136 times per contact",
+                  "Vary the time of day \u2014 if mornings don\u2019t land, try afternoons/evenings",
+                  "If you can\u2019t reach them, send a text offering to reschedule",
+                  "Send an email too \u2014 integrate Gmail with HubSpot so every touch is visible",
+                  "Double/triple dial anyone within 2-3 days of appointment who hasn\u2019t answered",
+                ],
+              },
+              {
+                type: "success",
+                title: "Voicemail Rule",
+                items: [
+                  "Default: DON\u2019T leave voicemails (eat 30-60 seconds, slow your dialing)",
+                  "Exception: Ghosting within 48 hours of appointment, or urgent situations",
+                ],
+              },
+            ],
+          },
+          tip_reinforce: {
+            badge: "Tips",
+            bc: "tips",
+            p: 50,
+            title: "Positive Reinforcement",
+            instr:
+              "At each checkpoint, REWARD them for completing it. Build momentum before hitting spouse.",
+            done: true,
+            doneNotes: [
+              {
+                type: "success",
+                title: "Celebration Lines",
+                items: [
+                  'NTA done: "Thank you for doing that \u2014 that\u2019s actually the hardest part. If you got through all those questions, you can get through anything."',
+                  'Zoom ready: "Wow, thank you \u2014 some of our clients aren\u2019t familiar with Zoom, so I appreciate that. You\u2019re making my job easier!"',
+                  'Kit done: "Perfect, you\u2019re ahead of the game."',
+                  'Everything done: "You\u2019re crushing it. {HAName} is going to have a lot of great info to work with."',
+                ],
+              },
+              {
+                type: "info",
+                title: "Why It Works",
+                items: [
+                  'Every "boom, we\u2019re friends" moment stacks trust.',
+                  "By the time you get to spouse, they see you as their teammate.",
+                  "Small yeses build to big yeses.",
+                ],
+              },
+            ],
+          },
+
+          // ═══════════ SITUATIONAL ═══════════
+          bad_timing: {
+            badge: "Situational",
+            bc: "tips",
+            p: 10,
+            title: "Bad Timing \u2014 Client is Rushed",
+            instr:
+              "Client sounds distracted, busy, or says it\u2019s not a good time. Don\u2019t push through \u2014 bail out and call back.",
+            script:
+              "Oh \u2014 this will just take a few moments. Do you have that time now, or do I need to give you a call here in just a little bit?",
+            altLabel: "If they need time",
+            altScript:
+              "No problem at all. When\u2019s a good time for me to call you back? I just need about five minutes.",
+            tip: "Don\u2019t push through a distracted client. You\u2019re better off having them focused than chasing answers while they\u2019re irritated.",
+            actions: [
+              {
+                label: "They have time \u2192 Continue",
+                cls: "success",
+                next: "timezone",
+              },
+              { label: "Call back later", cls: "secondary", next: "_back" },
+            ],
+          },
+          obj_cost_zero: {
+            badge: "Objection",
+            bc: "objection",
+            p: 50,
+            title: '"How Much Does It Cost?"',
+            instr:
+              "Never discuss program cost. The consultation is free with the kit. Anything else goes to the HA.",
+            script:
+              "$0. The consultation is free with the kit you purchased. Your health advisor is going to review your results and talk through what\u2019s going on.",
+            altLabel: "If they push for program pricing",
+            altScript:
+              "That\u2019s a great question \u2014 write that down. Your health advisor will cover all of that with you on the call.",
+            tip: "You don\u2019t know the price. That\u2019s by design. Don\u2019t speculate, don\u2019t estimate, don\u2019t discuss.",
+            actions: [
+              { label: "Handled \u2192 Resume", cls: "success", next: "_back" },
+            ],
+          },
+          obj_spouse_medical: {
+            badge: "Spouse Exception",
+            bc: "spouse",
+            p: 50,
+            title: "Spouse Medically Unable \u2014 Enrollment Opportunity",
+            instr:
+              "Spouse can\u2019t join due to medical condition. This is a valid exception \u2014 but the spouse might also be a potential client.",
+            script:
+              "I\u2019m sorry to hear that. That must be really hard. Out of curiosity \u2014 what\u2019s going on with him medically? Is this something where you ordered a second test kit for him as well?",
+            altLabel: "If not applicable / they decline",
+            altScript:
+              "Totally understand. We\u2019ll proceed with just you. I\u2019ll make a note for {HAName} so they know the situation.",
+            tip: "Don\u2019t push. Just plant the seed. A client\u2019s husband had dementia and \u2018couldn\u2019t be on the call\u2019 \u2014 he ended up getting enrolled too.",
+            actions: [
+              {
+                label: "Interested \u2192 Note for HA",
+                cls: "success",
+                next: "close",
+              },
+              {
+                label: "Not applicable \u2192 Proceed solo",
+                cls: "secondary",
+                next: "close",
+              },
+            ],
+          },
+          del_tips: {
+            badge: "Reference",
+            bc: "tips",
+            p: 50,
+            title: "Voice & Delivery Tips",
+            instr: "Reference card for voice, tone, and language during calls.",
+            done: true,
+            doneNotes: [
+              {
+                type: "warning",
+                title: "Chest Voice \u2014 Always",
+                items: [
+                  "Speak from your core. Statements, not questions.",
+                  "Talk as if everything is a sentence, never a question.",
+                  "You can sit in silence \u2014 it\u2019s okay. Don\u2019t fill every gap.",
+                  "Exception: Genuine curiosity about their pain is fine.",
+                ],
+              },
+              {
+                type: "danger",
+                title: "Never Say",
+                items: [
+                  "\u2018Please, can you give me your NTA score?\u2019",
+                  "\u2018Would you be able to...\u2019",
+                  "\u2018Thank you so much for your time\u2019",
+                  "\u2018I\u2019m sorry to bother you\u2019",
+                ],
+              },
+              {
+                type: "success",
+                title: "Say Instead",
+                items: [
+                  "\u2018What was your NTA score?\u2019",
+                  "\u2018Did you get the test in the mail?\u2019",
+                  "\u2018Instructions are in the kit for you.\u2019",
+                  "\u2018When can you knock that out?\u2019",
+                ],
+              },
+              {
+                type: "info",
+                title: "AC Guardrails \u2014 Know Your Lane",
+                items: [
+                  "Your job: Get them to the Zoom prepared, with a pain nugget and ideally their spouse.",
+                  "NOT your job: Closing, discussing cost, or laying into difficult clients.",
+                  "Never talk about money. If asked: \u2018$0 \u2014 the consult is free with the kit.\u2019",
+                  "Don\u2019t push spouse past 2-3 attempts. Note for HA.",
+                  "You attract what you expect. Keep positive energy.",
+                ],
+              },
+            ],
+          },
+        };
+
+        // === Tooltip data ===
+        var tooltips = {
+          nta: {
+            "neurotoxicity assessment":
+              "NTA Link: apply.pompaworkshop.com/login\nHubSpot field: ntq_percentage\nSecondary: apply.pompaworkshop.com/register-secondary",
+          },
+          kit: {
+            "test kit":
+              "Check: #kit-tracking Slack channel\nAdmin portal for self-service tracking\nSend testing instructions proactively",
+          },
+          zoom_access: {
+            "Zoom link":
+              "Zoom test call: zoom.us/test\nResend calendar invite if missing",
+          },
+          zoom_exp: {
+            "Zoom call":
+              "Zoom test link: zoom.us/test\nWalk through: click link > Open Zoom > Allow camera/mic",
+          },
+          spouse_intro: {
+            "Spouse Live Guide":
+              "Full Three No's framework\n9 talk tracks\nFinancial Closer + Wall handling",
+          },
+        };
+
+        // === Client Info state ===
+        var clientInfo = JSON.parse(
+          localStorage.getItem("callGuideClient") || "{}",
+        );
+        var ciOverlay = document.getElementById("ciOverlay");
+        var ciFields = {
+          FirstName: "ciFirstName",
+          ACName: "ciACName",
+          HAName: "ciHAName",
+          "Day, Date": "ciDay",
+          Day: "ciDay",
+          Time: "ciTime",
+          SpouseName: "ciSpouseName",
+          ApptDate: "ciDay",
+          ApptTime: "ciTime",
+        };
+        function ciVal(k) {
+          var el = document.getElementById(ciFields[k]);
+          return el ? el.value : "";
+        }
+        function loadClientInfo() {
+          Object.keys(ciFields).forEach(function (k) {
+            var el = document.getElementById(ciFields[k]);
+            if (el && clientInfo[ciFields[k]])
+              el.value = clientInfo[ciFields[k]];
+          });
+          var btn = document.getElementById("btnClient");
+          if (
+            Object.keys(clientInfo).some(function (k) {
+              return clientInfo[k];
+            })
+          )
+            btn.classList.add("has-data");
+          else btn.classList.remove("has-data");
+        }
+        function saveClientInfo() {
+          [
+            "ciFirstName",
+            "ciACName",
+            "ciHAName",
+            "ciDay",
+            "ciTime",
+            "ciSpouseName",
+          ].forEach(function (id) {
+            clientInfo[id] = document.getElementById(id).value;
+          });
+          localStorage.setItem("callGuideClient", JSON.stringify(clientInfo));
+          loadClientInfo();
+        }
+        function getClientVal(varName) {
+          var id = ciFields[varName];
+          return id ? clientInfo[id] || "" : "";
+        }
+        loadClientInfo();
+        document
+          .getElementById("btnClient")
+          .addEventListener("click", function () {
+            ciOverlay.classList.add("open");
+          });
+        ciOverlay.addEventListener("click", function (e) {
+          if (e.target === ciOverlay) {
+            saveClientInfo();
+            ciOverlay.classList.remove("open");
+            render();
+          }
+        });
+        document
+          .getElementById("ciSave")
+          .addEventListener("click", function () {
+            saveClientInfo();
+            ciOverlay.classList.remove("open");
+            render();
+          });
+        document
+          .getElementById("ciClear")
+          .addEventListener("click", function () {
+            clientInfo = {};
+            localStorage.removeItem("callGuideClient");
+            [
+              "ciFirstName",
+              "ciACName",
+              "ciHAName",
+              "ciDay",
+              "ciTime",
+              "ciSpouseName",
+            ].forEach(function (id) {
+              document.getElementById(id).value = "";
+            });
+            loadClientInfo();
+            ciOverlay.classList.remove("open");
+            render();
+          });
+
+        // === Call Timer ===
+        var timerStart = null;
+        var timerInterval = null;
+        var timerEl = document.getElementById("callTimer");
+        function startTimer() {
+          if (timerInterval) return;
+          timerStart = Date.now();
+          timerInterval = setInterval(updateTimer, 1000);
+          updateTimer();
+        }
+        function stopTimer() {
+          if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+          }
+          timerStart = null;
+          timerEl.textContent = "";
+          timerEl.className = "call-timer";
+        }
+        function updateTimer() {
+          if (!timerStart) return;
+          var s = Math.floor((Date.now() - timerStart) / 1000);
+          var m = Math.floor(s / 60);
+          s = s % 60;
+          timerEl.textContent = m + ":" + (s < 10 ? "0" : "") + s;
+          timerEl.className = "call-timer";
+          if (m >= 10) timerEl.classList.add("over");
+          else if (m >= 7) timerEl.classList.add("warn");
+        }
+
+        // === Completed steps tracking ===
+        var completedSteps = {};
+        try {
+          completedSteps = JSON.parse(
+            localStorage.getItem("callGuideCompleted") || "{}",
+          );
+        } catch (e) {
+          completedSteps = {};
+        }
+        var mainSteps = [
+          "opening",
+          "timezone",
+          "zoom_access",
+          "zoom_exp",
+          "device",
+          "nta",
+          "kit",
+          "spouse_intro",
+          "close",
+        ];
+        var stepLabels = {
+          opening: "1",
+          timezone: "2",
+          zoom_access: "3",
+          zoom_exp: "4",
+          device: "5",
+          nta: "6",
+          kit: "7",
+          spouse_intro: "8",
+          close: "9",
+        };
+
+        // === Breadcrumb ===
+        var breadcrumbEl = document.getElementById("breadcrumb");
+        function renderBreadcrumb() {
+          while (breadcrumbEl.firstChild)
+            breadcrumbEl.removeChild(breadcrumbEl.firstChild);
+          mainSteps.forEach(function (key, i) {
+            if (i > 0) {
+              var arrow = document.createElement("span");
+              arrow.className = "bc-arrow";
+              arrow.textContent = "\u203A";
+              breadcrumbEl.appendChild(arrow);
+            }
+            var el = document.createElement("span");
+            el.className = "bc-step";
+            if (key === current) el.classList.add("active");
+            if (completedSteps[key]) el.classList.add("done");
+            var check = document.createElement("span");
+            check.className = "bc-check";
+            check.textContent = "\u2713 ";
+            el.appendChild(check);
+            el.appendChild(document.createTextNode(stepLabels[key]));
+            el.addEventListener("click", function () {
+              goTo(key);
+            });
+            breadcrumbEl.appendChild(el);
+          });
+        }
+
+        // === Floating objection button ===
+        var fabObjBtn = document.getElementById("fabObjBtn");
+        var fabObjMenu = document.getElementById("fabObjMenu");
+        fabObjBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          fabObjMenu.classList.toggle("open");
+        });
+        document
+          .getElementById("fabObj")
+          .addEventListener("click", function (e) {
+            var item = e.target.closest(".fab-obj-item");
+            if (item) {
+              goTo(item.getAttribute("data-step"));
+              fabObjMenu.classList.remove("open");
+            }
+          });
+        document.addEventListener("click", function (e) {
+          if (!document.getElementById("fabObj").contains(e.target))
+            fabObjMenu.classList.remove("open");
+        });
+
+        // === Text message templates ===
+        var textMessages = {
+          nta: "Hi {FirstName}! Here's the link to complete your neurotoxicity assessment: apply.pompaworkshop.com/login \u2014 Takes about 10 min and helps {HAName} personalize your conversation.",
+          close:
+            "Hi {FirstName}! Here are testimonials from people who've worked with Dr. Pompa's team \u2014 worth a watch before your call: [TESTIMONIALS LINK]",
+        };
+
+        // === Confetti ===
+        function showConfetti() {
+          var wrap = document.getElementById("confettiWrap");
+          while (wrap.firstChild) wrap.removeChild(wrap.firstChild);
+          var colors = [
+            "#e74c3c",
+            "#3498db",
+            "#2ecc71",
+            "#f1c40f",
+            "#9b59b6",
+            "#e67e22",
+            "#1abc9c",
+          ];
+          for (var i = 0; i < 50; i++) {
+            var p = document.createElement("div");
+            p.className = "confetti-piece";
+            p.style.left = Math.random() * 100 + "%";
+            p.style.background =
+              colors[Math.floor(Math.random() * colors.length)];
+            p.style.animationDelay = Math.random() * 2 + "s";
+            p.style.width = Math.random() * 8 + 5 + "px";
+            p.style.height = Math.random() * 8 + 5 + "px";
+            p.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+            wrap.appendChild(p);
+          }
+          setTimeout(function () {
+            while (wrap.firstChild) wrap.removeChild(wrap.firstChild);
+          }, 4000);
+        }
+
+        // === Focus Mode state ===
+        var focusMode = localStorage.getItem("callGuideFocus") === "true";
+        var focusBtn = document.getElementById("btnFocus");
+        var stickyEl = document.getElementById("stickyActions");
+
+        function updateFocusBtn() {
+          if (focusMode) {
+            focusBtn.classList.add("active");
+            focusBtn.textContent = "Focus ON";
+            document.body.classList.add("focus-on");
+          } else {
+            focusBtn.classList.remove("active");
+            focusBtn.textContent = "Focus";
+            document.body.classList.remove("focus-on");
+          }
+        }
+
+        focusBtn.addEventListener("click", function () {
+          focusMode = !focusMode;
+          localStorage.setItem("callGuideFocus", focusMode);
+          updateFocusBtn();
+          render();
+        });
+
+        updateFocusBtn();
+
+        // === Enhance script text with variable pills and tooltips ===
+        function enhanceScriptText(container, rawText, stepKey) {
+          while (container.firstChild)
+            container.removeChild(container.firstChild);
+          var tips = tooltips[stepKey] || {};
+          var varPattern = /\{([^}]+)\}/g;
+          var segments = rawText.split(varPattern);
+
+          for (var i = 0; i < segments.length; i++) {
+            if (i % 2 === 1) {
+              var varName = segments[i];
+              var pill = document.createElement("span");
+              pill.className = "var-pill";
+              var filledVal = getClientVal(varName);
+              if (filledVal) {
+                pill.classList.add("filled");
+                pill.textContent = filledVal;
+              } else {
+                pill.textContent = varName;
+              }
+              container.appendChild(pill);
+            } else {
+              var seg = segments[i];
+              var tipKeys = Object.keys(tips);
+              if (tipKeys.length > 0) {
+                var processed = false;
+                for (var tk = 0; tk < tipKeys.length; tk++) {
+                  var term = tipKeys[tk];
+                  var idx = seg.toLowerCase().indexOf(term.toLowerCase());
+                  if (idx !== -1) {
+                    if (idx > 0)
+                      container.appendChild(
+                        document.createTextNode(seg.substring(0, idx)),
+                      );
+                    var termSpan = document.createElement("span");
+                    termSpan.className = "tooltip-trigger";
+                    termSpan.appendChild(
+                      document.createTextNode(
+                        seg.substring(idx, idx + term.length),
+                      ),
+                    );
+                    var dot = document.createElement("span");
+                    dot.className = "info-dot";
+                    dot.textContent = "i";
+                    termSpan.appendChild(dot);
+                    var tipBox = document.createElement("span");
+                    tipBox.className = "tooltip-box";
+                    tips[term].split("\n").forEach(function (line, li) {
+                      if (li > 0)
+                        tipBox.appendChild(document.createElement("br"));
+                      tipBox.appendChild(document.createTextNode(line));
+                    });
+                    termSpan.appendChild(tipBox);
+                    container.appendChild(termSpan);
+                    seg = seg.substring(idx + term.length);
+                    processed = true;
+                  }
+                }
+                if (seg) container.appendChild(document.createTextNode(seg));
+                continue;
+              }
+              container.appendChild(document.createTextNode(seg));
+            }
+          }
+        }
+
+        // === Build script card ===
+        function buildScriptCard(s, isFocus) {
+          var card = document.createElement("div");
+          card.className = "script-card";
+          var copyBtn = document.createElement("button");
+          copyBtn.className = "btn-copy";
+          copyBtn.textContent = "Copy";
+          copyBtn.addEventListener("click", function () {
+            var t = s.script.replace(/\{([^}]+)\}/g, function (m, v) {
+              return getClientVal(v) || m;
+            });
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(t);
+            } else {
+              var ta = document.createElement("textarea");
+              ta.value = t;
+              document.body.appendChild(ta);
+              ta.select();
+              document.execCommand("copy");
+              document.body.removeChild(ta);
+            }
+            copyBtn.textContent = "Copied!";
+            copyBtn.classList.add("copied");
+            setTimeout(function () {
+              copyBtn.textContent = "Copy";
+              copyBtn.classList.remove("copied");
+            }, 1500);
+          });
+          card.appendChild(copyBtn);
+          // Copy for Text button on specific steps
+          if (textMessages[current]) {
+            var txtBtn = document.createElement("button");
+            txtBtn.className = "btn-copy-text";
+            txtBtn.textContent = "\uD83D\uDCF1 Text";
+            txtBtn.addEventListener("click", function () {
+              var t = textMessages[current].replace(
+                /\{([^}]+)\}/g,
+                function (m, v) {
+                  return getClientVal(v) || m;
+                },
+              );
+              if (navigator.clipboard) navigator.clipboard.writeText(t);
+              else {
+                var ta = document.createElement("textarea");
+                ta.value = t;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand("copy");
+                document.body.removeChild(ta);
+              }
+              txtBtn.textContent = "Copied!";
+              txtBtn.classList.add("copied");
+              setTimeout(function () {
+                txtBtn.textContent = "\uD83D\uDCF1 Text";
+                txtBtn.classList.remove("copied");
+              }, 1500);
+            });
+            card.appendChild(txtBtn);
+          }
+          var lbl = document.createElement("div");
+          lbl.className = "script-card-label";
+          lbl.textContent = "Say This";
+          card.appendChild(lbl);
+          var txt = document.createElement("div");
+          txt.className = "script-text";
+          enhanceScriptText(txt, s.script, current);
+          card.appendChild(txt);
+
+          if (!isFocus) {
+            function addAlt(label, text) {
+              var alt = document.createElement("div");
+              alt.className = "script-alt";
+              var al = document.createElement("div");
+              al.className = "script-alt-label";
+              al.textContent = label;
+              alt.appendChild(al);
+              var at = document.createElement("div");
+              at.className = "script-text";
+              enhanceScriptText(at, text, current);
+              alt.appendChild(at);
+              card.appendChild(alt);
+            }
+            if (s.altScript) addAlt(s.altLabel || "Alternative", s.altScript);
+            if (s.extraScript)
+              addAlt(s.extraLabel || "Alternative", s.extraScript);
+          }
+          return card;
+        }
+
+        // === Make a collapsible row ===
+        function makeCollapsible(labelText, contentFn) {
+          var wrapper = document.createDocumentFragment();
+          var bar = document.createElement("div");
+          bar.className = "collapsible";
+          var labelSpan = document.createElement("span");
+          var truncated =
+            labelText.length > 60
+              ? labelText.substring(0, 60) + "..."
+              : labelText;
+          labelSpan.textContent = truncated;
+          bar.appendChild(labelSpan);
+          var chevron = document.createElement("span");
+          chevron.className = "chevron";
+          chevron.textContent = "\u25BC";
+          bar.appendChild(chevron);
+          var content = document.createElement("div");
+          content.className = "collapsible-content";
+          contentFn(content);
+          bar.addEventListener("click", function () {
+            bar.classList.toggle("expanded");
+            content.classList.toggle("expanded");
+          });
+          wrapper.appendChild(bar);
+          wrapper.appendChild(content);
+          return wrapper;
+        }
+
+        function render() {
+          var baseStep = S[current];
+          if (!baseStep) return;
+          // Version-aware merge: if V1 and step has v1 overrides, merge them
+          var s;
+          if (currentVersion === "v1" && baseStep.v1) {
+            s = {};
+            for (var k in baseStep) {
+              if (baseStep.hasOwnProperty(k) && k !== "v1") s[k] = baseStep[k];
+            }
+            for (var k2 in baseStep.v1) {
+              if (baseStep.v1.hasOwnProperty(k2)) s[k2] = baseStep.v1[k2];
+            }
+          } else {
+            s = baseStep;
+          }
+          while (mainEl.firstChild) mainEl.removeChild(mainEl.firstChild);
+          while (stickyEl.firstChild) stickyEl.removeChild(stickyEl.firstChild);
+          stickyEl.classList.remove("visible");
+          progressEl.style.width = (s.p || 0) + "%";
+
+          if (navHistory.length > 0) {
+            var bb = document.createElement("button");
+            bb.className = "btn-back";
+            bb.textContent = "\u2190 Back";
+            bb.addEventListener("click", goBack);
+            mainEl.appendChild(bb);
+          }
+
+          // Idea 7: Inline badge + title
+          var headerRow = document.createElement("div");
+          headerRow.className = "step-header-row";
+          var badge = document.createElement("span");
+          badge.className = "step-badge " + (s.bc || "");
+          badge.textContent = s.badge;
+          headerRow.appendChild(badge);
+          // Version badge indicator on steps with v1 overrides
+          if (baseStep.v1) {
+            var vBadge = document.createElement("span");
+            vBadge.className = "version-badge " + currentVersion;
+            vBadge.textContent =
+              currentVersion === "v1" ? "V1 Bree" : "V2 Classic";
+            headerRow.appendChild(vBadge);
+          }
+          var title = document.createElement("h1");
+          title.className = "step-title";
+          title.textContent = s.title;
+          headerRow.appendChild(title);
+          mainEl.appendChild(headerRow);
+
+          // Instruction (hidden entirely in focus mode)
+          if (s.instr && !focusMode) {
+            var p = document.createElement("p");
+            p.className = "step-instruction";
+            p.textContent = s.instr;
+            mainEl.appendChild(p);
+          }
+
+          // Script card
+          if (s.script) {
+            mainEl.appendChild(buildScriptCard(s, focusMode));
+
+            // Focus mode: alt/extra as collapsible rows below card
+            if (focusMode) {
+              if (s.altScript) {
+                mainEl.appendChild(
+                  makeCollapsible(
+                    (s.altLabel || "Alternative") + " - tap for script",
+                    function (content) {
+                      var at = document.createElement("div");
+                      at.className = "script-card";
+                      at.style.borderColor = "var(--slate-300)";
+                      var al = document.createElement("div");
+                      al.className = "script-alt-label";
+                      al.textContent = s.altLabel || "Alternative";
+                      at.appendChild(al);
+                      var atxt = document.createElement("div");
+                      atxt.className = "script-text";
+                      atxt.style.fontSize = "16px";
+                      atxt.style.color = "var(--ink-soft)";
+                      enhanceScriptText(atxt, s.altScript, current);
+                      at.appendChild(atxt);
+                      content.appendChild(at);
+                    },
+                  ),
+                );
+              }
+              if (s.extraScript) {
+                mainEl.appendChild(
+                  makeCollapsible(
+                    (s.extraLabel || "Alternative") + " - tap for script",
+                    function (content) {
+                      var et = document.createElement("div");
+                      et.className = "script-card";
+                      et.style.borderColor = "var(--slate-300)";
+                      var el2 = document.createElement("div");
+                      el2.className = "script-alt-label";
+                      el2.textContent = s.extraLabel || "Alternative";
+                      et.appendChild(el2);
+                      var etxt = document.createElement("div");
+                      etxt.className = "script-text";
+                      etxt.style.fontSize = "16px";
+                      etxt.style.color = "var(--ink-soft)";
+                      enhanceScriptText(etxt, s.extraScript, current);
+                      et.appendChild(etxt);
+                      content.appendChild(et);
+                    },
+                  ),
+                );
+              }
+            }
+          }
+
+          // Tip (hidden entirely in focus mode)
+          if (s.tip && !focusMode) {
+            var tip = document.createElement("div");
+            tip.className = "tip";
+            var b = document.createElement("strong");
+            b.textContent = "Tip: ";
+            tip.appendChild(b);
+            tip.appendChild(document.createTextNode(s.tip));
+            mainEl.appendChild(tip);
+          }
+
+          // Done notes
+          if (s.done && s.doneNotes) {
+            s.doneNotes.forEach(function (n) {
+              var c = document.createElement("div");
+              var ncType = "";
+              if (n.type === "warn") ncType = " warn";
+              else if (n.type === "info") ncType = " info";
+              else if (n.type === "warning") ncType = " warning";
+              else if (n.type === "danger") ncType = " danger";
+              else if (n.type === "success") ncType = " success";
+              c.className = "note-card" + ncType;
+              var t = document.createElement("p");
+              var b2 = document.createElement("strong");
+              b2.textContent = n.title;
+              t.appendChild(b2);
+              c.appendChild(t);
+              var ul = document.createElement("ul");
+              ul.className = "checklist";
+              n.items.forEach(function (i) {
+                var li = document.createElement("li");
+                li.textContent = i;
+                ul.appendChild(li);
+              });
+              c.appendChild(ul);
+              mainEl.appendChild(c);
+            });
+          }
+
+          // Idea 5: Sticky action buttons
+          if (s.actions) {
+            s.actions.forEach(function (a) {
+              var btn = document.createElement("button");
+              btn.className = "btn-action " + (a.cls || "secondary");
+              btn.textContent = a.label;
+              btn.addEventListener("click", function () {
+                if (a.next === "_back") goBack();
+                else if (a.next === "_spouse_live")
+                  window.open("spouse-live.html", "_blank");
+                else goTo(a.next);
+              });
+              stickyEl.appendChild(btn);
+            });
+            stickyEl.classList.add("visible");
+          }
+          if (s.done) {
+            var rb = document.createElement("button");
+            rb.className = "btn-action secondary";
+            rb.textContent = "Start Over";
+            rb.addEventListener("click", function () {
+              goTo("opening");
+            });
+            stickyEl.appendChild(rb);
+            stickyEl.classList.add("visible");
+          }
+          renderBreadcrumb();
+          if (current === "call_done") showConfetti();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function goTo(step) {
+          if (mainSteps.indexOf(current) !== -1 && step !== "opening") {
+            completedSteps[current] = true;
+            localStorage.setItem(
+              "callGuideCompleted",
+              JSON.stringify(completedSteps),
+            );
+          }
+          if (current === "opening" && step === "timezone") startTimer();
+          if (step === "opening") {
+            navHistory = [];
+            completedSteps = {};
+            localStorage.removeItem("callGuideCompleted");
+            stopTimer();
+          } else {
+            navHistory.push(current);
+          }
+          current = step;
+          render();
+        }
+        function goBack() {
+          if (navHistory.length > 0) {
+            current = navHistory.pop();
+            render();
+          }
+        }
+        function toggleDrawer() {
+          document.getElementById("drawer").classList.toggle("open");
+          document.getElementById("drawerOverlay").classList.toggle("open");
+        }
+
+        // === Version Toggle ===
+        var versionToggleEl = document.getElementById("versionToggle");
+        function updateVersionToggle() {
+          var btns = versionToggleEl.querySelectorAll("button");
+          for (var vi = 0; vi < btns.length; vi++) {
+            if (btns[vi].getAttribute("data-version") === currentVersion) {
+              btns[vi].classList.add("active");
+            } else {
+              btns[vi].classList.remove("active");
+            }
+          }
+        }
+        versionToggleEl.addEventListener("click", function (e) {
+          var btn = e.target.closest("button[data-version]");
+          if (btn) {
+            currentVersion = btn.getAttribute("data-version");
+            localStorage.setItem("callGuideVersion", currentVersion);
+            updateVersionToggle();
+            render();
+          }
+        });
+        updateVersionToggle();
+
+        document
+          .getElementById("btnRestart")
+          .addEventListener("click", function () {
+            goTo("opening");
+          });
+        document
+          .getElementById("btnToggle")
+          .addEventListener("click", toggleDrawer);
+        document
+          .getElementById("drawerOverlay")
+          .addEventListener("click", toggleDrawer);
+        document
+          .getElementById("drawerClose")
+          .addEventListener("click", toggleDrawer);
+        document
+          .getElementById("drawerBody")
+          .addEventListener("click", function (e) {
+            var btn = e.target.closest("[data-step]");
+            if (btn) {
+              goTo(btn.getAttribute("data-step"));
+              toggleDrawer();
+            }
+          });
+
+        // === Idea 8: Keyboard shortcuts ===
+        var kbOverlay = document.getElementById("kbOverlay");
+        document
+          .getElementById("btnKbHelp")
+          .addEventListener("click", function () {
+            kbOverlay.classList.toggle("open");
+          });
+        document
+          .getElementById("kbClose")
+          .addEventListener("click", function () {
+            kbOverlay.classList.remove("open");
+          });
+        kbOverlay.addEventListener("click", function (e) {
+          if (e.target === kbOverlay) kbOverlay.classList.remove("open");
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
+            if (e.key === "Escape" && ciOverlay.classList.contains("open")) {
+              saveClientInfo();
+              ciOverlay.classList.remove("open");
+              render();
+            }
+            return;
+          }
+          if (kbOverlay.classList.contains("open")) {
+            if (e.key === "Escape" || e.key === "?") {
+              kbOverlay.classList.remove("open");
+              return;
+            }
+            return;
+          }
+          var drawerOpen = document
+            .getElementById("drawer")
+            .classList.contains("open");
+          if (drawerOpen) {
+            if (e.key === "Escape" || e.key === "j" || e.key === "J") {
+              toggleDrawer();
+              return;
+            }
+            return;
+          }
+
+          if (e.key === "?") {
+            kbOverlay.classList.add("open");
+            return;
+          }
+          if (e.key === "j" || e.key === "J") {
+            toggleDrawer();
+            return;
+          }
+          if (e.key === "b" || e.key === "B") {
+            goBack();
+            return;
+          }
+          if (e.key === "i" || e.key === "I") {
+            document.getElementById("btnClient").click();
+            return;
+          }
+          if (e.key === "Escape") {
+            if (ciOverlay.classList.contains("open")) {
+              saveClientInfo();
+              ciOverlay.classList.remove("open");
+              render();
+              return;
+            }
+            if (fabObjMenu.classList.contains("open")) {
+              fabObjMenu.classList.remove("open");
+              return;
+            }
+          }
+          if (e.key === "f") {
+            focusBtn.click();
+            return;
+          }
+          if (e.key === "v" || e.key === "V") {
+            currentVersion = currentVersion === "v1" ? "v2" : "v1";
+            localStorage.setItem("callGuideVersion", currentVersion);
+            updateVersionToggle();
+            render();
+            return;
+          }
+          if (e.key === "c" || e.key === "C") {
+            var copyBtn = document.querySelector(".btn-copy");
+            if (copyBtn) copyBtn.click();
+            return;
+          }
+          if (e.key >= "1" && e.key <= "9") {
+            var btns = stickyEl.querySelectorAll(".btn-action");
+            var idx = parseInt(e.key) - 1;
+            if (btns[idx]) btns[idx].click();
+            return;
+          }
+        });
+
+        render();
+      })();
+    </script>
+  </body>
+</html>
